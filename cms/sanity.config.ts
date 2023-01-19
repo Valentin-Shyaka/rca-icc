@@ -1,14 +1,14 @@
-import {defineConfig} from 'sanity'
-import {deskTool} from 'sanity/desk'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemas'
+import { defineConfig } from 'sanity'
+import { deskTool } from 'sanity/desk'
+import { visionTool } from '@sanity/vision'
+import { schemaTypes } from './schemas'
 
 export default defineConfig({
   name: 'default',
   title: 'cms',
 
-  projectId: 'lxeru4rg',
-  dataset: 'production',
+  projectId: process.env.PROJECT_ID || "lxeru4rg",
+  dataset: process.env.DATASET || "production",
 
   plugins: [deskTool(), visionTool()],
 

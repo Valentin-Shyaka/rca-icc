@@ -1,8 +1,8 @@
-import {defineCliConfig} from 'sanity/cli'
+import { defineCliConfig } from 'sanity/cli'
 
 export default defineCliConfig({
   api: {
-    projectId: 'lxeru4rg',
-    dataset: 'production'
+    projectId: process.env.PROJECT_ID || "lxeru4rg",
+    dataset: process.env.DATASET || "production",
   }
 })
