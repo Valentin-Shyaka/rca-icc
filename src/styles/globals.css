@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.pattern-container{
+    /* Rectangle 21 */
+
+
+
+
+
+
+background: rgba(38, 101, 71, 0.93);
+
+
+}
