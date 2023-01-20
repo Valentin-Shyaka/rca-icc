@@ -9,6 +9,7 @@ import CompNavBar from "../components/constants/CompNavBar";
 type Props = {
 	children: React.ReactNode;
 	title?: string;
+	trending?: any[];
 };
 
 const MainLayout = (props: Props) => {
@@ -17,19 +18,20 @@ const MainLayout = (props: Props) => {
 			<Head>
 				<title>{props.title ?? "ICC"} </title>
 			</Head>
-			<div className='w-full flex flex-col px-[2%] h-screen'>
+			<main className='w-full flex flex-col px-[2%] h-screen'>
 				<div className='w-full flex flex-col border-b-2 border-gray'>
 					<Header />
 				</div>
 				<EventLinks />
-				<div className='flex w-full h-full overflow-hidden '>
+				<div className='flex w-full h-full overflow-hidden gap-x-2'>
 					<SideBar />
-					<div className='flex flex-col w-full'>
+					<div className='flex flex-col w-full gap-y-2'>
 						<CompNavBar />
-						{props.children}</div>
+						<div className='w-full'>{props.children}</div>
+					</div>
 					<Feed />
 				</div>
-			</div>
+			</main>
 		</>
 	);
 };
