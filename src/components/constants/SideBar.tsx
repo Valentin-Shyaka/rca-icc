@@ -11,7 +11,7 @@ const SideBar = () => {
 			/>
 			<div className='flex flex-col w-full gap-y-3'>
 				<span className='px-2'>Live matches</span>
-				<div className='flex items-center justify-between bg-whiteblue border-2 p-2 rounded-md border-divBack'>
+				<div className='flex items-center justify-between bg-whiteblue border-2 p-2 rounded-md border-divBack cursor-pointer'>
 					<div className='flex gap-x-2 items-start'>
 						<Image src='/images/teamlogo.svg' height={20} width={20} alt='' />
 						<span>Y1</span>
@@ -27,7 +27,7 @@ const SideBar = () => {
 				<span className='px-2'>Fixtures</span>
 				<div className='flex flex-col p-3 py-5 rounded-md gap-y-2 border-divBack border-2'>
 					{new Array(6).fill(0).map((v, i) => (
-						<span>Matchday {i}</span>
+						<span>Matchday {i+1}</span>
 					))}
 				</div>
 			</div>
@@ -37,7 +37,7 @@ const SideBar = () => {
 					{new Array(6).fill(0).map((v, i) => (
 						<div className='flex items-center gap-x-2'>
 							<Image src='/images/teamlogo.svg' height={10} width={10} alt='' />
-							<span>Matchday {i}</span>
+							<span>Matchday {i+1}</span>
 						</div>
 					))}
 				</div>
