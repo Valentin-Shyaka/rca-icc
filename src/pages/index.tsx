@@ -3,6 +3,7 @@ import MainLayout from '../layouts/MainLayout'
 import MatchCard from '../components/constants/MatchCard'
 import Table from '../components/constants/Table';
 import Stats from '../components/constants/Stats';
+import Players from '../components/constants/Players';
 
 const Home: NextPage = () => {
   return (
@@ -11,8 +12,9 @@ const Home: NextPage = () => {
 				{/* <LiveGameCard/> */}
 				{/* <MatchCard/> */}
 				{/* <Table/> */}
-				<Stats/>		
-				{/* <Table/>																									 */}
+				{/* <Stats/>		 */}
+				{/* <Table/>	*/}
+				<Players/>																				 
 
 			</main>
 		</MainLayout>
