@@ -18,7 +18,7 @@ const MainLayout = (props: Props) => {
 			<Head>
 				<title>{props.title ?? "ICC"} </title>
 			</Head>
-			<main className='w-full flex flex-col px-[2%] h-screen'>
+			<main className='w-full flex flex-col px-[5%] h-screen'>
 				<div className='w-full flex flex-col border-b-2 border-gray'>
 					<Header />
 				</div>
