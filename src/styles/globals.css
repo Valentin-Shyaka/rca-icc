@@ -4,18 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.pattern-container{
+.pattern-container {
     /* Rectangle 21 */
-
-
-
-
-
-
-background: rgba(38, 101, 71, 0.93);
-
-
+    background: rgba(38, 101, 71, 0.93);
 }
-*{
+
+* {
     font-family: 'DM Sans', sans-serif;
 }

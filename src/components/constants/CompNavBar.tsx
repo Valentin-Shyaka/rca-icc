@@ -1,22 +1,35 @@
-import React from 'react'
-import { compNavs } from '../../utils/data';
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { compNavs } from "../../utils/data";
 
-type Props = {
-    active: string;
-}
+const CompNavBar = () => {
+	const [path, setPath] = useState("");
+	const router = useRouter();
 
-const CompNavBar = ({active}: Props) => {
-  return (
-    <div className=' w-full flex items-center overflow-x-auto'>
-        {compNavs.map((nav, i) => {
-            const isActive = nav.name === active;
-            return(
-            <div className={`flex items-center justify-center border-b-2 p-3 ${isActive?'text-orange border-orange':'border-slate-300'} w-full cursor-pointer min-w-fit`}>
-                <span className='text-sm'>{nav.name}</span>
-            </div>
-        )})}
-    </div>
-  )
-}
+	useEffect(() => {
+		const { pathname } = router;
+		const path = pathname;
+		setPath(path);
+	}, [router]);
 
-export default CompNavBar
+	return (
+		<div className=' w-full flex items-center overflow-x-auto font-medium text-lg'>
+			{compNavs.map((nav, i) => {
+				const isActive = nav.path.split("/")[1] === path.split("/")[2];
+				return (
+					<Link
+						href={`${path.split("/")[1] + nav.path}`}
+						className={`flex items-center justify-center border-b-2 p-3 ${
+							isActive ? "text-orange border-orange" : "border-gray"
+						} w-full cursor-pointer min-w-fit`}
+					>
+						<span className='text-base'>{nav.name}</span>
+					</Link>
+				);
+			})}
+		</div>
+	);
+};
+
+export default CompNavBar;

@@ -1,9 +1,15 @@
 import React from 'react'
+import LiveGameCard from '../../components/constants/LiveGameCard';
+import MainLayout from '../../layouts/MainLayout'
 
-const IndexPages = () => {
+const IndexFootball = () => {
   return (
-    <div>IndexPages</div>
-  )
+		<MainLayout title='Football'>
+			<div className='flex w-full flex-col mx-auto max-w-[800px]'>
+				<LiveGameCard />
+			</div>
+		</MainLayout>
+	);
 }
 
-export default IndexPages
+export default IndexFootball

@@ -3,7 +3,7 @@ import React from "react";
 
 const SideBar = () => {
 	return (
-		<div className=' flex flex-col h-full max-w-[200px] w-1/4 gap-y-4'>
+		<div className=' flex flex-col h-full max-w-[200px] w-1/4 gap-y-4 overflow-y-auto'>
 			<input
 				placeholder='Search...'
 				className=' outline-none border-divBack border-2 rounded-md px-4  py-2 focus:border-orange duration-300 w-full'

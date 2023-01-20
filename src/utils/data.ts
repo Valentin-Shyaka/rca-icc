@@ -33,3 +33,25 @@ export const compNavs: CompNav[] = [
     }
 ]
 
+export const events = [
+    {
+        name: "football",
+        //   icon: <BsCode />,
+    },
+    {
+        name: "basketball",
+        //   icon: <BsEmojiSunglasses />,
+    },
+    {
+        name: "volleyball",
+        //   icon: <FaGamepad />,
+    },
+    {
+        name: "debate",
+        // icon: React.createFactory(GiCakeSlice),
+    },
+    {
+        name: "pingpong",
+        //   icon: <GiGalaxy />,
+    },
+];
