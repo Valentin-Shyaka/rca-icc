@@ -26,7 +26,7 @@ const MainLayout = (props: Props) => {
                 
                
 			<div className="w-full flex flex-col pl-20 pr-20 pt-10"> 
-			 <div className="w-full  flex flex-col border-b-2 ">
+			 <div className="w-full  flex flex-col border-b-2 border-gray">
 					<NavBar/>
 			</div>
 			 <EventLinks/>
