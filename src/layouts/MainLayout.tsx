@@ -10,13 +10,15 @@ type Props = {
 	children: React.ReactNode;
 	title?: string;
 	trending?: any[];
+	isGeneral?: boolean;
 };
 
 const MainLayout = (props: Props) => {
+	const title = props.title;
 	return (
 		<>
 			<Head>
-				<title>{props.title ?? "ICC"} </title>
+				<title>{title}</title>
 			</Head>
 			<main className='w-full flex flex-col px-[5%] h-screen'>
 				<div className='w-full flex flex-col border-b-2 border-gray'>
@@ -26,7 +28,7 @@ const MainLayout = (props: Props) => {
 				<div className='flex w-full h-full overflow-hidden gap-x-2'>
 					<SideBar />
 					<div className='flex flex-col w-full gap-y-2'>
-						<CompNavBar />
+						{props.isGeneral ? null :  <CompNavBar /> }
 						<div className='w-full'>{props.children}</div>
 					</div>
 					<Feed />

@@ -1,8 +1,17 @@
 import { CompNav } from "./types";
+import { BiFootball, BiBasketball, BiTennisBall, BiHome, } from 'react-icons/bi'
+import { FaUsers } from 'react-icons/fa'
+import { GiVolleyballBall } from 'react-icons/gi'
+import React from "react";
 
 export const compNavs: CompNav[] = [
     {
         id: 1,
+        name: 'Overview',
+        path: '/',
+    },
+    {
+        id: 11,
         name: 'Fixtures',
         path: '/fixtures',
     },
@@ -35,23 +44,33 @@ export const compNavs: CompNav[] = [
 
 export const events = [
     {
+        name: "home",
+        path: "",
+        icon: React.createElement(BiHome),
+    },
+    {
         name: "football",
-        //   icon: <BsCode />,
+        path: "football",
+          icon: React.createElement(BiFootball),
     },
     {
         name: "basketball",
-        //   icon: <BsEmojiSunglasses />,
+        Path: "basketball",
+        icon: React.createElement(BiBasketball),
     },
     {
         name: "volleyball",
-        //   icon: <FaGamepad />,
+        path: "volleyball",
+        icon: React.createElement(GiVolleyballBall),
     },
     {
         name: "debate",
-        // icon: React.createFactory(GiCakeSlice),
+        path: "debate",
+        icon: React.createElement(FaUsers),
     },
     {
         name: "pingpong",
-        //   icon: <GiGalaxy />,
+        path: "pingpong",
+        icon: React.createElement(BiTennisBall),
     },
 ];

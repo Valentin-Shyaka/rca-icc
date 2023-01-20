@@ -7,8 +7,8 @@ import Players from '../components/constants/Players';
 
 const Home: NextPage = () => {
   return (
-		<MainLayout title='Football'>
-			<main className='flex w-full flex-1 flex-col items-center justify-center px-20 text-center  '>
+		<MainLayout title='ICC - Home' isGeneral>
+			<main className='flex w-full flex-1 flex-col items-center justify-center px-20 text-center'>
 				{/* <LiveGameCard/> */}
 				{/* <MatchCard/> */}
 				{/* <Table/> */}
