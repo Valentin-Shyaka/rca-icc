@@ -2,14 +2,18 @@ import type { NextPage } from 'next'
 import MainLayout from '../layouts/MainLayout'
 import MatchCard from '../components/constants/MatchCard'
 import Table from '../components/constants/Table';
+import Stats from '../components/constants/Stats';
 
 const Home: NextPage = () => {
   return (
 		<MainLayout title='Football'>
-			<main className='flex w-full flex-1 flex-col items-center justify-center px-20 text-center'>
+			<main className='flex w-full flex-1 flex-col items-center justify-center px-20 text-center  '>
 				{/* <LiveGameCard/> */}
 				{/* <MatchCard/> */}
-				<Table/>
+				{/* <Table/> */}
+				<Stats/>		
+				{/* <Table/>																									 */}
+
 			</main>
 		</MainLayout>
 	);
