@@ -1,13 +1,10 @@
 import Head from "next/head";
 import React from "react";
-import Image from "next/image";
-import NavBar from "../components/NavBar";
-import EventLinks from "../components/EventLinks";
-import { isContext } from "vm";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Feed from "../components/Feed";
-
+import Header from "../components/constants/NavBar";
+import EventLinks from "../components/constants/EventLinks";
+import Feed from "../components/constants/Feed";
+import SideBar from "../components/constants/SideBar";
+import CompNavBar from "../components/constants/CompNavBar";
 
 type Props = {
 	children: React.ReactNode;
@@ -15,25 +12,23 @@ type Props = {
 };
 
 const MainLayout = (props: Props) => {
-	
-	 
 	return (
 		<>
 			<Head>
 				<title>{props.title ?? "ICC"} </title>
 			</Head>
-			
-                
-               
-			<div className="w-full flex flex-col pl-20 pr-20 pt-10"> 
-			 <div className="w-full  flex flex-col border-b-2 ">
-					<NavBar/>
-			</div>
-			 <EventLinks/>
-			 <div className="flex ">
-				{props.children}
-				<Feed/>
-			</div>
+			<div className='w-full flex flex-col px-[2%] h-screen'>
+				<div className='w-full flex flex-col border-b-2 border-gray'>
+					<Header />
+				</div>
+				<EventLinks />
+				<div className='flex w-full h-full overflow-hidden '>
+					<SideBar />
+					<div className='flex flex-col w-full'>
+						<CompNavBar />
+						{props.children}</div>
+					<Feed />
+				</div>
 			</div>
 		</>
 	);
