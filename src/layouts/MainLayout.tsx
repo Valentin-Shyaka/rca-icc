@@ -30,7 +30,7 @@ const MainLayout = (props: Props) => {
 					<NavBar/>
 			</div>
 			 <EventLinks/>
-			 <div>
+			 <div className="flex ">
 				{props.children}
 				<Feed/>
 			</div>
