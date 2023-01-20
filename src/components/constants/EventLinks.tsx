@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { events } from "../../utils/data";
+import NavSlider from "./NavSlider";
 // import { GiCakeSlice } from 'react-icons/gi'
 
 const EventLinks = () => {
@@ -10,7 +11,7 @@ const EventLinks = () => {
 
 	useEffect(() => {
 		const { pathname } = router;
-		const path = pathname.split('/')[1];
+		const path = pathname.split("/")[1];
 		setActive(path);
 	}, [router]);
 
@@ -19,24 +20,24 @@ const EventLinks = () => {
 	const eventStyle =
 		"w-full h-[40px] border-2 hover:bg-primary border-gray-300 px-3 py-2 rounded rounded-full flex items-center gap-2 justify-center cursor-pointer text-[#303030]";
 	return (
-		<div className='w-full flex justify-center gap-6 p-4'>
+		<NavSlider>
+			{/* <div className='w-full flex justify-center gap-6 p-4'> */}
 			{events.map((item) => (
-				<Link className=' w-full' href={`/${item.name}`} key={item.name}>
+				<Link className=' w-full' href={`/${item.path}`} key={item.name}>
 					<div
 						className={` border-gray duration-500 ${
 							active === item.name ? activeEventStyle : eventStyle
 						}`}
 					>
-						{/* <span className='font-bold text-2xl xl:text-md '>
-                    {item.icon}
-                </span> */}
+						<span className='font-bold text-2xl xl:text-md '>{item.icon}</span>
 						<span className='font-medium text-md block capitalize '>
 							{item.name}
 						</span>
 					</div>
 				</Link>
 			))}
-		</div>
+			{/* </div> */}
+		</NavSlider>
 	);
 };
 

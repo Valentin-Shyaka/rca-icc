@@ -16,10 +16,12 @@ const CompNavBar = () => {
 	return (
 		<div className=' w-full flex items-center overflow-x-auto font-medium text-lg'>
 			{compNavs.map((nav, i) => {
-				const isActive = nav.path.split("/")[1] === path.split("/")[2];
+				const isIndex = (path.split('/')[1] === router.pathname.split('/')[1]) && nav.name === "Overview" && router.pathname.split("/").length === 2;				
+				const isActive = nav.path.split("/")[1] === path.split("/")[2] || isIndex;
 				return (
 					<Link
-						href={`${path.split("/")[1] + nav.path}`}
+						key={i}
+						href={`/${path.split("/")[1] + nav.path}`}
 						className={`flex items-center justify-center border-b-2 p-3 ${
 							isActive ? "text-orange border-orange" : "border-gray"
 						} w-full cursor-pointer min-w-fit`}
