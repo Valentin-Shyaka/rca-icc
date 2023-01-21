@@ -35,13 +35,20 @@ export default {
 
         // player info
         {
-            name: "name",
-            title: "Name",
+            name: "displayName",
+            title: "Display Name",
             type: "string",
-            description: "name of a player",
+            description: "name of a player(like a username)",
             validation: Rule => Rule.required().min(3).max(300).warning(
                 "please provide a name for this player"
             ),
+            group: "playerInfo"
+        },
+        {
+            name: "fullName",
+            title: "Full Name",
+            type: "string",
+            description: "all names of a player (this is not required)",
             group: "playerInfo"
         },
         {
@@ -49,6 +56,9 @@ export default {
             title: "Profile",
             type: "image",
             group: "playerInfo"
+        },
+        {
+            name:"category",
         },
         {
             name: "assists",

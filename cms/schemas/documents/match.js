@@ -33,7 +33,7 @@ export default {
         {
             name: "date",
             title: "Date",
-            type:"datetime",
+            type: "datetime",
             description: "the date for the match",
             validation: rule => rule.required()
         },
@@ -50,6 +50,31 @@ export default {
             type: "reference",
             to: { type: "team" },
             validation: rule => rule.required()
+        },
+        {
+            name: "stats",
+            title: "Match stats",
+            type: "matchStats"
+        },
+        {
+            name: "events",
+            title: "Events",
+            type: "array",
+            of: [
+                { type: "event" }
+            ]
+        },
+        {
+            name: "homeTeamLineup",
+            title: "Home Team Lineup",
+            type: "lineup",
+            validation: rule => rule.required(),
+        },
+        {
+            name: "awayTeamLineup",
+            title: "Away Team Lineup",
+            type: "lineup",
+            validation: rule => rule.required(),
         },
     ]
 }

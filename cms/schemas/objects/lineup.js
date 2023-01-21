@@ -22,6 +22,8 @@ export default {
     ],
 
     fields: [
+
+        // football lineup
         {
             name: "formation",
             title: "Formation",
@@ -34,6 +36,15 @@ export default {
             type: "array",
             of: [{ type: "reference", to: { type: "player" } }],
             group: "footballLineup"
+        },
+
+        // basketball lineup
+        {
+            name: "startingFive",
+            title: "Starting Five",
+            type: "array",
+            of: [{ type: "reference", to: { type: "player" } }],
+            group: "basketballLineup"
         },
     ]
 }
