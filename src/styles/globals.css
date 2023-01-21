@@ -13,3 +13,17 @@
     font-family: 'DM Sans', sans-serif;
     scroll-behavior: smooth;
 }
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f100;
+    border-radius: 5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(187, 187, 187);
+    border-radius: 5rem;
+}

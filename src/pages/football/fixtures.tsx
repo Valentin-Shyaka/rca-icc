@@ -15,15 +15,13 @@ const Fixtures = () => {
 			capitalize(router.pathname.split("/")[1]);
   return (
 		<MainLayout title={title}>
-			<div className=' w-full flex-col'>
-				<h1 className='my-2'>Today</h1>
-				<div className="grid grid-cols-2 w-full gap-3">
-					<MatchCard />
-					<MatchCard />
-					<MatchCard />
-					<MatchCard />
-					<MatchCard />
-				</div>
+			<h1 className='my-2 font-semibold'>Today</h1>
+			<div className='grid desktop:grid-cols-3 md:grid-cols-2 gap-3'>
+				<MatchCard />
+				<MatchCard />
+				<MatchCard />
+				<MatchCard />
+				<MatchCard />
 			</div>
 		</MainLayout>
 	);
