@@ -1,9 +1,10 @@
 import React from 'react'
 import  Image from 'next/image';
+import Link from 'next/link';
 
 const MatchCard = () => {
   return (
-    <div className="flex border-2 border-gray max-w-[300px] w-full h-[120px] rounded-md hover:bg-slate-100 duration-300 cursor-pointer">
+    <Link href={'/match/12'} className="flex border-2 border-gray max-w-[300px] w-full h-[120px] rounded-md hover:bg-slate-100 duration-300 cursor-pointer">
         <div className='lg:p-6 p-3 flex justify-center gap-y-2 flex-col'>
             <div className='flex gap-2 text-center'>
                 <Image src='./images/teamImage.svg' width={ 20 } height={ 10 } alt={ '' }/>
@@ -19,7 +20,7 @@ const MatchCard = () => {
             <p className='text-sm font-bold'>Sat 21 Jan</p>
             <span>13:10</span>
         </div>
-    </div>
+    </Link>
   )
 }
 

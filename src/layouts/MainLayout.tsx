@@ -29,7 +29,7 @@ const MainLayout = (props: Props) => {
 					<SideBar />
 					<div className='flex flex-col w-full h-[full overflow-y-auto'>
 						{props.isGeneral ? null : <CompNavBar />}
-						<div className='flex flex-col h-[78vh] overflow-y-auto py-2'>
+						<div className='flex flex-col h-[85vh] overflow-y-auto py-2'>
 							{props.children}
 						</div>
 					</div>
