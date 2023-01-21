@@ -22,20 +22,26 @@ const EventLinks = () => {
 	return (
 		<NavSlider haveGap>
 			{/* <div className='w-full flex justify-center gap-6 p-4'> */}
-			{events.map((item) => (
-				<Link className=' w-full m-2' href={`/${item.path}`} key={item.name}>
-					<div
-						className={` border-gray duration-500 ${
-							active === item.name ? activeEventStyle : eventStyle
-						}`}
-					>
-						<span className='font-bold text-2xl xl:text-md '>{item.icon}</span>
-						<span className='font-medium text-md block capitalize '>
-							{item.name}
-						</span>
-					</div>
-				</Link>
-			))}
+			{events.map((item) => {
+				const isHome = item.name === "home" && active === "";
+				const isActive = item.name === active || isHome;
+				return (
+					<Link className=' w-full m-2' href={`/${item.path}`} key={item.name}>
+						<div
+							className={` border-gray duration-500 ${
+								isActive ? activeEventStyle : eventStyle
+							}`}
+						>
+							<span className='font-bold text-2xl xl:text-md '>
+								{item.icon}
+							</span>
+							<span className='font-medium text-md block capitalize '>
+								{item.name}
+							</span>
+						</div>
+					</Link>
+				);
+			})}
 			{/* </div> */}
 		</NavSlider>
 	);

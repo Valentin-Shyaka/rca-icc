@@ -8,6 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<>
 			<Head>
 				<title>RCA-ICC</title>
+				<link rel="shortcut icon" href="favicon.svg" type="image/x-icon" />
 			</Head>
 			<NextNProgress
 				color='#ff7b35'

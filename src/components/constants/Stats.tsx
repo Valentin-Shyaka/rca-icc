@@ -34,9 +34,9 @@ const Stats = () => {
         <div className='float-left font-bold text-lg'>
             <h3>Goals</h3>
         </div>
-        {players.map((player)=>{
+        {players.map((player, i)=>{
             return(
-                <div className='w-full border-b-2 border-gray  flex  gap-2 mt-10 justify-between'>
+                <div key={i} className='w-full border-b-2 border-gray  flex  gap-2 mt-10 justify-between'>
             <span className='text-sm font-bold'>{player.number}</span>
             <p className='text-sm font-bold absolute left-8'>{player.name}</p>
             <div className=' bg-gray w-[30px] h-6 text-slate-700 rounded-md text-center'>
