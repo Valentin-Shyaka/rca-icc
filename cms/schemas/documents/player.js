@@ -58,7 +58,12 @@ export default {
             group: "playerInfo"
         },
         {
-            name:"category",
+            name:"categories",
+            title: "Categories",
+            type: "array",
+            description: "categories where a player belongs to. ex: football, basketball, etc",
+            of: [{ type: "reference", to: { type: "category" } }],
+            group: "playerInfo"
         },
         {
             name: "assists",

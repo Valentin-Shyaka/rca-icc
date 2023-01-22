@@ -4,12 +4,20 @@ import createSchema from 'part:@sanity/base/schema-creator'
 // Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
+// documents
 import player from './documents/player';
 import team from './documents/team';
 import matchDay from './documents/matchDay';
 import match from './documents/match';
 import category from './documents/category';
 import coach from './documents/coach';
+
+
+// objects
+import matchStats from './objects/matchStats';
+import teamStats from './objects/teamStats';
+import lineup from './objects/lineup';
+import event from './objects/event';
 
 
 // Then we give our schema to the builder and provide the result to Sanity
@@ -21,6 +29,10 @@ export default createSchema({
         match,
         matchDay,
         category,
-        coach
+        coach,
+        matchStats,
+        teamStats,
+        lineup,
+        event
     ])
 })
