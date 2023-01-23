@@ -13,8 +13,7 @@ const Feed = () => {
 					height={50}
 				/>
 				<p className='font-md font-sans text-coolGray-500 text-left p-2 text-sm'>
-					Match day 2 , both Y2 and Y1 are fighting for the pride, who,s gonna
-					make it today? Let’s head to the stadium or keep this tab open .
+					The so-called year 1 kids surprise their opponents with a draw at their first official match and Welding dissapoints.
 				</p>
 			</div>
 		</div>

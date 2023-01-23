@@ -1,10 +1,14 @@
 import React from 'react'
 import MainLayout from '../../layouts/MainLayout'
+import TeamCard from '../../components/constants/TeamCard'
 
 const TeamsIndex = () => {
   return (
 		<MainLayout>
-			<div>TeamsIndex</div>
+			<div className='w-full h-fit flex-wrap flex  '>
+			<TeamCard/>
+			
+			</div>
 		</MainLayout>
 	);
 }
