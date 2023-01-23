@@ -20,13 +20,13 @@ export default {
         {
             name: "homeTeamStats",
             title: "Home Team Stats",
-            type: "teamStats",
+            type: "matchTeamStats",
             validation: rule => rule.required()
         },
         {
             name: "awayTeamStats",
             title: "Away Team Stats",
-            type: "teamStats",
+            type: "matchTeamStats",
             validation: rule => rule.required()
         },
     ]

@@ -14,7 +14,8 @@ import coach from './documents/coach';
 
 // objects
 import matchStats from './objects/matchStats';
-import teamStats from './objects/teamStats';
+import matchTeamStats from './objects/matchTeamStats';
+import overallTeamStats from './objects/overallTeamStats';
 import lineup from './objects/lineup';
 import event from './objects/event';
 
@@ -29,7 +30,8 @@ export default createSchema({
         matchDay,
         coach,
         matchStats,
-        teamStats,
+        overallTeamStats,
+        matchTeamStats,
         lineup,
         event
     ])

@@ -90,13 +90,7 @@ export default {
             validation: rule => rule.required().min(1),
             group: "playerInfo"
         },
-        {
-            name: "assists",
-            title: "Assists",
-            description: "Assists for a basketball player",
-            type: "number",
-            group: "generalStats"
-        },
+
         // football 
         {
             name: "position",
@@ -124,21 +118,33 @@ export default {
             title: "Goals",
             description: "Goals for a football player",
             type: "number",
-            group: "footballPlayerStats"
+            group: "footballPlayerStats",
+            default: 0
+        },
+        {
+            name: "footballAssists",
+            title: "Football Assists",
+            description: "Assists for a football player",
+            type: "number",
+            group: "footballPlayerStats",
+            default: 0
+
         },
         {
             name: "redCards",
             title: "Red Cards",
             description: "number of red cards for a football player",
             type: "number",
-            group: "footballPlayerStats"
+            group: "footballPlayerStats",
+            default: 0
         },
         {
             name: "yellowCards",
             title: "Yellow Cards",
             description: "Yellow cards for a football player",
             type: "number",
-            group: "footballPlayerStats"
+            group: "footballPlayerStats",
+            default: 0
         },
 
         // basketball
@@ -147,29 +153,48 @@ export default {
             title: "Points",
             description: "Points for a basketball player",
             type: "number",
-            group: "basketballPlayerStats"
+            group: "basketballPlayerStats",
+            default: 0
         },
         {
             name: "rebounds",
             title: "Rebounds",
             description: "Rebounds for a basketball player",
             type: "number",
-            group: "basketballPlayerStats"
+            group: "basketballPlayerStats",
+            default: 0
         },
-
+        {
+            name: "basketballAssists",
+            title: "Basketball Assists",
+            description: "Assists for a basketball player",
+            type: "number",
+            group: "basketballPlayerStats",
+            default: 0
+        },
         {
             name: "steals",
             title: "Steals",
             description: "Steals for a basketball player",
             type: "number",
-            group: "basketballPlayerStats"
+            group: "basketballPlayerStats",
+            default: 0
         },
         {
             name: "blocks",
             title: "Blocks",
             description: "Blocks for a basketball player",
             type: "number",
-            group: "basketballPlayerStats"
+            group: "basketballPlayerStats",
+            default: 0
         },
+        {
+            name: "fouls",
+            title: "Fouls",
+            description: "Fouls for a basketball player",
+            type: "number",
+            group: "basketballPlayerStats",
+            default: 0
+        }
     ]
 }

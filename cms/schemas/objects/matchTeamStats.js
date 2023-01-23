@@ -1,7 +1,7 @@
 
 export default {
-    name: "teamStats",
-    title: "Team Stats",
+    name: "matchTeamStats",
+    title: "Match Team Stats",
     type: "object",
 
     groups: [

@@ -48,5 +48,11 @@ export default {
             },
             validation: rule => rule.required()
         },
+        {
+            name:"stats",
+            title:"Stats",
+            type:"overallTeamStats",
+            description:"Overall team stats"
+        }
     ]
 }
