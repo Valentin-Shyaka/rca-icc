@@ -4,15 +4,8 @@ export default {
     type: "document",
     preview: {
         select: {
-            subtitle: "title",
+            title: "title",
         },
-        prepare({ subtitle, media }) {
-            return {
-                title: "Agency",
-                subtitle: subtitle,
-                media: media
-            }
-        }
     },
     fields: [
         {

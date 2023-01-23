@@ -5,7 +5,7 @@ export default {
     preview: {
         select: {
             title: "name",
-            subtitlle: "category.name",
+            subtitlle: "category",
             media: "logo",
         }
     },
@@ -23,7 +23,6 @@ export default {
             name: "logo",
             title: "Logo",
             type: "image",
-            validation: rule => rule.required()
         },
         {
             name: "players",
@@ -36,9 +35,17 @@ export default {
         {
             name: "category",
             title: "Category",
-            type: "reference",
+            type: "string",
             description: "The category where the team belongs to. ex : football, basketball, ...",
-            to: [{ type: "category" }],
+            options: {
+                list: [
+                    { title: "Football", value: "football" },
+                    { title: "Basketball", value: "basketball" },
+                    { title: "Volleyball", value: "volleyball" },
+                    { title: "Tennis", value: "tennis" },
+                    { title: "PingPong", value: "pingpong" },
+                ]
+            },
             validation: rule => rule.required()
         },
     ]

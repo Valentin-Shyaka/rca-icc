@@ -9,7 +9,6 @@ import player from './documents/player';
 import team from './documents/team';
 import matchDay from './documents/matchDay';
 import match from './documents/match';
-import category from './documents/category';
 import coach from './documents/coach';
 
 
@@ -28,7 +27,6 @@ export default createSchema({
         team,
         match,
         matchDay,
-        category,
         coach,
         matchStats,
         teamStats,

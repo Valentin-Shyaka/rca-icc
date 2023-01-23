@@ -4,7 +4,7 @@ export default {
     type: "document",
     preview: {
         select: {
-            title: "name",
+            title: "displayName",
             subtitle: "team",
             media: "profile",
         },
@@ -58,11 +58,20 @@ export default {
             group: "playerInfo"
         },
         {
-            name:"categories",
+            name: "categories",
             title: "Categories",
             type: "array",
             description: "categories where a player belongs to. ex: football, basketball, etc",
-            of: [{ type: "reference", to: { type: "category" } }],
+            of: [{ type: "string" }],
+            options: {
+                list: [
+                    { title: "Football", value: "football" },
+                    { title: "Basketball", value: "basketball" },
+                    { title: "Volleyball", value: "volleyball" },
+                    { title: "PingPong", value: "pingpong" },
+                ]
+            },
+            validation: rule => rule.required().min(1),
             group: "playerInfo"
         },
         {
@@ -78,6 +87,19 @@ export default {
             title: "Position",
             description: "Position of a football player",
             type: "string",
+            options: {
+                list: [
+                    { title: "Goalkeeper", value: "goalkeeper" },
+                    { title: "Defender", value: "defender" },
+                    { title: "Midfielder", value: "midfielder" },
+                    { title: "Forward", value: "forward" },
+                    { title: "Power Forward (for Bacco)", value: "powerForward" },
+                    { title: "Point Guard (for Bacco)", value: "pointGuard" },
+                    { title: "Center (for Bacco)", value: "center" },
+                    { title: "Shooting Guard (for Bacco)", value: "shootingGuard" },
+                    { title: "Small Forward (for Bacco)", value: "smallForward" },
+                ]
+            },
             group: "footballPlayerStats"
         },
         {
@@ -131,6 +153,6 @@ export default {
             description: "Blocks for a basketball player",
             type: "number",
             group: "basketballPlayerStats"
-        }
+        },
     ]
 }
