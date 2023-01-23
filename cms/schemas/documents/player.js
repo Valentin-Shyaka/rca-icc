@@ -5,9 +5,18 @@ export default {
     preview: {
         select: {
             title: "displayName",
-            subtitle: "team",
+            subtitle: "fullName",
             media: "profile",
         },
+        // use prepare to set title to displayName if provided else use full name.
+        prepare({ title, subtitle, media }) {
+            return {
+                title: title || subtitle,
+                subtitle: title ? null : subtitle,
+                media: media,
+            };
+        }
+
     },
     groups: [
         {
@@ -39,15 +48,15 @@ export default {
             title: "Display Name",
             type: "string",
             description: "name of a player(like a username)",
-            validation: Rule => Rule.required().min(3).max(300).warning(
-                "please provide a name for this player"
-            ),
             group: "playerInfo"
         },
         {
             name: "fullName",
             title: "Full Name",
             type: "string",
+            validation: Rule => Rule.required().min(3).max(300).warning(
+                "please provide a full name for this player"
+            ),
             description: "all names of a player (this is not required)",
             group: "playerInfo"
         },
@@ -55,6 +64,13 @@ export default {
             name: "profile",
             title: "Profile",
             type: "image",
+            group: "playerInfo"
+        },
+        {
+            name: "number",
+            title: "Number",
+            description: "a number that a player wears.",
+            type: "number",
             group: "playerInfo"
         },
         {
@@ -84,9 +100,10 @@ export default {
         // football 
         {
             name: "position",
-            title: "Position",
+            title: "Position (you can select many if the player plays many games) ",
             description: "Position of a football player",
-            type: "string",
+            type: "array",
+            of: [{ type: "string" }],
             options: {
                 list: [
                     { title: "Goalkeeper", value: "goalkeeper" },
@@ -100,7 +117,7 @@ export default {
                     { title: "Small Forward (for Bacco)", value: "smallForward" },
                 ]
             },
-            group: "footballPlayerStats"
+            group: "playerInfo"
         },
         {
             name: "goals",

@@ -1,3 +1,3 @@
-# Open Heavens Calgary
+# rca-icc
 
-content for rca
+content for rca interclass competitions
