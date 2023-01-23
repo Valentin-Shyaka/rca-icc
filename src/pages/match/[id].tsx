@@ -4,6 +4,7 @@ import LineUps from "../../components/Match/LineUps";
 import Stats from "../../components/Match/Stats";
 import Timeline from "../../components/Match/Timeline";
 import MainLayout from "../../layouts/MainLayout";
+import statistics from "../../utils/data/stats.json";
 
 const MatchPage = () => {
 	const [match, setMatch] = useState<any>(null);
@@ -21,7 +22,7 @@ const MatchPage = () => {
 	return (
 		<MainLayout isGeneral>
 			<div
-				className={`flex flex-col tablet:w-4/5 max-w-[1000px] w-full shadow-md mx-auto`}
+				className={`flex px-2 flex-col tablet:w-4/5 max-w-[1000px] w-full shadow-md mx-auto`}
 			>
 				<div className='flex px-3 items-center justify-between w-full'>
 					<p className='text-violet-400'>
@@ -89,8 +90,9 @@ const MatchPage = () => {
 				<div className='flex w-full overflow-x-auto shadow-md'>
 					<div className='w-full border-t-[1px] border-gray grid auto-cols-fr grid-flow-col mt-3 items-center shadow-md min-w-[350px]'>
 						<p
+							onClick={() => setActive("timeline")}
 							className={`px-6 py-2 hover:bg-slate-300/30 active:bg-slate-300/30 duration-300 cursor-pointer text-center ${
-								active === "trending" && "border-b-2  border-gray"
+								active === "timeline" && "border-b-2  border-orange"
 							}`}
 						>
 							TIMELINE
@@ -98,33 +100,34 @@ const MatchPage = () => {
 						<p
 							onClick={() => setActive("lineups")}
 							className={`px-6 py-2 hover:bg-slate-300/30 cursor-pointer text-center ${
-								active === "lineups" && "border-b-2  border-gray"
+								active === "lineups" && "border-b-2  border-orange"
 							}`}
 						>
 							LINEUPS
 						</p>
 						<p
+							onClick={() => setActive("stats")}
 							className={`px-6 py-2 hover:bg-slate-300/30 cursor-pointer text-center ${
-								active === "stats" && "border-b-2  border-gray"
+								active === "stats" && "border-b-2  border-orange"
 							}`}
 						>
 							STATS
 						</p>
 						<p
+							onClick={() => setActive("trendings")}
 							className={`px-6 py-2 hover:bg-slate-300/30 cursor-pointer text-center ${
-								active === "trendings" && "border-b-2  border-gray"
+								active === "trendings" && "border-b-2  border-orange"
 							}`}
 						>
 							TRENDINGS
 						</p>
 					</div>
 				</div>
-				<div className='flex flex-col w-full py-3'>
+				<div className='flex flex-col w-full py-3 '>
 					{!match || !hasStarted ? (
-						active === "stats" ? (
-                            null
-							// <Stats statistics={match?.statistics} />
-						) : active === "lineups" ? (
+						active ===
+						"stats" ?<Stats statistics={statistics.statistics}  />:
+						active === "lineups" ? (
 							<LineUps lineups={match?.lineups} />
 						) : (
 							<Timeline timeline={match?.timeline} />
