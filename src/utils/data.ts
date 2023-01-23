@@ -55,7 +55,7 @@ export const events = [
     },
     {
         name: "basketball",
-        Path: "basketball",
+        path: "basketball",
         icon: React.createElement(BiBasketball),
     },
     {

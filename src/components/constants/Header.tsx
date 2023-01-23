@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from "react-moment";
 
 const Header = () => {
 	return (
@@ -9,7 +10,7 @@ const Header = () => {
 			</div>
 
 			<span className=' text-grey font-normal truncate text-base'>
-				Fri 20th Jan
+				<Moment format='DD MMMM YYYY'>{new Date()}</Moment>
 			</span>
 		</div>
 	);
