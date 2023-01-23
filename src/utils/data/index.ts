@@ -1,4 +1,4 @@
-import { CompNav } from "./types";
+import { CompNav } from "../types";
 import { BiFootball, BiBasketball, BiTennisBall, BiHome, } from 'react-icons/bi'
 import { FaUsers } from 'react-icons/fa'
 import { GiVolleyballBall } from 'react-icons/gi'
@@ -55,7 +55,7 @@ export const events = [
     },
     {
         name: "basketball",
-        Path: "basketball",
+        path: "basketball",
         icon: React.createElement(BiBasketball),
     },
     {

@@ -1,7 +1,12 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
-const NavSlider = ({ children }: { children: ReactNode; props?: any }) => {
+interface Props {
+	children: ReactNode;
+	haveGap?: boolean;
+}
+
+const NavSlider = ({ children, haveGap }: Props) => {
 	const [chevAppear, setChevApp] = useState<any>({ left: false, right: false });
 	const [winObje, setWindow] = useState({});
 	const sliderRef = useRef(null);
@@ -49,7 +54,7 @@ const NavSlider = ({ children }: { children: ReactNode; props?: any }) => {
 	}, [winObje]);
 
 	return (
-		<div className='relative px-3 overflow-hidden w-full'>
+		<div className='relative px-3  w-full'>
 			{chevAppear.right && (
 				<BiChevronRight
 					onClick={handleRightChevClick}
@@ -65,7 +70,7 @@ const NavSlider = ({ children }: { children: ReactNode; props?: any }) => {
 			<div
 				ref={sliderRef}
 				onScroll={handleSliderScroll}
-				className='w-full relative py-2 gap-x-2 pb-4 flex overflow-x-auto hslider scrollbar-hide'
+				className={`w-full relative flex overflow-x-auto hslider scrollbar-hide`}
 			>
 				{children}
 			</div>
