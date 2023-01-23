@@ -7,9 +7,7 @@ const TeamsIndex = () => {
 		<MainLayout>
 			<div className='w-full h-fit flex-wrap flex  '>
 			<TeamCard/>
-			<TeamCard/>
-			<TeamCard/>
-			<TeamCard/>
+			
 			</div>
 		</MainLayout>
 	);
