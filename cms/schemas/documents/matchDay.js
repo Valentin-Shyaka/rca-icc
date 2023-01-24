@@ -41,6 +41,23 @@ export default {
             of: [
                 { type: "match" }
             ]
-        }
+        },
+          // category
+          {
+            name: "category",
+            title: "Category",
+            type: "string",
+            description: "The category where the team belongs to. ex : football, basketball, ...",
+            options: {
+                list: [
+                    { title: "Football", value: "football" },
+                    { title: "Basketball", value: "basketball" },
+                    { title: "Volleyball", value: "volleyball" },
+                    { title: "Tennis", value: "tennis" },
+                    { title: "PingPong", value: "pingpong" },
+                ]
+            },
+            validation: rule => rule.required()
+        },
     ]
 }
