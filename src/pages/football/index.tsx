@@ -6,7 +6,7 @@ const IndexFootball = () => {
   return (
 		<MainLayout title='Football'>
 			<div className='flex w-full flex-col mx-auto max-w-[800px]'>
-				<LiveGameCard />
+				<LiveGameCard path='/match/23' />
 			</div>
 		</MainLayout>
 	);
