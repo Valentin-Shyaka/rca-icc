@@ -45,6 +45,11 @@ export default {
             validation: rule => rule.required()
         },
         {
+            name:"status",
+            title: "Status",
+            type:"matchStatus"
+        },
+        {
             name: "stats",
             title: "Match stats",
             type: "matchStats"
