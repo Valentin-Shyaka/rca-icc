@@ -15,10 +15,13 @@ const Home: NextPage = () => {
 					<div className='flex w-full mt-4 gap-x-3'>
 						<div className='flex flex-col justify-between h-full'>
 							<p className=''>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-								provident saepe consequatur sunt possimus iusto similique
-								voluptatem eum! Suscipit harum cupiditate voluptatum facilis
-								totam. Neque debitis perspiciatis laborum porro sit?
+								Rwanda Coding academy has been perfect and excellent in
+								education and not to forget extra-curricular activities. From
+								the beginning of RCA , interclasses have been a challenging
+								league since a difference in age encourages minors to win
+								majors. Teams are forced to make their way to the stage to
+								receive their prizes in many hard duels with harder opponents.
+								Here it comes again! It's 2022-2023.
 							</p>
 							<button className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'>
 								See live matches <span className='ml-2 mt-1'>{">>"}</span>
@@ -49,7 +52,11 @@ const Home: NextPage = () => {
 					<h1 className='text-xl font-semibold'>Competitions</h1>
 					<div className='flex w-full mt-4 flex-wrap gap-3'>
 						{competitions.map((comp, i) => (
-							<Link href={`/${comp.name}`} key={comp.id} className=' border-2 items-center w-full max-w-[250px] gap-3 border-gray flex flex-col gap-y-3 p-3'>
+							<Link
+								href={`/${comp.name}`}
+								key={comp.id}
+								className=' border-2 items-center w-full max-w-[250px] gap-3 border-gray flex flex-col gap-y-3 p-3'
+							>
 								{comp.icon}
 								<h1 className='font-semibold capitalize'>{comp.name}</h1>
 							</Link>

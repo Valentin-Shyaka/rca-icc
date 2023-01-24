@@ -20,5 +20,14 @@ export type Team = {
     name: string;
     logo: string;
     players: Player[];
-    category: category
+    category: category;
+    stats: {
+        goalsConceded: number;
+        goalsScored: number;
+        matchesDrawn: number;
+        matchesLost: number;
+        matchesPlayed: number;
+        matchesWon: number;
+        points: number;
+    };
 }

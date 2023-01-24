@@ -15,7 +15,13 @@ export const teamsFootQuery = groq`*[_type == "team" && category == "football"]{
     "logo": logo.asset->url,
 }`
 
-export const teamsStatsFootQuery = groq`*[_type == "team" && category == "football"]{}`
+export const teamsStatsFootQuery = groq`*[_type == "team" && category == "football"]{
+    _id,
+    players,
+    name,
+    "logo": logo.asset->url,
+    stats,
+}`
 
 export const playersFootQuery = groq`*[_type == "team" && category == "football"]{
     _id,
