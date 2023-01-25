@@ -172,9 +172,11 @@ const MatchPage = () => {
 						) : active === "lineups" ? (
 							<LineUps
 								lineups={[
-									match?.stats?.homeTeamLineup,
-									match?.stats?.awayTeamLineup,
+									match?.homeTeamLineup,
+									match?.awayTeamLineup,
 								]}
+								homeTeam={match?.homeTeam}
+								awayTeam={match?.awayTeam}
 								isBasketball={isBasketball}
 							/>
 						) : (
