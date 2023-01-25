@@ -1,13 +1,24 @@
-import type { NextPage } from 'next'
-import Image from 'next/image';
-import Link from 'next/link';
-import { BiFootball } from 'react-icons/bi';
-import MatchCard from '../components/MatchCard';
-import MainLayout from '../layouts/MainLayout'
-import { competitions } from '../utils/data/other';
+import type { NextPage } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { BiFootball } from "react-icons/bi";
+import MatchCard from "../components/MatchCard";
+import { useApp } from "../contexts/AppProvider";
+import MainLayout from "../layouts/MainLayout";
+import { competitions } from "../utils/data/other";
 
 const Home: NextPage = () => {
-  return (
+	const { getMatches, matches } = useApp();
+
+	const finishedMatches = matches?.filter(
+		(match) => match?.status?.status === "FT"
+	);
+	const unfinishedMatches = matches?.filter(
+		(match) => match.status?.status !== "FT"
+	);
+	const upComingMatches = unfinishedMatches?.slice(0, 5);
+
+	return (
 		<MainLayout title='ICC - Home' isGeneral>
 			<main className='flex w-full flex-1 flex-col p-2 gap-y-3'>
 				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
@@ -23,23 +34,39 @@ const Home: NextPage = () => {
 								receive their prizes in many hard duels with harder opponents.
 								Here it comes again! It's 2022-2023.
 							</p>
-							<button className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'>
+							{/* <button className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'>
 								See live matches <span className='ml-2 mt-1'>{">>"}</span>
-							</button>
+							</button> */}
 						</div>
 						<Image
 							src={"/images/interclass.png"}
 							alt=''
-							className=' object-cover aspect-video'
+							className=' object-cover max-w-1/2 aspect-video'
 							height={250}
 							width={500}
 						/>
 					</div>
 				</div>
 				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
+					<h1 className='text-xl font-semibold'>Latest Results</h1>
+					<div className='flex w-full mt-4 flex-wrap gap-3'>
+						{finishedMatches?.map((match, i) => (
+							<MatchCard key={match._id} {...match} />
+						))}
+					</div>
+					<Link
+						href={"/football/fixtures"}
+						className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'
+					>
+						See All Fixtures<span className='ml-2 mt-1'>{">>"}</span>
+					</Link>
+				</div>
+				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
 					<h1 className='text-xl font-semibold'>Upcoming Matches</h1>
-					<div className='flex w-full mt-4'>
-						<MatchCard />
+					<div className='flex w-full mt-4 flex-wrap gap-2'>
+						{upComingMatches?.map((match, i) => (
+							<MatchCard key={match._id} {...match} />
+						))}
 					</div>
 					<Link
 						href={"/football/fixtures"}
@@ -55,23 +82,23 @@ const Home: NextPage = () => {
 							<Link
 								href={`/${comp.name}`}
 								key={comp.id}
-								className=' border-2 items-center w-full max-w-[250px] gap-3 border-gray flex flex-col gap-y-3 p-3'
+								className=' border-2 hover:bg-divBack items-center w-full max-w-[250px] gap-3 border-gray flex flex-col gap-y-3 p-3'
 							>
 								{comp.icon}
 								<h1 className='font-semibold capitalize'>{comp.name}</h1>
 							</Link>
 						))}
 					</div>
-					<Link
+					{/* <Link
 						href={"/football/fixtures"}
 						className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'
 					>
 						See All Fixtures<span className='ml-2 mt-1'>{">>"}</span>
-					</Link>
+					</Link> */}
 				</div>
 			</main>
 		</MainLayout>
 	);
-}
+};
 
 export default Home;

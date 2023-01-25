@@ -36,7 +36,7 @@ export const playersFootQuery = groq`*[_type == "team" && category == "football"
     },
 }`
 
-export const teamsBasketQuery = groq`*[_type == "team" && category == "basketball"]{
+export const teamsBasketQuery = groq`*[_type == "team" && category == "basketball"] {
     _id,
     players,
     name,
@@ -50,4 +50,58 @@ export const teamsVolleyQuery = groq`*[_type == "team" && category == "volleybal
     name,
     category,
     "logo": logo.asset->url,
+}`
+
+export const fetchMatchesQuery = groq`*[_type == "match"]{
+    _id,
+    date,
+    "homeTeam": homeTeam->{
+        _id,
+        name,
+        "logo": logo.asset->url,
+    },
+    "awayTeam": awayTeam->{
+        _id,
+        name,
+        "logo": logo.asset->url,
+    },
+    stats,
+    events,
+    status,
+    category,
+}`
+
+export const fetchMatchByIdQuery = (id: string) => groq`*[_type == "match" && _id == "${id}"]{
+    _id,
+    date,
+    "homeTeam": homeTeam->{
+        _id,
+        name,
+        "logo": logo.asset->url,
+        players[]->{
+            _id,
+            displayName,
+            fullName,
+            position,
+            "profile": profile.asset->url,
+            number,
+        },
+    },
+    "awayTeam": awayTeam->{
+        _id,
+        name,
+        "logo": logo.asset->url,
+        players[]->{
+            _id,
+            displayName,
+            fullName,
+            position,
+            "profile": profile.asset->url,
+            number,
+        },
+    },
+    stats,
+    events,
+    status,
+    category,
 }`
