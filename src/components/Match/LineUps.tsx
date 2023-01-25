@@ -1,12 +1,18 @@
 import Image from "next/image";
 import React from "react";
+import { LineUp, Match } from "../../utils/types/types1";
 import PlayerLineUp from "./PlayerLineUp";
 
 type Props = {
-	lineups: any;
+	lineups: [LineUp, LineUp];
+	isBasketball: boolean;
 };
 
 const LineUps = (props: Props) => {
+	console.log(props.isBasketball);
+	
+
+	if (props.isBasketball) return <div className=" text-center">Not Available</div>;
 	return (
 		<div className=' w-full flex flex-col'>
 			<div className='flex flex-col w-4/5 mx-auto bg-green-600 px-1'>
@@ -38,7 +44,7 @@ const LineUps = (props: Props) => {
 						width={30}
 						height={20}
 					/>
-					<span className=" uppercase">SUBSTITUTEs</span>
+					<span className=' uppercase'>SUBSTITUTEs</span>
 					<Image
 						src={"/images/teamImage2.svg"}
 						alt='team1'
@@ -46,7 +52,6 @@ const LineUps = (props: Props) => {
 						height={20}
 					/>
 				</div>
-				
 			</div>
 		</div>
 	);
