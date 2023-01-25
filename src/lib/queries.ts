@@ -1,4 +1,5 @@
 import { groq } from "next-sanity";
+import { allPlayerFields } from "./fields";
 
 export const playersQuery = groq`*[_type == "player"]{
     _id,
@@ -23,6 +24,15 @@ export const teamsStatsFootQuery = groq`*[_type == "team" && category == "footba
     stats,
 }`
 
+export const teamsStatsQuery = groq`*[_type == "team"]{
+    _id,
+    players,
+    name,
+    "logo": logo.asset->url,
+    stats,
+    category,
+}`
+
 export const playersFootQuery = groq`*[_type == "team" && category == "football"]{
     _id,
     name,
@@ -35,6 +45,21 @@ export const playersFootQuery = groq`*[_type == "team" && category == "football"
         "profile": profile.asset->url,
     },
 }`
+
+export const playersBaccoQuery = groq`*[_type == "team" && category == "basketball"]{
+    _id,
+    name,
+    category,
+    players[]->{
+        _id,
+        displayName,
+        fullName,
+        position,
+        "profile": profile.asset->url,
+    },
+}`
+
+export const fetchPlayersAllQuery = groq`*[_type == "player"]${allPlayerFields}`
 
 export const teamsBasketQuery = groq`*[_type == "team" && category == "basketball"] {
     _id,
@@ -52,7 +77,7 @@ export const teamsVolleyQuery = groq`*[_type == "team" && category == "volleybal
     "logo": logo.asset->url,
 }`
 
-export const fetchMatchesQuery = groq`*[_type == "match"]{
+export const fetchMatchesQuery = groq`*[_type == "match"] | order(date asc){
     _id,
     date,
     "homeTeam": homeTeam->{
