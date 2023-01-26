@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const SideBar = () => {
@@ -9,7 +10,7 @@ const SideBar = () => {
 				className=' outline-none border-divBack border-2 rounded-md px-4  py-2 focus:border-orange duration-300 w-full'
 				type='text'
 			/>
-			<div className='flex flex-col w-full gap-y-3'>
+			{/* <div className='flex flex-col w-full gap-y-3'>
 				<span className='px-2'>Live matches</span>
 				<div className='flex items-center justify-between bg-whiteblue border-2 p-2 rounded-md border-divBack cursor-pointer'>
 					<div className='flex gap-x-2 items-start'>
@@ -22,17 +23,17 @@ const SideBar = () => {
 						<Image src='/images/teamlogo.svg' height={20} width={20} alt='' />
 					</div>
 				</div>
-			</div>
+			</div> */}
 			<div className='flex flex-col gap-y-2'>
 				<span className='px-2'>Fixtures</span>
 				<div className='flex flex-col py-5 rounded-md  border-divBack border-2'>
 					{new Array(6).fill(0).map((v, i) => (
-						<span
+						<Link href={`/mathday/matchday ${i+1}`}
 							className=' w-full p-2 hover:bg-orange/20 duration-300 cursor-pointer rounded-md'
 							 key={i}
 						>
 							Matchday {i + 1}
-						</span>
+						</Link>
 					))}
 				</div>
 			</div>
