@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import Stats from "../../components/constants/Stats";
+import { useEffect } from "react";
 import { useApp } from "../../contexts/AppProvider";
 import MainLayout from "../../layouts/MainLayout";
 import { mixArray } from "../../utils/funcs";
@@ -30,7 +29,6 @@ const StatsIndex = () => {
 				</div>
 			</MainLayout>
 		);
-	console.log(withMostGoals);
 
 	return (
 		<MainLayout>

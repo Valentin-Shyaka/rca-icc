@@ -20,6 +20,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<Head>
 				<title>RCA-ICC</title>
 				<link rel='shortcut icon' href='/favicon.svg' type='image/x-icon' />
+				<meta
+					name='description'
+					content='Welcome to RCA interclass Competion Website, where education and competition go hand in hand. Our school offers a wide range of interclass competitions in various xtracurricular activities to challenge and inspire our students to reach their full potential.'
+				/>
 			</Head>
 			<NextNProgress
 				color='#ff7b35'

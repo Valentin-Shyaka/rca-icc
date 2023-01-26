@@ -5,6 +5,7 @@ export const allPlayerFields = `{
     fullName,
     profile,
     goals,
+    points,
     footballAssists,
     basketballAssists,
     steals,

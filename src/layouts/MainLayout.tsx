@@ -5,16 +5,18 @@ import EventLinks from "../components/constants/EventLinks";
 import Feed from "../components/constants/Feed";
 import SideBar from "../components/constants/SideBar";
 import CompNavBar from "../components/constants/CompNavBar";
+import { SEO } from "../utils/types/misc";
 
 type Props = {
 	children: React.ReactNode;
 	title?: string;
 	trending?: any[];
 	isGeneral?: boolean;
+	seo?: SEO;
 };
 
 const MainLayout = (props: Props) => {
-	const title = props.title;
+	const { title, seo } = props;
 	return (
 		<>
 			<Head>
