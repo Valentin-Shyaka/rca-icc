@@ -1,22 +1,29 @@
 export default {
     name: "event",
     title: "Event",
-    type: "document",
+    type: "object",
 
     preview: {
         select: {
-            title: "name",
+            title: "type",
+            subtitle: "time  "
         },
     },
     fields: [
         {
-            name: "name",
-            title: "Name",
+            name: "type",
+            title: "Event Type",
             type: "string",
-            description: "name of the event",
-            validation: Rule => Rule.required().min(3).max(300).warning(
-                "please provide a name for this event"
-            )
+            options: {
+                list: [
+                    { title: "Goal", value: "goal" },
+                    { title: "Simple Comment", value: "comment" },
+                    { title: "Foul", value: "faul" },
+                    { title: "Yellow Card", value: "yellowCard" },
+                    { title: "Red Card", value: "redCard" },
+                    { title: "Ball Post", value: "ballPost" }
+                ]
+            }
         },
         {
             name: "description",
@@ -30,5 +37,11 @@ export default {
             type: "number",
             description: "the time for the event (ex : a minute in a match)",
         },
+        {
+            title: "Scorer (optional)",
+            name: "scorer",
+            type: "reference",
+            to: [{ type: "player" }]
+        }
     ]
 }

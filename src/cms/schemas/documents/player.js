@@ -12,7 +12,7 @@ export default {
         prepare({ title, subtitle, media }) {
             return {
                 title: title || subtitle,
-                subtitle: title ? null : subtitle,
+                subtitle: subtitle,
                 media: media,
             };
         }
