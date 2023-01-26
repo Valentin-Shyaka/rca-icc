@@ -26,7 +26,7 @@ const MatchCard = ({
 	return (
 		<Link
 			href={`/match/${_id}`}
-			className='flex border-2 border-gray max-w-[300px] w-full h-[120px] rounded-md hover:bg-slate-100 duration-300 cursor-pointer'
+			className='flex border-2 border-gray max-w-[300px] min-w-[200px] w-full h-[120px] rounded-md hover:bg-slate-100 duration-300 cursor-pointer'
 		>
 			<div className='lg:p-6 p-3 flex justify-center w-full gap-y-2 flex-col'>
 				<div className='flex gap-2 text-center'>

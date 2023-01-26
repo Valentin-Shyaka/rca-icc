@@ -2,33 +2,8 @@ import React from "react"
 import { BiFootball, BiBasketball, BiTennisBall } from "react-icons/bi"
 import { FaUsers } from "react-icons/fa"
 import { GiVolleyballBall } from "react-icons/gi"
+import { EventType } from "../types/types2"
 
-export type Sub = {
-    off: string,
-    on: string,
-}
-
-export enum EventType {
-    Goal = 'Goal',
-    YellowCard = 'Yellow Card',
-    RedCard = 'Red Card',
-    Substitution = 'Substitution',
-    Penalty = 'Penalty',
-    OwnGoal = 'Own Goal',
-    MissedPenalty = 'Missed Penalty',
-    Commentry = 'Commentry',
-}
-
-
-export type TimeType  =  {
-    comment:  string ,
-    type:  EventType ,
-    time:  string ,
-    id:  string ,
-    scorer?:  string ,
-    substitution?:  Sub ,
-    image?:  string ,
-}
 
 export const timelist = [
     {
