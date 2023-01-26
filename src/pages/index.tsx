@@ -54,12 +54,6 @@ const Home: NextPage = () => {
 							<MatchCard key={match._id} {...match} />
 						))}
 					</div>
-					<Link
-						href={"/football/fixtures"}
-						className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'
-					>
-						See All Fixtures<span className='ml-2 mt-1'>{">>"}</span>
-					</Link>
 				</div>
 				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
 					<h1 className='text-xl font-semibold'>Upcoming Matches</h1>
