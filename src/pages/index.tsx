@@ -20,11 +20,11 @@ const Home: NextPage = () => {
 
 	return (
 		<MainLayout title='ICC - Home' isGeneral>
-			<main className='flex w-full flex-1 flex-col p-2 gap-y-3'>
+			<main className='flex w-full flex-1 flex-col p-2 gap-y-3 overflow-x-hidden'>
 				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
 					<h1 className='text-lg font-semibold'>RCA Interclasses Are Back</h1>
-					<div className='flex w-full mt-4 gap-x-3'>
-						<div className='flex flex-col justify-between h-full'>
+					<div className='flex w-full md:flex-row flex-col-reverse mt-4 gap-3'>
+						<div className='flex flex-col min-w-1/2 justify-between '>
 							<p className=''>
 								Rwanda Coding academy has been perfect and excellent in
 								education and not to forget extra-curricular activities. From
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
 						<Image
 							src={"/images/interclass.png"}
 							alt=''
-							className=' object-cover max-w-1/2 aspect-video'
+							className=' object-cover md:w-1/2 w-full aspect-video'
 							height={250}
 							width={500}
 						/>
@@ -54,12 +54,6 @@ const Home: NextPage = () => {
 							<MatchCard key={match._id} {...match} />
 						))}
 					</div>
-					<Link
-						href={"/football/fixtures"}
-						className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'
-					>
-						See All Fixtures<span className='ml-2 mt-1'>{">>"}</span>
-					</Link>
 				</div>
 				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
 					<h1 className='text-xl font-semibold'>Upcoming Matches</h1>

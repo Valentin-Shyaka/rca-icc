@@ -29,3 +29,31 @@ export type MatchDayType = {
     matches: Match[];
     category: category;
 }
+
+export type Sub = {
+    off: string,
+    on: string,
+}
+
+export enum EventType {
+    Goal = 'goal',
+    YellowCard = 'yellowCard',
+    RedCard = 'redCard',
+    Substitution = 'Substitution',
+    Penalty = 'Penalty',
+    OwnGoal = 'Own Goal',
+    MissedPenalty = 'Missed Penalty',
+    Commentry = 'comment',
+    ballPost = 'ballPost',
+}
+
+
+export type TimeType = {
+    description: string,
+    type: EventType,
+    time: string,
+    _id: string,
+    scorer?: string,
+    substitution?: Sub,
+    image?: string,
+}

@@ -36,7 +36,7 @@ const IndexVolley = () => {
 						<h1 className=''>No Matches Available</h1>
 					)}
 					<Link
-						href={"/football/fixtures"}
+						href={"/volleyball/fixtures"}
 						className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'
 					>
 						See All Fixtures<span className='ml-2 mt-1'>{">>"}</span>

@@ -33,3 +33,10 @@ export const fetchMatchDayTitleQuery = (title: string) => groq`*[_type == "match
         stats,
     },
 }`
+
+export const getTrendsQuery = groq`*[_type == "trends"]{
+    _id,
+    title,
+    description,
+    "image": image.asset->url,
+}`

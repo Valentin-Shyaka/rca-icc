@@ -1,15 +1,13 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Moment from "react-moment";
 import LineUps from "../../components/Match/LineUps";
 import Stats from "../../components/Match/Stats";
 import Timeline from "../../components/Match/Timeline";
-import { useApp } from "../../contexts/AppProvider";
 import MainLayout from "../../layouts/MainLayout";
 import { fetchMatchByIdQuery } from "../../lib/queries";
 import { sanityClient } from "../../lib/sanity";
-import statistics from "../../utils/data/stats.json";
 import { Match } from "../../utils/types/types1";
 
 const MatchPage = () => {
@@ -70,7 +68,7 @@ const MatchPage = () => {
 				</div>
 				<div className='flex px-4 py-4 max-w-[800px] w-full justify-between mx-auto mt-4'>
 					<div className='flex gap-3 align-middle text-center flex-col'>
-						<div className='flex items-center gap-x-2'>
+						<div className='flex five:flex-row flex-col items-center gap-2'>
 							<Image
 								src={match?.homeTeam.logo ?? "/images/teamImage.svg"}
 								alt='team1'
@@ -107,7 +105,7 @@ const MatchPage = () => {
 						)}
 					</div>
 					<div className='flex gap-3 align-middle text-center flex-col'>
-						<div className='flex items-center gap-x-2'>
+						<div className='flex five:flex-row flex-col-reverse items-center gap-2'>
 							<p className='text-md text-slate-700'>{match?.awayTeam.name}</p>
 							<Image
 								src={match?.awayTeam.logo ?? "/images/teamImage2.svg"}
@@ -152,14 +150,14 @@ const MatchPage = () => {
 						>
 							STATS
 						</p>
-						<p
+						{/* <p
 							onClick={() => setActive("trendings")}
-							className={`px-6 py-2 hover:bg-slate-300/30 cursor-pointer text-center ${
+							className={`px-6 five:flex hidden py-2 hover:bg-slate-300/30 cursor-pointer text-center ${
 								active === "trendings" && "border-b-2  border-orange"
 							}`}
 						>
 							TRENDINGS
-						</p>
+						</p> */}
 					</div>
 				</div>
 				<div className='flex flex-col w-full py-3 '>
@@ -171,10 +169,7 @@ const MatchPage = () => {
 							/>
 						) : active === "lineups" ? (
 							<LineUps
-								lineups={[
-									match?.homeTeamLineup,
-									match?.awayTeamLineup,
-								]}
+								lineups={[match?.homeTeamLineup, match?.awayTeamLineup]}
 								homeTeam={match?.homeTeam}
 								awayTeam={match?.awayTeam}
 								isBasketball={isBasketball}

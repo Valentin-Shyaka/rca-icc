@@ -28,6 +28,5 @@ module.exports = {
 			"2xl": "1920px",
 		},
 	},
-
 	plugins: [require("tailwind-scrollbar-hide")],
 };

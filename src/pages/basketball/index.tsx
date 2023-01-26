@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import BasketTable from '../../components/constants/BasketTable';
-import Table from '../../components/constants/Table';
-import MatchCard from '../../components/MatchCard';
-import { useApp } from '../../contexts/AppProvider';
-import MainLayout from '../../layouts/MainLayout'
+import Link from "next/link";
+import BasketTable from "../../components/constants/BasketTable";
+import Table from "../../components/constants/Table";
+import MatchCard from "../../components/MatchCard";
+import { useApp } from "../../contexts/AppProvider";
+import MainLayout from "../../layouts/MainLayout";
 
 const IndexBasket = () => {
 	const { teams, matches } = useApp();
@@ -11,7 +11,7 @@ const IndexBasket = () => {
 		(match) => match.status?.status !== "FT" && match.category === "basketball"
 	);
 	const upComingMatches = unfinishedMatches?.slice(0, 5);
-  return (
+	return (
 		<MainLayout title='Baskeball'>
 			<div className='flex flex-col w-full gap-y-3'>
 				{/* <div className='flex w-full flex-col mx-auto max-w-[800px]'>
@@ -36,7 +36,7 @@ const IndexBasket = () => {
 						<h1 className=''>No Matches Available</h1>
 					)}
 					<Link
-						href={"/football/fixtures"}
+						href={"/basketball/fixtures"}
 						className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'
 					>
 						See All Fixtures<span className='ml-2 mt-1'>{">>"}</span>
@@ -45,6 +45,6 @@ const IndexBasket = () => {
 			</div>
 		</MainLayout>
 	);
-}
+};
 
 export default IndexBasket;
