@@ -55,7 +55,9 @@ export default {
             name: "status",
             title: "Status",
             type: "matchStatus",
-            validation: rule => rule.required()
+            validation: rule => rule.required(),
+            // set default value
+            initialValue: "NS"
         },
         {
             name: "stats",
@@ -79,6 +81,23 @@ export default {
             name: "awayTeamLineup",
             title: "Away Team Lineup",
             type: "lineup",
+        },
+         // category
+         {
+            name: "category",
+            title: "Category",
+            type: "string",
+            description: "The category of the matchday ex : football, basketball, ...",
+            options: {
+                list: [
+                    { title: "Football", value: "football" },
+                    { title: "Basketball", value: "basketball" },
+                    { title: "Volleyball", value: "volleyball" },
+                    { title: "Tennis", value: "tennis" },
+                    { title: "PingPong", value: "pingpong" },
+                ]
+            },
+            validation: rule => rule.required()
         },
     ]
 }

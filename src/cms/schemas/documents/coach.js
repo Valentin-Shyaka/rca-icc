@@ -5,9 +5,16 @@ export default {
     preview: {
         select: {
             title: "name",
-            subtitle: "team",
+            subtitle: "team.name",
             media: "profile",
         },
+        prepare({ title, subtitle, media }) {
+            return {
+                title,
+                subtitle: `Coach of ${subtitle}`,
+                media,
+            }
+        }
     },
     fields: [
 

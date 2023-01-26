@@ -10,6 +10,8 @@ import team from './documents/team';
 import matchDay from './documents/matchDay';
 import match from './documents/match';
 import coach from './documents/coach';
+import trending from './documents/trending';
+
 
 
 // objects
@@ -35,6 +37,7 @@ export default createSchema({
         matchTeamStats,
         lineup,
         matchStatus,
-        event
+        event,
+        trending
     ])
 })
