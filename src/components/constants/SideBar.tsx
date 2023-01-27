@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useApp } from "../../contexts/AppProvider";
 
 const SideBar = () => {
+	const {trends} = useApp()
 	return (
 		<div className=' tab:flex hidden flex-col h-full max-w-[300px] w-1/4 gap-y-4 overflow-y-auto min-w-[200px]'>
 			<input
@@ -25,29 +27,33 @@ const SideBar = () => {
 				</div>
 			</div> */}
 			<div className='flex flex-col gap-y-2'>
-				<span className='px-2'>Fixtures</span>
+				<span className='px-2 font-semibold'>🔥 Trendings</span>
+				<div className='flex flex-col py-5 rounded-md  border-divBack border-2'>
+					{trends?.map((trend, i) => (
+						<Link
+							href={`/trends/${trend._id}`}
+							className=' w-full p-2 hover:bg-blue hover:text-white duration-300 cursor-pointer rounded-md text-sm font-semibold'
+							key={i}
+						>
+							{trend.title}
+						</Link>
+					))}
+				</div>
+			</div>
+			<div className='flex flex-col gap-y-2'>
+				<span className='px-2 font-semibold'>Football Matchdays</span>
 				<div className='flex flex-col py-5 rounded-md  border-divBack border-2'>
 					{new Array(6).fill(0).map((v, i) => (
-						<Link href={`/mathday/matchday ${i+1}`}
-							className=' w-full p-2 hover:bg-orange/20 duration-300 cursor-pointer rounded-md'
-							 key={i}
+						<Link
+							href={`/mathday/matchday ${i + 1}`}
+							className=' w-full p-2 hover:bg-blue hover:text-white duration-300 cursor-pointer rounded-md text-sm font-semibold'
+							key={i}
 						>
 							Matchday {i + 1}
 						</Link>
 					))}
 				</div>
 			</div>
-			{/* <div className='flex flex-col gap-y-2'>
-				<span className='px-2'>Teams</span>
-				<div className='flex flex-col p-3 py-5 rounded-md gap-y-2 border-divBack border-2'>
-					{new Array(6).fill(0).map((v, i) => (
-						<div key={i} className='flex items-center gap-x-2'>
-							<Image src='/images/teamlogo.svg' height={10} width={10} alt='' />
-							<span>Matchday {i + 1}</span>
-						</div>
-					))}
-				</div>
-			</div> */}
 		</div>
 	);
 };

@@ -12,10 +12,10 @@ import {
 	teamsStatsFootQuery,
 	teamsStatsQuery,
 } from "../lib/queries";
-import { AllPlayersStatsQuery } from "../lib/query1";
+import { AllPlayersStatsQuery, getTrendsQuery } from "../lib/query1";
 import { sanityClient } from "../lib/sanity";
 import { Match, Player, Team } from "../utils/types/types1";
-import { PlayerByTeam, TeamGroups } from "../utils/types/types2";
+import { PlayerByTeam, TeamGroups, Trend } from "../utils/types/types2";
 
 export type AppContextType = {
 	players?: PlayerByTeam;
@@ -26,6 +26,8 @@ export type AppContextType = {
 	teams?: TeamGroups;
 	setTeams?: React.Dispatch<React.SetStateAction<TeamGroups>>;
 	getPlayers?: () => void;
+	trends?: Trend[];
+	setTrends?: React.Dispatch<React.SetStateAction<Trend[]>>;
 };
 
 export const AppContext = createContext<AppContextType>({});
@@ -51,6 +53,7 @@ export default function AppProvider({ children }: Props) {
 		debate: [],
 		volleyball: [],
 	});
+	const [trends, setTrends] = useState<Trend[]>([]);
 
 	const getMatches = async () => {
 		try {
@@ -127,9 +130,20 @@ export default function AppProvider({ children }: Props) {
 		}
 	};
 
+	const getTrendings =async () => {
+		try {
+			const trendings = await sanityClient.fetch(getTrendsQuery);
+			console.log(trendings);
+			setTrends(trendings);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	useEffect(() => {
 		getMatches();
 		getTeams();
+		getTrendings();
 	}, []);
 
 	return (
@@ -143,6 +157,8 @@ export default function AppProvider({ children }: Props) {
 				teams,
 				setTeams,
 				getPlayers,
+				trends,
+				setTrends,
 			}}
 		>
 			{children}

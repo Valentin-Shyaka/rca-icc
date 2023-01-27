@@ -57,3 +57,10 @@ export type TimeType = {
     substitution?: Sub,
     image?: string,
 }
+
+export type Trend = {
+    _id: string,
+    title: string,
+    description: string,
+    image: string,
+}

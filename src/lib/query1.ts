@@ -34,9 +34,16 @@ export const fetchMatchDayTitleQuery = (title: string) => groq`*[_type == "match
     },
 }`
 
-export const getTrendsQuery = groq`*[_type == "trends"]{
+export const getTrendsQuery = groq`*[_type == "trending"]{
     _id,
     title,
     description,
     "image": image.asset->url,
 }`
+
+export const getTrendById = (id: string) => groq`*[_type == "trending" && _id == "${id}"]{
+    _id,
+    title,
+    description,
+    "image": image.asset->url,
+    }`
