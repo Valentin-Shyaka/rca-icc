@@ -74,7 +74,7 @@ const Home: NextPage = () => {
 					{trends?.map((trend) => (
 						<div key={trend._id} className='flex flex-col gap-y-3 w-full'>
 							<h1 className='text-lg font-semibold'>{trend.title}</h1>
-							<div className='flex md:flex-row flex-col w-full'>
+							<div className='flex md:flex-row flex-col w-full gap-3'>
 								<Image
 									className=' w-full object-cover md:w-1/2'
 									src={trend.image}
@@ -82,16 +82,15 @@ const Home: NextPage = () => {
 									width={1920}
 									height={1080}
 								/>
-								<div className="flex flex-col w-1/2">
-								<p className=''>
-									{trend.description.slice(0, 200) + "..."}
-								</p>
-								<Link
-									href={`/trends/${trend._id}`}
-									className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'
-								>
-									See More<span className='ml-2 mt-1'>{">>"}</span>
-								</Link></div>
+								<div className='flex flex-col w-1/2'>
+									<p className=''>{trend.description.slice(0, 200) + "..."}</p>
+									<Link
+										href={`/trends/${trend._id}`}
+										className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'
+									>
+										Read More<span className='ml-2 mt-1'>{">>"}</span>
+									</Link>
+								</div>
 							</div>
 						</div>
 					))}
