@@ -28,7 +28,7 @@ const Matchday = () => {
 		if (title) getMatchday();
 	}, [title]);
 	return (
-		<MainLayout isGeneral>
+		<MainLayout isGeneral title={(title??"Matchdays") as string}>
 			<div className={`flex px-2 flex-col  w-full `}>
 				<h1 className=' capitalize text-lg font=semibold'>{title}</h1>
 				<div className='flex w-full mt-4 flex-wrap gap-2'>

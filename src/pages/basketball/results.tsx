@@ -10,7 +10,7 @@ const ResultsIndex = () => {
 			match?.status?.status === "FT" && match?.category === "basketball"
 	);
 	return (
-		<MainLayout title='BasketBall'>
+		<MainLayout title='BasketBall - Results'>
 			<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
 				<h1 className='text-xl font-semibold'>Latest Results</h1>
 				<div className='flex w-full mt-4 flex-wrap gap-3'>

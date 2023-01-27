@@ -8,7 +8,7 @@ import { Team } from '../../utils/types/types1';
 
 const FootTableIndex = ({ teams }: { teams: Team[] }) => {
 	return (
-		<MainLayout>
+		<MainLayout title='Football - Table'>
 			<div className='p-3 gap-y-3'>
 				<div className='float-left font-bold text-lg px-3'>
 					<h3>Standings</h3>

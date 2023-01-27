@@ -40,7 +40,7 @@ const StatsIndex = () => {
 	console.log(withMostPoints);
 	return (
 		<MainLayout>
-			<div className='p-3 flex flex-col w-full gap-y-2'>
+			<div className='p-3 flex flex-col w-full gap-y-2' title="Basketball - Stats">
 				<h3 className=' px-2 font-semibold text-lg mt-5'>Points</h3>
 				{withMostPoints?.slice(0, 5)?.map((player, i) => {
 					return (

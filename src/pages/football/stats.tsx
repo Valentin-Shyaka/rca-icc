@@ -8,10 +8,11 @@ const StatsIndex = () => {
 	const { players, getPlayers } = useApp();
 
 	const footPlayers: Player[] = mixArray(players?.football!);
-	const withMostGoals = footPlayers?.sort(
+	const len = footPlayers.length;
+	const withMostGoals = footPlayers?.slice(0, len).sort(
 		(a, b) => (b?.goals ?? 0) - (a?.goals ?? 0)
 	);
-	const withMostAssits = footPlayers?.sort(
+	const withMostAssits = footPlayers?.slice(0, len).sort(
 		(a, b) => ((b.footballAssists ?? 0) - (a.footballAssists ?? 0)) as any
 	);
 
@@ -31,7 +32,7 @@ const StatsIndex = () => {
 		);
 
 	return (
-		<MainLayout>
+		<MainLayout title="Football - Stats">
 			<div className='p-3 flex flex-col w-full gap-y-2'>
 				<h3 className=' px-2 font-semibold text-lg mt-5'>Goals</h3>
 				{withMostGoals?.slice(0, 5)?.map((player, i) => {

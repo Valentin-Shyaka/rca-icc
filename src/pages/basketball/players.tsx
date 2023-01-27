@@ -17,7 +17,7 @@ type PlayerProps = {
 
 const PlayersIndex = ({ teamPlayers }: PlayerProps) => {
 	return (
-		<MainLayout>
+		<MainLayout title='Basketball - Players'>
 			<div className='p-3 gap-y-3'>
 				<h1 className='px-3 font-semibold'>Players</h1>
 				{/* <div className='flex gap-3 flex-wrap w-full mt-3'>

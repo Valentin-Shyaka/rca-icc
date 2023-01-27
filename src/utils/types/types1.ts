@@ -70,6 +70,7 @@ export type Match = {
 	homeTeamLineup: LineUp;
 	awayTeamLineup: LineUp;
     _id: string;
+    banner: string;
     title: string;
     description: string;
     date: Date;

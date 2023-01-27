@@ -8,6 +8,7 @@ import Timeline from "../../components/Match/Timeline";
 import MainLayout from "../../layouts/MainLayout";
 import { fetchMatchByIdQuery } from "../../lib/queries";
 import { sanityClient } from "../../lib/sanity";
+import { SEO } from "../../utils/types/misc";
 import { Match } from "../../utils/types/types1";
 
 const MatchPage = () => {
@@ -46,8 +47,14 @@ const MatchPage = () => {
 		}
 	}, [id]);
 
+	const seo: SEO = {
+		title: `${match?.homeTeam?.name} vs ${match?.awayTeam?.name}`,
+		description: `${match?.homeTeam?.name} vs ${match?.awayTeam?.name}`,
+		image: match?.banner,
+	}
+
 	return (
-		<MainLayout isGeneral>
+		<MainLayout isGeneral title={seo.title} seo={seo}>
 			<div
 				className={`flex px-2 flex-col tablet:w-4/5 max-w-[1000px] w-full shadow-md mx-auto`}
 			>

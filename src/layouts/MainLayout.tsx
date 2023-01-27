@@ -21,6 +21,18 @@ const MainLayout = (props: Props) => {
 		<>
 			<Head>
 				<title>{title}</title>
+				{seo && (
+					<>
+						<meta name='description' content={seo.description} />
+						<meta property='og:title' content={seo.description} />
+						<meta name='type' property='og:type' content='article' />
+						<meta
+							name='image'
+							property='og:image'
+							content={seo.image}
+						/>
+					</>
+				)}
 			</Head>
 			<main className='w-full flex flex-col md:px-[2%] px-1 overflow-hidden h-screen'>
 				<div className='w-full flex flex-col border-b-2 border-gray'>
