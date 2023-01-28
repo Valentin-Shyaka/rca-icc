@@ -58,10 +58,10 @@ export default function AppProvider({ children }: Props) {
 	const getMatches = async () => {
 		try {
 			const res = await sanityClient.fetch(fetchMatchesQuery);
-			console.log(res);
+			// console.log(res);
 			setMatches(res);
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 
@@ -126,14 +126,14 @@ export default function AppProvider({ children }: Props) {
 				basketball: basketballPlayers,
 			});
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 
 	const getTrendings =async () => {
 		try {
 			const trendings = await sanityClient.fetch(getTrendsQuery);
-			console.log(trendings);
+			// console.log(trendings);
 			setTrends(trendings);
 		} catch (error) {
 			console.log(error);

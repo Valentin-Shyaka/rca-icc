@@ -37,7 +37,7 @@ const MatchPage = () => {
 
 	const getMatch = async () => {
 		const match = await sanityClient.fetch(fetchMatchByIdQuery(id as string));
-		console.log(match);
+		// console.log(match);
 		setMatch(match[0]);
 	};
 

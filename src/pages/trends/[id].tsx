@@ -15,7 +15,7 @@ const TrendsIndex = () => {
 	const getTrend = async () => {
 		try {
 			const trend = await sanityClient.fetch(getTrendById(id as string));
-			console.log(trend);
+			// console.log(trend);
 			
 			setTrend(trend[0]);
 		} catch (error) {

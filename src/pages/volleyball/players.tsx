@@ -48,7 +48,7 @@ export default PlayersIndex;
 
 export const getStaticProps: GetStaticProps = async () => {
 	const teamPlayers = await sanityClient.fetch(playersVolleyQuery);
-	console.log(teamPlayers);
+	// console.log(teamPlayers);
 
 	return {
 		props: {

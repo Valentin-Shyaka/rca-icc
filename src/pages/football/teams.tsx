@@ -23,7 +23,7 @@ export default TeamsIndex
 
 export const getStaticProps: GetStaticProps = async () => {
 	const teams = await sanityClient.fetch(teamsFootQuery);
-	console.log(teams);
+	// console.log(teams);
 	
 	return {
 		props: {

@@ -33,7 +33,7 @@ const LineUps = (props: Props) => {
 	const homeLineUp = props.lineups[0];
 
 	useEffect(() => {
-		console.log(awayLineUp, homeLineUp);
+		// console.log(awayLineUp, homeLineUp);
 
 		// get starting eleven
 		awayLineUp.startingEleven.map((player, i) => {

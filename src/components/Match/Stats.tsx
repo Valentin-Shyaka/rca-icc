@@ -14,7 +14,7 @@ const Stats = ({ stats, teams }: Props) => {
 	const homeStat = Object.entries(stats?.homeTeamStats);
 	const statsNames = awayStat.map((stat) => stat[0]);
 
-	console.log(awayStat, homeStat[1]);
+	// console.log(awayStat, homeStat[1]);
 
 	return (
 		<div className='p-5 flex flex-col'>
