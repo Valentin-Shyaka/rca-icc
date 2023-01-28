@@ -1,3 +1,4 @@
+import { Player } from "../types/types1";
 
 export const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
@@ -11,4 +12,23 @@ export const mixArray = (arr: any[]) => {
         arr[randomIndex] = temporaryValue;
     }
     return arr;
+}
+const postions = ['defender', 'midfielder', 'forward'];
+
+export const fillLineUp = (arr: Player[], size: number) => {
+    let newSize = size;
+    const newArr = [...arr];
+    const hasGK = newArr.some(player => player.position.includes('goalkeeper'));
+    if (!hasGK) {
+        const dummyPlayer = { displayName: 'Dummy', position: ['goalkeeper'], _id: 'Dummy', number: Math.floor(Math.random() * 100) };
+        newArr.push(dummyPlayer as unknown as Player);
+        newSize--;
+    }
+    const s = newSize+1;
+    while (newArr.length < s) {
+        const dummyPlayer = { displayName: 'Dummy', position: [postions[Math.floor(Math.random() * 3)]]
+        , _id: (Math.random() * 100000).toString(), number: Math.floor(Math.random() * 100) };
+        newArr.push(dummyPlayer as unknown as Player);
+    }
+    return newArr;
 }

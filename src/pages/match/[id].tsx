@@ -53,6 +53,8 @@ const MatchPage = () => {
 		image: match?.banner,
 	}
 
+	const isLive = match?.status?.status === "LIVE";
+
 	return (
 		<MainLayout isGeneral title={seo.title} seo={seo}>
 			<div
@@ -63,7 +65,7 @@ const MatchPage = () => {
 						<span className=' cursor-pointer capitalize'>
 							{match?.category}
 						</span>
-						<span className={`ml-2`}>
+						<span className={`ml-2 text-orange`}>
 							{isToday ? (
 								"Today"
 							) : (
@@ -71,7 +73,7 @@ const MatchPage = () => {
 							)}
 						</span>
 					</p>
-					<p>{match?.status?.status}</p>
+					{<p className=" text-orange">{match?.status?.status}</p>}
 				</div>
 				<div className='flex px-4 py-4 max-w-[800px] w-full justify-between mx-auto mt-4'>
 					<div className='flex gap-3 align-middle text-center flex-col'>
@@ -135,25 +137,22 @@ const MatchPage = () => {
 					<div className='w-full border-t-[1px] border-gray grid auto-cols-fr grid-flow-col mt-3 items-center shadow-md min-w-[350px]'>
 						<p
 							onClick={() => setActive("timeline")}
-							className={`px-6 py-2 hover:bg-slate-300/30 active:bg-slate-300/30 duration-300 cursor-pointer text-center ${
-								active === "timeline" && "border-b-2  border-orange"
-							}`}
+							className={`px-6 py-2 hover:bg-slate-300/30 active:bg-slate-300/30 duration-300 cursor-pointer text-center ${active === "timeline" && "border-b-2  border-orange"
+								}`}
 						>
 							TIMELINE
 						</p>
 						<p
 							onClick={() => setActive("lineups")}
-							className={`px-6 py-2 hover:bg-slate-300/30 cursor-pointer text-center ${
-								active === "lineups" && "border-b-2  border-orange"
-							}`}
+							className={`px-6 py-2 hover:bg-slate-300/30 cursor-pointer text-center ${active === "lineups" && "border-b-2  border-orange"
+								}`}
 						>
 							LINEUPS
 						</p>
 						<p
 							onClick={() => setActive("stats")}
-							className={`px-6 py-2 hover:bg-slate-300/30 cursor-pointer text-center ${
-								active === "stats" && "border-b-2  border-orange"
-							}`}
+							className={`px-6 py-2 hover:bg-slate-300/30 cursor-pointer text-center ${active === "stats" && "border-b-2  border-orange"
+								}`}
 						>
 							STATS
 						</p>

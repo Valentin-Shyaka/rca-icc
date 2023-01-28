@@ -34,7 +34,7 @@ const LineUps = (props: Props) => {
 
 	useEffect(() => {
 		console.log(awayLineUp, homeLineUp);
-		
+
 		// get starting eleven
 		awayLineUp.startingEleven.map((player, i) => {
 			const foundPlayer = awayPlayers.find((p) => p._id === player._ref);
@@ -116,6 +116,24 @@ const LineUps = (props: Props) => {
 						width={30}
 						height={20}
 					/>
+				</div>
+				<div className="flex flex-col w-full mt-4">
+					<div className="flex flex-col w-1/2 gap-y-2">
+						{homeLineUps.subs.map((player, i) => (
+							<div className="flex items-center gap-x-3">
+								<span className="">{player.number}</span>
+								<span className="">{player.displayName}</span>
+							</div>
+						))}
+					</div>
+					<div className="flex flex-col w-1/2 gap-y-2">
+						{awayLineUps.subs.map((player, i) => (
+							<div className="flex items-center gap-x-3">
+								<span className="">{player.number}</span>
+								<span className="">{player.displayName}</span>
+							</div>
+						))}
+					</div>
 				</div>
 			</div>
 		</div>

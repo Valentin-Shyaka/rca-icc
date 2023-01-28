@@ -23,6 +23,8 @@ const MatchCard = ({
 		? stats?.homeTeamStats?.points
 		: stats?.homeTeamStats?.goals;
 
+	const isDueDate = new Date(date).getTime() < new Date().getTime();
+
 	return (
 		<Link
 			href={`/match/${_id}`}
@@ -73,7 +75,10 @@ const MatchCard = ({
 			) : (
 				<div className=' p-3 px-1 min-w-[100px] flex flex-col gap-y-2 justify-center'>
 					<p className='text-xs font-bold text-center'>
-						<Moment format='MMM Do YYYY'>{date}</Moment>
+						{isDueDate ? (
+							<span className=" text-orange">Postoponed</span>
+						) : (
+							<Moment format='MMM Do YYYY'>{date}</Moment>)}
 					</p>
 					<span className=' text-sm text-center'>
 						<Moment format='LT'>{date}</Moment>
