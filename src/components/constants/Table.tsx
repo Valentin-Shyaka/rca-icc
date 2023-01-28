@@ -11,41 +11,43 @@ const Table = ({ teams }: Props) => {
 	const standings = teams.sort((a,b) => (b?.stats?.points ?? 0) < (a?.stats?.points ?? 0) ? -1 : 1)
 
 	return (
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th></th>
-					<th>P</th>
-					<th>W</th>
-					<th>D</th>
-					<th>L</th>
-					<th>GF</th>
-					<th>GA</th>
-					<th>GD</th>
-					<th>PTS</th>
-				</tr>
-			</thead>
-			<tbody>
-				{standings.map((team, index) => (
-					<tr key={index}>
-						<td>{index + 1}</td>
-						<td>{team.name}</td>
-						<td>{team?.stats?.matchesPlayed ?? 0}</td>
-						<td>{team?.stats?.matchesWon ?? 0}</td>
-						<td>{team?.stats?.matchesDrawn ?? 0}</td>
-						<td>{team?.stats?.matchesLost ?? 0}</td>
-						<td>{team?.stats?.goalsScored ?? 0}</td>
-						<td>{team?.stats?.goalsConceded ?? 0}</td>
-						<td>
-							{(team?.stats?.goalsScored ?? 0) -
-								(team?.stats?.goalsConceded ?? 0)}
-						</td>
-						<td>{team?.stats?.points ?? 0}</td>
+		<div className='flex w-full flex-col overflow-x-auto table-cont'>
+			<table className=' min-w-[450px] overflow-x-auto'>
+				<thead>
+					<tr>
+						<th></th>
+						<th></th>
+						<th>P</th>
+						<th>W</th>
+						<th>D</th>
+						<th>L</th>
+						<th>GF</th>
+						<th>GA</th>
+						<th>GD</th>
+						<th>PTS</th>
 					</tr>
-				))}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{standings.map((team, index) => (
+						<tr key={index}>
+							<td>{index + 1}</td>
+							<td>{team.name}</td>
+							<td>{team?.stats?.matchesPlayed ?? 0}</td>
+							<td>{team?.stats?.matchesWon ?? 0}</td>
+							<td>{team?.stats?.matchesDrawn ?? 0}</td>
+							<td>{team?.stats?.matchesLost ?? 0}</td>
+							<td>{team?.stats?.goalsScored ?? 0}</td>
+							<td>{team?.stats?.goalsConceded ?? 0}</td>
+							<td>
+								{(team?.stats?.goalsScored ?? 0) -
+									(team?.stats?.goalsConceded ?? 0)}
+							</td>
+							<td>{team?.stats?.points ?? 0}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
 	);
 };
 

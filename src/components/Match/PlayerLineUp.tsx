@@ -93,20 +93,20 @@ const PlayerLineUp = ({ awayLineUp, homeLineUp }: Props) => {
 						style={{ gridTemplateColumns: `repeat(${awayDefenders.length}, 1fr)` }}
 					>
 						{awayDefenders.map((player, i) => (
-							<PlayerBox name='Player 2' color={`#ff7b35`} {...player} id={i} />
+							<PlayerBox name='Player 2' color={`#000`} {...player} id={i} />
 						))}
 					</div>
 					<div className={`grid grid-cols-${awayMidfielders.length} w-full`}
 						style={{ gridTemplateColumns: `repeat(${awayMidfielders.length}, 1fr)` }}
 					>
 						{awayMidfielders.map((player, i) => (
-							<PlayerBox name='Player 6' color={`#ff7b35`} {...player} id={i} />
+							<PlayerBox name='Player 6' color={`#000`} {...player} id={i} />
 						))}
 					</div>
 					<div className={`grid grid-cols-${awayForwards.length} w-full`} style={{ gridTemplateColumns: `repeat(${awayForwards.length}, 1fr)` }}
 					>
 						{awayForwards.map((player, i) => (
-							<PlayerBox name='Player 9' color={`#ff7b35`} {...player} id={i} />
+							<PlayerBox name='Player 9' color={`#000`} {...player} id={i} />
 						))}
 					</div>
 				</div>
@@ -127,7 +127,7 @@ export const PlayerBox = ({ name, number, color, id, displayName }: any) => (
 			}}
 			className={`border-2 border-white w-11 aspect-square rounded-full flex items-center justify-center p-2`}
 		>
-			<span className=''>{number ?? id + 1}</span>
+			<span className=''>{number ?? Math.ceil(Math.random()*99)}</span>
 		</span>
 		<span className=''>{displayName??name}</span>
 	</div>

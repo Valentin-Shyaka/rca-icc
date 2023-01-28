@@ -41,9 +41,9 @@ const MainLayout = (props: Props) => {
 				<EventLinks />
 				<div className='flex w-full h-full gap-x-2 overflow-hidden'>
 					<SideBar />
-					<div className='flex flex-col w-full h-[full overflow-y-auto'>
+					<div className='flex flex-col w-full h-[full overflow-y-auto overflow-x-hidden'>
 						{props.isGeneral ? null : <CompNavBar />}
-						<div className='flex flex-col h-[85vh] overflow-y-auto py-2'>
+						<div className='flex flex-col h-[85vh] overflow-y-auto py-2 overflow-x-hidden'>
 							{props.children}
 						</div>
 					</div>
