@@ -16,7 +16,7 @@ type PlayerProps = {
 };
 
 const PlayersIndex = ({ teamPlayers }: PlayerProps) => {
-	console.log(teamPlayers);
+	// console.log(teamPlayers);
 
 	return (
 		<MainLayout title="Football - Players">
@@ -46,7 +46,7 @@ export default PlayersIndex;
 
 export const getStaticProps: GetStaticProps = async () => {
 	const teamPlayers = await sanityClient.fetch(playersFootQuery);
-	console.log(teamPlayers);
+	// console.log(teamPlayers);
 
 	return {
 		props: {

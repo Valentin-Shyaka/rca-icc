@@ -16,7 +16,7 @@ const Matchday = () => {
 			const matchday = await sanityClient.fetch(
 				fetchMatchDayTitleQuery(title as string)
 			);
-			console.log(title, matchday);
+			// console.log(title, matchday);
 
 			setMatchday(matchday[0]);
 		} catch (error) {

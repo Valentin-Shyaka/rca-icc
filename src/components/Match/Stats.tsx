@@ -14,7 +14,7 @@ const Stats = ({ stats, teams }: Props) => {
 	const homeStat = Object.entries(stats?.homeTeamStats);
 	const statsNames = awayStat.map((stat) => stat[0]);
 
-	console.log(awayStat, homeStat[1]);
+	// console.log(awayStat, homeStat[1]);
 
 	return (
 		<div className='p-5 flex flex-col'>
@@ -38,9 +38,9 @@ const Stats = ({ stats, teams }: Props) => {
 			{new Array(statsNames.length - 1).fill(0).map((_, i: number) => (
 				<RowStat
 					key={i}
-					left={homeStat[i + 1][1]}
-					right={awayStat[i + 1][1]}
-					stat={statsNames[i + 1]}
+					left={homeStat[i + 1][1] ? homeStat[i + 1][1] : "N/A"}
+					right={awayStat[i + 1][1] ? awayStat[i + 1][1] : "N/A"}
+					stat={statsNames[i + 1] ? statsNames[i + 1] : "N/A"}
 				/>
 			))}
 		</div>
