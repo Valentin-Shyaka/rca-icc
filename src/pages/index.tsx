@@ -82,7 +82,7 @@ const Home: NextPage = () => {
 									width={1920}
 									height={1080}
 								/>
-								<div className='flex flex-col w-1/2'>
+								<div className='flex flex-col md:w-1/2 w-full'>
 									<p className=''>{trend.description.slice(0, 200) + "..."}</p>
 									<Link
 										href={`/trends/${trend._id}`}

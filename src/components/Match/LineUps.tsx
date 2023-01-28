@@ -82,8 +82,8 @@ const LineUps = (props: Props) => {
 		<div className=' w-full flex flex-col'>
 			<div className='flex flex-col w-4/5 mx-auto bg-green-600 px-1'>
 				<div className='flex items-center justify-between text-white bg-black/20 p-2 shadow-md'>
-					<h1>Y1</h1>
-					<h1>4-3-3</h1>
+					<h1>{props.homeTeam.name}</h1>
+					<h1>{homeLineUp.formation}</h1>
 				</div>
 				<div className='relative h-[120vh] w-full border-2 border-white'>
 					<PlayerLineUp homeLineUp={homeLineUps} awayLineUp={awayLineUps} />
@@ -97,8 +97,8 @@ const LineUps = (props: Props) => {
 					</div>
 				</div>
 				<div className='flex items-center justify-between text-white bg-black/20 p-2 shadow-md'>
-					<h1>TVET</h1>
-					<h1>4-3-3</h1>
+					<h1>{props.awayTeam.name}</h1>
+					<h1>{awayLineUp.formation}</h1>
 				</div>
 			</div>
 			<div className='flex flex-col w-4/5 mx-auto py-4'>
