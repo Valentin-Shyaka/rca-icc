@@ -38,9 +38,9 @@ const Stats = ({ stats, teams }: Props) => {
 			{new Array(statsNames.length - 1).fill(0).map((_, i: number) => (
 				<RowStat
 					key={i}
-					left={homeStat[i + 1][1]}
-					right={awayStat[i + 1][1]}
-					stat={statsNames[i + 1]}
+					left={homeStat[i + 1][1] ? homeStat[i + 1][1] : "N/A"}
+					right={awayStat[i + 1][1] ? awayStat[i + 1][1] : "N/A"}
+					stat={statsNames[i + 1] ? statsNames[i + 1] : "N/A"}
 				/>
 			))}
 		</div>

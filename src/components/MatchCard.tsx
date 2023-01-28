@@ -15,7 +15,7 @@ const MatchCard = ({
 }: Match) => {
 	const isFinished = status?.status === "FT";
 	const isBasketball = category === "basketball";
-	const isLive=status?.status==="HT"||status?.status==="1H"|| status?.status==="2H";
+	const isLive = status?.status === "HT" || status?.status === "1H" || status?.status === "2H";
 
 	const awayScore = isBasketball
 		? stats?.awayTeamStats?.points
@@ -79,7 +79,9 @@ const MatchCard = ({
 						{isLive ? (
 							<span className=" text-green-500">live</span>
 						) : (
-							<Moment format='MMM Do YYYY'>{date}</Moment>)}
+							<Moment format='MMM Do YYYY'>{date}</Moment>)
+
+						}
 					</p>
 					<span className=' text-sm text-center'>
 						<Moment format='LT'>{date}</Moment>
