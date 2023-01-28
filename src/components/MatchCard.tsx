@@ -76,7 +76,7 @@ const MatchCard = ({
 				<div className=' p-3 px-1 min-w-[100px] flex flex-col gap-y-2 justify-center'>
 					<p className='text-xs font-bold text-center'>
 						{isDueDate ? (
-							<span className=" text-orange">Postoponed</span>
+							<span className=" text-orange">Postponed</span>
 						) : (
 							<Moment format='MMM Do YYYY'>{date}</Moment>)}
 					</p>
