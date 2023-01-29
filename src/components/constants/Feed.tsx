@@ -16,6 +16,7 @@ const Feed = () => {
 			<Carousel autoPlay infiniteLoop
 				showThumbs={false}
 				showIndicators={false}
+				swipeable={true}
 				renderArrowPrev={(click) => <BiChevronLeft onClick={click} className=" absolute top-1/2 -translate-y-1/2 left-0 z-10 h-full duration-300 cursor-pointer hover:bg-black/10" />}
 				renderArrowNext={(click) => <BiChevronRight onClick={click} className=" absolute top-1/2 -translate-y-1/2 right-0 h-full duration-300 cursor-pointer hover:bg-black/10" />}
 				showStatus={false} interval={9000}>

@@ -8,7 +8,15 @@ const Table = ({ teams }: Props) => {
 	if (!teams) return <div>loading...</div>;
 	if (teams.length === 0) return <div>no teams</div>;
 
-	const standings = teams.sort((a,b) => (b?.stats?.points ?? 0) < (a?.stats?.points ?? 0) ? -1 : 1)
+	const standings = teams.sort((a, b) => {
+		if (a?.stats?.points === b?.stats?.points) {
+			const aDiff = (a?.stats?.goalsScored ?? 0) - (a?.stats?.goalsConceded ?? 0)
+			const bDiff = (b?.stats?.goalsScored ?? 0) - (b?.stats?.goalsConceded ?? 0)
+			return aDiff > bDiff ? -1 : 1
+		}
+		return (b?.stats?.points ?? 0) < (a?.stats?.points ?? 0) ? -1 : 1
+	}
+	)
 
 	return (
 		<div className='flex w-full flex-col overflow-x-auto table-cont'>
