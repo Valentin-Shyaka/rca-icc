@@ -47,3 +47,10 @@ export const getTrendById = (id: string) => groq`*[_type == "trending" && _id ==
     description,
     "image": image.asset->url,
     }`
+    
+export const getInsightsQuery = groq`*[_type == "insight"]{
+    _id,
+    title,
+    description,
+    "image": image.asset->url,
+}`

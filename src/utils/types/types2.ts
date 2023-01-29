@@ -64,3 +64,10 @@ export type Trend = {
     description: string,
     image: string,
 }
+
+export type Insight = {
+    _id: string,
+    title: string,
+    description: string,
+    image: string,
+}

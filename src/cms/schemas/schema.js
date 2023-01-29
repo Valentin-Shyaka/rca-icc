@@ -21,6 +21,7 @@ import overallTeamStats from './objects/overallTeamStats';
 import lineup from './objects/lineup';
 import event from './objects/event';
 import matchStatus from './objects/matchStatus';
+import insight from './documents/insight';
 
 
 // Then we give our schema to the builder and provide the result to Sanity
@@ -38,6 +39,7 @@ export default createSchema({
         lineup,
         matchStatus,
         event,
-        trending
+        trending,
+        insight,
     ])
 })
