@@ -4,6 +4,7 @@ import Head from "next/head";
 import NextNProgress from "nextjs-progressbar";
 import AppProvider from "../contexts/AppProvider";
 import { useState, useEffect } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [showChild, setShowChild] = useState(false);
