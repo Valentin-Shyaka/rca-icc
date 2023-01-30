@@ -1,21 +1,42 @@
 import React from "react";
 import Image from "next/image";
+import { useApp } from "../../contexts/AppProvider";
+import { Carousel } from 'react-responsive-carousel';
+import { BiArrowBack, BiChevronLeft, BiChevronRight, BiLeftArrow } from "react-icons/bi";
 
 const Feed = () => {
+	const { insights, getInsights } = useApp();
+
+	React.useEffect(() => {
+		getInsights!();
+	}, []);
 	return (
-		<div className='flex-col gap-y-3 lg:flex hidden'>
+		<div className='flex-col gap-y-3 lg:flex w-[250px] hidden '>
 			<h1 className=' text-center font-semibold'>Insights</h1>
-			<div className='w-[250px] float-right  border-2 border-gray h-[250px] rounded-md relative top-0 aspect-square'>
-				<Image
-					src={"/images/feedImage.png"}
-					alt={"match feed"}
-					width={250}
-					height={50}
-				/>
-				<p className='font-md font-sans text-coolGray-500 text-left p-2 text-sm'>
-					The so-called year 1 kids surprise their opponents with a draw at their first official match and Welding dissapoints.
-				</p>
-			</div>
+			<Carousel autoPlay infiniteLoop
+				showThumbs={false}
+				showIndicators={false}
+				swipeable={true}
+				renderArrowPrev={(click) => <BiChevronLeft onClick={click} className=" absolute top-1/2 -translate-y-1/2 left-0 z-10 h-full duration-300 cursor-pointer hover:bg-black/10" />}
+				renderArrowNext={(click) => <BiChevronRight onClick={click} className=" absolute top-1/2 -translate-y-1/2 right-0 h-full duration-300 cursor-pointer hover:bg-black/10" />}
+				showStatus={false} interval={9000}>
+				{insights?.map((insight) => (
+					<div key={insight._id} className='w-full  border-2 border-gray rounded-md  aspect-square'>
+						<div className="w-full overflow-hidden h-[180px] ">
+							<Image
+								src={insight.image}
+								alt={insight.title}
+								className=" object-cover min-h-full"
+								width={250}
+								height={50}
+							/></div>
+						<h1 className="font-semibold text-center">{insight.title}</h1>
+						<p className='font-md font-sans text-coolGray-500 text-left p-2 text-sm'>
+							{insight.description}
+						</p>
+					</div>
+				))}
+			</Carousel>
 		</div>
 	);
 };

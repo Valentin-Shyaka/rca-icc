@@ -117,7 +117,7 @@ const LineUps = (props: Props) => {
 						height={20}
 					/>
 				</div>
-				<div className="flex flex-col w-full mt-4">
+				<div className="flex w-full justify-between mt-4">
 					<div className="flex flex-col w-1/2 gap-y-2">
 						{homeLineUps.subs.map((player, i) => (
 							<div className="flex items-center gap-x-3">
@@ -126,7 +126,7 @@ const LineUps = (props: Props) => {
 							</div>
 						))}
 					</div>
-					<div className="flex flex-col w-1/2 gap-y-2">
+					<div className="flex items-end flex-col w-1/2 gap-y-2">
 						{awayLineUps.subs.map((player, i) => (
 							<div className="flex items-center gap-x-3">
 								<span className="">{player.number}</span>

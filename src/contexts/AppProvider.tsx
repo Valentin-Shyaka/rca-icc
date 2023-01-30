@@ -12,10 +12,10 @@ import {
 	teamsStatsFootQuery,
 	teamsStatsQuery,
 } from "../lib/queries";
-import { AllPlayersStatsQuery, getTrendsQuery } from "../lib/query1";
+import { AllPlayersStatsQuery, getInsightsQuery, getTrendsQuery } from "../lib/query1";
 import { sanityClient } from "../lib/sanity";
 import { Match, Player, Team } from "../utils/types/types1";
-import { PlayerByTeam, TeamGroups, Trend } from "../utils/types/types2";
+import { Insight, PlayerByTeam, TeamGroups, Trend } from "../utils/types/types2";
 
 export type AppContextType = {
 	players?: PlayerByTeam;
@@ -28,6 +28,9 @@ export type AppContextType = {
 	getPlayers?: () => void;
 	trends?: Trend[];
 	setTrends?: React.Dispatch<React.SetStateAction<Trend[]>>;
+	insights?: Insight[];
+	setInsights?: React.Dispatch<React.SetStateAction<Insight[]>>;
+	getInsights?: () => void;
 };
 
 export const AppContext = createContext<AppContextType>({});
@@ -54,6 +57,7 @@ export default function AppProvider({ children }: Props) {
 		volleyball: [],
 	});
 	const [trends, setTrends] = useState<Trend[]>([]);
+	const [insights, setInsights] = useState<Insight[]>([]);
 
 	const getMatches = async () => {
 		try {
@@ -140,6 +144,15 @@ export default function AppProvider({ children }: Props) {
 		}
 	}
 
+	const getInsights = async () => {
+		try {
+			const insights = await sanityClient.fetch(getInsightsQuery);
+			setInsights(insights);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	useEffect(() => {
 		getMatches();
 		getTeams();
@@ -159,6 +172,9 @@ export default function AppProvider({ children }: Props) {
 				getPlayers,
 				trends,
 				setTrends,
+				insights,
+				setInsights,
+				getInsights,
 			}}
 		>
 			{children}
