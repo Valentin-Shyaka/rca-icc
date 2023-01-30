@@ -12,7 +12,7 @@ const IndexVolley = () => {
 	);
 	const upComingMatches = unfinishedMatches?.slice(0, 5);
   return (
-		<MainLayout>
+		<MainLayout title='Volleyball'>
 			<div className='flex flex-col w-full gap-y-3'>
 				{/* <div className='flex w-full flex-col mx-auto max-w-[800px]'>
 				<LiveGameCard path='/match/23' />
