@@ -8,7 +8,7 @@ import MainLayout from "../layouts/MainLayout";
 import { competitions } from "../utils/data/other";
 
 const Home: NextPage = () => {
-	const { getMatches, matches, trends } = useApp();
+	const { getMatches, matches, trends, friendlyMatches } = useApp();
 
 	const finishedMatches = matches?.filter(
 		(match) => match?.status?.status === "FT"
@@ -21,32 +21,9 @@ const Home: NextPage = () => {
 	return (
 		<MainLayout title='ICC - Home' isGeneral>
 			<main className='flex w-full flex-1 flex-col p-2 gap-y-3 overflow-x-hidden'>
-				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
-					<h1 className='text-lg font-semibold'>RCA Interclasses Are Back</h1>
-					<div className='flex w-full md:flex-row flex-col-reverse mt-4 gap-3'>
-						<div className='flex flex-col min-w-1/2 justify-between '>
-							<p className=''>
-								Rwanda Coding academy has been perfect and excellent in
-								education and not to forget extra-curricular activities. From
-								the beginning of RCA , interclasses have been a challenging
-								league since a difference in age encourages minors to win
-								majors. Teams are forced to make their way to the stage to
-								receive their prizes in many hard duels with harder opponents.
-								Here it comes again! It's 2022-2023.
-							</p>
-							{/* <button className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'>
-								See live matches <span className='ml-2 mt-1'>{">>"}</span>
-							</button> */}
-						</div>
-						<Image
-							src={"/images/interclass.png"}
-							alt=''
-							className=' object-cover md:w-1/2 w-full aspect-video'
-							height={250}
-							width={500}
-						/>
-					</div>
-				</div>
+				{friendlyMatches!?.length > 0 &&<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
+					<h1 className='text-lg font-semibold'>Friendlies</h1>
+				</div>}
 				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
 					<h1 className='text-xl font-semibold'>Latest Results</h1>
 					<div className='flex w-full mt-4 flex-wrap gap-3'>

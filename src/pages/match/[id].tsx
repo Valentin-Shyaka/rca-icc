@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Moment from "react-moment";
 import LineUps from "../../components/Match/LineUps";
 import Stats from "../../components/Match/Stats";
@@ -8,12 +8,13 @@ import Timeline from "../../components/Match/Timeline";
 import MainLayout from "../../layouts/MainLayout";
 import { fetchMatchByIdQuery } from "../../lib/queries";
 import { sanityClient } from "../../lib/sanity";
-import { SEO } from "../../utils/types/misc";
+import { MatchGoals, SEO } from "../../utils/types/misc";
 import { Match } from "../../utils/types/types1";
 
 const MatchPage = () => {
 	const [match, setMatch] = useState<Match | null>(null);
 	const [active, setActive] = useState("stats");
+	const [goals, setGoals] = useState<MatchGoals>({away: [], home: []});
 	const router = useRouter();
 	const { id } = router.query;
 
@@ -46,6 +47,24 @@ const MatchPage = () => {
 			getMatch();
 		}
 	}, [id]);
+
+	useLayoutEffect(() => {
+		const goalEvents = match?.events?.filter((event) => event.type === "goal");
+		console.log(goalEvents);
+		
+		const homeGoals: MatchGoals["home"] = [];
+		const awayGoals: MatchGoals["away"] = [];
+
+		goalEvents?.forEach((event: any) => {
+			if (event.team === "home") {
+				homeGoals.push(event);
+			} else {
+				awayGoals.push(event);
+			}
+		});
+
+		setGoals({home: homeGoals, away: awayGoals});
+	}, [match?.events])
 
 	const seo: SEO = {
 		title: `${match?.homeTeam?.name} vs ${match?.awayTeam?.name}`,

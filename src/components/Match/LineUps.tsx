@@ -24,7 +24,7 @@ const LineUps = (props: Props) => {
 		eleven: [],
 		subs: [],
 	});
-	if (props.isBasketball)
+	if (props.isBasketball || (!props.lineups[0]&&!props.lineups[1]))
 		return <div className=' text-center'>Not Available</div>;
 
 	const homePlayers = props.homeTeam.players;

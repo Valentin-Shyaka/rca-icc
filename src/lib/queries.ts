@@ -11,6 +11,7 @@ export const playersQuery = groq`*[_type == "player"]{
 export const teamsFootQuery = groq`*[_type == "team" && category == "football"]{
     _id,
     players,
+    isOfficial,
     name,
     category,
     "logo": logo.asset->url,
@@ -19,6 +20,7 @@ export const teamsFootQuery = groq`*[_type == "team" && category == "football"]{
 export const teamsStatsFootQuery = groq`*[_type == "team" && category == "football"]{
     _id,
     players,
+    isOfficial,
     name,
     "logo": logo.asset->url,
     stats,
@@ -27,6 +29,7 @@ export const teamsStatsFootQuery = groq`*[_type == "team" && category == "footba
 export const teamsStatsQuery = groq`*[_type == "team"]{
     _id,
     players,
+    isOfficial,
     name,
     "logo": logo.asset->url,
     stats,
@@ -77,6 +80,7 @@ export const fetchPlayersAllQuery = groq`*[_type == "player"]${allPlayerFields}`
 export const teamsBasketQuery = groq`*[_type == "team" && category == "basketball"] {
     _id,
     players,
+    isOfficial,
     name,
     category,
     "logo": logo.asset->url,
@@ -85,6 +89,7 @@ export const teamsBasketQuery = groq`*[_type == "team" && category == "basketbal
 export const teamsVolleyQuery = groq`*[_type == "team" && category == "volleyball"]{
     _id,
     players,
+    isOfficial,
     name,
     category,
     "logo": logo.asset->url,
@@ -105,6 +110,7 @@ export const fetchMatchesQuery = groq`*[_type == "match"] | order(date asc){
     },
     stats,
     events,
+    type,
     status,
     category,
 }`

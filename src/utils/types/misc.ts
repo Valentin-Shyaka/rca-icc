@@ -1,3 +1,4 @@
+import { Player } from "./types1";
 
 export type SEO = {
     title?: string;
@@ -6,4 +7,13 @@ export type SEO = {
     url?: string;
     type?: string;
     keywords?: string;
+}
+export type matchTeamGoal = {
+    scorer: Player;
+    time: string;
+    type: string;
+}
+export type MatchGoals = {
+    home: matchTeamGoal[];
+    away: matchTeamGoal[];
 }
