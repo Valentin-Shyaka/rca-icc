@@ -10,6 +10,7 @@ export default {
         }
     },
     fields: [
+
         {
             name: "name",
             title: "Name",
@@ -23,6 +24,13 @@ export default {
             name: "logo",
             title: "Logo",
             type: "image",
+        },
+        {
+            name: "isOfficial",
+            title: "Is Official",
+            type: "boolean",
+            description: "Is this team official ?",
+            default: false
         },
         {
             name: "players",
@@ -49,10 +57,10 @@ export default {
             validation: rule => rule.required()
         },
         {
-            name:"stats",
-            title:"Stats",
-            type:"overallTeamStats",
-            description:"Overall team stats"
+            name: "stats",
+            title: "Stats",
+            type: "overallTeamStats",
+            description: "Overall team stats"
         }
     ]
 }

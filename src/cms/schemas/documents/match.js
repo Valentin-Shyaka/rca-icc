@@ -38,6 +38,17 @@ export default {
             validation: rule => rule.required()
         },
         {
+            name: "type",
+            title: "Type",
+            type: "string",
+            options: {
+                list: [
+                    { title: "League", value: "league" },
+                    { title: "Friendly", value: "friendly" },
+                ]
+            }
+        },
+        {
             name: "homeTeam",
             title: "Home Team",
             type: "reference",
@@ -82,8 +93,8 @@ export default {
             title: "Away Team Lineup",
             type: "lineup",
         },
-         // category
-         {
+        // category
+        {
             name: "category",
             title: "Category",
             type: "string",

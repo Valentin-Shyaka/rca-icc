@@ -42,6 +42,17 @@ export default {
             name: "scorer",
             type: "reference",
             to: [{ type: "player" }]
+        },
+        {
+            title: "team",
+            name: "team",
+            type: "string",
+            options: {
+                list: [
+                    { title: "Home", value: "home" },
+                    { title: "Away", value: "away" },
+                ]
+            }
         }
     ]
 }
