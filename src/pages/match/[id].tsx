@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useLayoutEffect, useState } from "react";
 import Moment from "react-moment";
@@ -105,7 +106,10 @@ const MatchPage = () => {
 				</div>
 				<div className='flex px-4 py-4 max-w-[800px] w-full justify-between mx-auto mt-4'>
 					<div className='flex gap-3 align-middle text-center flex-col'>
-						<div className='flex five:flex-row flex-col items-center gap-2'>
+						<Link
+							href={`/team/${match?.homeTeam._id}`}
+							className='flex five:flex-row flex-col items-center gap-2'
+						>
 							<Image
 								src={match?.homeTeam.logo ?? "/images/teamImage.svg"}
 								alt='team1'
@@ -113,7 +117,7 @@ const MatchPage = () => {
 								height={40}
 							/>
 							<p className='text-md text-slate-700'>{match?.homeTeam.name}</p>
-						</div>
+						</Link>
 						{hasStarted && !isBasketball && (
 							<div className='flex flex-col gap-y-1'>
 								{goals.home.map((goal, i) => (
@@ -148,7 +152,10 @@ const MatchPage = () => {
 						)}
 					</div>
 					<div className='flex gap-3 align-middle text-center flex-col'>
-						<div className='flex five:flex-row flex-col-reverse items-center gap-2'>
+						<Link
+							href={`/team/${match?.awayTeam._id}`}
+							className='flex five:flex-row flex-col-reverse items-center gap-2'
+						>
 							<p className='text-md text-slate-700'>{match?.awayTeam.name}</p>
 							<Image
 								src={match?.awayTeam.logo ?? "/images/teamImage2.svg"}
@@ -156,13 +163,13 @@ const MatchPage = () => {
 								width={40}
 								height={40}
 							/>
-						</div>
+						</Link>
 						{hasStarted && !isBasketball && (
 							<div className='flex flex-col gap-y-1'>
 								{goals.away.map((goal, i) => (
 									<div key={i} className=' gap-x-2'>
 										<span className='text-slate p-2 text-sm'>
-											{goal.scorer?.displayName??'Own Goal'}
+											{goal.scorer?.displayName ?? "Own Goal"}
 										</span>
 										<span className='text-md font-bold text-sm'>
 											{goal.time}'

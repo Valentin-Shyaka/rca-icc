@@ -46,25 +46,25 @@ const TeamIndex = () => {
 				<div className=' flex gap-2 flex-wrap  border-2 border-gray rounded-md p-2 mt-2'>
 					<div className='flex flex-col gap-2'>
 						<p className='text-sm text-slate-500'>
-							Matches Played: {team?.stats.matchesPlayed ?? 0}
+							Matches Played: {team?.stats?.matchesPlayed ?? 0}
 						</p>
 						<p className='text-sm text-slate-500'>
-							Wins: {team?.stats.matchesWon ?? 0}
+							Wins: {team?.stats?.matchesWon ?? 0}
 						</p>
 						<p className='text-sm text-slate-500'>
-							Losses: {team?.stats.matchesLost ?? 0}
+							Losses: {team?.stats?.matchesLost ?? 0}
 						</p>
 						<p className='text-sm text-slate-500'>
-							Draws: {team?.stats.matchesDrawn ?? "N/A"}
+							Draws: {team?.stats?.matchesDrawn ?? "N/A"}
 						</p>
 						<p className='text-sm text-slate-500'>
-							Points: {team?.stats.points ?? 0}
+							Points: {team?.stats?.points ?? 0}
 						</p>
 						<p className='text-sm text-slate-500'>
-							Goal Scored: {team?.stats.goalsScored ?? "N/A"}
+							Goal Scored: {team?.stats?.goalsScored ?? "N/A"}
 						</p>
 						<p className='text-sm text-slate-500'>
-							Goal Conceded: {team?.stats.goalsConceded ?? "N/A"}
+							Goal Conceded: {team?.stats?.goalsConceded ?? "N/A"}
 						</p>
 					</div>
 				</div>
