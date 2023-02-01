@@ -15,7 +15,7 @@ const ResultsIndex = () => {
 		<MainLayout title='BasketBall - Results'>
 			<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
 				<h1 className='text-xl font-semibold'>Latest Results</h1>
-				<div className='flex w-full mt-4 flex-wrap gap-3'>
+				<div className='grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2'>
 					{finishedMatches?.map((match, i) => (
 						<MatchCard key={match._id} {...match} />
 					))}

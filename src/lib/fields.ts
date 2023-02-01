@@ -3,7 +3,7 @@ export const allPlayerFields = `{
     _id,
     displayName,
     fullName,
-    profile,
+    "profile": profile.asset->url,
     goals,
     points,
     footballAssists,

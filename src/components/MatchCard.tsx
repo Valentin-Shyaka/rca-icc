@@ -28,6 +28,7 @@ const MatchCard = ({
 		: stats?.homeTeamStats?.goals;
 
 	const isDueDate = new Date(date).getTime() < new Date().getTime();
+	const isToday = new Date(date).getDate() === new Date().getDate();
 
 	return (
 		<Link
@@ -42,7 +43,7 @@ const MatchCard = ({
 						height={10}
 						alt={""}
 					/>
-					<p className='text-slate text-sm text-start font-bold'>
+					<p className='text-slate text-xs text-start font-bold'>
 						{homeTeam?.name}
 					</p>
 				</div>
@@ -53,7 +54,7 @@ const MatchCard = ({
 						height={10}
 						alt={""}
 					/>
-					<p className='text-slate text-sm text-start font-bold'>
+					<p className='text-slate text-xs text-start font-bold'>
 						{awayTeam?.name}
 					</p>
 				</div>
@@ -73,7 +74,7 @@ const MatchCard = ({
 				<div className=' p-3 px-1 min-w-[80px] flex flex-col items-center justify-center'>
 					<span className=' text-center'>FT</span>
 					<span className='text-xs font-bold text-center'>
-						<Moment format='MMM Do YYYY'>{date}</Moment>
+						{isToday ? "Today" : <Moment format='MMM Do YYYY'>{date}</Moment>}
 					</span>
 				</div>
 			) : (
@@ -87,6 +88,8 @@ const MatchCard = ({
 							<p className='text-xs font-bold text-center'>
 								{isLive ? (
 									<span className=' text-green-500'>live</span>
+								) : isToday ? (
+									"Today"
 								) : (
 									<Moment format='MMM Do YYYY'>{date}</Moment>
 								)}

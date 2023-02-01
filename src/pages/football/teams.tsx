@@ -7,11 +7,12 @@ import { sanityClient } from '../../lib/sanity';
 import { Team } from '../../utils/types/types1';
 
 const TeamsIndex = ({teams}: {teams: Team[]}) => {
+	const officialTeams = teams.filter(team => team.isOfficial === true)
   return (
 		<MainLayout title='Football - Teams'>
 			<h1 className=' text-lg font-semibold px-3'>Football Teams</h1>
 			<div className='w-full h-fit grid desktop:flex flex-wrap desktop:gap-1 gap-3 md:grid-cols-2'>
-				{teams.map((team) => (
+				{officialTeams.map((team) => (
 					<TeamCard key={team._id} {...team} />
 				))}
 			</div>

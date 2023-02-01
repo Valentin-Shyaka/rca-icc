@@ -28,7 +28,7 @@ const Fixtures = () => {
 			</div> */}
 			<div className='flex flex-col w-full px-3'>
 				<h1 className='my-2 font-semibold px-3'>UpComing games</h1>
-				<div className='flex w-full mt-4 flex-wrap gap-2'>
+				<div className='grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2'>
 					{unfinishedMatches?.map((match, i) => (
 						<MatchCard key={match._id} {...match} />
 					))}
