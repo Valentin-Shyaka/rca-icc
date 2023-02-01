@@ -6,9 +6,12 @@ import { capitalize } from "../../utils/funcs";
 
 const ResultsIndex = () => {
 	const { matches } = useApp();
-	const finishedMatches = matches?.filter(
-		(match) => match?.status?.status === "FT" && match?.category === "football"
-	);
+	const finishedMatches = matches
+		?.filter(
+			(match) =>
+				match?.status?.status === "FT" && match?.category === "football"
+		)
+		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());;
 	const router = useRouter();
 	const title =
 		capitalize(router.pathname.split("/")[2]) +

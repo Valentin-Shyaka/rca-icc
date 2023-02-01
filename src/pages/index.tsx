@@ -10,9 +10,10 @@ import { competitions } from "../utils/data/other";
 const Home: NextPage = () => {
 	const { getMatches, matches, trends, friendlyMatches } = useApp();
 
-	const finishedMatches = matches?.filter(
-		(match) => match?.status?.status === "FT"
-	);
+	const finishedMatches = matches
+		?.filter((match) => match?.status?.status === "FT")
+		.slice(0, 5)
+		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 	const unfinishedMatches = matches?.filter(
 		(match) => match.status?.status !== "FT"
 	);

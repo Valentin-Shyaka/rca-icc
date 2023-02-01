@@ -43,7 +43,7 @@ const SideBar = () => {
 			<div className='flex flex-col gap-y-2'>
 				<span className='px-2 font-semibold'>Football Matchdays</span>
 				<div className='flex flex-col py-5 rounded-md  border-divBack border-2'>
-					{new Array(6).fill(0).map((v, i) => (
+					{new Array(5).fill(0).map((v, i) => (
 						<Link
 							href={`/mathday/matchday ${i + 1}`}
 							className=' w-full p-2 hover:bg-blue hover:text-white duration-300 cursor-pointer rounded-md text-sm font-semibold'

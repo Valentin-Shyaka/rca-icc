@@ -16,7 +16,7 @@ const Timeline = (props: Props) => {
 		return <div className=' text-center'>Not Available</div>;
 	return (
 		<div className='flex flex-col gap-y-3 w-4/5 mx-auto border-[1px] border-gray p-3 shadow-md'>
-			{timeline.map((time: TimeType, i) => (
+			{timeline.reverse().map((time: TimeType, i) => (
 				<TimeCard {...time} key={i} />
 			))}
 		</div>

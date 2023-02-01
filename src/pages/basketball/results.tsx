@@ -5,10 +5,12 @@ import MainLayout from "../../layouts/MainLayout";
 
 const ResultsIndex = () => {
 	const { matches } = useApp();
-	const finishedMatches = matches?.filter(
-		(match) =>
-			match?.status?.status === "FT" && match?.category === "basketball"
-	);
+	const finishedMatches = matches
+		?.filter(
+			(match) =>
+				match?.status?.status === "FT" && match?.category === "basketball"
+		)
+		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());;
 	return (
 		<MainLayout title='BasketBall - Results'>
 			<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
