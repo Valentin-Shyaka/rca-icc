@@ -12,8 +12,8 @@ const Home: NextPage = () => {
 
 	const finishedMatches = matches
 		?.filter((match) => match?.status?.status === "FT")
-		.slice(0, 5)
-		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+		.slice(0, 5);
 	const unfinishedMatches = matches?.filter(
 		(match) => match.status?.status !== "FT"
 	);
