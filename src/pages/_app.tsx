@@ -19,28 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
 			<Head>
-				<title>RCA-ICC</title>
 				<link rel='shortcut icon' href='/favicon.svg' type='image/x-icon' />
-				<meta
-					name='description'
-					content='Welcome to RCA interclass Competion Website, where education and competition go hand in hand. Our school offers a wide range of interclass competitions in various xtracurricular activities to challenge and inspire our students to reach their full potential.'
-				/>
-				<meta
-					name='title'
-					property='og:title'
-					content='RCA-ICC- Home of all RCA interclass Competitions'
-				/>
-				<meta
-					name='description'
-					property='og:description'
-					content='Welcome to RCA interclass Competion Website, where education and competition go hand in hand. Our school offers a wide range of interclass competitions in various xtracurricular activities to challenge and inspire our students to reach their full potential.'
-				/>
-				<meta name='type' property='og:type' content='article' />
-				<meta
-					name='image'
-					property='og:image'
-					content='/images/interclass.png'
-				/>
 			</Head>
 			<NextNProgress
 				color='#ff7b35'
