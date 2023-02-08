@@ -18,9 +18,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<>
-			<Head>
-				<link rel='shortcut icon' href='/favicon.svg' type='image/x-icon' />
-			</Head>
 			<NextNProgress
 				color='#ff7b35'
 				startPosition={0.3}

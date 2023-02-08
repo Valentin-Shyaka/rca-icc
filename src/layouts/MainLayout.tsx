@@ -22,6 +22,7 @@ const MainLayout = (props: Props) => {
     <>
       <Head>
         <title>{seotitle}</title>
+        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
         {seo ? (
           <>
             <meta name="description" content={seo.description?.slice(0, 200)} />
@@ -32,7 +33,6 @@ const MainLayout = (props: Props) => {
         ) : (
           <>
             <title>RCA-ICC</title>
-            <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
             <meta
               name="description"
               content="Welcome to RCA interclass Competion Website, where education and competition go hand in hand. Our school offers a wide range of interclass competitions in various xtracurricular activities to challenge and inspire our students to reach their full potential."
