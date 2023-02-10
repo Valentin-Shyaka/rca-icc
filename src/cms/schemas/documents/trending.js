@@ -40,6 +40,11 @@ export default {
                 "please provide a title for the trending"
             )
         },
+        {
+            name: "date",
+            title: "Date",
+            type: "date",
+        }
     ]
 
 }
