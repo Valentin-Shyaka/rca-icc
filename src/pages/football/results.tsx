@@ -6,9 +6,12 @@ import { capitalize } from "../../utils/funcs";
 
 const ResultsIndex = () => {
 	const { matches } = useApp();
-	const finishedMatches = matches?.filter(
-		(match) => match?.status?.status === "FT" && match?.category === "football"
-	);
+	const finishedMatches = matches
+		?.filter(
+			(match) =>
+				match?.status?.status === "FT" && match?.category === "football"
+		)
+		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());;
 	const router = useRouter();
 	const title =
 		capitalize(router.pathname.split("/")[2]) +
@@ -18,7 +21,7 @@ const ResultsIndex = () => {
 		<MainLayout title={title}>
 			<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
 				<h1 className='text-xl font-semibold'>Latest Results</h1>
-				<div className='flex w-full mt-4 flex-wrap gap-3'>
+				<div className='grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2'>
 					{finishedMatches?.map((match, i) => (
 						<MatchCard key={match._id} {...match} />
 					))}

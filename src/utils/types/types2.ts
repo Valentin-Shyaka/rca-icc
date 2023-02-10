@@ -47,15 +47,21 @@ export enum EventType {
     ballPost = 'ballPost',
 }
 
+export enum EventTeam {
+    Home = 'home',
+    Away = 'away',
+}
+
 
 export type TimeType = {
     description: string,
     type: EventType,
     time: string,
     _id: string,
-    scorer?: string,
+    scorer?: Player,
     substitution?: Sub,
     image?: string,
+    team?: EventTeam,
 }
 
 export type Trend = {

@@ -7,14 +7,11 @@ import {
 } from "react";
 import {
 	fetchMatchesQuery,
-	fetchPlayersAllQuery,
-	playersFootQuery,
-	teamsStatsFootQuery,
 	teamsStatsQuery,
 } from "../lib/queries";
 import { AllPlayersStatsQuery, getInsightsQuery, getTrendsQuery } from "../lib/query1";
 import { sanityClient } from "../lib/sanity";
-import { Match, Player, Team } from "../utils/types/types1";
+import { Match, Team } from "../utils/types/types1";
 import { Insight, PlayerByTeam, TeamGroups, Trend } from "../utils/types/types2";
 
 export type AppContextType = {
@@ -31,6 +28,8 @@ export type AppContextType = {
 	insights?: Insight[];
 	setInsights?: React.Dispatch<React.SetStateAction<Insight[]>>;
 	getInsights?: () => void;
+	friendlyMatches?: Match[];
+	setFriendlyMatches?: React.Dispatch<React.SetStateAction<Match[]>>;
 };
 
 export const AppContext = createContext<AppContextType>({});
@@ -49,6 +48,7 @@ export default function AppProvider({ children }: Props) {
 		volleyball: [],
 	});
 	const [matches, setMatches] = useState<Match[]>([]);
+	const [friendlyMatches, setFriendlyMatches] = useState<Match[]>([]);
 	const [teams, setTeams] = useState<TeamGroups>({
 		football: [],
 		basketball: [],
@@ -62,8 +62,10 @@ export default function AppProvider({ children }: Props) {
 	const getMatches = async () => {
 		try {
 			const res = await sanityClient.fetch(fetchMatchesQuery);
-			// console.log(res);
-			setMatches(res);
+			const leagueMatches = res.filter((match: Match) => match.type === "league");
+			const friendlyMatches = res.filter((match: Match) => match.type === "friendly");
+			setMatches(leagueMatches);
+			setFriendlyMatches(friendlyMatches);
 		} catch (error) {
 			// console.log(error);
 		}
@@ -72,19 +74,21 @@ export default function AppProvider({ children }: Props) {
 	const getTeams = async () => {
 		try {
 			const teams = await sanityClient.fetch(teamsStatsQuery);
-			const footballTeams = teams.filter(
+			const officialTeams = teams.filter((team: Team) => team.isOfficial);
+			
+			const footballTeams = officialTeams.filter(
 				(team: Team) => team.category === "football"
 			);
-			const basketballTeams = teams.filter(
+			const basketballTeams = officialTeams.filter(
 				(team: Team) => team.category === "basketball"
 			);
-			const volleyballTeams = teams.filter(
+			const volleyballTeams = officialTeams.filter(
 				(team: Team) => team.category === "volleyball"
 			);
-			const pingpongTeams = teams.filter(
+			const pingpongTeams = officialTeams.filter(
 				(team: Team) => team.category === "pingpong"
 			);
-			const debateTeams = teams.filter(
+			const debateTeams = officialTeams.filter(
 				(team: Team) => team.category === "debate"
 			);
 			setTeams({
@@ -175,6 +179,8 @@ export default function AppProvider({ children }: Props) {
 				insights,
 				setInsights,
 				getInsights,
+				friendlyMatches,
+				setFriendlyMatches,
 			}}
 		>
 			{children}

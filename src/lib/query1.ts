@@ -54,3 +54,13 @@ export const getInsightsQuery = groq`*[_type == "insight"]{
     description,
     "image": image.asset->url,
 }`
+
+export const fetchTeamByIdQuery = (id: string) => groq`*[_type == "team" && _id == "${id}"]{
+    _id,
+    name,
+    category,
+    players[]->${allPlayerFields},
+    stats,
+    "logo": logo.asset->url,
+    isOfficial,
+}`

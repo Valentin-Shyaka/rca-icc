@@ -24,7 +24,7 @@ const LineUps = (props: Props) => {
 		eleven: [],
 		subs: [],
 	});
-	if (props.isBasketball)
+	if (props.isBasketball || (!props.lineups[0]&&!props.lineups[1]))
 		return <div className=' text-center'>Not Available</div>;
 
 	const homePlayers = props.homeTeam.players;
@@ -36,7 +36,7 @@ const LineUps = (props: Props) => {
 		// console.log(awayLineUp, homeLineUp);
 
 		// get starting eleven
-		awayLineUp.startingEleven.map((player, i) => {
+		awayLineUp?.startingEleven?.map((player, i) => {
 			const foundPlayer = awayPlayers.find((p) => p._id === player._ref);
 			if (foundPlayer)
 				setAwayLineUps((prev) => ({
@@ -45,7 +45,7 @@ const LineUps = (props: Props) => {
 				}));
 		});
 
-		homeLineUp.startingEleven.map((player) => {
+		homeLineUp?.startingEleven?.map((player) => {
 			const foundPlayer = homePlayers.find((p) => p._id === player._ref);
 			if (foundPlayer)
 				setHomeLineUps((prev) => ({
@@ -120,7 +120,7 @@ const LineUps = (props: Props) => {
 				<div className="flex w-full justify-between mt-4">
 					<div className="flex flex-col w-1/2 gap-y-2">
 						{homeLineUps.subs.map((player, i) => (
-							<div className="flex items-center gap-x-3">
+							<div key={i} className="flex items-center gap-x-3">
 								<span className="">{player.number}</span>
 								<span className="">{player.displayName}</span>
 							</div>
@@ -128,7 +128,7 @@ const LineUps = (props: Props) => {
 					</div>
 					<div className="flex items-end flex-col w-1/2 gap-y-2">
 						{awayLineUps.subs.map((player, i) => (
-							<div className="flex items-center gap-x-3">
+							<div key={i} className="flex items-center gap-x-3">
 								<span className="">{player.number}</span>
 								<span className="">{player.displayName}</span>
 							</div>

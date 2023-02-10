@@ -38,9 +38,9 @@ const Stats = ({ stats, teams }: Props) => {
 			{new Array(statsNames.length - 1).fill(0).map((_, i: number) => (
 				<RowStat
 					key={i}
-					left={homeStat[i + 1][1] ? homeStat[i + 1][1] : "N/A"}
-					right={awayStat[i + 1][1] ? awayStat[i + 1][1] : "N/A"}
-					stat={statsNames[i + 1] ? statsNames[i + 1] : "N/A"}
+					left={homeStat[i + 1][1] ? homeStat[i + 1][1] : "0"}
+					right={awayStat[i + 1][1] ? awayStat[i + 1][1] : "0"}
+					stat={statsNames[i + 1] ? statsNames[i + 1] : "0"}
 				/>
 			))}
 		</div>
@@ -61,7 +61,7 @@ const RowStat = ({ left, stat, right }: any) => {
 	return (
 		<div className='w-full mt-4 flex items-center justify-between'>
 			<p>{l}</p>
-			<p className=' capitalize'>{stat}</p>
+			<p className=' capitalize text-center'>{stat}</p>
 			<p>{r}</p>
 		</div>
 	);

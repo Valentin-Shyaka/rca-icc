@@ -8,11 +8,12 @@ import MainLayout from "../layouts/MainLayout";
 import { competitions } from "../utils/data/other";
 
 const Home: NextPage = () => {
-	const { getMatches, matches, trends } = useApp();
+	const { getMatches, matches, trends, friendlyMatches } = useApp();
 
-	const finishedMatches = matches?.filter(
-		(match) => match?.status?.status === "FT"
-	);
+	const finishedMatches = matches
+		?.filter((match) => match?.status?.status === "FT")
+		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+		.slice(0, 5);
 	const unfinishedMatches = matches?.filter(
 		(match) => match.status?.status !== "FT"
 	);
@@ -21,35 +22,47 @@ const Home: NextPage = () => {
 	return (
 		<MainLayout title='ICC - Home' isGeneral>
 			<main className='flex w-full flex-1 flex-col p-2 gap-y-3 overflow-x-hidden'>
-				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
-					<h1 className='text-lg font-semibold'>RCA Interclasses Are Back</h1>
-					<div className='flex w-full md:flex-row flex-col-reverse mt-4 gap-3'>
-						<div className='flex flex-col min-w-1/2 justify-between '>
-							<p className=''>
-								Rwanda Coding academy has been perfect and excellent in
-								education and not to forget extra-curricular activities. From
-								the beginning of RCA , interclasses have been a challenging
-								league since a difference in age encourages minors to win
-								majors. Teams are forced to make their way to the stage to
-								receive their prizes in many hard duels with harder opponents.
-								Here it comes again! It's 2022-2023.
-							</p>
-							{/* <button className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'>
-								See live matches <span className='ml-2 mt-1'>{">>"}</span>
-							</button> */}
-						</div>
-						<Image
-							src={"/images/interclass.png"}
-							alt=''
-							className=' object-cover md:w-1/2 w-full aspect-video'
-							height={250}
-							width={500}
-						/>
+				{trends!?.length > 0 && (
+					<div className='flex flex-col border-2 rounded-md p-2 border-gray gap-y-3'>
+						<h1 className='text-xl font-semibold'>Trendings</h1>
+						{trends?.map((trend) => (
+							<div key={trend._id} className='flex flex-col gap-y-3 w-full'>
+								<h1 className='text-lg font-semibold'>{trend.title}</h1>
+								<div className='flex md:flex-row flex-col w-full gap-3'>
+									<Image
+										className=' w-full object-cover md:w-1/2 aspect-video'
+										src={trend.image}
+										alt={trend.title}
+										width={1920}
+										height={1080}
+									/>
+									<div className='flex flex-col md:w-1/2 w-full'>
+										<p className=''>
+											{trend.description.slice(0, 200) + "..."}
+										</p>
+										<Link
+											href={`/trends/${trend._id}`}
+											className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'
+										>
+											Read More<span className='ml-2 mt-1'>{">>"}</span>
+										</Link>
+									</div>
+								</div>
+							</div>
+						))}
 					</div>
-				</div>
+				)}
+				{friendlyMatches!?.length > 0 && (
+					<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
+						<h1 className='text-lg font-semibold'>Friendlies</h1>
+						{friendlyMatches?.map((match, i) => (
+							<MatchCard key={match._id} {...match} />
+						))}
+					</div>
+				)}
 				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
 					<h1 className='text-xl font-semibold'>Latest Results</h1>
-					<div className='flex w-full mt-4 flex-wrap gap-3'>
+					<div className='grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2'>
 						{finishedMatches?.map((match, i) => (
 							<MatchCard key={match._id} {...match} />
 						))}
@@ -57,7 +70,7 @@ const Home: NextPage = () => {
 				</div>
 				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
 					<h1 className='text-xl font-semibold'>Upcoming Matches</h1>
-					<div className='flex w-full mt-4 flex-wrap gap-2'>
+					<div className='grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2'>
 						{upComingMatches?.map((match, i) => (
 							<MatchCard key={match._id} {...match} />
 						))}
@@ -68,32 +81,6 @@ const Home: NextPage = () => {
 					>
 						See All Fixtures<span className='ml-2 mt-1'>{">>"}</span>
 					</Link>
-				</div>
-				<div className='flex flex-col border-2 rounded-md p-2 border-gray gap-y-3'>
-					<h1 className='text-xl font-semibold'>Trendings</h1>
-					{trends?.map((trend) => (
-						<div key={trend._id} className='flex flex-col gap-y-3 w-full'>
-							<h1 className='text-lg font-semibold'>{trend.title}</h1>
-							<div className='flex md:flex-row flex-col w-full gap-3'>
-								<Image
-									className=' w-full object-cover md:w-1/2'
-									src={trend.image}
-									alt={trend.title}
-									width={1920}
-									height={1080}
-								/>
-								<div className='flex flex-col md:w-1/2 w-full'>
-									<p className=''>{trend.description.slice(0, 200) + "..."}</p>
-									<Link
-										href={`/trends/${trend._id}`}
-										className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'
-									>
-										Read More<span className='ml-2 mt-1'>{">>"}</span>
-									</Link>
-								</div>
-							</div>
-						</div>
-					))}
 				</div>
 				<div className='flex flex-col border-2 rounded-md p-2 border-gray'>
 					<h1 className='text-xl font-semibold'>Competitions</h1>

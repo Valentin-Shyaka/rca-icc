@@ -1,5 +1,5 @@
 import { type } from "os";
-import { RefType } from "./types2";
+import { RefType, TimeType } from "./types2";
 
 export type Player = {
     _id: string;
@@ -24,10 +24,15 @@ export enum category {
     basketball = "basketball", football = "football", volleyball = "volleyball", pingpong = "pingpong", debate = "debate"
 }
 
+export enum MatchType {
+    league = "league", cup = "cup", friendly = "friendly"
+}
+
 export type Team = {
     _id: string;
     name: string;
     logo: string;
+    isOfficial: boolean;
     players: Player[];
     category: category;
     stats: {
@@ -39,12 +44,6 @@ export type Team = {
         matchesWon: number;
         points: number;
     };
-}
-
-export type Event = {
-    name: string;
-    description: string;
-    time: number | string;
 }
 
 export type LineUp = {
@@ -73,11 +72,12 @@ export type Match = {
     banner: string;
     title: string;
     description: string;
+    type: MatchType;
     date: Date;
     homeTeam: Team;
     awayTeam: Team;
     status: any;
-    events: Event[];
+    events: TimeType[];
     category: category;
     stats: {
         awayTeamStats: TeamStats;
