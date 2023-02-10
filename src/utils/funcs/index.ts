@@ -32,3 +32,14 @@ export const fillLineUp = (arr: Player[], size: number) => {
     }
     return newArr;
 }
+
+export const removeDuplicates = (arr: Player[]) => {
+    // use full name as key
+    const map = new Map();
+    for (const item of arr) {
+        if(!map.has(item._id)) {
+            map.set(item._id, true);
+        }
+    }
+    return Array.from(map.keys()).map(id => arr.find(player => player._id === id)) as Player[];
+}

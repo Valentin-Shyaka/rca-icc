@@ -21,12 +21,12 @@ const Feed = () => {
 				renderArrowNext={(click) => <BiChevronRight onClick={click} className=" absolute top-1/2 -translate-y-1/2 right-0 h-full duration-300 cursor-pointer hover:bg-black/10" />}
 				showStatus={false} interval={9000}>
 				{insights?.map((insight) => (
-					<div key={insight._id} className='w-full  border-2 border-gray rounded-md  aspect-square'>
+					<div key={insight._id} className='w-full  border-2 border-gray rounded-md  aspect-square h-full'>
 						<div className="w-full overflow-hidden h-[180px] ">
 							<Image
 								src={insight.image}
 								alt={insight.title}
-								className=" object-cover min-h-full"
+								className=" object-cover min-h-full object-center max-h-full"
 								width={250}
 								height={50}
 							/></div>

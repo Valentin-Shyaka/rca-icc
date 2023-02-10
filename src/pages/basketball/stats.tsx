@@ -1,15 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Stats from "../../components/constants/Stats";
 import { useApp } from "../../contexts/AppProvider";
 import MainLayout from "../../layouts/MainLayout";
-import { mixArray } from "../../utils/funcs";
+import { mixArray, removeDuplicates } from "../../utils/funcs";
 import { Player } from "../../utils/types/types1";
 
 const StatsIndex = () => {
 	const { players, getPlayers } = useApp();
-
+	const [stats, setStats] = useState<{ points: Set<Player>; assists: Set<Player>;  rebounds: Set<Player>  }>({
+		points: new Set(),
+		assists: new Set(),
+		rebounds: new Set(),
+	});
 	const baccoPlayers: Player[] = mixArray(players?.basketball!);
-	const len = baccoPlayers.length;
+	
+	useEffect(() => {
+		if (players && players.basketball.length > 0) {
+			const len = baccoPlayers.length;
 	const withMostPoints = baccoPlayers
 		?.slice(0, len)
 		.sort((a, b) => (b.points ?? 0) - (a.points ?? 0));
@@ -22,6 +29,14 @@ const StatsIndex = () => {
 	const withMostRebounds = baccoPlayers
 		?.slice(0, len)
 		.sort((a, b) => ((b.rebounds ?? 0) - (a.rebounds ?? 0)) as any);
+
+		setStats({
+			points: new Set(removeDuplicates(withMostPoints)),
+			assists: new Set(removeDuplicates(withMostAssits)),
+			rebounds: new Set(removeDuplicates(withMostRebounds)),
+		});
+	}
+	}, [players]);
 
 	useEffect(() => {
 		if (!players || players.basketball.length === 0) {
@@ -37,12 +52,12 @@ const StatsIndex = () => {
 				</div>
 			</MainLayout>
 		);
-	console.log(withMostPoints);
+		
 	return (
 		<MainLayout>
 			<div className='p-3 flex flex-col w-full gap-y-2' title="Basketball - Stats">
 				<h3 className=' px-2 font-semibold text-lg mt-5'>Points</h3>
-				{withMostPoints?.slice(0, 5)?.map((player, i) => {
+				{Array.from(stats.points)?.slice(0, 5)?.map((player, i) => {
 					return (
 						<div
 							key={i}
@@ -59,7 +74,7 @@ const StatsIndex = () => {
 					);
 				})}
 				<h3 className=' px-2 font-semibold text-lg mt-5'>Assists</h3>
-				{withMostAssits?.slice(0, 5)?.map((player, i) => {
+				{Array.from(stats.assists)?.slice(0, 5)?.map((player, i) => {
 					return (
 						<div
 							key={i}
@@ -76,7 +91,7 @@ const StatsIndex = () => {
 					);
 				})}
 				<h3 className=' px-2 font-semibold text-lg mt-5'>Rebounds</h3>
-				{withMostRebounds?.slice(0, 5)?.map((player, i) => {
+				{Array.from(stats.rebounds)?.slice(0, 5)?.map((player, i) => {
 					return (
 						<div
 							key={i}

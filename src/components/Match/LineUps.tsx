@@ -61,10 +61,10 @@ const LineUps = (props: Props) => {
 
 		// get subs
 		const homeSubs = homePlayers.filter(
-			(player) => !homeLineUp.startingEleven.find((p) => p._ref === player._id)
+			(player) => !homeLineUp?.startingEleven?.find((p) => p._ref === player._id)
 		);
 		const awaySubs = awayPlayers.filter(
-			(player) => !awayLineUp.startingEleven.find((p) => p._ref === player._id)
+			(player) => !awayLineUp?.startingEleven?.find((p) => p._ref === player._id)
 		);
 		setHomeLineUps((prev) => ({
 			...prev,

@@ -1,20 +1,36 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useApp } from "../../contexts/AppProvider";
 import MainLayout from "../../layouts/MainLayout";
-import { mixArray } from "../../utils/funcs";
+import { mixArray, removeDuplicates } from "../../utils/funcs";
 import { Player } from "../../utils/types/types1";
 
 const StatsIndex = () => {
 	const { players, getPlayers } = useApp();
+	// make stats state with goals and assists which are sets
+	const [stats, setStats] = useState<{ goals: Set<Player>; assists: Set<Player> }>({
+		goals: new Set(),
+		assists: new Set(),
+	});
 
 	const footPlayers: Player[] = mixArray(players?.football!);
+	useEffect(() => {
+		if (players && players.football.length > 0) {
 	const len = footPlayers.length;
 	const withMostGoals = footPlayers?.slice(0, len).sort(
 		(a, b) => (b?.goals ?? 0) - (a?.goals ?? 0)
 	);
 	const withMostAssits = footPlayers?.slice(0, len).sort(
 		(a, b) => ((b.footballAssists ?? 0) - (a.footballAssists ?? 0)) as any
-	);
+		);
+
+		// set stats
+		setStats({
+			goals: new Set(removeDuplicates(withMostGoals)),
+			assists: new Set(removeDuplicates(withMostAssits)),
+		});
+	}
+		},[players])
+
 
 	useEffect(() => {
 		if (!players || players.football.length === 0) {
@@ -35,7 +51,7 @@ const StatsIndex = () => {
 		<MainLayout title="Football - Stats">
 			<div className='p-3 flex flex-col w-full gap-y-2'>
 				<h3 className=' px-2 font-semibold text-lg mt-5'>Goals</h3>
-				{withMostGoals?.slice(0, 5)?.map((player, i) => {
+				{Array.from(stats.goals)?.slice(0, 5)?.map((player, i) => {
 					return (
 						<div
 							key={i}
@@ -52,7 +68,7 @@ const StatsIndex = () => {
 					);
 				})}
 				<h3 className=' px-2 font-semibold text-lg mt-5'>Assists</h3>
-				{withMostAssits?.slice(0, 5)?.map((player, i) => {
+				{Array.from(stats.assists)?.slice(0, 5)?.map((player, i) => {
 					return (
 						<div
 							key={i}

@@ -34,7 +34,7 @@ export const fetchMatchDayTitleQuery = (title: string) => groq`*[_type == "match
     },
 }`
 
-export const getTrendsQuery = groq`*[_type == "trending"]{
+export const getTrendsQuery = groq`*[_type == "trending"] | order(date desc){
     _id,
     title,
     description,

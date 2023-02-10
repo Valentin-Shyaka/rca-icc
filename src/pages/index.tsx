@@ -18,6 +18,7 @@ const Home: NextPage = () => {
 		(match) => match.status?.status !== "FT"
 	);
 	const upComingMatches = unfinishedMatches?.slice(0, 5);
+	const mainTrend = trends?.slice(0, 1)[0];
 
 	return (
 		<MainLayout title='ICC - Home' isGeneral>
@@ -25,23 +26,22 @@ const Home: NextPage = () => {
 				{trends!?.length > 0 && (
 					<div className='flex flex-col border-2 rounded-md p-2 border-gray gap-y-3'>
 						<h1 className='text-xl font-semibold'>Trendings</h1>
-						{trends?.map((trend) => (
-							<div key={trend._id} className='flex flex-col gap-y-3 w-full'>
-								<h1 className='text-lg font-semibold'>{trend.title}</h1>
+							<div key={mainTrend?._id} className='flex flex-col gap-y-3 w-full'>
+								<h1 className='text-lg font-semibold'>{mainTrend?.title}</h1>
 								<div className='flex md:flex-row flex-col w-full gap-3'>
 									<Image
 										className=' w-full object-cover md:w-1/2 aspect-video'
-										src={trend.image}
-										alt={trend.title}
+										src={mainTrend?.image!}
+										alt={mainTrend?.title!}
 										width={1920}
 										height={1080}
 									/>
 									<div className='flex flex-col md:w-1/2 w-full'>
 										<p className=''>
-											{trend.description.slice(0, 200) + "..."}
+											{mainTrend?.description.slice(0, 200) + "..."}
 										</p>
 										<Link
-											href={`/trends/${trend._id}`}
+											href={`/trends/${mainTrend?._id}`}
 											className='w-fit mt-4 px-3 py-2 text-blue flex items-center hover:text-[#1a44da] duration-300 rounded-md'
 										>
 											Read More<span className='ml-2 mt-1'>{">>"}</span>
@@ -49,7 +49,6 @@ const Home: NextPage = () => {
 									</div>
 								</div>
 							</div>
-						))}
 					</div>
 				)}
 				{friendlyMatches!?.length > 0 && (
