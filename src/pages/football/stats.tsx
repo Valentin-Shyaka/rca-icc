@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useApp } from "../../contexts/AppProvider";
 import MainLayout from "../../layouts/MainLayout";
 import { mixArray, removeDuplicates } from "../../utils/funcs";
+import { PRankeAble, rankPlayers } from "../../utils/funcs/func1";
 import { Player } from "../../utils/types/types1";
 
 const StatsIndex = () => {
 	const { players, getPlayers } = useApp();
 	// make stats state with goals and assists which are sets
-	const [stats, setStats] = useState<{ goals: Set<Player>; assists: Set<Player> }>({
+	const [stats, setStats] = useState<{ goals: Set<PRankeAble>; assists: Set<PRankeAble> }>({
 		goals: new Set(),
 		assists: new Set(),
 	});
@@ -23,12 +24,15 @@ const StatsIndex = () => {
 		(a, b) => ((b.footballAssists ?? 0) - (a.footballAssists ?? 0)) as any
 		);
 
+		const rankedWithGoals = rankPlayers(withMostGoals, "goals");
+		const rankedWithAssists = rankPlayers(withMostAssits, "footballAssists");
 		// set stats
 		setStats({
-			goals: new Set(removeDuplicates(withMostGoals)),
-			assists: new Set(removeDuplicates(withMostAssits)),
+			goals: new Set(removeDuplicates(rankedWithGoals)),
+			assists: new Set(removeDuplicates(rankedWithAssists)),
 		});
 	}
+	
 		},[players])
 
 
@@ -58,7 +62,7 @@ const StatsIndex = () => {
 							className='w-full border-b-2 border-gray  flex  gap-2 mt-5 justify-between'
 						>
 							<div className='flex items-center'>
-								<span className='text-sm font-bold px-2'>{i + 1}.</span>
+								<span className='text-sm font-bold px-2'>{player.rank}.</span>
 								<p className='text-sm font-bold'>{player.fullName}</p>
 							</div>
 							<div className=' bg-gray w-[30px] h-6 text-slate-700 rounded-md text-center'>
@@ -75,7 +79,7 @@ const StatsIndex = () => {
 							className='w-full border-b-2 border-gray  flex  gap-2 mt-5 justify-between'
 						>
 							<div className='flex items-center'>
-								<span className='text-sm font-bold px-2'>{i + 1}.</span>
+								<span className='text-sm font-bold px-2'>{player.rank}.</span>
 								<p className='text-sm font-bold'>{player.fullName}</p>
 							</div>
 							<div className=' bg-gray w-[30px] h-6 text-slate-700 rounded-md text-center'>

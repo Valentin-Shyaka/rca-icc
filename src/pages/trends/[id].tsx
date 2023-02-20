@@ -39,7 +39,7 @@ const TrendsIndex = () => {
 				<h1 className="text-lg font-semibold text-center">{trend?.title}</h1>
 				<Image src={trend?.image??""} height={1080} className=' w-full object-cover max-h-[70vh]' width={1920} alt='TrendImage' />
 				{trend?.description.split("<nextp>").map((p, i) => (
-					<p key={i} className=" mt-5">
+					<p key={i} className=" mt-3">
 						{p}
 					</p>
 				))}

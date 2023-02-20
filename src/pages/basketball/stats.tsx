@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import Stats from "../../components/constants/Stats";
+import { useEffect, useState } from "react";
 import { useApp } from "../../contexts/AppProvider";
 import MainLayout from "../../layouts/MainLayout";
 import { mixArray, removeDuplicates } from "../../utils/funcs";
+import { PRankeAble, rankPlayers } from "../../utils/funcs/func1";
 import { Player } from "../../utils/types/types1";
 
 const StatsIndex = () => {
 	const { players, getPlayers } = useApp();
-	const [stats, setStats] = useState<{ points: Set<Player>; assists: Set<Player>;  rebounds: Set<Player>  }>({
+	const [stats, setStats] = useState<{ points: Set<PRankeAble>; assists: Set<PRankeAble>;  rebounds: Set<PRankeAble>  }>({
 		points: new Set(),
 		assists: new Set(),
 		rebounds: new Set(),
@@ -16,6 +16,8 @@ const StatsIndex = () => {
 	
 	useEffect(() => {
 		if (players && players.basketball.length > 0) {
+
+			// sort players by points, assists and rebounds
 			const len = baccoPlayers.length;
 	const withMostPoints = baccoPlayers
 		?.slice(0, len)
@@ -30,10 +32,16 @@ const StatsIndex = () => {
 		?.slice(0, len)
 		.sort((a, b) => ((b.rebounds ?? 0) - (a.rebounds ?? 0)) as any);
 
+		// add rank players
+		const rankedWithPoints = rankPlayers(withMostPoints, "points");
+		const rankedWithAssists = rankPlayers(withMostAssits, "basketballAssists");
+		const rankedWithRebounds = rankPlayers(withMostRebounds, "rebounds");
+		
+		// set stats removing duplicates
 		setStats({
-			points: new Set(removeDuplicates(withMostPoints)),
-			assists: new Set(removeDuplicates(withMostAssits)),
-			rebounds: new Set(removeDuplicates(withMostRebounds)),
+			points: new Set(removeDuplicates(rankedWithPoints)),
+			assists: new Set(removeDuplicates(rankedWithAssists)),
+			rebounds: new Set(removeDuplicates(rankedWithRebounds)),
 		});
 	}
 	}, [players]);
@@ -64,7 +72,7 @@ const StatsIndex = () => {
 							className='w-full border-b-2 border-gray  flex  gap-2 mt-5 justify-between'
 						>
 							<div className='flex items-center'>
-								<span className='text-sm font-bold px-2'>{i + 1}.</span>
+								<span className='text-sm font-bold px-2'>{player.rank}.</span>
 								<p className='text-sm font-bold'>{player.fullName}</p>
 							</div>
 							<div className=' bg-gray w-[30px] h-6 text-slate-700 rounded-md text-center'>
@@ -81,7 +89,7 @@ const StatsIndex = () => {
 							className='w-full border-b-2 border-gray  flex  gap-2 mt-5 justify-between'
 						>
 							<div className='flex items-center'>
-								<span className='text-sm font-bold px-2'>{i + 1}.</span>
+								<span className='text-sm font-bold px-2'>{player.rank}.</span>
 								<p className='text-sm font-bold'>{player.fullName}</p>
 							</div>
 							<div className=' bg-gray w-[30px] h-6 text-slate-700 rounded-md text-center'>
@@ -98,7 +106,7 @@ const StatsIndex = () => {
 							className='w-full border-b-2 border-gray  flex  gap-2 mt-5 justify-between'
 						>
 							<div className='flex items-center'>
-								<span className='text-sm font-bold px-2'>{i + 1}.</span>
+								<span className='text-sm font-bold px-2'>{player.rank}.</span>
 								<p className='text-sm font-bold'>{player.fullName}</p>
 							</div>
 							<div className=' bg-gray w-[30px] h-6 text-slate-700 rounded-md text-center'>

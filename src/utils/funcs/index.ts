@@ -1,4 +1,5 @@
 import { Player } from "../types/types1";
+import { PRankeAble } from "./func1";
 
 export const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
@@ -33,7 +34,7 @@ export const fillLineUp = (arr: Player[], size: number) => {
     return newArr;
 }
 
-export const removeDuplicates = (arr: Player[]) => {
+export const removeDuplicates = (arr: PRankeAble[]) => {
     // use full name as key
     const map = new Map();
     for (const item of arr) {
@@ -41,5 +42,5 @@ export const removeDuplicates = (arr: Player[]) => {
             map.set(item._id, true);
         }
     }
-    return Array.from(map.keys()).map(id => arr.find(player => player._id === id)) as Player[];
+    return Array.from(map.keys()).map(id => arr.find(player => player._id === id)) as PRankeAble[];
 }
