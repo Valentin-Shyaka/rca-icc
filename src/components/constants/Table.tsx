@@ -38,27 +38,67 @@ const Table = ({ teams }: Props) => {
           </tr>
         </thead>
         <tbody>
-          {standings.map((team, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>
-                <Link href={`/team/${team._id}`} className=" hover:text-blue duration-200">{team.name}</Link>
-              </td>
-              <td>{team?.stats?.matchesPlayed ?? 0}</td>
-              <td>{team?.stats?.matchesWon ?? 0}</td>
-              <td>{team?.stats?.matchesDrawn ?? 0}</td>
-              <td>{team?.stats?.matchesLost ?? 0}</td>
-              <td>{team?.stats?.goalsScored ?? 0}</td>
-              <td>{team?.stats?.goalsConceded ?? 0}</td>
-              <td>
-                {(team?.stats?.goalsScored ?? 0) -
-                  (team?.stats?.goalsConceded ?? 0)}
-              </td>
-              <td>{team?.stats?.points ?? 0}</td>
-            </tr>
-          ))}
+          {standings.map((team, i) => {
+            const fc = "border-l-green-500";
+            const sc = "border-l-yellow-500";
+            const tc = "border-l-orange";
+            const lc = "border-l-red-500";
+            const border =
+              i === 0
+                ? fc
+                : i === 1
+                ? sc
+                : i === 2
+                ? tc
+                : i === standings.length - 1
+                ? lc
+                : "border-l-white";
+            return (
+              <tr className={`border-l-2 ${border}`} key={i}>
+                <td>{i + 1}</td>
+                <td>
+                  <Link
+                    href={`/team/${team._id}`}
+                    className=" hover:text-blue duration-200"
+                  >
+                    {team.name}
+                  </Link>
+                </td>
+                <td>{team?.stats?.matchesPlayed ?? 0}</td>
+                <td>{team?.stats?.matchesWon ?? 0}</td>
+                <td>{team?.stats?.matchesDrawn ?? 0}</td>
+                <td>{team?.stats?.matchesLost ?? 0}</td>
+                <td>{team?.stats?.goalsScored ?? 0}</td>
+                <td>{team?.stats?.goalsConceded ?? 0}</td>
+                <td>
+                  {(team?.stats?.goalsScored ?? 0) -
+                    (team?.stats?.goalsConceded ?? 0)}
+                </td>
+                <td>{team?.stats?.points ?? 0}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
+      {/* labels */}
+      <div className="flex justify-between mt-2 w-full">
+        <div className="flex items-center">
+          <div className="bg-green-500 w-3 h-3"></div>
+          <p className="ml-2 text-xs">Winner</p>
+        </div>
+        <div className="flex items-center">
+          <div className="bg-yellow-500 w-3 h-3"></div>
+          <p className="ml-2 text-xs">Runner-Up</p>
+        </div>
+        <div className="flex items-center">
+          <div className="bg-orange w-3 h-3"></div>
+          <p className="ml-2 text-xs">Third Place</p>
+        </div>
+        <div className="flex items-center">
+          <div className="bg-red-500 w-3 h-3"></div>
+          <p className="ml-2 text-xs">Last Place</p>
+        </div>
+      </div>
     </div>
   );
 };

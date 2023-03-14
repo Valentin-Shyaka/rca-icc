@@ -18,7 +18,7 @@ const EventLinks = () => {
 	const activeEventStyle =
 		"w-full h-[40px] border-2 hover:bg-blue-200 border-[#2076F8] px-3 py-2 rounded rounded-full flex items-center gap-2 justify-center cursor-pointer text-white bg-[#2076F8]";
 	const eventStyle =
-		"w-full h-[40px] border-2 hover:bg-primary border-gray-300 px-3 py-2 rounded rounded-full flex items-center gap-2 justify-center cursor-pointer text-[#303030]";
+    "w-full h-[40px] border-2 hover:bg-[#2076F8] hover:text-white border-gray-300 px-3 py-2 rounded rounded-full flex items-center gap-2 justify-center cursor-pointer text-[#303030]";
 	return (
 		<NavSlider haveGap>
 			{/* <div className='w-full flex justify-center gap-6 p-4'> */}
@@ -28,7 +28,7 @@ const EventLinks = () => {
 				return (
 					<Link className=' w-full m-2' href={`/${item.path}`} key={item.name}>
 						<div
-							className={` border-gray duration-500 ${
+							className={` border-gray ${
 								isActive ? activeEventStyle : eventStyle
 							}`}
 						>

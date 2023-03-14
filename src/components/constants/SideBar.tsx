@@ -32,7 +32,7 @@ const SideBar = () => {
 					{trends?.map((trend, i) => (
 						<Link
 							href={`/trends/${trend._id}`}
-							className=' w-full p-2 hover:bg-blue hover:text-white duration-300 cursor-pointer rounded-md text-sm font-semibold'
+							className=' w-full p-2 hover:bg-blue hover:text-white cursor-pointer rounded-md text-sm font-semibold'
 							key={i}
 						>
 							{trend.title}
@@ -46,7 +46,7 @@ const SideBar = () => {
 					{new Array(5).fill(0).map((v, i) => (
 						<Link
 							href={`/mathday/matchday ${i + 1}`}
-							className=' w-full p-2 hover:bg-blue hover:text-white duration-300 cursor-pointer rounded-md text-sm font-semibold'
+							className=' w-full p-2 hover:bg-blue hover:text-white cursor-pointer rounded-md text-sm font-semibold'
 							key={i}
 						>
 							Matchday {i + 1}

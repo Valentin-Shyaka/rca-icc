@@ -19,6 +19,7 @@ const MatchCard = ({
     status?.status === "HT" ||
     status?.status === "1H" ||
     status?.status === "2H";
+  const isForfeit = status?.status === "FF";
 
   const awayScore = isBasketball
     ? stats?.awayTeamStats?.points
@@ -27,7 +28,8 @@ const MatchCard = ({
     ? stats?.homeTeamStats?.points
     : stats?.homeTeamStats?.goals;
 
-  const isDueDate = new Date(date).getTime() + 1000*60*90 < new Date().getTime();
+  const isDueDate =
+    new Date(date).getTime() + 1000 * 60 * 90 < new Date().getTime();
   const isToday = new Date(date).getDate() === new Date().getDate();
 
   return (
@@ -70,12 +72,16 @@ const MatchCard = ({
         </div>
       )}
       <span className="w-[1px] h-[80%] bg-gray mt-2"></span>
-      {isFinished ? (
+      {isFinished || isForfeit ? (
         <div className=" p-3 px-1 min-w-[80px] flex flex-col items-center justify-center">
-          <span className=" text-center">FT</span>
-          <span className="text-xs font-bold text-center">
-            {isToday ? "Today" : <Moment format="MMM Do YYYY">{date}</Moment>}
-          </span>
+          <span className=" text-center">{isForfeit ? "FF" : "FT"}</span>
+          {isForfeit ? (
+            <span className="text-xs font-bold text-center">Forfeit</span>
+          ) : (
+            <span className="text-xs font-bold text-center">
+              {isToday ? "Today" : <Moment format="MMM Do YYYY">{date}</Moment>}
+            </span>
+          )}
         </div>
       ) : (
         <div className=" p-3 px-1 min-w-[100px] flex flex-col gap-y-2 justify-center">
@@ -96,13 +102,13 @@ const MatchCard = ({
               </p>
               {isLive ? (
                 <div className="flex flex-col justify-center gap-y-2 px-1 items-center">
-				<span className="text-slate text-sm text-white p-1 px-2 bg-orange font-bold">
-				  {homeScore??0}
-				</span>
-				<span className="text-slate text-sm text-white p-1 px-2 bg-black font-bold">
-				  {awayScore??0}
-				</span>
-			  </div>
+                  <span className="text-slate text-sm text-white p-1 px-2 bg-orange font-bold">
+                    {homeScore ?? 0}
+                  </span>
+                  <span className="text-slate text-sm text-white p-1 px-2 bg-black font-bold">
+                    {awayScore ?? 0}
+                  </span>
+                </div>
               ) : (
                 <span className=" text-sm text-center">
                   <Moment format="LT">{date}</Moment>
