@@ -11,14 +11,18 @@ const IndexFootball = () => {
 	console.log(teams);
 	
 	const unfinishedMatches = matches?.filter(
-		(match) => match.status?.status !== "FT" && match.category === "football"
-	);
+    (match) =>
+      (match?.status?.status !== "FT" || match?.status?.status !== "FF") &&
+      match.category === "football"
+  );
 	const finishedMatches = matches
-		?.filter(
-			(match) => match?.status?.status === "FT" && match.category === "football"
-		)
-		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-		.slice(0, 5);
+    ?.filter(
+      (match) =>
+        (match?.status?.status === "FT" || match?.status?.status === "FF") &&
+        match.category === "football"
+    )
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 5);
 	const upComingMatches = unfinishedMatches?.slice(0, 5);
 	return (
 		<MainLayout title='Football'>

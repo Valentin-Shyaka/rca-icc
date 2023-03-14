@@ -11,11 +11,14 @@ const Home: NextPage = () => {
   const { getMatches, matches, trends, friendlyMatches } = useApp();
 
   const finishedMatches = matches
-    ?.filter((match) => match?.status?.status === "FT")
+    ?.filter(
+      (match) =>
+        match?.status?.status === "FT" || match?.status?.status === "FF"
+    )
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 5);
   const unfinishedMatches = matches?.filter(
-    (match) => match.status?.status !== "FT"
+    (match) => match?.status?.status !== "FT" || match?.status?.status !== "FF"
   );
   const upComingMatches = unfinishedMatches?.slice(0, 5);
   const mainTrend = trends?.slice(0, 1)[0];

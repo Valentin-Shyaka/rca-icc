@@ -61,7 +61,7 @@ const MatchCard = ({
           </p>
         </div>
       </div>
-      {isFinished && (
+      {(isFinished || isForfeit) && (
         <div className="flex flex-col justify-center gap-y-2 px-1 items-center">
           <span className="text-slate text-sm text-white p-1 px-2 bg-orange font-bold">
             {homeScore}
@@ -76,7 +76,7 @@ const MatchCard = ({
         <div className=" p-3 px-1 min-w-[80px] flex flex-col items-center justify-center">
           <span className=" text-center">{isForfeit ? "FF" : "FT"}</span>
           {isForfeit ? (
-            <span className="text-xs font-bold text-center">Forfeit</span>
+            <span className="text-xs font-bold text-center text-orange">Forfeit</span>
           ) : (
             <span className="text-xs font-bold text-center">
               {isToday ? "Today" : <Moment format="MMM Do YYYY">{date}</Moment>}

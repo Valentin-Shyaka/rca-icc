@@ -8,8 +8,10 @@ import { capitalize } from "../../utils/funcs";
 const Fixtures = () => {
 	const { matches } = useApp();
 	const unfinishedMatches = matches?.filter(
-		(match) => match.status?.status !== "FT" && match.category === "football"
-	);
+    (match) =>
+      (match?.status?.status !== "FT" || match?.status?.status !== "FF") &&
+      match.category === "football"
+  );
 
 	const router = useRouter();
 	const title =
