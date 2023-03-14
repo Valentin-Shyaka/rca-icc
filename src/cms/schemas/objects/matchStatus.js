@@ -31,6 +31,7 @@ export default {
                     { title: "Full Time", value: "FT" },
                     { title: "Extra Time", value: "ET" },
                     { title: "Penalties", value: "P" },
+                    { title: "forfeit", value: "FF" },
 
                     // basketball
                     { title: "First Quarter", value: "1Q" },
@@ -41,7 +42,7 @@ export default {
                 ]
             },
             validation: rule => rule.required(),
-            default:"NS"
+            default: "NS"
         }
 
     ]
