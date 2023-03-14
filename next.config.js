@@ -6,6 +6,8 @@ module.exports = {
 			"cdn.sanity.io",
 			"lh3.googleusercontent.com",
 			"cdn.discordapp.com",
+			'e0.365dm.com',
+			'images.unsplash.com'
 		],
 	},
 };

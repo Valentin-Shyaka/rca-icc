@@ -22,34 +22,34 @@ const PlayerLineUp = ({ awayLineUp, homeLineUp }: Props) => {
 	// 		</h1>
 	// 	);
 	if (!areAwayEleven) {
-		awayLineUpCopy.eleven = fillLineUp(awayLineUpCopy.eleven, leftAway);
+		awayLineUpCopy.eleven = fillLineUp(awayLineUpCopy?.eleven, leftAway);
 	}
 	if (!areHOmeEleven) {
-		homeLineUpCopy.eleven = fillLineUp(homeLineUpCopy.eleven, leftHome);
+		homeLineUpCopy.eleven = fillLineUp(homeLineUpCopy?.eleven, leftHome);
 	}
 
-	const homeDefenders = homeLineUpCopy.eleven.filter((player) =>
+	const homeDefenders = homeLineUpCopy?.eleven.filter((player) =>
 		player.position?.includes("defender")
 	);
-	const homeMidfielders = homeLineUpCopy.eleven.filter((player) =>
+	const homeMidfielders = homeLineUpCopy?.eleven.filter((player) =>
 		player.position?.includes("midfielder")
 	);
-	const homeForwards = homeLineUpCopy.eleven.filter((player) =>
+	const homeForwards = homeLineUpCopy?.eleven.filter((player) =>
 		player.position?.includes("forward")
 	);
-	const awayDefenders = awayLineUpCopy.eleven.filter((player) =>
+	const awayDefenders = awayLineUpCopy?.eleven.filter((player) =>
 		player.position?.includes("defender")
 	);
-	const awayMidfielders = awayLineUpCopy.eleven.filter((player) =>
+	const awayMidfielders = awayLineUpCopy?.eleven.filter((player) =>
 		player.position?.includes("midfielder")
 	);
-	const awayForwards = awayLineUpCopy.eleven.filter((player) =>
+	const awayForwards = awayLineUpCopy?.eleven.filter((player) =>
 		player.position?.includes("forward")
 	);
-	const homeGoalkeeper = homeLineUpCopy.eleven.find((player) =>
+	const homeGoalkeeper = homeLineUpCopy?.eleven.find((player) =>
 		player.position?.includes("goalkeeper")
 	);
-	const awayGoalkeeper = awayLineUpCopy.eleven.find((player) =>
+	const awayGoalkeeper = awayLineUpCopy?.eleven.find((player) =>
 		player.position?.includes("goalkeeper")
 	);
 	return (

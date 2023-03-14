@@ -18,6 +18,11 @@ type Props = {
 const MainLayout = (props: Props) => {
   const { title, seo } = props;
   const seotitle = title ?? "RCA-ICCC";
+  const host = window.location.host;
+  const protocol = window.location.protocol;
+  const baseUrl = `${protocol}//${host}`;
+  console.log(baseUrl, protocol);
+  
   return (
     <>
       <Head>
@@ -28,7 +33,7 @@ const MainLayout = (props: Props) => {
             <meta name="description" content={seo.description?.slice(0, 200)} />
             <meta property="og:title" content={seo.title} />
             <meta name="type" property="og:type" content="article" />
-            <meta name="image" property="og:image" content={seo.image} />
+            <meta name="image" property="og:image"  content={`${baseUrl}//api/og?image=${seo.image}`} />
           </>
         ) : (
           <>
@@ -51,7 +56,7 @@ const MainLayout = (props: Props) => {
             <meta
               name="image"
               property="og:image"
-              content="/images/interclass.png"
+              content={`${baseUrl}//api/og`}
             />
           </>
         )}
