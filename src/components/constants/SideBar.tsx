@@ -4,14 +4,14 @@ import React from "react";
 import { useApp } from "../../contexts/AppProvider";
 
 const SideBar = () => {
-	const {trends} = useApp()
+	const { trends } = useApp()
 	return (
 		<div className=' tab:flex hidden flex-col h-full max-w-[300px] w-1/4 gap-y-4 overflow-y-auto min-w-[200px]'>
-			<input
+			{/* <input
 				placeholder='Search...'
 				className=' outline-none border-divBack border-2 rounded-md px-4  py-2 focus:border-orange duration-300 w-full'
 				type='text'
-			/>
+			/> */}
 			{/* <div className='flex flex-col w-full gap-y-3'>
 				<span className='px-2'>Live matches</span>
 				<div className='flex items-center justify-between bg-whiteblue border-2 p-2 rounded-md border-divBack cursor-pointer'>
