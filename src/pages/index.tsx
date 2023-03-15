@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiFootball } from "react-icons/bi";
 import MatchCard from "../components/MatchCard";
+import Countdown from "../components/other/Countdown";
 import { useApp } from "../contexts/AppProvider";
 import MainLayout from "../layouts/MainLayout";
 import { competitions } from "../utils/data/other";
@@ -21,12 +22,28 @@ const Home: NextPage = () => {
     (match) => match?.status?.status !== "FT" || match?.status?.status !== "FF"
   );
   const upComingMatches = unfinishedMatches?.slice(0, 5);
+  const todayMatch = unfinishedMatches?.filter(
+    (match) => new Date(match.date).getDate() === new Date().getDate()
+  )[0];
   const mainTrend = trends?.slice(0, 1)[0];
+
+  // make a data of 25th March 2023 16:30 into readable javascript date
+  const date = new Date(todayMatch?.date!);
+  // make a date which is greater tha today's match by 3 hours
+  const finishDate = new Date(date.getTime() + 1000 * 60 * 60 * 2);
+  console.log("date", finishDate.toString());
+  const isFinished = new Date().getTime() > finishDate.getTime();
 
   return (
     <>
       <MainLayout title="ICC - Home" isGeneral>
         <main className="flex w-full flex-1 flex-col p-2 gap-y-3 overflow-x-hidden">
+          {!isFinished && (
+            <div className="flex flex-col border-2 rounded-md p-2 border-gray gap-y-3">
+              <h1 className="text-xl font-semibold">Main today's match</h1>
+              <Countdown targetDate={date} />
+            </div>
+          )}
           {trends!?.length > 0 && (
             <div className="flex flex-col border-2 rounded-md p-2 border-gray gap-y-3">
               <h1 className="text-xl font-semibold">Trendings</h1>
