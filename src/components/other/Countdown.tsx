@@ -55,7 +55,7 @@ function CountdownTimer({ targetDate, startTime, endTime, isFinished }: Props) {
     <div className="flex flex-col items-center w-full">
       <div className="flex w-full flex-col items-center justify-center gap-3">
         <span className=" text-center">
-          ⚠️⚠️ BASTBALL FINAL IS COMMING ⚠️⚠️
+          ⚠️⚠️ BASKETBALL FINAL IS COMMING ⚠️⚠️
         </span>
         <div className="flex items-center gap-x-3">
           <span className=" font-bold text-4xl">Y2 BC</span>
