@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import { BiFootball } from "react-icons/bi";
 import MatchCard from "../components/MatchCard";
 import Countdown from "../components/other/Countdown";
@@ -41,7 +42,7 @@ const Home: NextPage = () => {
           {!isFinished && (
             <div className="flex flex-col border-2 rounded-md p-2 border-gray gap-y-3">
               <h1 className="text-xl font-semibold">Main today's match</h1>
-              <Countdown targetDate={date} />
+              <Countdown isFinished={isFinished} targetDate={date} endTime={finishDate} startTime={date} />
             </div>
           )}
           {trends!?.length > 0 && (
@@ -133,3 +134,5 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+

@@ -1,7 +1,15 @@
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { BiBell } from "react-icons/bi";
 
-function CountdownTimer({ targetDate }: { targetDate: Date }) {
+interface Props {
+  targetDate: Date;
+  endTime: Date;
+  startTime: Date;
+  isFinished: boolean;
+}
+
+function CountdownTimer({ targetDate, startTime, endTime, isFinished }: Props) {
   const calculateTimeLeft = () => {
     const difference = +new Date(targetDate) - +new Date();
 
@@ -55,37 +63,35 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
           <span className=" font-bold text-4xl">Y3 BC</span>
         </div>
       </div>
-      <div className=" flex justify-center w-full">
-        <TimePart value={formatTime(days)} label="Days" />
-        <TimePart value={formatTime(hours)} label="Hours" />
-        <TimePart value={formatTime(minutes)} label="Minutes" />
-        <TimePart value={formatTime(seconds)} label="Seconds" />
-      </div>
+      {!Object.keys(timeLeft).length ? (
+        <div>
+          <p>It's time</p>
+        </div>
+      ) : (
+        <>
+          <span>Start In</span>
+          <div className=" flex justify-center w-full">
+            <TimePart value={formatTime(days)} label="Days" />
+            <TimePart value={formatTime(hours)} label="Hours" />
+            <TimePart value={formatTime(minutes)} label="Minutes" />
+            <TimePart value={formatTime(seconds)} label="Seconds" />
+          </div>
+        </>
+      )}
       <p>🔥🔥 You don't wanna miss this. Will you? 🔥🔥</p>
-      {/* <div className="flex w-full items-center justify-center gap-3">
-        <span className=" text-center">I don't Wanna miss this. Please</span>
-        <button
-          onClick={() => {
-            if (Notification.permission === "granted") {
-              new Notification("Reminder", {
-                body: "The event has started!",
-              });
-            } else if (Notification.permission !== "denied") {
-              Notification.requestPermission().then((permission) => {
-                if (permission === "granted") {
-                  new Notification("Reminder", {
-                    body: "The event has started!",
-                  });
-                }
-              });
-            }
-          }}
-          className=" text-orange flex items-center gap-x-2 py-2 rounded-md  w-fit"
-        >
-          <BiBell />
-          Remind me
-        </button>
-      </div> */}
+      {!isFinished && (
+        <div className="flex w-full items-center justify-center gap-3">
+          <span className=" text-center">I don't Wanna miss this. Please</span>
+          <Link
+            href={`https://www.google.com/calendar/render?action=TEMPLATE&dates=${startTime}/${endTime}&text=Y2%20FC%20vs%20Y3%20FC%20Match&location=School%20Football%20Field`}
+            target="_blank"
+            className=" text-orange flex items-center gap-x-2 py-2 rounded-md  w-fit"
+          >
+            <BiBell />
+            Remind me
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
