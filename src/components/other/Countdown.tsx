@@ -83,7 +83,7 @@ function CountdownTimer({ targetDate, startTime, endTime, isFinished }: Props) {
         <div className="flex w-full items-center justify-center gap-3">
           <span className=" text-center">I don't Wanna miss this. Please</span>
           <Link
-            href={`https://www.google.com/calendar/render?action=TEMPLATE&dates=${startTime}/${endTime}&text=Y2%20FC%20vs%20Y3%20FC%20Match&location=School%20Football%20Field`}
+            href={`https://www.google.com/calendar/render?action=TEMPLATE&dates=${startTime}/${endTime}&text=Y2%20BC%20vs%20Y3%20BC%20Match&location=School%20Football%20Field`}
             target="_blank"
             className=" text-orange flex items-center gap-x-2 py-2 rounded-md  w-fit"
           >
