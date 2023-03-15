@@ -41,7 +41,7 @@ const Home: NextPage = () => {
         <main className="flex w-full flex-1 flex-col p-2 gap-y-3 overflow-x-hidden">
           {!isFinished && (
             <div className="flex flex-col border-2 rounded-md p-2 border-gray gap-y-3">
-              <h1 className="text-xl font-semibold">Main today's match</h1>
+              <h1 className="text-xl font-semibold">Today&apos;s main match</h1>
               <Countdown isFinished={isFinished} targetDate={date} endTime={finishDate} startTime={date} />
             </div>
           )}
