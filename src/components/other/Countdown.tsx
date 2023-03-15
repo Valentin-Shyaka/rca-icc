@@ -43,19 +43,11 @@ function CountdownTimer({ targetDate, startTime, endTime, isFinished }: Props) {
 
   const { days, hours, minutes, seconds } = timeLeft as any;
 
-  if (!Object.keys(timeLeft).length) {
-    return (
-      <div>
-        <p>It's time</p>
-      </div>
-    );
-  }
-
   return (
     <div className="flex flex-col items-center w-full">
       <div className="flex w-full flex-col items-center justify-center gap-3">
         <span className=" text-center">
-          ⚠️⚠️ BASKETBALL FINAL IS COMMING ⚠️⚠️
+          ⚠️⚠️ BASKETBALL FINAL ⚠️⚠️
         </span>
         <div className="flex items-center gap-x-3">
           <span className=" font-bold text-4xl">Y2 BC</span>
@@ -64,7 +56,7 @@ function CountdownTimer({ targetDate, startTime, endTime, isFinished }: Props) {
         </div>
       </div>
       {!Object.keys(timeLeft).length ? (
-        <div>
+        <div className=" w-full flex justify-center text-xl text-orange font-bold">
           <p>It's time</p>
         </div>
       ) : (
