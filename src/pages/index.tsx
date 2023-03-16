@@ -34,12 +34,14 @@ const Home: NextPage = () => {
   const finishDate = new Date(date.getTime() + 1000 * 60 * 60 * 2);
   console.log("date", finishDate.toString());
   const isFinished = new Date().getTime() > finishDate.getTime();
+  console.log(isFinished);
+  
 
   return (
     <>
       <MainLayout title="ICC - Home" isGeneral>
         <main className="flex w-full flex-1 flex-col p-2 gap-y-3 overflow-x-hidden">
-          {!isFinished && (
+          {!isFinished && todayMatch && (
             <div className="flex flex-col border-2 rounded-md p-2 border-gray gap-y-3">
               <h1 className="text-xl font-semibold">Today&apos;s main match</h1>
               <Countdown isFinished={isFinished} targetDate={date} endTime={finishDate} startTime={date} />

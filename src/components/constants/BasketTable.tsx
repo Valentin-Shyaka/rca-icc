@@ -11,7 +11,7 @@ const BasketTable = ({ teams }: Props) => {
   if (teams.length === 0) return <div className="px-4">No teams Found</div>;
 
   const standings = teams.sort((a, b) =>
-    (b?.stats?.points ?? 0) < (a?.stats?.points ?? 0) ? -1 : 1
+    (b?.stats?.matchesWon ?? 0) < (a?.stats?.matchesWon ?? 0) ? -1 : 1
   );
 
   return (

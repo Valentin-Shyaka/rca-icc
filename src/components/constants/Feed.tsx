@@ -10,6 +10,7 @@ const Feed = () => {
 	React.useEffect(() => {
 		getInsights!();
 	}, []);
+	if(insights?.length === 0) return null;
 	return (
 		<div className='flex-col gap-y-3 lg:flex w-[250px] hidden '>
 			<h1 className=' text-center font-semibold'>Insights</h1>
