@@ -1,14 +1,21 @@
-import React from 'react'
-import MainLayout from '../../layouts/MainLayout'
+import Link from "next/link";
+import React from "react";
+import MainLayout from "../../layouts/MainLayout";
 
 const IndexPing = () => {
   return (
-		<MainLayout isGeneral title='Pingpong'>
-			<div className=' h-full flex items-center flex-col justify-center'>
-				<h1 className=' text-xl font-semibold'>Comming Soon as Fixtures are not confirmed</h1>
-			</div>
-		</MainLayout>
-	);
-}
+    <MainLayout isGeneral title="Pingpong">
+      <div className=" h-full flex items-center flex-col justify-center">
+        <Link
+          className="text-2xl font-semibold text-center text-blue"
+          href="https://challonge.com/rcatabletennis"
+          target="_blank"
+        >
+          Go to Competition Page
+        </Link>
+      </div>
+    </MainLayout>
+  );
+};
 
-export default IndexPing
+export default IndexPing;
