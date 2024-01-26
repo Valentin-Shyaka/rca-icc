@@ -6,21 +6,22 @@ import MainLayout from "../../layouts/MainLayout";
 import { capitalize } from "../../utils/funcs";
 
 const Fixtures = () => {
-	const { matches } = useApp();
-	const unfinishedMatches = matches?.filter(
+  const { matches } = useApp();
+  const unfinishedMatches = matches?.filter(
     (match) =>
-      (match?.status?.status !== "FT" || match?.status?.status !== "FF") &&
+      match?.status?.status !== "FT" &&
+      match?.status?.status !== "FF" &&
       match.category === "football"
   );
 
-	const router = useRouter();
-	const title =
-		capitalize(router.pathname.split("/")[2]) +
-		" - " +
-		capitalize(router.pathname.split("/")[1]);
-	return (
-		<MainLayout title={title}>
-			{/* <h1 className='my-2 font-semibold'>Today</h1>
+  const router = useRouter();
+  const title =
+    capitalize(router.pathname.split("/")[2]) +
+    " - " +
+    capitalize(router.pathname.split("/")[1]);
+  return (
+    <MainLayout title={title}>
+      {/* <h1 className='my-2 font-semibold'>Today</h1>
 			<div className='grid desktop:grid-cols-3 md:grid-cols-2 gap-3'>
 				<MatchCard />
 				<MatchCard />
@@ -28,19 +29,19 @@ const Fixtures = () => {
 				<MatchCard />
 				<MatchCard />
 			</div> */}
-			<div className='flex flex-col w-full px-3'>
-				<h1 className='my-2 font-semibold px-3'>UpComing games</h1>
-				<div className='grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2'>
-					{unfinishedMatches?.map((match, i) => (
-						<MatchCard key={match._id} {...match} />
-					))}
-					{unfinishedMatches?.length === 0 && (
-						<h1 className=''>No Matches Available</h1>
-					)}
-				</div>
-			</div>
-		</MainLayout>
-	);
+      <div className="flex flex-col w-full px-3">
+        <h1 className="my-2 font-semibold px-3">UpComing games</h1>
+        <div className="grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2">
+          {unfinishedMatches?.map((match, i) => (
+            <MatchCard key={match._id} {...match} />
+          ))}
+          {unfinishedMatches?.length === 0 && (
+            <h1 className="">No Matches Available</h1>
+          )}
+        </div>
+      </div>
+    </MainLayout>
+  );
 };
 
 export default Fixtures;
