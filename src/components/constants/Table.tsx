@@ -39,6 +39,7 @@ const Table = ({ teams }: Props) => {
         </thead>
         <tbody>
           {standings.map((team, i) => {
+            // for border colors 1st, 2nd, 3rd, last
             const fc = "border-l-green-500";
             const sc = "border-l-yellow-500";
             const tc = "border-l-orange";
@@ -48,7 +49,7 @@ const Table = ({ teams }: Props) => {
                 ? fc
                 : i === 1
                 ? sc
-                : i === 2
+                : i === 2 && standings.length > 3
                 ? tc
                 : i === standings.length - 1
                 ? lc
