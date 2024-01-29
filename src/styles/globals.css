@@ -57,3 +57,16 @@ table tr td:nth-child(2) {
 .table-cont::-webkit-scrollbar{
     height: 10px;
 }
+.season-select-section {
+    margin: 0!important;
+    padding: 0!important;
+    width: auto !important;
+}
+
+.season-input {
+    padding-right: 0!important;
+    font-size: large !important;
+}
+.season-dropdown{
+    width: 150px !important;
+}
