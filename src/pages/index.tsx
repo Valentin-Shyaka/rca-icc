@@ -1,13 +1,12 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
-import { BiFootball } from "react-icons/bi";
-import MatchCard from "../components/MatchCard";
-import Countdown from "../components/other/Countdown";
-import { useApp } from "../contexts/AppProvider";
-import MainLayout from "../layouts/MainLayout";
 import { competitions } from "../utils/data/other";
+import { useApp } from "../contexts/AppProvider";
+import dynamic from "next/dynamic";
+const MatchCard = dynamic(() => import("@/components/MatchCard"));
+const Countdown = dynamic(() => import("@/components/other/Countdown"));
+const MainLayout = dynamic(() => import("@/layouts/MainLayout"));
 
 const Home: NextPage = () => {
   const { getMatches, matches, trends, friendlyMatches } = useApp();
