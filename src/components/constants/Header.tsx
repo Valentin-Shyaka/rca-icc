@@ -1,10 +1,21 @@
+import { useSanity } from "@/contexts/SanityProvider";
+import { getYearFromDataSet } from "@/utils/funcs/func1";
 import { Select } from "@mantine/core";
-import Link from "next/link";
-import React from "react";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect } from "react";
 import Moment from "react-moment";
 
 const Header = () => {
+  const { setDataSet, refresh, dataSet } = useSanity();
   const [season, setSeason] = React.useState("2023");
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (!dataSet) return;
+    console.log("dataSet has changed", dataSet);
+    const season = getYearFromDataSet(dataSet);
+    setSeason(season);
+  }, [dataSet]);
 
   return (
     <div className="w-full flex text-lg text-bold font-bold mb-2 justify-between h-[60px] items-center">
@@ -29,6 +40,7 @@ const Header = () => {
           onChange={(value) => {
             if (!value) return;
             setSeason(value);
+            refresh(value);
           }}
         />
       </div>
