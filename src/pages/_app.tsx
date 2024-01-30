@@ -6,6 +6,7 @@ import AppProvider from "../contexts/AppProvider";
 import { useState, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "@mantine/core/styles.css";
+import SanityProvider from "@/contexts/SanityProvider";
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -30,9 +31,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         height={3}
         showOnShallow={true}
       />
-      <AppProvider>
-        <Component {...pageProps} />
-      </AppProvider>
+      <SanityProvider>
+        <AppProvider>
+          <Component {...pageProps} />
+        </AppProvider>
+      </SanityProvider>
     </MantineProvider>
   );
 }

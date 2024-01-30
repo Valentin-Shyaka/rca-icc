@@ -35,7 +35,6 @@ const Home: NextPage = () => {
   console.log("date", finishDate.toString());
   const isFinished = new Date().getTime() > finishDate.getTime();
   console.log(isFinished);
-  
 
   return (
     <>
@@ -44,7 +43,12 @@ const Home: NextPage = () => {
           {!isFinished && todayMatch && (
             <div className="flex flex-col border-2 rounded-md p-2 border-gray gap-y-3">
               <h1 className="text-xl font-semibold">Today&apos;s main match</h1>
-              <Countdown isFinished={isFinished} targetDate={date} endTime={finishDate} startTime={date} />
+              <Countdown
+                isFinished={isFinished}
+                targetDate={date}
+                endTime={finishDate}
+                startTime={date}
+              />
             </div>
           )}
           {trends!?.length > 0 && (
@@ -79,11 +83,13 @@ const Home: NextPage = () => {
             </div>
           )}
           {friendlyMatches!?.length > 0 && (
-            <div className="flex flex-col border-2 rounded-md p-2 border-gray">
+            <div className="flex flex-col border-2 gap-2 rounded-md p-2 border-gray">
               <h1 className="text-lg font-semibold">Friendlies</h1>
-              {friendlyMatches?.map((match, i) => (
-                <MatchCard key={match._id} {...match} />
-              ))}
+              <div className="grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2">
+                {friendlyMatches?.map((match, i) => (
+                  <MatchCard key={match._id} {...match} />
+                ))}
+              </div>
             </div>
           )}
           <div className="flex flex-col border-2 rounded-md p-2 border-gray">
@@ -136,5 +142,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-
