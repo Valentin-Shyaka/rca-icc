@@ -1,14 +1,17 @@
 import { useSanity } from "@/contexts/SanityProvider";
 import { getYearFromDataSet } from "@/utils/funcs/func1";
-import { Select } from "@mantine/core";
+import { Alert, Select } from "@mantine/core";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import Moment from "react-moment";
+import Banner from "../other/Banner";
+import { BiPointer } from "react-icons/bi";
+import { FaHandPointLeft } from "react-icons/fa";
 
 const Header = () => {
   const { setDataSet, refresh, dataSet } = useSanity();
   const [season, setSeason] = React.useState("2023");
-  const searchParams = useSearchParams();
+  const [showAlert, setShowAlert] = React.useState(true);
 
   useEffect(() => {
     if (!dataSet) return;
@@ -19,7 +22,7 @@ const Header = () => {
 
   return (
     <div className="w-full flex text-lg text-bold font-bold mb-2 justify-between h-[60px] items-center">
-      <div className=" border border-blue rounded-md overflow-hidden text-center gap-x-1 flex items-center">
+      <div className=" border border-blue min-w-fit rounded-md overflow-hidden text-center gap-x-1 flex items-center">
         <p className="text-white font-sans bg-blue px-3 py-1">ICC</p>
         {/* <p className='ml-1'>2023</p> */}
         <Select
@@ -44,8 +47,24 @@ const Header = () => {
           }}
         />
       </div>
-
-      <span className=" text-grey font-normal truncate text-base">
+      {showAlert && (
+        <Banner
+          // message="👈🏾 You can always select competition year to view older results. Click on logo year and see"
+          message={
+            <Alert
+              icon={<FaHandPointLeft />}
+              onClose={() => setShowAlert(false)}
+              withCloseButton
+            >
+              <h1 className="text-blue text-sm italic">
+                You can always select competition year to view older results.
+                Click on logo year and see
+              </h1>
+            </Alert>
+          }
+        />
+      )}
+      <span className=" text-grey font-normal whitespace-nowrap text-base">
         <Moment format="DD MMMM YYYY">{Date.now()}</Moment>
       </span>
     </div>

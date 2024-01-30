@@ -77,16 +77,22 @@ const SanityProvider = ({ children }: Props) => {
   };
 
   useEffect(() => {
-    // if (dataSet) return;
-    console.log("params to change data set", searchParams.get("season"));
+    const q_season = searchParams.get("season");
+    console.log("params to change data set", q_season);
+    if (!q_season) return;
     setLoading(true);
     setTimeout(() => {
-      const q_season = searchParams.get("season");
       const season = q_season ?? String(currYear);
       setDataSet(getDataSetFromYear(season));
       setLoading(false);
     }, 1000);
   }, [searchParams]);
+
+  useEffect(() => {
+    const q_season = searchParams.get("season");
+    const season = q_season ?? String(currYear);
+    setDataSet(getDataSetFromYear(season));
+  }, []);
 
   if (!client || !config || loading || !dataSet) return <LoadingView />;
 

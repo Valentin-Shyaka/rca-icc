@@ -8,6 +8,7 @@
   "dependencies": {
     "@mantine/core": "^7.5.0",
     "@mantine/hooks": "^7.5.0",
+    "@next/env": "^14.1.0",
     "@portabletext/react": "^3.0.11",
     "@sanity/vision": "^3.26.1",
     "@vercel/og": "^0.1.0",
