@@ -7,6 +7,7 @@ import Moment from "react-moment";
 import Banner from "../other/Banner";
 import { BiPointer } from "react-icons/bi";
 import { FaHandPointLeft } from "react-icons/fa";
+import Link from "next/link";
 
 const Header = () => {
   const { setDataSet, refresh, dataSet } = useSanity();
@@ -23,7 +24,9 @@ const Header = () => {
   return (
     <div className="w-full flex text-lg text-bold font-bold mb-2 justify-between h-[60px] items-center">
       <div className=" border border-blue min-w-fit rounded-md overflow-hidden text-center gap-x-1 flex items-center">
-        <p className="text-white font-sans bg-blue px-3 py-1">ICC</p>
+        <Link href={"/"} className="text-white font-sans bg-blue px-3 py-1">
+          ICC
+        </Link>
         {/* <p className='ml-1'>2023</p> */}
         <Select
           variant="unstyled"

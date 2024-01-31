@@ -4,3 +4,7 @@ export type CompNav = {
     name: string;
     path: string;
 }
+
+export interface SeasonData<T = any> {
+    [key: string]: T;
+}

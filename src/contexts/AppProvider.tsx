@@ -20,6 +20,7 @@ import {
 } from "../utils/types/types2";
 import { useSanity } from "./SanityProvider";
 import { SanityClient } from "next-sanity";
+import { SeasonData } from "@/utils/types";
 
 export type AppContextType = {
   players?: PlayerByTeam;
@@ -37,6 +38,7 @@ export type AppContextType = {
   getInsights?: (client: any) => void;
   friendlyMatches?: Match[];
   setFriendlyMatches?: React.Dispatch<React.SetStateAction<Match[]>>;
+  getDataSeason?: <T = any>(data: SeasonData<T>) => T | undefined;
 };
 
 export const AppContext = createContext<AppContextType>({});
@@ -70,7 +72,7 @@ export default function AppProvider({ children }: Props) {
   const getMatches = async (client: SanityClient) => {
     try {
       const res = await client?.fetch(fetchMatchesQuery);
-      const leagueMatches = res.filter(
+      const leagueMatches: Match[] = res.filter(
         (match: Match) => match.type === "league"
       );
       const friendlyMatches = res.filter(
@@ -169,10 +171,45 @@ export default function AppProvider({ children }: Props) {
     }
   };
 
+  const flush = () => {
+    console.log("flushing data");
+    setPlayers({
+      football: [],
+      basketball: [],
+      pingpong: [],
+      debate: [],
+      volleyball: [],
+    });
+    setMatches([]);
+    setTeams({
+      football: [],
+      basketball: [],
+      pingpong: [],
+      debate: [],
+      volleyball: [],
+    });
+    setTrends([]);
+    setInsights([]);
+    setFriendlyMatches([]);
+  };
+
+  const getDataSeason = <T = any,>(data: SeasonData<T>) => {
+    if (!dataSet) return;
+    const dataSetData = data?.[dataSet];
+    if (!dataSetData) {
+      console.log("no data");
+      return;
+    }
+    return dataSetData;
+  };
+
   useEffect(() => {
     console.log("app provider", dataSet);
     console.log("client", client);
     if (!client) return;
+    // flush data
+    flush();
+    // get data again
     getMatches(client);
     getTeams(client);
     getTrendings(client);
@@ -196,6 +233,7 @@ export default function AppProvider({ children }: Props) {
         getInsights,
         friendlyMatches,
         setFriendlyMatches,
+        getDataSeason,
       }}
     >
       {children}
