@@ -8,7 +8,7 @@ export default {
             title: "title",
             subtitle: "category"
         },
-        prepare({ title, subtitle }) {
+        prepare({ title, subtitle }: any) {
             return {
                 title: title,
                 subtitle: subtitle ? `category : ${subtitle}` : "no category"
@@ -21,7 +21,7 @@ export default {
             title: "Title",
             type: "string",
             description: "match day title. ex : matchday 1",
-            validation: Rule => Rule.required().min(3).max(300).warning(
+            validation: (Rule: any) => Rule.required().min(3).max(300).warning(
                 "please provide a name for the matchday"
             )
         },
@@ -36,13 +36,13 @@ export default {
             title: "Date",
             description: "the date for the match day",
             type: "date",
-            validation: rule => rule.required()
+            validation: (rule: any) => rule.required()
         },
         {
             name: "matches",
             title: "Matches",
             type: "array",
-            validation: Rule => Rule.required().warning(
+            validation: (Rule: any) => Rule.required().warning(
                 "please provide matches which will take place on this matchday"
             ),
             of: [{ type: "reference", to: { type: "match" } }]
@@ -62,7 +62,7 @@ export default {
                     { title: "PingPong", value: "pingpong" },
                 ]
             },
-            validation: rule => rule.required()
+            validation: (rule: any) => rule.required()
         },
     ]
 }

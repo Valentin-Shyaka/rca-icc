@@ -21,6 +21,7 @@ interface SanityContextProps {
   client: SanityClient | null;
   setClient: React.Dispatch<React.SetStateAction<SanityClient | null>>;
   refresh: (year: string) => void;
+  setConfig?: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const SanityContext = React.createContext<SanityContextProps>({
@@ -38,7 +39,7 @@ interface Props {
   children: ReactElement<any, string | JSXElementConstructor<any>>;
 }
 
-const makeConfig = (dataSet?: string) => {
+export const makeConfig = (dataSet?: string) => {
   return defineConfig({
     basePath: "/studio",
     name: "rca-icc",
@@ -107,7 +108,15 @@ const SanityProvider = ({ children }: Props) => {
 
   return (
     <SanityContext.Provider
-      value={{ config, dataSet, setDataSet, client, setClient, refresh }}
+      value={{
+        config,
+        dataSet,
+        setDataSet,
+        client,
+        setClient,
+        refresh,
+        setConfig,
+      }}
     >
       {!client || !config || loading || !dataSet ? (
         <LoadingView />
