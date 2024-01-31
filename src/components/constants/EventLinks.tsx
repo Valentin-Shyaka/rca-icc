@@ -1,20 +1,25 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { events } from "../../utils/data";
+import { EventType, events } from "../../utils/data";
 import NavSlider from "./NavSlider";
 // import { GiCakeSlice } from 'react-icons/gi'
 
-const EventLinks = () => {
+interface Props {
+	routes: EventType[]
+}
+
+const EventLinks = ({routes}:Props) => {
 	const [active, setActive] = useState("");
 	const router = useRouter();
 
 	useEffect(() => {
 		const { pathname } = router;
 		const path = pathname.split("/")[1];
+	
 		setActive(path);
 	}, [router]);
-
+ 
 	const activeEventStyle =
 		"w-full h-[40px] border-2 hover:bg-blue-200 border-[#2076F8] px-3 py-2 rounded rounded-full flex items-center gap-2 justify-center cursor-pointer text-white bg-[#2076F8]";
 	const eventStyle =
@@ -22,7 +27,7 @@ const EventLinks = () => {
 	return (
 		<NavSlider haveGap>
 			{/* <div className='w-full flex justify-center gap-6 p-4'> */}
-			{events.map((item) => {
+			{routes.map((item) => {
 				const isHome = item.name === "home" && active === "";
 				const isActive = item.name === active || isHome;
 				return (

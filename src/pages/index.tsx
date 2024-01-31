@@ -118,7 +118,7 @@ const Home: NextPage = () => {
             <div className="flex w-full mt-4 flex-wrap gap-3">
               {competitions.map((comp, i) => (
                 <Link
-                  href={`/${comp.name}`}
+                  href={comp.url ?? `/${comp.name}`}
                   key={comp.id}
                   className=" border-2 hover:bg-divBack items-center w-full max-w-[250px] gap-3 border-gray flex flex-col gap-y-3 p-3"
                 >

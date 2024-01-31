@@ -5,14 +5,38 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import Moment from "react-moment";
 import Banner from "../other/Banner";
-import { BiPointer } from "react-icons/bi";
-import { FaHandPointLeft } from "react-icons/fa";
+import {
+  BiGame,
+  BiHome,
+  BiJoystickButton,
+  BiLeftArrow,
+  BiPointer,
+} from "react-icons/bi";
+import {
+  FaArrowLeft,
+  FaBackward,
+  FaGamepad,
+  FaHandPointLeft,
+  FaPlaystation,
+} from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { MdScoreboard } from "react-icons/md";
 
 const Header = () => {
   const { setDataSet, refresh, dataSet } = useSanity();
   const [season, setSeason] = React.useState("2023");
   const [showAlert, setShowAlert] = React.useState(true);
+  const [active, setActive] = React.useState("");
+  const router = useRouter();
+  const { pathname } = router;
+
+  useEffect(() => {
+    const path = pathname.split("/")[1];
+    setActive(path);
+  }, [router]);
+
+  const isGaming = pathname.startsWith("/gaming");
 
   useEffect(() => {
     if (!dataSet) return;
@@ -67,9 +91,19 @@ const Header = () => {
           }
         />
       )}
-      <span className=" text-grey font-normal whitespace-nowrap text-base">
+      {/* <span className=" text-grey font-normal whitespace-nowrap text-base">
         <Moment format="DD MMMM YYYY">{Date.now()}</Moment>
-      </span>
+      </span> */}
+      <div className="flex font-semibold gap-2 text-base">
+        <Link
+          className={` px-2 py-1 duration-150 text-blue flex gap-2 items-center hover:text-blue/70
+          `}
+          href={isGaming ? "/" : "/gaming"}
+        >
+          {isGaming ? <FaArrowLeft /> : <MdScoreboard />}
+          {isGaming ? "Home" : "Fantasy"}
+        </Link>
+      </div>
     </div>
   );
 };

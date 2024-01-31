@@ -49,6 +49,16 @@ export const playersFootQuery = groq`*[_type == "team" && category == "football"
     },
 }`
 
+export const playersByTeamQuery=(id: string) => groq `*[_type== "team" && "_id"==${id}]{
+    players[]->{
+        _id,
+        displayname,
+        fullName,
+        position,
+        "profile": profile.asset->url
+    }
+} `
+
 export const playersBaccoQuery = groq`*[_type == "team" && category == "basketball"]{
     _id,
     name,
@@ -114,6 +124,7 @@ export const fetchMatchesQuery = groq`*[_type == "match"] | order(date asc){
     status,
     category,
 }`
+
 
 export const playerFields = `{
             _id,
