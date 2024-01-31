@@ -5,7 +5,12 @@ import { visionTool } from "@sanity/vision";
 import { SanityClient, createClient } from "next-sanity";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, {
+  JSXElementConstructor,
+  ReactElement,
+  useContext,
+  useEffect,
+} from "react";
 import { defineConfig, set } from "sanity";
 import { structureTool } from "sanity/structure";
 
@@ -30,7 +35,7 @@ const SanityContext = React.createContext<SanityContextProps>({
 export const useSanity = () => useContext(SanityContext);
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactElement<any, string | JSXElementConstructor<any>>;
 }
 
 const makeConfig = (dataSet?: string) => {
@@ -58,15 +63,8 @@ const SanityProvider = ({ children }: Props) => {
   const [dataSet, setDataSet] = React.useState<string | null>(null);
   const [client, setClient] = React.useState<SanityClient | null>(null);
   const [loading, setLoading] = React.useState(false);
+  const [season, setSeason] = React.useState<string | null>(null); // [currYear, currYear - 1, currYear - 2, currYear - 3]
   const router = useRouter();
-
-  useEffect(() => {
-    if (!dataSet) return;
-    console.log("data set changed", dataSet);
-    setConfig(makeConfig(dataSet));
-    const client = createClient(makeConfig(dataSet));
-    setClient(client);
-  }, [dataSet]);
 
   const refresh = (year: string) => {
     const dts = getDataSetFromYear(year);
@@ -76,14 +74,21 @@ const SanityProvider = ({ children }: Props) => {
     router.push(router.pathname, `?season=${year}`, { shallow: true });
   };
 
+  // useEffect hell starts here 😂
   useEffect(() => {
     const q_season = searchParams.get("season");
     console.log("params to change data set", q_season);
-    if (!q_season) return;
+    console.log(" data set with param", dataSet);
+    if (!q_season || q_season === getYearFromDataSet(dataSet!)) return;
+    setSeason(q_season);
     setLoading(true);
     setTimeout(() => {
       const season = q_season ?? String(currYear);
-      setDataSet(getDataSetFromYear(season));
+      const dataSet = getDataSetFromYear(season);
+      setDataSet(dataSet);
+      setConfig(makeConfig(dataSet));
+      const client = createClient(makeConfig(dataSet));
+      setClient(client);
       setLoading(false);
     }, 1000);
   }, [searchParams]);
@@ -91,16 +96,24 @@ const SanityProvider = ({ children }: Props) => {
   useEffect(() => {
     const q_season = searchParams.get("season");
     const season = q_season ?? String(currYear);
-    setDataSet(getDataSetFromYear(season));
+    const dataSet = getDataSetFromYear(season);
+    setDataSet(dataSet);
+    setConfig(makeConfig(dataSet));
+    const client = createClient(makeConfig(dataSet));
+    setClient(client);
   }, []);
 
-  if (!client || !config || loading || !dataSet) return <LoadingView />;
+  // if (!client || !config || loading || !dataSet) return <LoadingView />;
 
   return (
     <SanityContext.Provider
       value={{ config, dataSet, setDataSet, client, setClient, refresh }}
     >
-      {children}
+      {!client || !config || loading || !dataSet ? (
+        <LoadingView />
+      ) : (
+        React.cloneElement(children, { key: season })
+      )}
     </SanityContext.Provider>
   );
 };
