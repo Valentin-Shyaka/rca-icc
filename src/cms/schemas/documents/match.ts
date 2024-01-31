@@ -9,6 +9,29 @@ export default defineType({
       title: "title",
     },
   },
+  groups: [
+    {
+      title: "Match",
+      name: "match",
+      default: true,
+    },
+    {
+      title: "Match Stats",
+      name: "matchStats",
+    },
+    {
+      title: "Match Events",
+      name: "matchEvents",
+    },
+    {
+      title: "Match Lineup",
+      name: "matchLineup",
+    },
+    {
+      title: "Match Fantasy",
+      name: "matchFantasy",
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -27,6 +50,7 @@ export default defineType({
         }
         return "Match";
       },
+      group: "match",
     }),
     {
       name: "banner",
@@ -36,11 +60,14 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      group: "match",
     },
     {
       name: "description",
       title: "Description",
       type: "text",
+      description: "the description of the match",
+      group: "match",
     },
     {
       name: "date",
@@ -48,6 +75,7 @@ export default defineType({
       type: "datetime",
       description: "the date for the match",
       validation: (rule) => rule.required(),
+      group: "match",
     },
     {
       name: "type",
@@ -59,49 +87,8 @@ export default defineType({
           { title: "Friendly", value: "friendly" },
         ],
       },
-    },
-    {
-      name: "homeTeam",
-      title: "Home Team",
-      type: "reference",
-      to: { type: "team" },
       validation: (rule) => rule.required(),
-    },
-    {
-      name: "awayTeam",
-      title: "Away Team",
-      type: "reference",
-      to: { type: "team" },
-      validation: (rule) => rule.required(),
-    },
-    {
-      name: "status",
-      title: "Status",
-      type: "matchStatus",
-      validation: (rule) => rule.required(),
-      // set default value of status object
-      initialValue: "NS",
-    },
-    {
-      name: "stats",
-      title: "Match stats",
-      type: "matchStats",
-    },
-    {
-      name: "events",
-      title: "Events",
-      type: "array",
-      of: [{ type: "event" }],
-    },
-    {
-      name: "homeTeamLineup",
-      title: "Home Team Lineup",
-      type: "lineup",
-    },
-    {
-      name: "awayTeamLineup",
-      title: "Away Team Lineup",
-      type: "lineup",
+      group: "match",
     },
     // category
     {
@@ -120,6 +107,63 @@ export default defineType({
         ],
       },
       validation: (rule) => rule.required(),
+      group: "match",
+    },
+    {
+      name: "homeTeam",
+      title: "Home Team",
+      type: "reference",
+      to: { type: "team" },
+      validation: (rule) => rule.required(),
+      group: "match",
+    },
+    {
+      name: "awayTeam",
+      title: "Away Team",
+      type: "reference",
+      to: { type: "team" },
+      validation: (rule) => rule.required(),
+      group: "match",
+    },
+    {
+      name: "status",
+      title: "Status",
+      type: "matchStatus",
+      validation: (rule) => rule.required(),
+      // set default value of status object
+      initialValue: "NS",
+      group: "match",
+    },
+    {
+      name: "stats",
+      title: "Match stats",
+      type: "matchStats",
+      group: "matchStats",
+    },
+    {
+      name: "events",
+      title: "Events",
+      type: "array",
+      of: [{ type: "event" }],
+      group: "matchEvents",
+    },
+    {
+      name: "homeTeamLineup",
+      title: "Home Team Lineup",
+      type: "lineup",
+      group: "matchLineup",
+    },
+    {
+      name: "awayTeamLineup",
+      title: "Away Team Lineup",
+      type: "lineup",
+      group: "matchLineup",
+    },
+    {
+      name: "fantasy",
+      title: "Fantasy",
+      type: "fantasy",
+      group: "matchFantasy",
     },
   ],
 });

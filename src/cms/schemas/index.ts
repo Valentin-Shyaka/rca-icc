@@ -15,6 +15,7 @@ import event from "./objects/event";
 import matchStatus from "./objects/matchStatus";
 import insight from "./documents/insight";
 import { SchemaType, SchemaTypeDefinition } from "sanity";
+import fantasy from "./objects/fantasy";
 
 const objects = [
   matchStats,
@@ -23,6 +24,7 @@ const objects = [
   lineup,
   event,
   matchStatus,
+  fantasy,
 ];
 
 const documents = [player, team, matchDay, match, coach, trending, insight];

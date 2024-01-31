@@ -37,19 +37,48 @@ export default defineType({
     },
     {
       name: "description",
-      title: "description",
+      title: "description (Deprecated)",
       type: "text",
-      description: "the description of the trending",
-      validation: (Rule) =>
-        Rule.required()
-          .min(3)
-          .max(300)
-          .warning("please provide a title for the trending"),
+      description: "do not use this field. Use the content field instead",
+    },
+    {
+      name: "content",
+      title: "Content",
+      type: "array",
+      of: [
+        {
+          type: "block",
+        },
+        {
+          type: "image",
+        },
+        {
+          type: "file",
+        },
+      ],
+      validation: (Rule) => Rule.required().warning("please provide a content"),
     },
     {
       name: "date",
       title: "Date",
       type: "date",
+    },
+    {
+      name: "category",
+      title: "Category",
+      type: "string",
+      options: {
+        list: [
+          { title: "Football", value: "football" },
+          { title: "Basketball", value: "basketball" },
+          { title: "Volleyball", value: "volleyball" },
+          { title: "Debate", value: "debate" },
+          { title: "Pingpong", value: "pingpong" },
+          { title: "Fantasy", value: "fantasy" },
+          { title: "Others", value: "others" },
+        ],
+      },
+      initialValue: "others",
     },
   ],
 });
