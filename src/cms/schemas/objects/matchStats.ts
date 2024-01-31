@@ -1,33 +1,33 @@
-export default {
-    name: "matchStats",
-    title: "Match Stats",
-    type: "object",
+import { defineType } from "sanity";
 
-    groups: [
-        {
-            title: "Football Match Stats",
-            name: "footballMatchStats",
-            options: { collapsible: true }
-        },
-        {
-            title: "Basketball Match Stats",
-            name: "basketballMatchStats",
-            options: { collapsible: true }
-        }
-    ],
+export default defineType({
+  name: "matchStats",
+  title: "Match Stats",
+  type: "object",
 
-    fields: [
-        {
-            name: "homeTeamStats",
-            title: "Home Team Stats",
-            type: "matchTeamStats",
-            validation: rule => rule.required()
-        },
-        {
-            name: "awayTeamStats",
-            title: "Away Team Stats",
-            type: "matchTeamStats",
-            validation: rule => rule.required()
-        },
-    ]
-}
+  groups: [
+    {
+      title: "Football Match Stats",
+      name: "footballMatchStats",
+    },
+    {
+      title: "Basketball Match Stats",
+      name: "basketballMatchStats",
+    },
+  ],
+
+  fields: [
+    {
+      name: "homeTeamStats",
+      title: "Home Team Stats",
+      type: "matchTeamStats",
+      validation: (rule) => rule.required(),
+    },
+    {
+      name: "awayTeamStats",
+      title: "Away Team Stats",
+      type: "matchTeamStats",
+      validation: (rule) => rule.required(),
+    },
+  ],
+});

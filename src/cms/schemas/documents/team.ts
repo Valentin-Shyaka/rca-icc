@@ -16,7 +16,7 @@ export default defineType({
       name: "name",
       title: "Name",
       type: "string",
-      description: "The team name . ex : Y2-Football",
+      description: "The team name . ex : Y2 FC (VC, BC, ...)",
       validation: (Rule) =>
         Rule.required()
           .min(3)
