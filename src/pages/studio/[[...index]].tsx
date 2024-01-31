@@ -1,20 +1,26 @@
-import { useSanity } from "@/contexts/SanityProvider";
+import { makeConfig, useSanity } from "@/contexts/SanityProvider";
 import { getDataSetFromYear, getYearFromDataSet } from "@/utils/funcs/func1";
 import { Select } from "@mantine/core";
+import { createClient } from "next-sanity";
 import { NextStudio } from "next-sanity/studio";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
 export default function AdminPage() {
-  const { config, setDataSet, dataSet } = useSanity();
+  const { config, setDataSet, dataSet, setConfig } = useSanity();
   const searchParams = useSearchParams();
   const [season, setSeason] = React.useState("2023");
+  const router = useRouter();
 
   useEffect(() => {
     const dts = getDataSetFromYear(season);
+    console.log("dts", dts);
     if (dts === dataSet) return;
-    setDataSet?.(dts);
-    // window.location.reload();
+    setDataSet(dts);
+    setConfig?.(makeConfig(dts));
+    // router.push(router.pathname, `?season=${season}`, { shallow: true });
+    // // // window.location.reload();
   }, [season]);
 
   useEffect(() => {

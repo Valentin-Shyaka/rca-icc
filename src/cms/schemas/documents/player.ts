@@ -1,4 +1,6 @@
-export default {
+import { defineField, defineType } from "sanity";
+
+export default defineType({
     name: "player",
     title: "Player",
     type: "document",
@@ -22,22 +24,18 @@ export default {
         {
             title: "Player Info",
             name: "playerInfo",
-            options: { collapsible: true }
         },
         {
             title: "General Stats",
             name: "generalStats",
-            options: { collapsible: true }
         },
         {
             title: "Football Player Stats",
             name: "footballPlayerStats",
-            options: { collapsible: true }
         },
         {
             title: "Basketball Player Stats",
             name: "basketballPlayerStats",
-            options: { collapsible: true }
         }
     ],
     fields: [
@@ -113,21 +111,21 @@ export default {
             },
             group: "playerInfo"
         },
-        {
+        defineField({
             name: "goals",
             title: "Goals",
             description: "Goals for a football player",
             type: "number",
             group: "footballPlayerStats",
-            default: 0
-        },
+            initialValue: 0
+        }),
         {
             name: "footballAssists",
             title: "Football Assists",
             description: "Assists for a football player",
             type: "number",
             group: "footballPlayerStats",
-            default: 0
+            initialValue: 0
 
         },
         {
@@ -136,7 +134,7 @@ export default {
             description: "number of red cards for a football player",
             type: "number",
             group: "footballPlayerStats",
-            default: 0
+            initialValue: 0
         },
         {
             name: "yellowCards",
@@ -144,7 +142,7 @@ export default {
             description: "Yellow cards for a football player",
             type: "number",
             group: "footballPlayerStats",
-            default: 0
+            initialValue: 0
         },
 
         // basketball
@@ -154,7 +152,7 @@ export default {
             description: "Points for a basketball player",
             type: "number",
             group: "basketballPlayerStats",
-            default: 0
+            initialValue: 0
         },
         {
             name: "rebounds",
@@ -162,7 +160,7 @@ export default {
             description: "Rebounds for a basketball player",
             type: "number",
             group: "basketballPlayerStats",
-            default: 0
+            initialValue: 0
         },
         {
             name: "basketballAssists",
@@ -170,7 +168,7 @@ export default {
             description: "Assists for a basketball player",
             type: "number",
             group: "basketballPlayerStats",
-            default: 0
+            initialValue: 0
         },
         {
             name: "steals",
@@ -178,7 +176,7 @@ export default {
             description: "Steals for a basketball player",
             type: "number",
             group: "basketballPlayerStats",
-            default: 0
+            initialValue: 0
         },
         {
             name: "blocks",
@@ -186,7 +184,7 @@ export default {
             description: "Blocks for a basketball player",
             type: "number",
             group: "basketballPlayerStats",
-            default: 0
+            initialValue: 0
         },
         {
             name: "fouls",
@@ -194,7 +192,7 @@ export default {
             description: "Fouls for a basketball player",
             type: "number",
             group: "basketballPlayerStats",
-            default: 0
+            initialValue: 0
         }
     ]
-}
+})
