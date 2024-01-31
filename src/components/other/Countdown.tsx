@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { BiBell } from "react-icons/bi";
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { BiBell } from 'react-icons/bi';
 
 interface Props {
   targetDate: Date;
@@ -37,7 +37,7 @@ function CountdownTimer({ targetDate, startTime, endTime, isFinished }: Props) {
     return () => clearTimeout(timer);
   });
 
-  const formatTime = (time: Number) => {
+  const formatTime = (time: number) => {
     return time < 10 ? `0${time}` : time;
   };
 
@@ -46,9 +46,7 @@ function CountdownTimer({ targetDate, startTime, endTime, isFinished }: Props) {
   return (
     <div className="flex flex-col items-center w-full">
       <div className="flex w-full flex-col items-center justify-center gap-3">
-        <span className=" text-center">
-          ⚠️⚠️ BASKETBALL FINAL ⚠️⚠️
-        </span>
+        <span className=" text-center">⚠️⚠️ BASKETBALL FINAL ⚠️⚠️</span>
         <div className="flex items-center gap-x-3">
           <span className=" font-bold text-4xl">Y2 BC</span>
           <span className=" font-bold text-xl">vs</span>
@@ -90,13 +88,7 @@ function CountdownTimer({ targetDate, startTime, endTime, isFinished }: Props) {
 
 export default CountdownTimer;
 
-const TimePart = ({
-  value,
-  label,
-}: {
-  value: string | Number;
-  label: string;
-}) => (
+const TimePart = ({ value, label }: { value: string | number; label: string }) => (
   <div className="flex flex-col items-center p-3">
     <span className=" text-6xl">{value.toString()}</span>
     <span className=" text-xl">{label}</span>

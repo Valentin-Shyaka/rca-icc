@@ -1,19 +1,19 @@
-import { defineType } from "sanity";
+import { defineType } from 'sanity';
 
 export default defineType({
-  name: "fantasy",
-  title: "Fantasy",
-  type: "object",
+  name: 'fantasy',
+  title: 'Fantasy',
+  type: 'object',
   fields: [
     {
-      name: "manOfTheMatch",
-      type: "reference",
-      to: [{ type: "player" }],
+      name: 'manOfTheMatch',
+      type: 'reference',
+      to: [{ type: 'player' }],
     },
     {
-      name: "firstTeamToScore",
-      type: "reference",
-      to: [{ type: "team" }],
+      name: 'firstTeamToScore',
+      type: 'reference',
+      to: [{ type: 'team' }],
     },
   ],
 });

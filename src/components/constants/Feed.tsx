@@ -1,14 +1,9 @@
-import React from "react";
-import Image from "next/image";
-import { useApp } from "../../contexts/AppProvider";
-import { Carousel } from "react-responsive-carousel";
-import {
-  BiArrowBack,
-  BiChevronLeft,
-  BiChevronRight,
-  BiLeftArrow,
-} from "react-icons/bi";
-import { useSanity } from "@/contexts/SanityProvider";
+import React from 'react';
+import Image from 'next/image';
+import { useApp } from '../../contexts/AppProvider';
+import { Carousel } from 'react-responsive-carousel';
+import { BiArrowBack, BiChevronLeft, BiChevronRight, BiLeftArrow } from 'react-icons/bi';
+import { useSanity } from '@/contexts/SanityProvider';
 
 const Feed = () => {
   const { insights, getInsights } = useApp();
@@ -44,10 +39,7 @@ const Feed = () => {
         interval={9000}
       >
         {insights?.map((insight) => (
-          <div
-            key={insight._id}
-            className="w-full  border-2 border-gray rounded-md  aspect-square h-full"
-          >
+          <div key={insight._id} className="w-full  border-2 border-gray rounded-md  aspect-square h-full">
             <div className="w-full overflow-hidden h-[180px] ">
               <Image
                 src={insight.image}
@@ -58,9 +50,7 @@ const Feed = () => {
               />
             </div>
             <h1 className="font-semibold text-center">{insight.title}</h1>
-            <p className="font-md font-sans text-coolGray-500 text-left p-2 text-sm">
-              {insight.description}
-            </p>
+            <p className="font-md font-sans text-coolGray-500 text-left p-2 text-sm">{insight.description}</p>
           </div>
         ))}
       </Carousel>
