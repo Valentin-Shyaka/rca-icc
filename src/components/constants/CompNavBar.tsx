@@ -3,10 +3,19 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { compNavs } from "../../utils/data";
 import NavSlider from "./NavSlider";
+import { CompNav } from "../../utils/types";
 
-const CompNavBar = () => {
+
+interface CompNavsProps{
+	routes?:CompNav[]
+}
+
+const CompNavBar = ({routes = compNavs}:CompNavsProps) => {
 	const [path, setPath] = useState("");
 	const router = useRouter();
+
+	 
+	
 
 	useEffect(() => {
 		const { pathname } = router;
@@ -17,7 +26,7 @@ const CompNavBar = () => {
 	return (
 		// <div className=' w-full flex items-center overflow-x-auto font-medium text-lg'>
 		<NavSlider>
-			{compNavs.map((nav, i) => {
+			{routes.map((nav, i) => {
 				const isIndex = (path.split('/')[1] === router.pathname.split('/')[1]) && nav.name === "Overview" && router.pathname.split("/").length === 2;				
 				const isActive = nav.path.split("/")[1] === path.split("/")[2] || isIndex;
 				return (
