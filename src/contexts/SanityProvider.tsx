@@ -1,18 +1,13 @@
-import { schemaTypes } from "@/cms/schemas";
-import LoadingView from "@/components/other/LoadingView";
-import { getDataSetFromYear, getYearFromDataSet } from "@/utils/funcs/func1";
-import { visionTool } from "@sanity/vision";
-import { SanityClient, createClient } from "next-sanity";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
-import React, {
-  JSXElementConstructor,
-  ReactElement,
-  useContext,
-  useEffect,
-} from "react";
-import { defineConfig, set } from "sanity";
-import { structureTool } from "sanity/structure";
+import { schemaTypes } from '@/cms/schemas';
+import LoadingView from '@/components/other/LoadingView';
+import { getDataSetFromYear, getYearFromDataSet } from '@/utils/funcs/func1';
+import { visionTool } from '@sanity/vision';
+import { SanityClient, createClient } from 'next-sanity';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
+import React, { JSXElementConstructor, ReactElement, useContext, useEffect } from 'react';
+import { defineConfig, set } from 'sanity';
+import { structureTool } from 'sanity/structure';
 
 interface SanityContextProps {
   config: any;
@@ -21,6 +16,7 @@ interface SanityContextProps {
   client: SanityClient | null;
   setClient: React.Dispatch<React.SetStateAction<SanityClient | null>>;
   refresh: (year: string) => void;
+  setConfig?: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const SanityContext = React.createContext<SanityContextProps>({
@@ -38,16 +34,15 @@ interface Props {
   children: ReactElement<any, string | JSXElementConstructor<any>>;
 }
 
-const makeConfig = (dataSet?: string) => {
+export const makeConfig = (dataSet?: string) => {
   return defineConfig({
-    basePath: "/studio",
-    name: "rca-icc",
-    title: "RCA interclass competitions CMS",
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "",
-    useCdn:
-      typeof document !== "undefined" && process.env.NODE_ENV === "production",
-    apiVersion: "2022-11-16",
-    dataset: dataSet ?? "production",
+    basePath: '/studio',
+    name: 'rca-icc',
+    title: 'RCA interclass competitions CMS',
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? '',
+    useCdn: typeof document !== 'undefined' && process.env.NODE_ENV === 'production',
+    apiVersion: '2022-11-16',
+    dataset: dataSet ?? 'production',
     plugins: [structureTool(), visionTool()],
     schema: {
       types: schemaTypes as any,
@@ -70,15 +65,15 @@ const SanityProvider = ({ children }: Props) => {
     const dts = getDataSetFromYear(year);
     console.log(dts, dataSet);
     if (dts === dataSet) return;
-    console.log("refreshing");
+    console.log('refreshing');
     router.push(router.pathname, `?season=${year}`, { shallow: true });
   };
 
   // useEffect hell starts here 😂
   useEffect(() => {
-    const q_season = searchParams.get("season");
-    console.log("params to change data set", q_season);
-    console.log(" data set with param", dataSet);
+    const q_season = searchParams.get('season');
+    console.log('params to change data set', q_season);
+    console.log(' data set with param', dataSet);
     if (!q_season || q_season === getYearFromDataSet(dataSet!)) return;
     setSeason(q_season);
     setLoading(true);
@@ -94,7 +89,7 @@ const SanityProvider = ({ children }: Props) => {
   }, [searchParams]);
 
   useEffect(() => {
-    const q_season = searchParams.get("season");
+    const q_season = searchParams.get('season');
     const season = q_season ?? String(currYear);
     const dataSet = getDataSetFromYear(season);
     setDataSet(dataSet);
@@ -107,13 +102,17 @@ const SanityProvider = ({ children }: Props) => {
 
   return (
     <SanityContext.Provider
-      value={{ config, dataSet, setDataSet, client, setClient, refresh }}
+      value={{
+        config,
+        dataSet,
+        setDataSet,
+        client,
+        setClient,
+        refresh,
+        setConfig,
+      }}
     >
-      {!client || !config || loading || !dataSet ? (
-        <LoadingView />
-      ) : (
-        React.cloneElement(children, { key: season })
-      )}
+      {!client || !config || loading || !dataSet ? <LoadingView /> : React.cloneElement(children, { key: season })}
     </SanityContext.Provider>
   );
 };

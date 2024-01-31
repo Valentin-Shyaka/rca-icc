@@ -1,9 +1,9 @@
-import { useSanity } from "@/contexts/SanityProvider";
-import React from "react";
-import PlayerCard from "../../components/constants/PlayerCard";
-import MainLayout from "../../layouts/MainLayout";
-import { playersVolleyQuery } from "../../lib/queries";
-import { Player } from "../../utils/types/types1";
+import { useSanity } from '@/contexts/SanityProvider';
+import React from 'react';
+import PlayerCard from '../../components/constants/PlayerCard';
+import MainLayout from '../../layouts/MainLayout';
+import { playersVolleyQuery } from '../../lib/queries';
+import { Player } from '../../utils/types/types1';
 
 type PlayerProps = {
   teamPlayers: Array<{
@@ -16,9 +16,7 @@ type PlayerProps = {
 
 const PlayersIndex = () => {
   const { client } = useSanity();
-  const [teamPlayers, setTeamPlayers] = React.useState<
-    PlayerProps["teamPlayers"]
-  >([]);
+  const [teamPlayers, setTeamPlayers] = React.useState<PlayerProps['teamPlayers']>([]);
 
   React.useEffect(() => {
     if (!client) return;

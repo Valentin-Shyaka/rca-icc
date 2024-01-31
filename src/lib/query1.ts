@@ -1,12 +1,12 @@
-import { groq } from "next-sanity";
-import { allPlayerFields } from "./fields";
+import { groq } from 'next-sanity';
+import { allPlayerFields } from './fields';
 
 export const AllPlayersStatsQuery = groq`*[_type == "team"]{
     _id,
     name,
     category,
     players[]->${allPlayerFields},
-}`
+}`;
 
 export const fetchMatchDayTitleQuery = (title: string) => groq`*[_type == "matchDay" && title == "${title}"]{
     _id,
@@ -32,28 +32,28 @@ export const fetchMatchDayTitleQuery = (title: string) => groq`*[_type == "match
         status,
         stats,
     },
-}`
+}`;
 
 export const getTrendsQuery = groq`*[_type == "trending"] | order(date desc){
     _id,
     title,
     description,
     "image": image.asset->url,
-}`
+}`;
 
 export const getTrendById = (id: string) => groq`*[_type == "trending" && _id == "${id}"]{
     _id,
     title,
     description,
     "image": image.asset->url,
-    }`
-    
+    }`;
+
 export const getInsightsQuery = groq`*[_type == "insight"]{
     _id,
     title,
     description,
     "image": image.asset->url,
-}`
+}`;
 
 export const fetchTeamByIdQuery = (id: string) => groq`*[_type == "team" && _id == "${id}"]{
     _id,
@@ -63,4 +63,4 @@ export const fetchTeamByIdQuery = (id: string) => groq`*[_type == "team" && _id 
     stats,
     "logo": logo.asset->url,
     isOfficial,
-}`
+}`;
