@@ -78,8 +78,8 @@ export default function AppProvider({ children }: Props) {
       const friendlyMatches = res.filter(
         (match: Match) => match.type === "friendly"
       );
-      setMatches(leagueMatches);
-      setFriendlyMatches(friendlyMatches);
+      // setMatches(leagueMatches);
+      // setFriendlyMatches(friendlyMatches);
     } catch (error) {
       // console.log(error);
     }
