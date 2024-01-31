@@ -42,7 +42,46 @@ export const compNavs: CompNav[] = [
     }
 ]
 
-export const events = [
+export const gamingEvents = [
+    {
+        name: "home",
+        path: "",
+        icon: React.createElement(BiHome),
+    },
+    {
+        name: "football",
+        path: "gaming/football",
+          icon: React.createElement(BiFootball),
+    },
+    {
+        name: "basketball",
+        path: "gaming/basketball",
+        icon: React.createElement(BiBasketball),
+    },
+    {
+        name: "volleyball",
+        path: "gaming/volleyball",
+        icon: React.createElement(GiVolleyballBall),
+    },
+    // {
+    //     name: "debate",
+    //     path: "debate",
+    //     icon: React.createElement(FaUsers),
+    // },
+    // {
+    //     name: "pingpong",
+    //     path: "pingpong",
+    //     icon: React.createElement(BiTennisBall),
+    // },
+];
+
+export interface EventType {
+ name: string;
+ path: string;
+ icon: React.ReactNode;
+}
+
+export const events: EventType[] = [
     {
         name: "home",
         path: "",
@@ -74,3 +113,5 @@ export const events = [
         icon: React.createElement(BiTennisBall),
     },
 ];
+
+

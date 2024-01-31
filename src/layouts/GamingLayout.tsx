@@ -8,7 +8,8 @@ import CompNavBar from "../components/constants/CompNavBar";
 import { SEO } from "../utils/types/misc";
 import ConfettiExplosion from "react-confetti-explosion";
 import { CompNav } from "../utils/types";
-import { events } from "../utils/data";
+import GamingSidebar from "../components/constants/GamingSidebar";
+import { gamingEvents } from "../utils/data";
 
 
 
@@ -23,9 +24,9 @@ type Props = {
   routes?:CompNav[]
 };
 
-const MainLayout = (props: Props ) => {
+const GamingLayout = (props: Props ) => {
   const { title, seo } = props;
-  const seotitle = title ?? "RCA-ICCC";
+  const seotitle = title ?? "RCA-ICC";
   const host = window.location.host;
   const protocol = window.location.protocol;
   const baseUrl = `${protocol}//${host}`;
@@ -78,17 +79,17 @@ const MainLayout = (props: Props ) => {
         <div className="w-full flex flex-col border-b-2 border-gray">
           <Header />
         </div>
-        <EventLinks routes={events}/>
+        <EventLinks routes={gamingEvents} />
         <div className="flex w-full h-full gap-x-2 overflow-hidden">
-          <SideBar />
+          <GamingSidebar/>
           <div className="flex flex-col w-full h-[full overflow-y-auto overflow-x-hidden">
-            {props.isGeneral ? null : <CompNavBar />}
+            {/* {props.isGeneral ? null : <CompNavBar />} */}
             <div className="flex flex-col h-[85vh] overflow-y-auto py-2 overflow-x-hidden">
               {props.children}
             </div>
           </div>
           <Feed />
-        </div>
+        </div>  
       </main>
       {/* <div className="absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center">
         {isExploding && (
@@ -107,4 +108,4 @@ const MainLayout = (props: Props ) => {
   );
 };
 
-export default MainLayout;
+export default GamingLayout;
