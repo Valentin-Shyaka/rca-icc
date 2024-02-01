@@ -10,9 +10,10 @@ generator client {
 
 model User {
     id        String   @id @default(uuid())
+    mis_id    String?  @unique
     email     String   @unique
     name      String?
+    isGamer   Boolean  @default(false)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    mis_id    String?  @unique
 }

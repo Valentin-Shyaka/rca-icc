@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import '@mantine/core/styles.css';
 import dynamic from 'next/dynamic';
+import UserProvider from '@/contexts/UserProvider';
 // import AppProvider from "../contexts/AppProvider";
 // import SanityProvider from "@/contexts/SanityProvider";
 const AppProvider = dynamic(() => import('@/contexts/AppProvider'));
@@ -29,9 +30,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <MantineProvider theme={theme}>
       <NextNProgress color="#ff7b35" startPosition={0.3} stopDelayMs={200} height={3} showOnShallow={true} />
       <SanityProvider>
-        <AppProvider>
-          <Component {...pageProps} />
-        </AppProvider>
+        <UserProvider>
+          <AppProvider>
+            <Component {...pageProps} />
+          </AppProvider>
+        </UserProvider>
       </SanityProvider>
     </MantineProvider>
   );

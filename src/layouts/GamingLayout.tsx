@@ -1,15 +1,15 @@
+import { useUser } from '@/contexts/UserProvider';
 import Head from 'next/head';
-import React, { useState } from 'react';
-import Header from '../components/constants/Header';
+import React from 'react';
 import EventLinks from '../components/constants/EventLinks';
 import Feed from '../components/constants/Feed';
-import SideBar from '../components/constants/SideBar';
-import CompNavBar from '../components/constants/CompNavBar';
-import { SEO } from '../utils/types/misc';
-import ConfettiExplosion from 'react-confetti-explosion';
-import { CompNav } from '../utils/types';
 import GamingSidebar from '../components/constants/GamingSidebar';
+import Header from '../components/constants/Header';
 import { gamingEvents } from '../utils/data';
+import { CompNav } from '../utils/types';
+import { SEO } from '../utils/types/misc';
+import { useRouter } from 'next/router';
+import LoadingView from '@/components/other/LoadingView';
 
 type Props = {
   children: React.ReactNode;
@@ -21,18 +21,23 @@ type Props = {
 };
 
 const GamingLayout = (props: Props) => {
+  const { user } = useUser();
   const { title, seo } = props;
-  const seotitle = title ?? 'RCA-ICC';
+  const seoTitle = title ?? 'RCA-ICC';
   const host = window.location.host;
   const protocol = window.location.protocol;
   const baseUrl = `${protocol}//${host}`;
   console.log(baseUrl, protocol);
-  // const [isExploding, setIsExploding] = useState(true);
+  const router = useRouter();
 
+  if (!user) {
+    router.push('/auth/login');
+    return <LoadingView />;
+  }
   return (
     <>
       <Head>
-        <title>{seotitle}</title>
+        <title>{seoTitle}</title>
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
         {seo ? (
           <>
@@ -46,13 +51,13 @@ const GamingLayout = (props: Props) => {
             <title>RCA-ICC</title>
             <meta
               name="description"
-              content="Welcome to RCA interclass Competion Website, where education and competition go hand in hand. Our school offers a wide range of interclass competitions in various xtracurricular activities to challenge and inspire our students to reach their full potential."
+              content="Welcome to RCA interclass Competition Website, where education and competition go hand in hand. Our school offers a wide range of interclass competitions in various xtracurricular activities to challenge and inspire our students to reach their full potential."
             />
             <meta name="title" property="og:title" content="RCA-ICC- Home of all RCA interclass Competitions" />
             <meta
               name="description"
               property="og:description"
-              content="Welcome to RCA interclass Competion Website, where education and competition go hand in hand. Our school offers a wide range of interclass competitions in various xtracurricular activities to challenge and inspire our students to reach their full potential."
+              content="Welcome to RCA interclass Competition Website, where education and competition go hand in hand. Our school offers a wide range of interclass competitions in various xtracurricular activities to challenge and inspire our students to reach their full potential."
             />
             <meta name="type" property="og:type" content="article" />
             <meta name="image" property="og:image" content={`${baseUrl}//api/og`} />
@@ -73,19 +78,6 @@ const GamingLayout = (props: Props) => {
           <Feed />
         </div>
       </main>
-      {/* <div className="absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center">
-        {isExploding && (
-          <ConfettiExplosion
-            {...{
-              force: 0.8,
-              duration: 3000,
-              particleCount: 250,
-              width: 1600,
-              particleSize: 6,
-            }}
-          />
-        )}
-      </div> */}
     </>
   );
 };
