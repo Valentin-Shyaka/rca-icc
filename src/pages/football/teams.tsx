@@ -1,9 +1,9 @@
-import { useSanity } from "@/contexts/SanityProvider";
-import { useEffect, useState } from "react";
-import TeamCard from "../../components/constants/TeamCard";
-import MainLayout from "../../layouts/MainLayout";
-import { teamsFootQuery } from "../../lib/queries";
-import { Team } from "../../utils/types/types1";
+import { useSanity } from '@/contexts/SanityProvider';
+import { useEffect, useState } from 'react';
+import TeamCard from '../../components/constants/TeamCard';
+import MainLayout from '../../layouts/MainLayout';
+import { teamsFootQuery } from '../../lib/queries';
+import { Team } from '../../utils/types/types1';
 
 const TeamsIndex = () => {
   const { client } = useSanity();

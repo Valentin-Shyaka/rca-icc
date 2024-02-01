@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { Team } from "../../utils/types/types1";
+import Link from 'next/link';
+import { Team } from '../../utils/types/types1';
 
 type Props = {
   teams: Team[];
@@ -11,10 +11,8 @@ const Table = ({ teams }: Props) => {
 
   const standings = teams.sort((a, b) => {
     if (a?.stats?.points === b?.stats?.points) {
-      const aDiff =
-        (a?.stats?.goalsScored ?? 0) - (a?.stats?.goalsConceded ?? 0);
-      const bDiff =
-        (b?.stats?.goalsScored ?? 0) - (b?.stats?.goalsConceded ?? 0);
+      const aDiff = (a?.stats?.goalsScored ?? 0) - (a?.stats?.goalsConceded ?? 0);
+      const bDiff = (b?.stats?.goalsScored ?? 0) - (b?.stats?.goalsConceded ?? 0);
       return aDiff > bDiff ? -1 : 1;
     }
     return (b?.stats?.points ?? 0) < (a?.stats?.points ?? 0) ? -1 : 1;
@@ -40,28 +38,25 @@ const Table = ({ teams }: Props) => {
         <tbody>
           {standings.map((team, i) => {
             // for border colors 1st, 2nd, 3rd, last
-            const fc = "border-l-green-500";
-            const sc = "border-l-yellow-500";
-            const tc = "border-l-orange";
-            const lc = "border-l-red-500";
+            const fc = 'border-l-green-500';
+            const sc = 'border-l-yellow-500';
+            const tc = 'border-l-orange';
+            const lc = 'border-l-red-500';
             const border =
               i === 0
                 ? fc
                 : i === 1
-                ? sc
-                : i === 2 && standings.length > 3
-                ? tc
-                : i === standings.length - 1
-                ? lc
-                : "border-l-white";
+                  ? sc
+                  : i === 2 && standings.length > 3
+                    ? tc
+                    : i === standings.length - 1
+                      ? lc
+                      : 'border-l-white';
             return (
               <tr className={`border-l-2 ${border}`} key={i}>
                 <td>{i + 1}</td>
                 <td>
-                  <Link
-                    href={`/team/${team._id}`}
-                    className=" hover:text-blue duration-200"
-                  >
+                  <Link href={`/team/${team._id}`} className=" hover:text-blue duration-200">
                     {team.name}
                   </Link>
                 </td>
@@ -71,10 +66,7 @@ const Table = ({ teams }: Props) => {
                 <td>{team?.stats?.matchesLost ?? 0}</td>
                 <td>{team?.stats?.goalsScored ?? 0}</td>
                 <td>{team?.stats?.goalsConceded ?? 0}</td>
-                <td>
-                  {(team?.stats?.goalsScored ?? 0) -
-                    (team?.stats?.goalsConceded ?? 0)}
-                </td>
+                <td>{(team?.stats?.goalsScored ?? 0) - (team?.stats?.goalsConceded ?? 0)}</td>
                 <td>{team?.stats?.points ?? 0}</td>
               </tr>
             );

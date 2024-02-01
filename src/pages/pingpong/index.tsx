@@ -1,6 +1,6 @@
-import Link from "next/link";
-import React from "react";
-import MainLayout from "../../layouts/MainLayout";
+import Link from 'next/link';
+import React from 'react';
+import MainLayout from '../../layouts/MainLayout';
 
 const IndexPing = () => {
   return (
