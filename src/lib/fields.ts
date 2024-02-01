@@ -1,4 +1,3 @@
-
 export const allPlayerFields = `{
     _id,
     displayName,
@@ -16,4 +15,4 @@ export const allPlayerFields = `{
     yellowCards,
     number,
     position,
-    }`
+    }`;

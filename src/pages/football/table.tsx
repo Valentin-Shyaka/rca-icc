@@ -1,6 +1,6 @@
-import Table from "@/components/constants/Table";
-import { useApp } from "@/contexts/AppProvider";
-import MainLayout from "@/layouts/MainLayout";
+import Table from '@/components/constants/Table';
+import { useApp } from '@/contexts/AppProvider';
+import MainLayout from '@/layouts/MainLayout';
 
 const FootTableIndex = () => {
   const { teams } = useApp();
