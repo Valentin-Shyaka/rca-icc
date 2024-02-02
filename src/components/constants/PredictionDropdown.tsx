@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { BiSolidChevronUp } from 'react-icons/bi';
 import { FaPlus } from 'react-icons/fa';
-import { Team } from '../../utils/types/types1';
+import { Match, Team } from '../../utils/types/types1';
 
 import Image from 'next/image';
 interface Props {
-  awayTeam: Team | undefined;
-  homeTeam: Team | undefined;
+  match: Match[];
 }
 
-const PredictionDropdown = ({ awayTeam, homeTeam }: Props) => {
+const PredictionDropdown = ({ match }: Props) => {
   const [dropActive, setDropActive] = useState(false);
+
   // const id=team?._id ||"e3325bde-3101-465e-8d6a-d2de8afb8e59"
   // const [team, setTeam] = React.useState<Team | null>(null);
   //  const awayTeam= match.awayTeam
@@ -39,6 +39,7 @@ const PredictionDropdown = ({ awayTeam, homeTeam }: Props) => {
           <div className="">
             <BiSolidChevronUp
               onClick={() => {
+                console.log(dropActive);
                 setDropActive(!dropActive);
               }}
               className=" font-bold "
@@ -48,6 +49,7 @@ const PredictionDropdown = ({ awayTeam, homeTeam }: Props) => {
           <div className="bg-[#2076F8] p-1 rounded-lg">
             <FaPlus
               onClick={() => {
+                console.log(dropActive);
                 setDropActive(!dropActive);
               }}
               className=" font-bold text-sm text-white"
@@ -57,21 +59,37 @@ const PredictionDropdown = ({ awayTeam, homeTeam }: Props) => {
       </div>
       {dropActive ? (
         <div>
+          <p className="mt-2 font-bold">{match[0].homeTeam.name}</p>
           <div className="flex flex-wrap justify-between mt-2 text-sm text-slate-500 text-left bg-slate-100 p-2 ">
-            {homeTeam?.players?.map((player, i) => (
+            {match[0].homeTeam?.players.map((player, i) => {
               // <PlayerCard key={i} {...player} />
-              <div key={i} className="gap-4">
-                <Image width={80} height={60} alt="player profile" src={player?.profile} className="rounded-full" />
-                <p className="font-bold text-center mt-2">{player?.displayName}</p>
-              </div>
-            ))}
-          </div>
 
+              return (
+                <div key={i} className="gap-4 ">
+                  <Image
+                    width={80}
+                    height={60}
+                    alt="player profile"
+                    src={player?.profile ?? '/images/player.png'}
+                    className="rounded-full"
+                  />
+                  <p className="font-bold text-center mt-2">{player?.displayName}</p>
+                </div>
+              );
+            })}
+          </div>
+          <p className="mt-2 font-bold">{match[0].awayTeam.name}</p>
           <div className="flex flex-wrap justify-between mt-2 text-sm text-slate-500 text-left bg-slate-100 p-2 ">
-            {awayTeam?.players?.map((player, i) => (
+            {match[0].awayTeam?.players.map((player, i) => (
               // <PlayerCard key={i} {...player} />
               <div key={i} className="gap-4">
-                <Image width={80} height={60} alt="player profile" src={player?.profile} className="rounded-full" />
+                <Image
+                  width={80}
+                  height={60}
+                  alt="player profile"
+                  src={player?.profile ?? '/images/player.png'}
+                  className="rounded-full"
+                />
                 <p className="font-bold text-center mt-2">{player?.displayName}</p>
               </div>
             ))}
