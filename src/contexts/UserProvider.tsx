@@ -27,8 +27,9 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { pathname } = useRouter();
 
   const getProfile = async () => {
-    setLoading(true);
     const token = getCookie('token');
+    if (!token) return;
+    setLoading(true);
     if (!pathname.startsWith('/gaming')) return setLoading(false);
     try {
       const response = await fetch('http://194.163.167.131:6543/api/v1/auth/profile', {

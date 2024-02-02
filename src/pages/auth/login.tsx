@@ -1,4 +1,4 @@
-import { decodeToken } from '@/utils/funcs/fetch';
+import { createUserFromToken, decodeToken } from '@/utils/funcs/fetch';
 import { Button } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,15 +12,19 @@ const LoginPage = () => {
   const searchParams = useSearchParams();
 
   React.useEffect(() => {
-    const token = searchParams.get('token');
-    if (!token) return;
-    const decoded = decodeToken(token);
-    console.log('decoded token', decoded);
-    if (token) {
-      setLoading(true);
-      setCookie('token', token, { maxAge: 60 * 60 * 24 });
-      window.location.href = '/gaming';
-    }
+    const getOauthToken = async () => {
+      const token = searchParams.get('token');
+      if (!token) return;
+      const decoded = decodeToken(token);
+      console.log('decoded token', decoded);
+      if (token) {
+        setLoading(true);
+        setCookie('token', token, { maxAge: 60 * 60 * 24 });
+        await createUserFromToken(token);
+        window.location.href = '/gaming';
+      }
+    };
+    getOauthToken();
   }, []);
 
   const loginWithRCA = () => {

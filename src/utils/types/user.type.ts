@@ -8,21 +8,12 @@ export interface IUser {
   createdAt: string;
   updatedAt: string;
   id: string;
-  firstName: string;
-  lastName: string;
   email: string;
   username: string;
-  lastLogin: number;
-  gender: string;
   profilePicture: any;
   password: string;
   activationCode: string;
-  status: string;
   phoneNumber: string;
-  nationalId: string;
-  address: any;
-  roles: any[];
-  fullName?: string;
 }
 
 export interface UserProfile extends IModel {

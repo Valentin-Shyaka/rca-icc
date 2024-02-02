@@ -3,7 +3,7 @@ import { jwtDecode } from 'jwt-decode';
 export const decodeToken = (token: string) => {
   try {
     const decoded = jwtDecode(token);
-    return decoded;
+    return decoded as { email: string; iat: number; exp: number; userId: string; role: string };
   } catch (error) {
     console.log(error);
     return null;
@@ -12,3 +12,18 @@ export const decodeToken = (token: string) => {
 
 export const getFile = (fileName: string | null | undefined) =>
   fileName ? `http://194.163.167.131:6543/api/v1/files/${fileName}` : null;
+
+/**
+ * Creates user from token if not user exists
+ * @param token
+ * @returns
+ */
+export const createUserFromToken = async (token: string) => {
+  return fetch('/api/users/create-from-token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ token }),
+  });
+};
