@@ -5,7 +5,7 @@ import { Match, Team } from '../../utils/types/types1';
 
 import Image from 'next/image';
 interface Props {
-  match: Match[];
+  match: Match;
 }
 
 const PredictionDropdown = ({ match }: Props) => {
@@ -59,9 +59,9 @@ const PredictionDropdown = ({ match }: Props) => {
       </div>
       {dropActive ? (
         <div>
-          <p className="mt-2 font-bold">{match[0].homeTeam.name}</p>
+          <p className="mt-2 font-bold">{match.homeTeam.name}</p>
           <div className="flex flex-wrap justify-between mt-2 text-sm text-slate-500 text-left bg-slate-100 p-2 ">
-            {match[0].homeTeam?.players.map((player, i) => {
+            {match.homeTeam?.players.map((player, i) => {
               // <PlayerCard key={i} {...player} />
 
               return (
@@ -78,9 +78,9 @@ const PredictionDropdown = ({ match }: Props) => {
               );
             })}
           </div>
-          <p className="mt-2 font-bold">{match[0].awayTeam.name}</p>
+          <p className="mt-2 font-bold">{match.awayTeam.name}</p>
           <div className="flex flex-wrap justify-between mt-2 text-sm text-slate-500 text-left bg-slate-100 p-2 ">
-            {match[0].awayTeam?.players.map((player, i) => (
+            {match.awayTeam?.players.map((player, i) => (
               // <PlayerCard key={i} {...player} />
               <div key={i} className="gap-4">
                 <Image

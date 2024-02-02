@@ -5,8 +5,10 @@ import NextNProgress from 'nextjs-progressbar';
 import { useState, useEffect } from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 import dynamic from 'next/dynamic';
 import UserProvider from '@/contexts/UserProvider';
+import { Notifications } from '@mantine/notifications';
 // import AppProvider from "../contexts/AppProvider";
 // import SanityProvider from "@/contexts/SanityProvider";
 const AppProvider = dynamic(() => import('@/contexts/AppProvider'));
@@ -36,6 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </AppProvider>
         </UserProvider>
       </SanityProvider>
+      <Notifications />
     </MantineProvider>
   );
 }

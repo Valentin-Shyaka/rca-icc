@@ -1,10 +1,21 @@
 'use client';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Moment from 'react-moment';
 import { Match } from '../utils/types/types1';
+import Moment from 'react-moment';
+import { useState } from 'react';
+import PredictionModal from './constants/PredictionModal';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-const MatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category }: Match) => {
+interface Props extends Match {
+  isGaming?: boolean;
+}
+
+const GameMatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category, isGaming }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const isNotStarted = status?.status === 'NS';
   const isFinished = status?.status === 'FT';
   const isBasketball = category === 'basketball';
   const isLive = status?.status === 'HT' || status?.status === '1H' || status?.status === '2H';
@@ -17,9 +28,9 @@ const MatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category }: M
   const isToday = new Date(date).getDate() === new Date().getDate();
 
   return (
-    <Link
-      href={`/match/${_id}`}
-      className="relative flex border-2 border-gray max-w-[300px] min-w-[200px] w-full h-[120px] rounded-md hover:bg-slate-100 duration-300 cursor-pointer"
+    <div
+      //   href={`/match/${_id}`}
+      className="relative flex border-2 border-gray max-w-[300px] min-w-[200px] w-full h-[120px] rounded-md hover:bg-slate-100 duration-300"
     >
       <div className="lg:p-6 p-3 flex justify-center w-full gap-y-2 flex-col">
         <div className="flex gap-2 text-center">
@@ -31,17 +42,9 @@ const MatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category }: M
           <p className="text-slate text-xs text-start font-bold">{awayTeam?.name}</p>
         </div>
       </div>
-
-      <div></div>
-      {(isFinished || isForfeit) && (
-        <div className="flex flex-col justify-center gap-y-2 px-1 items-center">
-          <span className="text-slate text-sm text-white p-1 px-2 bg-orange font-bold">{homeScore}</span>
-          <span className="text-slate text-sm text-white p-1 px-2 bg-black font-bold">{awayScore}</span>
-        </div>
-      )}
-
       <span className="w-[1px] h-[80%] bg-gray mt-2"></span>
-      {isFinished || isForfeit ? (
+      {/* Can't play / View match result here in gaming*/}
+      {isForfeit ? (
         <div className=" p-3 px-1 min-w-[80px] flex flex-col items-center justify-center">
           <span className=" text-center">{isForfeit ? 'FF' : 'FT'}</span>
           {isForfeit ? (
@@ -54,35 +57,33 @@ const MatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category }: M
         </div>
       ) : (
         <div className=" p-3 px-1 min-w-[100px] flex flex-col gap-y-2 justify-center">
-          {isDueDate && !isLive ? (
-            <p className=" text-orange text-sm text-center font-semibold">Postponed</p>
-          ) : (
-            <>
-              <p className="text-xs font-bold text-center">
-                {isLive ? (
-                  <span className=" text-green-500">live</span>
-                ) : isToday ? (
-                  'Today'
-                ) : (
-                  <Moment format="MMM Do YYYY">{date}</Moment>
-                )}
-              </p>
+          <>
+            <p className="text-xs font-bold text-center">
               {isLive ? (
-                <div className="flex flex-col justify-center gap-y-2 px-1 items-center">
-                  <span className="text-slate text-sm text-white p-1 px-2 bg-orange font-bold">{homeScore ?? 0}</span>
-                  <span className="text-slate text-sm text-white p-1 px-2 bg-black font-bold">{awayScore ?? 0}</span>
-                </div>
+                <span className=" text-green-500">live</span>
+              ) : isToday ? (
+                'Today'
               ) : (
-                <span className=" text-sm text-center">
-                  <Moment format="LT">{date}</Moment>
-                </span>
+                <Moment format="MMM Do YYYY">{date}</Moment>
               )}
-            </>
-          )}
+            </p>
+            <div className="flex flex-col leading-tight">
+              <span className=" text-sm text-center">
+                <Moment format="LT">{date}</Moment>
+              </span>
+              <button
+                onClick={() => setIsOpen(true)}
+                className="  right-2 top-2 text-white bg-[#2076F8] hover:bg-white duration-200 border-2 border-blue hover:text-blue rounded-3xl text-sm py-1 px-2  "
+              >
+                {isNotStarted ? 'Play' : 'View'}
+              </button>
+              <PredictionModal isOpen={isOpen} closeModal={() => setIsOpen(false)} matchId={_id} />
+            </div>
+          </>
         </div>
       )}
-    </Link>
+    </div>
   );
 };
 
-export default MatchCard;
+export default GameMatchCard;
