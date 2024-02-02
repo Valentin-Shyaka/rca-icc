@@ -1,0 +1,80 @@
+datasource db {
+    provider     = "mongodb"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id             String           @id @default(uuid()) @map("_id")
+    mis_id         String           @unique
+    email          String?          @unique
+    name           String?
+    firstName      String?
+    lastName       String?
+    password       String?
+    isGamer        Boolean          @default(false)
+    createdAt      DateTime         @default(now())
+    updatedAt      DateTime         @updatedAt
+    UserPrediction UserPrediction[]
+}
+
+model UserPrediction {
+    id            String               @id @default(uuid()) @map("_id")
+    user          User                 @relation(fields: [userId], references: [id])
+    userId        String
+    matchId       String
+    prediction    Prediction
+    status        UserPredictionStatus @default(NOT_MARKED)
+    points        Int                  @default(0)
+    season        Season               @relation(fields: [seasonId], references: [id])
+    seasonId      String
+    matchCategory MatchCategory
+}
+
+enum UserPredictionStatus {
+    NOT_MARKED
+    MARKED
+}
+
+enum MatchCategory {
+    football
+    basketball
+    volleyball
+}
+
+type Prediction {
+    manOfTheMatch        String
+    firstTeamToScore     String
+    homeScore            Int
+    awayScore            Int
+    highestScoringPlayer String
+}
+
+model UserOverallScore {
+    id       String @id @default(uuid()) @map("_id")
+    score    Int
+    mis_id   String
+    season   Season @relation(fields: [seasonId], references: [id])
+    seasonId String
+}
+
+model Season {
+    id               String             @id @default(uuid()) @map("_id")
+    name             String             @unique
+    status           SeasonStatus       @default(ACTIVE)
+    startDate        DateTime
+    endDate          DateTime
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    UserOverallScore UserOverallScore[]
+    UserPrediction   UserPrediction[]
+}
+
+enum SeasonStatus {
+    ACTIVE
+    INACTIVE
+}

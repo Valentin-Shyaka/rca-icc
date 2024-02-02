@@ -1,12 +1,13 @@
-import Head from "next/head";
-import React, { useState } from "react";
-import Header from "../components/constants/Header";
-import EventLinks from "../components/constants/EventLinks";
-import Feed from "../components/constants/Feed";
-import SideBar from "../components/constants/SideBar";
-import CompNavBar from "../components/constants/CompNavBar";
-import { SEO } from "../utils/types/misc";
-import ConfettiExplosion from "react-confetti-explosion";
+import Header from '@/components/constants/Header';
+import Head from 'next/head';
+import React from 'react';
+import CompNavBar from '../components/constants/CompNavBar';
+import EventLinks from '../components/constants/EventLinks';
+import Feed from '../components/constants/Feed';
+import SideBar from '../components/constants/SideBar';
+import { events } from '../utils/data';
+import { CompNav } from '../utils/types';
+import { SEO } from '../utils/types/misc';
 
 type Props = {
   children: React.ReactNode;
@@ -14,17 +15,18 @@ type Props = {
   trending?: any[];
   isGeneral?: boolean;
   seo?: SEO;
+  routes?: CompNav[];
 };
 
 const MainLayout = (props: Props) => {
   const { title, seo } = props;
-  const seotitle = title ?? "RCA-ICCC";
+  const seotitle = title ?? 'RCA-ICCC';
   const host = window.location.host;
   const protocol = window.location.protocol;
   const baseUrl = `${protocol}//${host}`;
   console.log(baseUrl, protocol);
   // const [isExploding, setIsExploding] = useState(true);
-  
+
   return (
     <>
       <Head>
@@ -35,11 +37,7 @@ const MainLayout = (props: Props) => {
             <meta name="description" content={seo.description?.slice(0, 200)} />
             <meta property="og:title" content={seo.title} />
             <meta name="type" property="og:type" content="article" />
-            <meta
-              name="image"
-              property="og:image"
-              content={`${baseUrl}//api/og?image=${seo.image}`}
-            />
+            <meta name="image" property="og:image" content={`${baseUrl}//api/og?image=${seo.image}`} />
           </>
         ) : (
           <>
@@ -48,22 +46,14 @@ const MainLayout = (props: Props) => {
               name="description"
               content="Welcome to RCA interclass Competion Website, where education and competition go hand in hand. Our school offers a wide range of interclass competitions in various xtracurricular activities to challenge and inspire our students to reach their full potential."
             />
-            <meta
-              name="title"
-              property="og:title"
-              content="RCA-ICC- Home of all RCA interclass Competitions"
-            />
+            <meta name="title" property="og:title" content="RCA-ICC- Home of all RCA interclass Competitions" />
             <meta
               name="description"
               property="og:description"
               content="Welcome to RCA interclass Competion Website, where education and competition go hand in hand. Our school offers a wide range of interclass competitions in various xtracurricular activities to challenge and inspire our students to reach their full potential."
             />
             <meta name="type" property="og:type" content="article" />
-            <meta
-              name="image"
-              property="og:image"
-              content={`${baseUrl}//api/og`}
-            />
+            <meta name="image" property="og:image" content={`${baseUrl}//api/og`} />
           </>
         )}
       </Head>
@@ -71,14 +61,12 @@ const MainLayout = (props: Props) => {
         <div className="w-full flex flex-col border-b-2 border-gray">
           <Header />
         </div>
-        <EventLinks />
+        <EventLinks routes={events} />
         <div className="flex w-full h-full gap-x-2 overflow-hidden">
           <SideBar />
           <div className="flex flex-col w-full h-[full overflow-y-auto overflow-x-hidden">
             {props.isGeneral ? null : <CompNavBar />}
-            <div className="flex flex-col h-[85vh] overflow-y-auto py-2 overflow-x-hidden">
-              {props.children}
-            </div>
+            <div className="flex flex-col h-[85vh] overflow-y-auto py-2 overflow-x-hidden">{props.children}</div>
           </div>
           <Feed />
         </div>

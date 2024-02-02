@@ -7,9 +7,9 @@ export const config = {
 };
 
 export default async function (req: NextRequest) {
-    const { searchParams } = req.nextUrl
-    const name = searchParams.get('name')
-    const image = searchParams.get('image')
+  const { searchParams } = req.nextUrl;
+  const name = searchParams.get('name');
+  const image = searchParams.get('image');
   return new ImageResponse(
     (
       <div
@@ -24,14 +24,16 @@ export default async function (req: NextRequest) {
         }}
       >
         {image ? (
-      <img
-        tw='object-cover min-w-full'
-       src={image} alt='og:Image' />
-       ):(
-        <img
-        tw='object-cover min-w-full'
-        src={'https://cdn.sanity.io/images/lxeru4rg/production/7db3e46e0e970a3bc31d281fea74473bf3d56edc-846x755.png'} alt='og:Image' />
-       )}
+          <img tw="object-cover min-w-full" src={image} alt="og:Image" />
+        ) : (
+          <img
+            tw="object-cover min-w-full"
+            src={
+              'https://cdn.sanity.io/images/lxeru4rg/production/7db3e46e0e970a3bc31d281fea74473bf3d56edc-846x755.png'
+            }
+            alt="og:Image"
+          />
+        )}
       </div>
     ),
     {
