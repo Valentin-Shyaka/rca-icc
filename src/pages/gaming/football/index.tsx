@@ -6,8 +6,6 @@ import GameMatchCard from '@/components/GameMatchCard';
 const GamingPage = () => {
   const { matches } = useApp();
   const footballMatchNS = matches?.filter((match) => match?.status.status === 'NS' && match?.category === 'football');
-  console.log('footballMatchNS', footballMatchNS);
-  console.log('matches', matches);
 
   return (
     <GamingLayout>

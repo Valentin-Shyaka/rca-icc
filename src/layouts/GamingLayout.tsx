@@ -1,6 +1,6 @@
 import { useUser } from '@/contexts/UserProvider';
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
 import EventLinks from '../components/constants/EventLinks';
 import Feed from '../components/constants/Feed';
 import GamingSidebar from '../components/constants/GamingSidebar';
@@ -11,6 +11,7 @@ import { SEO } from '../utils/types/misc';
 import { useRouter } from 'next/router';
 import LoadingView from '@/components/other/LoadingView';
 import CompNavBar from '@/components/constants/CompNavBar';
+import { useApp } from '@/contexts/AppProvider';
 
 type Props = {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ type Props = {
 
 const GamingLayout = (props: Props) => {
   const { user } = useUser();
+  const { getUserPredictions } = useApp();
   const { title, seo } = props;
   const seoTitle = title ?? 'RCA-ICC';
   const host = window.location.host;
@@ -35,6 +37,11 @@ const GamingLayout = (props: Props) => {
     router.push('/auth/login');
     return <LoadingView />;
   }
+
+  useEffect(() => {
+    getUserPredictions?.();
+  }, []);
+
   return (
     <>
       <Head>

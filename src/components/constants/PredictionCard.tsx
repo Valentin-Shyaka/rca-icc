@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import PredictionDropdown from './PredictionDropdown';
+import PredictionDropdown from './prediction-dropdowns/ManOfTheMatch';
 
 const PredictionCard = () => {
   return (

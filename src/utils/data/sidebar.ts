@@ -14,11 +14,11 @@ export const gameSidebarRoutes: SideBarRoute[] = [
     path: '/gaming',
     icon: React.createElement(MdScoreboard, { size: 25 }),
   },
-  //   {
-  //     name: 'My Predictions',
-  //     path: '/gaming/predictions',
-  //     icon: React.createElement(MdScoreboard, { size: 25 }),
-  //   },
+  {
+    name: 'My Predictions',
+    path: '/gaming/predictions',
+    icon: React.createElement(MdScoreboard, { size: 25 }),
+  },
   {
     name: 'Standings',
     path: '/gaming/standings',

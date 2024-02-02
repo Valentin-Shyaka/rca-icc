@@ -8,6 +8,7 @@ import { useState } from 'react';
 import PredictionModal from './constants/PredictionModal';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { useApp } from '@/contexts/AppProvider';
 
 interface Props extends Match {
   isGaming?: boolean;
@@ -15,6 +16,8 @@ interface Props extends Match {
 
 const GameMatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category, isGaming }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { userPredictions } = useApp();
+  const [hasPredicted, setHasPredicted] = useState(false);
   const isNotStarted = status?.status === 'NS';
   const isFinished = status?.status === 'FT';
   const isBasketball = category === 'basketball';
@@ -26,6 +29,13 @@ const GameMatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category,
 
   const isDueDate = new Date(date).getTime() + 1000 * 60 * 90 < new Date().getTime();
   const isToday = new Date(date).getDate() === new Date().getDate();
+
+  useEffect(() => {
+    if (userPredictions) {
+      const hasPredicted = userPredictions.some((prediction) => prediction.matchId === _id);
+      setHasPredicted(hasPredicted);
+    }
+  }, [userPredictions]);
 
   return (
     <div
@@ -75,9 +85,9 @@ const GameMatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category,
                 onClick={() => setIsOpen(true)}
                 className="  right-2 top-2 text-white bg-[#2076F8] hover:bg-white duration-200 border-2 border-blue hover:text-blue rounded-3xl text-sm py-1 px-2  "
               >
-                {isNotStarted ? 'Play' : 'View'}
+                {hasPredicted && isNotStarted ? 'Update' : isNotStarted ? 'Play' : 'View'}
               </button>
-              <PredictionModal isOpen={isOpen} closeModal={() => setIsOpen(false)} matchId={_id} />
+              {isOpen && <PredictionModal isOpen={isOpen} closeModal={() => setIsOpen(false)} matchId={_id} />}
             </div>
           </>
         </div>

@@ -27,3 +27,10 @@ export const createUserFromToken = async (token: string) => {
     body: JSON.stringify({ token }),
   });
 };
+
+export const getResError = (error?: any, defaultMs: string = 'Something Went Wrong') => {
+  if (!error) return defaultMs;
+  const isNetError = error?.message?.includes('Network Error');
+  if (isNetError) return 'Network Error';
+  return error?.response?.data?.message ?? error?.message ?? defaultMs;
+};

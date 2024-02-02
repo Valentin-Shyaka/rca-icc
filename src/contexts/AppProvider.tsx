@@ -6,6 +6,9 @@ import { Insight, PlayerByTeam, TeamGroups, Trend } from '../utils/types/types2'
 import { useSanity } from './SanityProvider';
 import { SanityClient } from 'next-sanity';
 import { SeasonData } from '@/utils/types';
+import axios from 'axios';
+import { notifications } from '@mantine/notifications';
+import { UserPrediction } from '@prisma/client';
 
 export type AppContextType = {
   players?: PlayerByTeam;
@@ -24,6 +27,9 @@ export type AppContextType = {
   friendlyMatches?: Match[];
   setFriendlyMatches?: React.Dispatch<React.SetStateAction<Match[]>>;
   getDataSeason?: <T = any>(data: SeasonData<T>) => T | undefined;
+  userPredictions?: UserPrediction[];
+  setUserPredictions?: React.Dispatch<React.SetStateAction<UserPrediction[]>>;
+  getUserPredictions?: () => void;
 };
 
 export const AppContext = createContext<AppContextType>({});
@@ -53,6 +59,7 @@ export default function AppProvider({ children }: Props) {
   });
   const [trends, setTrends] = useState<Trend[]>([]);
   const [insights, setInsights] = useState<Insight[]>([]);
+  const [userPredictions, setUserPredictions] = useState<any>([]);
 
   const getMatches = async (client: SanityClient) => {
     try {
@@ -128,6 +135,22 @@ export default function AppProvider({ children }: Props) {
     }
   };
 
+  const getUserPredictions = async () => {
+    try {
+      const res = await axios.get(`/api/fantasy/my-predictions`);
+      const data = await res.data?.data;
+      console.log('userPredictions prov', data);
+      setUserPredictions(data);
+    } catch (error: any) {
+      console.log(error);
+      notifications.show({
+        title: 'Error',
+        message: 'An error occurred Get Prev Prediction',
+        color: 'red',
+      });
+    }
+  };
+
   const flush = () => {
     console.log('flushing data');
     setPlayers({
@@ -191,6 +214,9 @@ export default function AppProvider({ children }: Props) {
         friendlyMatches,
         setFriendlyMatches,
         getDataSeason,
+        getUserPredictions,
+        userPredictions,
+        setUserPredictions,
       }}
     >
       {children}
