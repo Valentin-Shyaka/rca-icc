@@ -30,5 +30,6 @@
 	},
 	"cSpell.words": [
 		"Navs"
-	]
+	],
+	"prisma.fileWatcher": true
 }

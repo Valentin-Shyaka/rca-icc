@@ -28,7 +28,10 @@ model UserPrediction {
     userId     String
     matchId    String
     prediction Prediction
-    status     UserPredictionStatus
+    status     UserPredictionStatus @default(NOT_MARKED)
+    points     Int                  @default(0)
+    season     Season               @relation(fields: [seasonId], references: [id])
+    seasonId   String
 }
 
 enum UserPredictionStatus {
@@ -44,8 +47,27 @@ type Prediction {
     highestScoringPlayer String
 }
 
-model UserScore {
-    id     String @id @default(uuid()) @map("_id")
-    score  Int
-    mis_id String
+model UserOveralScore {
+    id       String @id @default(uuid()) @map("_id")
+    score    Int
+    mis_id   String
+    season   Season @relation(fields: [seasonId], references: [id])
+    seasonId String
+}
+
+model Season {
+    id              String            @id @default(uuid()) @map("_id")
+    name            String            @unique
+    status          SeasonStatus      @default(ACTIVE)
+    startDate       DateTime
+    endDate         DateTime
+    createdAt       DateTime          @default(now())
+    updatedAt       DateTime          @updatedAt
+    UserOveralScore UserOveralScore[]
+    UserPrediction  UserPrediction[]
+}
+
+enum SeasonStatus {
+    ACTIVE
+    INACTIVE
 }

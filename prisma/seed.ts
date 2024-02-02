@@ -2,28 +2,29 @@ import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const userData: Prisma.UserCreateInput[] = [
+// run once on a new database
+const seasonData: Prisma.SeasonCreateInput[] = [
   {
-    name: 'Alice',
-    email: 'alice@prisma.io',
+    name: '2023',
+    startDate: new Date('2023-02-5'),
+    endDate: new Date('2023-03-22'),
+    status: 'INACTIVE',
   },
   {
-    name: 'Nilu',
-    email: 'nilu@prisma.io',
-  },
-  {
-    name: 'Mahmoud',
-    email: 'mahmoud@prisma.io',
+    name: '2024',
+    startDate: new Date('2024-02-5'),
+    endDate: new Date('2024-03-22'),
+    status: 'ACTIVE',
   },
 ];
 
 async function main() {
   console.log(`Start seeding ...`);
-  for (const u of userData) {
-    const user = await prisma.user.create({
-      data: u,
+  for (const s of seasonData) {
+    const season = await prisma.season.create({
+      data: s,
     });
-    console.log(`Created user with id: ${user.id}`);
+    console.log(`Created season with id: ${season.id}`);
   }
   console.log(`Seeding finished.`);
 }
