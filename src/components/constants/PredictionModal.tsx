@@ -13,30 +13,27 @@ import { useSanity } from '@/contexts/SanityProvider';
 interface Props {
   isOpen: boolean;
   closeModal: () => void;
-  matchid: string
+  matchid: string;
 }
 
 const PredictionModal = ({ isOpen, closeModal, matchid }: Props) => {
-  const [match, setMatch] =useState<Match | null>(null);
- const {client}=useSanity()
- 
+  const [match, setMatch] = useState<Match | null>(null);
+  const { client } = useSanity();
 
-  const getMatch= async ()=>{
-   try{
-    const match= await client?.fetch(fetchMatchByIdQuery(matchid))
-    setMatch(match)
-   }catch(error){
-    console.log(error)
-   }
-    
-  } 
+  const getMatch = async () => {
+    try {
+      const match = await client?.fetch(fetchMatchByIdQuery(matchid));
+      setMatch(match);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
- console.log(match)
+  console.log(match);
 
-    useEffect(() => {
+  useEffect(() => {
     if (matchid) {
       getMatch();
-      
     }
   }, [matchid]);
 
@@ -44,7 +41,6 @@ const PredictionModal = ({ isOpen, closeModal, matchid }: Props) => {
   // const homeTeam= match?.homeTeam
 
   // console.log(match?.awayTeam)
-
 
   return (
     <>
