@@ -1,19 +1,28 @@
+import { getUserFromReq } from '@/lib/api';
 import prisma from '@/lib/prisma';
-import { decodeToken } from '@/utils/funcs/fetch';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     try {
-      const token = req.headers.authorization || req.cookies.token;
-      if (!token) return res.status(401).json({ error: 'Unauthorized' });
-      const decoded = decodeToken(token);
-      if (!decoded) return res.status(401).json({ error: 'Unauthorized' });
-      const user = await prisma.user.findFirst({ where: { email: decoded?.email } });
+      const user = await getUserFromReq(req, res);
       if (!user) return res.status(404).json({ error: 'User not found' });
 
+      // check season
+      let season = req.query.season as string | undefined;
+      console.log('query season', season);
+      if (!season) {
+        const res = await prisma.season.findFirst({
+          where: {
+            status: 'ACTIVE',
+          },
+        });
+        season = res?.id;
+      }
+      if (!season) return res.status(404).json({ error: 'Season not found' });
+
       const data = await prisma.userPrediction.findMany({
-        where: { userId: user.id },
+        where: { userId: user.id, seasonId: season },
       });
       return res.status(200).json({ data });
     } catch (error) {}

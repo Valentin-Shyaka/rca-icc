@@ -34,10 +34,20 @@ export const rankPlayers = (players: Player[], key: RankableKEYS) => {
   return rankedPlayers as PRankeAble[];
 };
 
+/**
+ * Get the dataset from the year
+ * @param year
+ * @returns
+ */
 export const getDataSetFromYear = (year: string) => {
   return year === '2023' ? 'production' : `${year}`;
 };
 
+/**
+ * Get the year from the dataset
+ * @param dataSet
+ * @returns
+ */
 export const getYearFromDataSet = (dataSet: string) => {
   return dataSet === 'production' ? '2023' : dataSet;
 };

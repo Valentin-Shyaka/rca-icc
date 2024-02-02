@@ -29,6 +29,7 @@
 		"editor.defaultFormatter": "Prisma.prisma"
 	},
 	"cSpell.words": [
+		"groq",
 		"Navs"
 	],
 	"prisma.fileWatcher": true

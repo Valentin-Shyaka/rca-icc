@@ -23,20 +23,27 @@ model User {
 }
 
 model UserPrediction {
-    id         String               @id @default(uuid()) @map("_id")
-    user       User                 @relation(fields: [userId], references: [id])
-    userId     String
-    matchId    String
-    prediction Prediction
-    status     UserPredictionStatus @default(NOT_MARKED)
-    points     Int                  @default(0)
-    season     Season               @relation(fields: [seasonId], references: [id])
-    seasonId   String
+    id            String               @id @default(uuid()) @map("_id")
+    user          User                 @relation(fields: [userId], references: [id])
+    userId        String
+    matchId       String
+    prediction    Prediction
+    status        UserPredictionStatus @default(NOT_MARKED)
+    points        Int                  @default(0)
+    season        Season               @relation(fields: [seasonId], references: [id])
+    seasonId      String
+    matchCategory MatchCategory
 }
 
 enum UserPredictionStatus {
     NOT_MARKED
     MARKED
+}
+
+enum MatchCategory {
+    football
+    basketball
+    volleyball
 }
 
 type Prediction {
@@ -47,7 +54,7 @@ type Prediction {
     highestScoringPlayer String
 }
 
-model UserOveralScore {
+model UserOverallScore {
     id       String @id @default(uuid()) @map("_id")
     score    Int
     mis_id   String
@@ -56,15 +63,15 @@ model UserOveralScore {
 }
 
 model Season {
-    id              String            @id @default(uuid()) @map("_id")
-    name            String            @unique
-    status          SeasonStatus      @default(ACTIVE)
-    startDate       DateTime
-    endDate         DateTime
-    createdAt       DateTime          @default(now())
-    updatedAt       DateTime          @updatedAt
-    UserOveralScore UserOveralScore[]
-    UserPrediction  UserPrediction[]
+    id               String             @id @default(uuid()) @map("_id")
+    name             String             @unique
+    status           SeasonStatus       @default(ACTIVE)
+    startDate        DateTime
+    endDate          DateTime
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    UserOverallScore UserOverallScore[]
+    UserPrediction   UserPrediction[]
 }
 
 enum SeasonStatus {
