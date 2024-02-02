@@ -32,7 +32,7 @@ const LoginPage = () => {
       <button
         disabled={loading}
         onClick={loginWithRCA}
-        className="w-fit flex items-center gap-3 text-lg h-14 font-medium border-2 px-4 border-blue hover:bg-slate-200 rounded-md"
+        className="w-fit flex items-center gap-3 text-lg h-14 font-medium border-2 px-4 border-[#19234a] hover:bg-slate-200 rounded-md"
       >
         {loading ? (
           <LuLoader2 className=" animate-spin" size={40} />

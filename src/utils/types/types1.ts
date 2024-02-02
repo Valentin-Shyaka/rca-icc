@@ -82,7 +82,9 @@ export type Match = {
   date: Date;
   homeTeam: Team;
   awayTeam: Team;
-  status: any;
+  status: {
+    status: string;
+  };
   events: TimeType[];
   category: category;
   stats: {

@@ -5,11 +5,12 @@ import EventLinks from '../components/constants/EventLinks';
 import Feed from '../components/constants/Feed';
 import GamingSidebar from '../components/constants/GamingSidebar';
 import Header from '../components/constants/Header';
-import { gamingEvents } from '../utils/data';
+import { gamingEvents, gamingNavs } from '../utils/data';
 import { CompNav } from '../utils/types';
 import { SEO } from '../utils/types/misc';
 import { useRouter } from 'next/router';
 import LoadingView from '@/components/other/LoadingView';
+import CompNavBar from '@/components/constants/CompNavBar';
 
 type Props = {
   children: React.ReactNode;
@@ -68,11 +69,11 @@ const GamingLayout = (props: Props) => {
         <div className="w-full flex flex-col border-b-2 border-gray">
           <Header />
         </div>
-        <EventLinks routes={gamingEvents} />
         <div className="flex w-full h-full gap-x-2 overflow-hidden">
           <GamingSidebar />
           <div className="flex flex-col w-full h-[full overflow-y-auto overflow-x-hidden">
-            {/* {props.isGeneral ? null : <CompNavBar />} */}
+            {!props.isGeneral && <EventLinks routes={gamingEvents} />}
+            {/* {<CompNavBar routes={gamingNavs} />} */}
             <div className="flex flex-col h-[85vh] overflow-y-auto py-2 overflow-x-hidden">{props.children}</div>
           </div>
           <Feed />
