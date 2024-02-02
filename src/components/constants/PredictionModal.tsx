@@ -2,10 +2,13 @@ import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { Fragment, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import { fetchMatchByIdQuery } from '../../lib/queries';
+
 import { sanityClient } from '../../lib/sanity';
 import { Match } from '../../utils/types/types1';
 import PredictionDropdown from './PredictionDropdown';
+import { useApp } from '@/contexts/AppProvider';
+import { fetchMatchByIdQuery } from '../../lib/queries';
+import { useSanity } from '@/contexts/SanityProvider';
 
 interface Props {
   isOpen: boolean;
@@ -14,23 +17,30 @@ interface Props {
 }
 
 const PredictionModal = ({ isOpen, closeModal, matchid }: Props) => {
-  // const [team, setTeam] = React.useState<Team | null>(null);
   const [match, setMatch] = useState<Match | null>(null);
+  const { client } = useSanity();
 
-  // const awayTeam= match.awayTeam
-  // const homeTeam= match.homeTeam
   const getMatch = async () => {
-    const match = await sanityClient.fetch(fetchMatchByIdQuery(matchid as string));
-    // console.log(match);
-    setMatch(match[0]);
+    try {
+      const match = await client?.fetch(fetchMatchByIdQuery(matchid));
+      setMatch(match);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  console.log(match);
 
   useEffect(() => {
     if (matchid) {
       getMatch();
-      console.log(match?.awayTeam.players);
     }
   }, [matchid]);
+
+  // const awayTeam= match?.awayTeam
+  // const homeTeam= match?.homeTeam
+
+  // console.log(match?.awayTeam)
 
   return (
     <>
@@ -114,7 +124,7 @@ const PredictionModal = ({ isOpen, closeModal, matchid }: Props) => {
                       </div>
                     </div>
                     <div className="w-full mt-2">
-                      <PredictionDropdown awayTeam={match?.awayTeam} homeTeam={match?.homeTeam} />
+                      <PredictionDropdown match={match} />
                     </div>
                   </div>
                 </Dialog.Panel>

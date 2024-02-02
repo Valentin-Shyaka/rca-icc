@@ -1,15 +1,12 @@
 import { useSanity } from '@/contexts/SanityProvider';
 import { getYearFromDataSet } from '@/utils/funcs/func1';
 import { Alert, Select } from '@mantine/core';
-import { useSearchParams } from 'next/navigation';
-import React, { useEffect } from 'react';
-import Moment from 'react-moment';
-import Banner from '../other/Banner';
-import { BiGame, BiHome, BiJoystickButton, BiLeftArrow, BiPointer } from 'react-icons/bi';
-import { FaArrowLeft, FaBackward, FaGamepad, FaHandPointLeft, FaPlaystation } from 'react-icons/fa';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { FaArrowLeft, FaHandPointLeft } from 'react-icons/fa';
 import { MdScoreboard } from 'react-icons/md';
+import Banner from '../other/Banner';
 
 const Header = () => {
   const { setDataSet, refresh, dataSet } = useSanity();
