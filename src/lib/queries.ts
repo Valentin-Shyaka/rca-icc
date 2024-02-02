@@ -155,4 +155,5 @@ export const fetchMatchByIdQuery = (id: string) => groq`*[_type == "match" && _i
     events,
     status,
     category,
+    fantasy,
 }`;

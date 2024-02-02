@@ -24,5 +24,13 @@
 	"[typescriptreact]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
-	"editor.inlineSuggest.showToolbar": "onHover"
+	"editor.inlineSuggest.showToolbar": "onHover",
+	"[prisma]": {
+		"editor.defaultFormatter": "Prisma.prisma"
+	},
+	"cSpell.words": [
+		"groq",
+		"Navs"
+	],
+	"prisma.fileWatcher": true
 }

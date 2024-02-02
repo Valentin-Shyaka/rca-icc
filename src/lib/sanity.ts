@@ -1,3 +1,4 @@
+import { getDataSetFromYear } from '@/utils/funcs/func1';
 import { createClient } from 'next-sanity';
 
 export const sanityConfig: any = {
@@ -8,3 +9,4 @@ export const sanityConfig: any = {
 };
 
 export const sanityClient = createClient(sanityConfig);
+export const seasonClient = (season: string) => createClient({ ...sanityConfig, dataset: getDataSetFromYear(season) });

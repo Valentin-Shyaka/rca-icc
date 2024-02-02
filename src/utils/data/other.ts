@@ -75,13 +75,7 @@ export const competitions = [
     icon: React.createElement(GiVolleyballBall, {
       size: 60,
     }),
-  },
-  {
-    id: 4,
-    name: 'debate',
-    icon: React.createElement(FaUsers, {
-      size: 60,
-    }),
+    hideInGaming: true,
   },
   {
     id: 5,
@@ -89,6 +83,7 @@ export const competitions = [
     icon: React.createElement(BiTennisBall, {
       size: 60,
     }),
+    hideInGaming: true,
   },
   {
     id: 6,
