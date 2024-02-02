@@ -36,11 +36,10 @@ const MatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category }: M
 
     setActive(path);
   }, [router]);
-  console.log(`${active} is active`);
 
   return (
     <Link
-      href={`/match/${_id}`}
+      href={active ? ` ` : `/match/${_id}`}
       className="relative flex border-2 border-gray max-w-[300px] min-w-[200px] w-full h-[120px] rounded-md hover:bg-slate-100 duration-300 cursor-pointer"
     >
       <div className="lg:p-6 p-3 flex justify-center w-full gap-y-2 flex-col">
@@ -103,14 +102,14 @@ const MatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category }: M
           )}
         </div>
       )}
-      {!isNotStarted && active === 'gaming' ? (
-        <Link href={'/gaming'}>
+      {isNotStarted && active === 'gaming' ? (
+        <div>
           <div
             onClick={() => setIsOpen(true)}
             className=" absolute right-2 top-2 border-2 border-[#2076F8] rounded-lg p-2  "
           ></div>
           <PredictionModal isOpen={isOpen} closeModal={() => setIsOpen(false)} matchid={_id} />
-        </Link>
+        </div>
       ) : (
         <div></div>
       )}
