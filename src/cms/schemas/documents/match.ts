@@ -125,8 +125,6 @@ export default defineType({
       title: 'Status',
       type: 'matchStatus',
       validation: (rule) => rule.required(),
-      // set default value of status object
-      initialValue: 'NS',
       group: 'match',
     },
     {

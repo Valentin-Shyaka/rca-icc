@@ -39,8 +39,8 @@ const FootTableIndex = () => {
   return (
     <GamingLayout title="Football - Table" isGeneral>
       <div className="p-3 gap-y-3">
-        <h3 className=" text-center">Fantasy Standings</h3>
-        <div className="float-left font-bold text-lg px-3">
+        <h3 className=" text-center text-xl font-semibold">Fantasy Standings</h3>
+        <div className="float-left mt-4 font-bold text-lg px-3">
           <h3>Standings</h3>
         </div>
         <div className="flex flex-col w-full items-center overflow-x-auto">
@@ -50,8 +50,11 @@ const FootTableIndex = () => {
               Loading Standings...
             </h1>
           )}
+          {!loading && standings.length === 0 && (
+            <h1 className="flex gap-2 flex-col items-center text-sm">No Standings So Far. Will be available after</h1>
+          )}
           {standings.length > 0 && (
-            <table>
+            <table className="mt-2">
               <thead>
                 <tr>
                   <th align="left" className="p-2">

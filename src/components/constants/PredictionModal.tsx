@@ -136,6 +136,7 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
       getMatch();
       getPrevPrediction();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matchId]);
 
   const isFootball = match?.category.toLowerCase() === 'football';
@@ -151,10 +152,13 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
         opened={isOpen}
         onClose={closeModal}
         title={
-          <span className=" font-semibold text-xl text-center">
+          <span className=" font-semibold w-full justify-center text-xl text-center">
             {match?.homeTeam?.name} vs {match?.awayTeam?.name} Prediction
           </span>
         }
+        classNames={{
+          title: ' w-full text-center font-semibold text-xl',
+        }}
       >
         <div className="flex-1 flex flex-col gap-3 justify-center">
           {/* error */}
@@ -172,7 +176,7 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
           <div className="flex gap-2 justify-center items-center ">
             <div className="flex gap-3 align-middle text-center flex-col">
               <div className="flex items-center gap-x-2">
-                <Image src={'/images/teamImage.svg'} alt="team1" width={50} height={30} />
+                <Image src={match?.homeTeam.logo ?? '/images/teamImage.svg'} alt="team1" width={70} height={50} />
                 <p className="text-md text-slate-700 font-semibold text-lg">{match?.homeTeam?.name}</p>
               </div>
             </div>
@@ -197,7 +201,7 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
             <div className="flex gap-3 align-middle text-center flex-col">
               <div className="flex items-center gap-x-2">
                 <p className="text-md text-slate-700 font-semibold text-lg">{match?.awayTeam?.name}</p>
-                <Image src={'/images/teamImage2.svg'} alt="team1" width={50} height={30} />
+                <Image src={match?.awayTeam.logo ?? '/images/teamImage2.svg'} alt="team1" width={70} height={50} />
               </div>
             </div>
           </div>
