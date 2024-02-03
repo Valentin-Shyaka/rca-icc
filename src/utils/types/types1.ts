@@ -91,4 +91,9 @@ export type Match = {
     awayTeamStats: TeamStats;
     homeTeamStats: TeamStats;
   };
+  fantasy: {
+    manOfTheMatch: RefType | Player | null;
+    highestScoringPlayer: RefType | Player | null;
+    firstTeamToScore: RefType | Team | null;
+  };
 };
