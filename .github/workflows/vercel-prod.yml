@@ -30,7 +30,7 @@ jobs:
         run: npm run format
         # Prisma generate
       - name: Prisma Generate
-        run: npn run generate
+        run: npm run generate
         # Build Project Artifacts
       - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
