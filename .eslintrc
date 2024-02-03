@@ -27,7 +27,8 @@
                 "printWidth": 120,
                 "bracketSpacing": true
             }
-        ]
+        ],
+        "valid-typeof": "off"
     },
     "parser": "@typescript-eslint/parser",
     "overrides": [

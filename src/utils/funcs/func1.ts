@@ -9,7 +9,7 @@ export const rankPlayers = (players: Player[], key: RankableKEYS) => {
   const sortedPlayers = players.sort((a, b) => b[key] - a[key]);
 
   // add rank to each player
-  let rankedPlayers = sortedPlayers.map((player, index) => {
+  const rankedPlayers = sortedPlayers.map((player, index) => {
     return {
       ...player,
       rank: `${index + 1}`,

@@ -37,7 +37,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         fantasy,
         category,
       });
-      // * Do something with the data
+      // If match is not finished, don't update the score
+      if (status.status !== 'FT') {
+        res.status(200).json({ message: 'Match not finished' });
+        return;
+      }
+
       const userPredictions = await prisma.userPrediction.findMany({
         where: {
           matchId: _id,

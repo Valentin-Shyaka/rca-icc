@@ -16,7 +16,7 @@ const Home: NextPage = () => {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 5);
   const unfinishedMatches = matches?.filter(
-    (match) => match?.status?.status !== 'FT' || match?.status?.status !== 'FF',
+    (match) => match?.status?.status !== 'FT' && match?.status?.status !== 'FF',
   );
   const upComingMatches = unfinishedMatches?.slice(0, 5);
   const todayMatch = unfinishedMatches?.filter((match) => new Date(match.date).getDate() === new Date().getDate())[0];
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
           )}
           {trends && trends?.length > 0 && (
             <div className="flex flex-col border-2 rounded-md p-2 border-gray gap-y-3">
-              <h1 className="text-xl font-semibold">Trendings</h1>
+              <h1 className="text-xl font-semibold">Trending</h1>
               <div key={mainTrend?._id} className="flex flex-col gap-y-3 w-full">
                 <h1 className="text-lg font-semibold">{mainTrend?.title}</h1>
                 <div className="flex md:flex-row flex-col w-full gap-3">

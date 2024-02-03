@@ -9,6 +9,7 @@ import { SeasonData } from '@/utils/types';
 import axios from 'axios';
 import { notifications } from '@mantine/notifications';
 import { UserPrediction } from '@prisma/client';
+import React from 'react';
 
 export type AppContextType = {
   players?: PlayerByTeam;

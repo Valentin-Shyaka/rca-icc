@@ -35,15 +35,6 @@ const GamingLayout = (props: Props) => {
   console.log(baseUrl, protocol);
   const router = useRouter();
 
-  if (!user) {
-    router.push('/auth/login');
-    return <LoadingView />;
-  }
-
-  // useEffect(() => {
-  //   getUserPredictions?.();
-  // }, []);
-
   // get matches and predictions in every 25 seconds to keep the data updated
   useEffect(() => {
     getUserPredictions?.();
@@ -53,6 +44,11 @@ const GamingLayout = (props: Props) => {
     }, 15000);
     return () => clearInterval(interval);
   }, []);
+
+  if (!user) {
+    router.push('/auth/login');
+    return <LoadingView />;
+  }
 
   return (
     <>

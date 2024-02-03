@@ -1,8 +1,6 @@
 import Link from 'next/link';
-import React from 'react';
-import LiveGameCard from '../../components/constants/LiveGameCard';
-import Table from '../../components/constants/Table';
 import MatchCard from '../../components/MatchCard';
+import Table from '../../components/constants/Table';
 import { useApp } from '../../contexts/AppProvider';
 import MainLayout from '../../layouts/MainLayout';
 

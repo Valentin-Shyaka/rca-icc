@@ -1,11 +1,9 @@
-import React from 'react';
-import GamingLayout from '../../layouts/GamingLayout';
-import { useApp } from '../../contexts/AppProvider';
-import { competitions } from '../../utils/data/other';
 import Link from 'next/link';
+import GamingLayout from '../../layouts/GamingLayout';
+import { competitions } from '../../utils/data/other';
 const GamingPage = () => {
-  const { getMatches, matches, trends, friendlyMatches } = useApp();
   const gamingCOmps = competitions.filter((comp) => !comp.hideInGaming);
+
   return (
     <GamingLayout>
       <h1 className="text-center font-bold ">Welcome to the official RCA-ICC prediction !!</h1>

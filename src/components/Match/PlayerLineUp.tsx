@@ -9,8 +9,8 @@ type Props = {
 };
 
 const PlayerLineUp = ({ awayLineUp, homeLineUp }: Props) => {
-  let homeLineUpCopy = { ...homeLineUp };
-  let awayLineUpCopy = { ...awayLineUp };
+  const homeLineUpCopy = { ...homeLineUp };
+  const awayLineUpCopy = { ...awayLineUp };
   const areHOmeEleven = homeLineUp?.eleven?.length === 11;
   const areAwayEleven = awayLineUp?.eleven?.length === 11;
   const leftHome = 11 - homeLineUp?.eleven?.length;

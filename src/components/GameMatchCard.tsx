@@ -1,14 +1,10 @@
 'use client';
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Match } from '../utils/types/types1';
-import Moment from 'react-moment';
-import { useState } from 'react';
-import PredictionModal from './constants/PredictionModal';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { useApp } from '@/contexts/AppProvider';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import Moment from 'react-moment';
+import { Match } from '../utils/types/types1';
+import PredictionModal from './constants/PredictionModal';
 
 interface Props extends Match {
   isGaming?: boolean;
@@ -19,15 +15,15 @@ const GameMatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category,
   const { userPredictions } = useApp();
   const [hasPredicted, setHasPredicted] = useState(false);
   const isNotStarted = status?.status === 'NS';
-  const isFinished = status?.status === 'FT';
-  const isBasketball = category === 'basketball';
+  // const isFinished = status?.status === 'FT';
+  // const isBasketball = category === 'basketball';
   const isLive = status?.status === 'HT' || status?.status === '1H' || status?.status === '2H';
   const isForfeit = status?.status === 'FF';
 
-  const awayScore = isBasketball ? stats?.awayTeamStats?.points : stats?.awayTeamStats?.goals;
-  const homeScore = isBasketball ? stats?.homeTeamStats?.points : stats?.homeTeamStats?.goals;
+  // const awayScore = isBasketball ? stats?.awayTeamStats?.points : stats?.awayTeamStats?.goals;
+  // const homeScore = isBasketball ? stats?.homeTeamStats?.points : stats?.homeTeamStats?.goals;
 
-  const isDueDate = new Date(date).getTime() + 1000 * 60 * 90 < new Date().getTime();
+  // const isDueDate = new Date(date).getTime() + 1000 * 60 * 90 < new Date().getTime();
   const isToday = new Date(date).getDate() === new Date().getDate();
 
   useEffect(() => {
