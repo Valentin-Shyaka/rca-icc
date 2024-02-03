@@ -5,18 +5,18 @@ const prisma = new PrismaClient();
 // run once on a new database (make sure to comment out after running)
 
 const seasonData: Prisma.SeasonCreateInput[] = [
-  {
-    name: '2023',
-    startDate: new Date('2023-02-5'),
-    endDate: new Date('2023-03-22'),
-    status: 'INACTIVE',
-  },
-  {
-    name: '2024',
-    startDate: new Date('2024-02-5'),
-    endDate: new Date('2024-03-22'),
-    status: 'ACTIVE',
-  },
+  // {
+  //   name: '2023',
+  //   startDate: new Date('2023-02-5'),
+  //   endDate: new Date('2023-03-22'),
+  //   status: 'INACTIVE',
+  // },
+  // {
+  //   name: '2024',
+  //   startDate: new Date('2024-02-5'),
+  //   endDate: new Date('2024-03-22'),
+  //   status: 'ACTIVE',
+  // },
 ];
 
 async function main() {
