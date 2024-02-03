@@ -1,32 +1,32 @@
-import { defineType } from "sanity";
+import { defineType } from 'sanity';
 
 export default defineType({
-  name: "matchStats",
-  title: "Match Stats",
-  type: "object",
+  name: 'matchStats',
+  title: 'Match Stats',
+  type: 'object',
 
   groups: [
     {
-      title: "Football Match Stats",
-      name: "footballMatchStats",
+      title: 'Football Match Stats',
+      name: 'footballMatchStats',
     },
     {
-      title: "Basketball Match Stats",
-      name: "basketballMatchStats",
+      title: 'Basketball Match Stats',
+      name: 'basketballMatchStats',
     },
   ],
 
   fields: [
     {
-      name: "homeTeamStats",
-      title: "Home Team Stats",
-      type: "matchTeamStats",
+      name: 'homeTeamStats',
+      title: 'Home Team Stats',
+      type: 'matchTeamStats',
       validation: (rule) => rule.required(),
     },
     {
-      name: "awayTeamStats",
-      title: "Away Team Stats",
-      type: "matchTeamStats",
+      name: 'awayTeamStats',
+      title: 'Away Team Stats',
+      type: 'matchTeamStats',
       validation: (rule) => rule.required(),
     },
   ],

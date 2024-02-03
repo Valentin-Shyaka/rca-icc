@@ -1,16 +1,12 @@
-import React from "react";
-import GamingLayout from "../../layouts/GamingLayout";
-import { useApp } from "../../contexts/AppProvider";
-import { competitions } from "../../utils/data/other";
-import Link from "next/link";
-const index = () => {
-  const { getMatches, matches, trends, friendlyMatches } = useApp();
+import Link from 'next/link';
+import GamingLayout from '../../layouts/GamingLayout';
+import { competitions } from '../../utils/data/other';
+const GamingPage = () => {
   const gamingCOmps = competitions.filter((comp) => !comp.hideInGaming);
+
   return (
     <GamingLayout>
-      <h1 className="text-center font-bold ">
-        Welcome to the official RCA-ICC prediction !!
-      </h1>
+      <h1 className="text-center font-bold ">Welcome to the official RCA-ICC prediction !!</h1>
       <div className="flex flex-wrap gap-4 p-6">
         {gamingCOmps.map((comp, i) => (
           <Link
@@ -27,4 +23,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default GamingPage;

@@ -1,9 +1,9 @@
-import PlayerCard from "../../components/constants/PlayerCard";
-import MainLayout from "../../layouts/MainLayout";
-import { playersBaccoQuery } from "../../lib/queries";
-import { Player } from "../../utils/types/types1";
-import { useSanity } from "@/contexts/SanityProvider";
-import { useEffect, useState } from "react";
+import PlayerCard from '../../components/constants/PlayerCard';
+import MainLayout from '../../layouts/MainLayout';
+import { playersBaccoQuery } from '../../lib/queries';
+import { Player } from '../../utils/types/types1';
+import { useSanity } from '@/contexts/SanityProvider';
+import { useEffect, useState } from 'react';
 
 type PlayerProps = {
   teamPlayers: Array<{
@@ -15,9 +15,7 @@ type PlayerProps = {
 };
 
 const PlayersIndex = () => {
-  const [teamPlayers, setTeamPlayers] = useState<PlayerProps["teamPlayers"]>(
-    []
-  );
+  const [teamPlayers, setTeamPlayers] = useState<PlayerProps['teamPlayers']>([]);
   const { client } = useSanity();
 
   useEffect(() => {

@@ -1,78 +1,65 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import { useApp } from "../../contexts/AppProvider";
-import MatchCard from "../MatchCard";
+import Link from 'next/link';
+import { useApp } from '../../contexts/AppProvider';
+import { MdScoreboard } from 'react-icons/md';
+import { gameSidebarRoutes } from '@/utils/data/sidebar';
+import { useRouter } from 'next/router';
+import { BiLogOut } from 'react-icons/bi';
+import { deleteCookie, getCookie } from 'cookies-next';
+import { decodeToken } from '@/utils/funcs/fetch';
+import { get } from 'http';
 
 const GamingSidebar = () => {
-	const { trends,matches } = useApp()
-	 
-	const finishedMatches = matches
-    ?.filter(
-      (match) =>
-        match?.status?.status === "FT" || match?.status?.status === "FF"
-    )
+  const { trends, matches } = useApp();
+  const { pathname } = useRouter();
+
+  const finishedMatches = matches
+    ?.filter((match) => match?.status?.status === 'FT' || match?.status?.status === 'FF')
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 5);
-	return (
-		<div className=' tab:flex hidden flex-col h-full max-w-[300px] w-1/4 gap-y-4 overflow-y-auto min-w-[200px]'>
-			{/* <input
-				placeholder='Search...'
-				className=' outline-none border-divBack border-2 rounded-md px-4  py-2 focus:border-orange duration-300 w-full'
-				type='text'
-			/> */}
-			{/* <div className='flex flex-col w-full gap-y-3'>
-				<span className='px-2'>Live matches</span>
-				<div className='flex items-center justify-between bg-whiteblue border-2 p-2 rounded-md border-divBack cursor-pointer'>
-					<div className='flex gap-x-2 items-start'>
-						<Image src='/images/teamlogo.svg' height={20} width={20} alt='' />
-						<span>Y1</span>
-					</div>
-					<span className=' text-xs'>vs</span>
-					<div className='flex gap-x-2 items-start'>
-						<span>Y2</span>
-						<Image src='/images/teamlogo.svg' height={20} width={20} alt='' />
-					</div>
-				</div>
-			</div> */}
-			<div className='flex flex-col gap-y-2'>
-				<span className='px-2 font-semibold'>🔥 Top actuality</span>
-				<div className='flex flex-col rounded-md  border-divBack border-2'>
-					{trends?.map((trend, i) => (
-						<Link
-							href={`/trends/${trend._id}`}
-							className=' w-full p-2 hover:bg-blue hover:text-white cursor-pointer rounded-md text-sm font-semibold'
-							key={i}
-						>
-							{trend.title}
-						</Link>
-					))}
-				</div>
-			</div>
-			<div className='flex flex-col gap-y-2'>
-				<span className='px-2 font-semibold'>Fantasy news</span>
-				<div className='flex flex-col py-5 rounded-md  border-divBack border-2'>
-					{/* {new Array(5).fill(0).map((v, i) => (
-						<Link
-							href={`/mathday/matchday ${i + 1}`}
-							className=' w-full p-2 hover:bg-blue hover:text-white cursor-pointer rounded-md text-sm font-semibold'
-							key={i}
-						>
-							Matchday {i + 1}
-						</Link>
-					))} */}
-					<div className="  overflow-auto h-60">
-						{finishedMatches?.map((match, i) => (
-							<div className="">
-								<MatchCard key={match._id} {...match} />
-							</div>
-						  ))}
-					</div>
-					
-				</div>
-			</div>
-		</div>
-	);
+
+  const logout = () => {
+    deleteCookie('token');
+    window.location.reload();
+  };
+
+  console.log('decoded token', decodeToken(getCookie('token')!));
+
+  return (
+    <div className=" tab:flex hidden flex-col h-[90vh] max-w-[300px] w-1/4 gap-y-4 overflow-y-auto min-w-[200px]">
+      <div className="flex flex-col gap-y-2 h-full">
+        <div className="flex h-full flex-col  rounded-b-md px-2 border-divBack justify-between border-t-0 border-2">
+          <div className="flex flex-col gap-2">
+            <span className="px-2 font-semibold py-3">Fantasy</span>
+            {gameSidebarRoutes.map((route) => {
+              const isActive = pathname === route.path;
+              return (
+                <Link
+                  key={route.name}
+                  href={route.path}
+                  className={` w-full flex items-center gap-2 p-2 hover:bg-blue hover:text-white cursor-pointer rounded-md text-sm font-semibold
+              ${isActive ? ' bg-blue text-white ' : ''}
+              `}
+                >
+                  <span className="w-7">{route.icon}</span>
+                  {route.name}
+                </Link>
+              );
+            })}
+          </div>
+          <button
+            className={` w-full text-blue flex items-center gap-2 p-2 hover:bg-blue hover:text-white cursor-pointer rounded-md text-sm font-semibold
+              `}
+            onClick={logout}
+          >
+            <span className="w-7">
+              <BiLogOut />
+            </span>
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default GamingSidebar;

@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { useApp } from "../../contexts/AppProvider";
-import MainLayout from "../../layouts/MainLayout";
-import { mixArray, removeDuplicates } from "../../utils/funcs";
-import { PRankeAble, rankPlayers } from "../../utils/funcs/func1";
-import { Player } from "../../utils/types/types1";
-import { useSanity } from "@/contexts/SanityProvider";
+import { useEffect, useState } from 'react';
+import { useApp } from '../../contexts/AppProvider';
+import MainLayout from '../../layouts/MainLayout';
+import { mixArray, removeDuplicates } from '../../utils/funcs';
+import { PRankeAble, rankPlayers } from '../../utils/funcs/func1';
+import { Player } from '../../utils/types/types1';
+import { useSanity } from '@/contexts/SanityProvider';
 
 const StatsIndex = () => {
   const { client } = useSanity();
@@ -22,17 +22,13 @@ const StatsIndex = () => {
   useEffect(() => {
     if (players && players.football.length > 0) {
       const len = footPlayers.length;
-      const withMostGoals = footPlayers
-        ?.slice(0, len)
-        .sort((a, b) => (b?.goals ?? 0) - (a?.goals ?? 0));
+      const withMostGoals = footPlayers?.slice(0, len).sort((a, b) => (b?.goals ?? 0) - (a?.goals ?? 0));
       const withMostAssits = footPlayers
         ?.slice(0, len)
-        .sort(
-          (a, b) => ((b.footballAssists ?? 0) - (a.footballAssists ?? 0)) as any
-        );
+        .sort((a, b) => ((b.footballAssists ?? 0) - (a.footballAssists ?? 0)) as any);
 
-      const rankedWithGoals = rankPlayers(withMostGoals, "goals");
-      const rankedWithAssists = rankPlayers(withMostAssits, "footballAssists");
+      const rankedWithGoals = rankPlayers(withMostGoals, 'goals');
+      const rankedWithAssists = rankPlayers(withMostAssits, 'footballAssists');
       // set stats
       setStats({
         goals: new Set(removeDuplicates(rankedWithGoals)),
@@ -50,9 +46,7 @@ const StatsIndex = () => {
   if (footPlayers.length === 0)
     return (
       <MainLayout>
-        <div className="flex justify-center items-center h-screen">
-          Loading...
-        </div>
+        <div className="flex justify-center items-center h-screen">Loading...</div>
       </MainLayout>
     );
 
@@ -64,10 +58,7 @@ const StatsIndex = () => {
           ?.slice(0, 5)
           ?.map((player, i) => {
             return (
-              <div
-                key={i}
-                className="w-full border-b-2 border-gray  flex  gap-2 mt-5 justify-between"
-              >
+              <div key={i} className="w-full border-b-2 border-gray  flex  gap-2 mt-5 justify-between">
                 <div className="flex items-center">
                   <span className="text-sm font-bold px-2">{player.rank}.</span>
                   <p className="text-sm font-bold">{player.fullName}</p>
@@ -83,10 +74,7 @@ const StatsIndex = () => {
           ?.slice(0, 5)
           ?.map((player, i) => {
             return (
-              <div
-                key={i}
-                className="w-full border-b-2 border-gray  flex  gap-2 mt-5 justify-between"
-              >
+              <div key={i} className="w-full border-b-2 border-gray  flex  gap-2 mt-5 justify-between">
                 <div className="flex items-center">
                   <span className="text-sm font-bold px-2">{player.rank}.</span>
                   <p className="text-sm font-bold">{player.fullName}</p>

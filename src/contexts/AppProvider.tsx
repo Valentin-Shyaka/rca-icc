@@ -1,26 +1,15 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { fetchMatchesQuery, teamsStatsQuery } from "../lib/queries";
-import {
-  AllPlayersStatsQuery,
-  getInsightsQuery,
-  getTrendsQuery,
-} from "../lib/query1";
-import { Match, Team } from "../utils/types/types1";
-import {
-  Insight,
-  PlayerByTeam,
-  TeamGroups,
-  Trend,
-} from "../utils/types/types2";
-import { useSanity } from "./SanityProvider";
-import { SanityClient } from "next-sanity";
-import { SeasonData } from "@/utils/types";
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { fetchMatchesQuery, teamsStatsQuery } from '../lib/queries';
+import { AllPlayersStatsQuery, getInsightsQuery, getTrendsQuery } from '../lib/query1';
+import { Match, Team } from '../utils/types/types1';
+import { Insight, PlayerByTeam, TeamGroups, Trend } from '../utils/types/types2';
+import { useSanity } from './SanityProvider';
+import { SanityClient } from 'next-sanity';
+import { SeasonData } from '@/utils/types';
+import axios from 'axios';
+import { notifications } from '@mantine/notifications';
+import { UserPrediction } from '@prisma/client';
+import React from 'react';
 
 export type AppContextType = {
   players?: PlayerByTeam;
@@ -39,6 +28,9 @@ export type AppContextType = {
   friendlyMatches?: Match[];
   setFriendlyMatches?: React.Dispatch<React.SetStateAction<Match[]>>;
   getDataSeason?: <T = any>(data: SeasonData<T>) => T | undefined;
+  userPredictions?: UserPrediction[];
+  setUserPredictions?: React.Dispatch<React.SetStateAction<UserPrediction[]>>;
+  getUserPredictions?: () => void;
 };
 
 export const AppContext = createContext<AppContextType>({});
@@ -68,18 +60,15 @@ export default function AppProvider({ children }: Props) {
   });
   const [trends, setTrends] = useState<Trend[]>([]);
   const [insights, setInsights] = useState<Insight[]>([]);
+  const [userPredictions, setUserPredictions] = useState<any>([]);
 
   const getMatches = async (client: SanityClient) => {
     try {
       const res = await client?.fetch(fetchMatchesQuery);
-      const leagueMatches: Match[] = res.filter(
-        (match: Match) => match.type === "league"
-      );
-      const friendlyMatches = res.filter(
-        (match: Match) => match.type === "friendly"
-      );
-      // setMatches(leagueMatches);
-      // setFriendlyMatches(friendlyMatches);
+      const leagueMatches: Match[] = res.filter((match: Match) => match.type === 'league');
+      const friendlyMatches = res.filter((match: Match) => match.type === 'friendly');
+      setMatches(leagueMatches);
+      setFriendlyMatches(friendlyMatches);
     } catch (error) {
       // console.log(error);
     }
@@ -90,21 +79,11 @@ export default function AppProvider({ children }: Props) {
       const teams = await client?.fetch(teamsStatsQuery);
       const officialTeams = teams.filter((team: Team) => team.isOfficial);
 
-      const footballTeams = officialTeams.filter(
-        (team: Team) => team.category === "football"
-      );
-      const basketballTeams = officialTeams.filter(
-        (team: Team) => team.category === "basketball"
-      );
-      const volleyballTeams = officialTeams.filter(
-        (team: Team) => team.category === "volleyball"
-      );
-      const pingpongTeams = officialTeams.filter(
-        (team: Team) => team.category === "pingpong"
-      );
-      const debateTeams = officialTeams.filter(
-        (team: Team) => team.category === "debate"
-      );
+      const footballTeams = officialTeams.filter((team: Team) => team.category === 'football');
+      const basketballTeams = officialTeams.filter((team: Team) => team.category === 'basketball');
+      const volleyballTeams = officialTeams.filter((team: Team) => team.category === 'volleyball');
+      const pingpongTeams = officialTeams.filter((team: Team) => team.category === 'pingpong');
+      const debateTeams = officialTeams.filter((team: Team) => team.category === 'debate');
       setTeams({
         football: footballTeams,
         basketball: basketballTeams,
@@ -120,27 +99,13 @@ export default function AppProvider({ children }: Props) {
   const getPlayers = async (client: SanityClient) => {
     try {
       const teamPlayers = await client?.fetch(AllPlayersStatsQuery);
-      const footballTeamPlayers = teamPlayers.filter(
-        (player: Team) => player.category === "football"
-      );
-      const basketballTeamPlayers = teamPlayers.filter(
-        (player: Team) => player.category === "basketball"
-      );
-      const pingpongTeamPlayers = teamPlayers.filter(
-        (player: Team) => player.category === "pingpong"
-      );
-      const debateTeamPlayers = teamPlayers.filter(
-        (player: Team) => player.category === "debate"
-      );
-      const volleyballTeamPlayers = teamPlayers.filter(
-        (player: Team) => player.category === "volleyball"
-      );
-      const footballPlayers = footballTeamPlayers
-        .map((team: Team) => team.players)
-        .flat();
-      const basketballPlayers = basketballTeamPlayers
-        .map((team: Team) => team.players)
-        .flat();
+      const footballTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'football');
+      const basketballTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'basketball');
+      const pingpongTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'pingpong');
+      const debateTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'debate');
+      const volleyballTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'volleyball');
+      const footballPlayers = footballTeamPlayers.map((team: Team) => team.players).flat();
+      const basketballPlayers = basketballTeamPlayers.map((team: Team) => team.players).flat();
 
       setPlayers({
         ...players,
@@ -171,8 +136,24 @@ export default function AppProvider({ children }: Props) {
     }
   };
 
+  const getUserPredictions = async () => {
+    try {
+      const res = await axios.get(`/api/fantasy/my-predictions`);
+      const data = await res.data?.data;
+      console.log('userPredictions prov', data);
+      setUserPredictions(data);
+    } catch (error: any) {
+      console.log(error);
+      notifications.show({
+        title: 'Error',
+        message: 'An error occurred Get Prev Prediction',
+        color: 'red',
+      });
+    }
+  };
+
   const flush = () => {
-    console.log("flushing data");
+    console.log('flushing data');
     setPlayers({
       football: [],
       basketball: [],
@@ -197,15 +178,15 @@ export default function AppProvider({ children }: Props) {
     if (!dataSet) return;
     const dataSetData = data?.[dataSet];
     if (!dataSetData) {
-      console.log("no data");
+      console.log('no data');
       return;
     }
     return dataSetData;
   };
 
   useEffect(() => {
-    console.log("app provider", dataSet);
-    console.log("client", client);
+    console.log('app provider', dataSet);
+    console.log('client', client);
     if (!client) return;
     // flush data
     flush();
@@ -234,6 +215,9 @@ export default function AppProvider({ children }: Props) {
         friendlyMatches,
         setFriendlyMatches,
         getDataSeason,
+        getUserPredictions,
+        userPredictions,
+        setUserPredictions,
       }}
     >
       {children}
