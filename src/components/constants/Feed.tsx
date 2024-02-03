@@ -1,9 +1,9 @@
-import React from 'react';
-import Image from 'next/image';
-import { useApp } from '../../contexts/AppProvider';
-import { Carousel } from 'react-responsive-carousel';
-import { BiArrowBack, BiChevronLeft, BiChevronRight, BiLeftArrow } from 'react-icons/bi';
 import { useSanity } from '@/contexts/SanityProvider';
+import Image from 'next/image';
+import React from 'react';
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import { Carousel } from 'react-responsive-carousel';
+import { useApp } from '../../contexts/AppProvider';
 
 const Feed = () => {
   const { insights, getInsights } = useApp();

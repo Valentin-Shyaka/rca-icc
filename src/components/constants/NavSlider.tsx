@@ -6,11 +6,10 @@ interface Props {
   haveGap?: boolean;
 }
 
-const NavSlider = ({ children, haveGap }: Props) => {
+const NavSlider = ({ children }: Props) => {
   const [chevAppear, setChevApp] = useState<any>({ left: false, right: false });
   const [winObje, setWindow] = useState({});
   const sliderRef = useRef(null);
-  const curRef: any = sliderRef.current;
 
   // console.log(children);
   const handleSliderScroll = (e: any) => {

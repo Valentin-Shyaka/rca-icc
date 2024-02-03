@@ -1,21 +1,12 @@
-import Link from 'next/link';
-import { useApp } from '../../contexts/AppProvider';
-import { MdScoreboard } from 'react-icons/md';
 import { gameSidebarRoutes } from '@/utils/data/sidebar';
+import { decodeToken } from '@/utils/funcs/fetch';
+import { deleteCookie, getCookie } from 'cookies-next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { BiLogOut } from 'react-icons/bi';
-import { deleteCookie, getCookie } from 'cookies-next';
-import { decodeToken } from '@/utils/funcs/fetch';
-import { get } from 'http';
 
 const GamingSidebar = () => {
-  const { trends, matches } = useApp();
   const { pathname } = useRouter();
-
-  const finishedMatches = matches
-    ?.filter((match) => match?.status?.status === 'FT' || match?.status?.status === 'FF')
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 5);
 
   const logout = () => {
     deleteCookie('token');

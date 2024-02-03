@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Player } from '../../utils/types/types1';
 
-const PlayerCard = ({ displayName, fullName, number, profile, position }: Player) => {
+const PlayerCard = ({ displayName, profile, position }: Player) => {
   return (
     <div className="w-[120px] h-[180px] flex flex-col items-center cursor-pointer border-2 border-gray">
       <Image

@@ -24,10 +24,10 @@ jobs:
         run: npm install
         # Run yan lint:fix
       - name: Run Lint
-        run: npm lint:fix
+        run: npm run lint:fix
         # Run Format
       - name: Run Format
-        run: npm format
+        run: npm run format
       - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
