@@ -15,13 +15,13 @@ const GameMatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category,
   const { userPredictions } = useApp();
   const [hasPredicted, setHasPredicted] = useState(false);
   const isNotStarted = status?.status === 'NS';
-  // const isFinished = status?.status === 'FT';
-  // const isBasketball = category === 'basketball';
+  const isFinished = status?.status === 'FT';
+  const isBasketball = category === 'basketball';
   const isLive = status?.status === 'HT' || status?.status === '1H' || status?.status === '2H';
   const isForfeit = status?.status === 'FF';
 
-  // const awayScore = isBasketball ? stats?.awayTeamStats?.points : stats?.awayTeamStats?.goals;
-  // const homeScore = isBasketball ? stats?.homeTeamStats?.points : stats?.homeTeamStats?.goals;
+  const awayScore = isBasketball ? stats?.awayTeamStats?.points : stats?.awayTeamStats?.goals;
+  const homeScore = isBasketball ? stats?.homeTeamStats?.points : stats?.homeTeamStats?.goals;
 
   // const isDueDate = new Date(date).getTime() + 1000 * 60 * 90 < new Date().getTime();
   const isToday = new Date(date).getDate() === new Date().getDate();
@@ -48,6 +48,13 @@ const GameMatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category,
           <p className="text-slate text-xs text-start font-bold">{awayTeam?.name}</p>
         </div>
       </div>
+      <div></div>
+      {(isFinished || isForfeit) && (
+        <div className="flex flex-col justify-center gap-y-2 px-1 items-center">
+          <span className="text-slate text-sm text-white p-1 px-2 bg-orange font-bold">{homeScore}</span>
+          <span className="text-slate text-sm text-white p-1 px-2 bg-black font-bold">{awayScore}</span>
+        </div>
+      )}
       <span className="w-[1px] h-[80%] bg-gray mt-2"></span>
       {/* Can't play / View match result here in gaming*/}
       {isForfeit ? (
