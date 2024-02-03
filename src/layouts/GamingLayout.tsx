@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 import LoadingView from '@/components/other/LoadingView';
 import CompNavBar from '@/components/constants/CompNavBar';
 import { useApp } from '@/contexts/AppProvider';
+import { useSanity } from '@/contexts/SanityProvider';
 
 type Props = {
   children: React.ReactNode;
@@ -24,7 +25,8 @@ type Props = {
 
 const GamingLayout = (props: Props) => {
   const { user } = useUser();
-  const { getUserPredictions } = useApp();
+  const { getUserPredictions, getMatches } = useApp();
+  const { client } = useSanity();
   const { title, seo } = props;
   const seoTitle = title ?? 'RCA-ICC';
   const host = window.location.host;
@@ -38,8 +40,18 @@ const GamingLayout = (props: Props) => {
     return <LoadingView />;
   }
 
+  // useEffect(() => {
+  //   getUserPredictions?.();
+  // }, []);
+
+  // get matches and predictions in every 25 seconds to keep the data updated
   useEffect(() => {
     getUserPredictions?.();
+    const interval = setInterval(() => {
+      getMatches?.(client);
+      getUserPredictions?.();
+    }, 15000);
+    return () => clearInterval(interval);
   }, []);
 
   return (

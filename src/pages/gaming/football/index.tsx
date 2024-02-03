@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useApp } from '@/contexts/AppProvider';
 import MatchCard from '@/components/MatchCard';
 import GamingLayout from '@/layouts/GamingLayout';

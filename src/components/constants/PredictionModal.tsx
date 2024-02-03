@@ -1,9 +1,11 @@
+import { useApp } from '@/contexts/AppProvider';
 import { useSanity } from '@/contexts/SanityProvider';
 import { useUser } from '@/contexts/UserProvider';
 import { getResError } from '@/utils/funcs/fetch';
 import { getYearFromDataSet } from '@/utils/funcs/func1';
 import { Button, Modal } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
+import { UserPrediction } from '@prisma/client';
 import axios from 'axios';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -12,7 +14,6 @@ import { Match } from '../../utils/types/types1';
 import FirstToScore from './prediction-dropdowns/FirstToScore';
 import HighScorer from './prediction-dropdowns/HighScorer';
 import ManOfTheMatch from './prediction-dropdowns/ManOfTheMatch';
-import { useApp } from '@/contexts/AppProvider';
 
 interface Props {
   isOpen: boolean;
@@ -41,6 +42,7 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
   const [error, setError] = useState('');
   const { userPredictions, setUserPredictions } = useApp();
   const [hasPredicted, setHasPredicted] = useState(false);
+  const [userPrediction, setUserPrediction] = useState<UserPrediction | null | undefined>(null);
 
   const getMatch = async () => {
     try {
@@ -117,6 +119,7 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
     console.log('userPredictions', userPredictions);
     console.log('userPrevPrediction', userPrevPrediction);
     if (userPrevPrediction) setHasPredicted(true);
+    setUserPrediction(userPrevPrediction!);
     setPrediction({
       ...prediction,
       manOfTheMatch: userPrevPrediction?.prediction?.manOfTheMatch ?? '',
@@ -156,8 +159,15 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
         <div className="flex-1 flex flex-col gap-3 justify-center">
           {/* error */}
           <span className="text-red-500 text-center">{error}</span>
-          {match?.status.status !== 'NS' && (
-            <span className="text-red-500 text-center font-semibold text-lg">Game is Closed</span>
+          {match?.status.status !== 'NS' && userPrediction?.status !== 'MARKED' && (
+            <span className="text-red-500 text-center font-semibold text-lg">
+              Game is Closed. Prediction is not allowed.
+            </span>
+          )}
+          {userPrediction?.status === 'MARKED' && (
+            <span className=" text-center font-semibold text-lg">
+              You Scored {userPrediction?.points} Points in this match
+            </span>
           )}
           <div className="flex gap-2 justify-center items-center ">
             <div className="flex gap-3 align-middle text-center flex-col">

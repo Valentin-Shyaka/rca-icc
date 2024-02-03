@@ -23,8 +23,8 @@ const Table = ({ teams }: Props) => {
       <table className=" min-w-[450px] overflow-x-auto">
         <thead>
           <tr>
-            <th></th>
-            <th></th>
+            <th>#</th>
+            <th>Team</th>
             <th>P</th>
             <th>W</th>
             <th>D</th>

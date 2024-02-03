@@ -1,6 +1,5 @@
 import React from 'react';
 import { useApp } from '@/contexts/AppProvider';
-import MatchCard from '@/components/MatchCard';
 import GamingLayout from '@/layouts/GamingLayout';
 import GameMatchCard from '@/components/GameMatchCard';
 
