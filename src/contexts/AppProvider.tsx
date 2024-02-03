@@ -101,8 +101,8 @@ export default function AppProvider({ children }: Props) {
       const teamPlayers = await client?.fetch(AllPlayersStatsQuery);
       const footballTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'football');
       const basketballTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'basketball');
-      const pingpongTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'pingpong');
-      const debateTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'debate');
+      // const pingpongTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'pingpong');
+      // const debateTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'debate');
       const volleyballTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'volleyball');
       const footballPlayers = footballTeamPlayers.map((team: Team) => team.players).flat();
       const basketballPlayers = basketballTeamPlayers.map((team: Team) => team.players).flat();
@@ -111,17 +111,18 @@ export default function AppProvider({ children }: Props) {
         ...players,
         football: footballPlayers,
         basketball: basketballPlayers,
+        volleyball: volleyballTeamPlayers,
       });
     } catch (error) {
       // console.log(error);
     }
   };
 
-  const getTrendings = async (client: SanityClient) => {
+  const getTrending = async (client: SanityClient) => {
     try {
-      const trendings = await client?.fetch(getTrendsQuery);
+      const trending = await client?.fetch(getTrendsQuery);
       // console.log(trendings);
-      setTrends(trendings);
+      setTrends(trending);
     } catch (error) {
       console.log(error);
     }
@@ -144,11 +145,11 @@ export default function AppProvider({ children }: Props) {
       setUserPredictions(data);
     } catch (error: any) {
       console.log(error);
-      notifications.show({
-        title: 'Error',
-        message: 'An error occurred Get Prev Prediction',
-        color: 'red',
-      });
+      // notifications.show({
+      //   title: 'Error',
+      //   message: 'An error occurred Get Prev Prediction',
+      //   color: 'red',
+      // });
     }
   };
 
@@ -193,7 +194,8 @@ export default function AppProvider({ children }: Props) {
     // get data again
     getMatches(client);
     getTeams(client);
-    getTrendings(client);
+    getTrending(client);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [client]);
 
   return (

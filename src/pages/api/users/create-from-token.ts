@@ -11,9 +11,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           Authorization: `Bearer ${token}`,
         },
       });
-      const res = await response.json();
-      console.log('res', res);
-      const data = res.data;
+      const _res = await response.json();
+      console.log('res', _res.data.message);
+      const data = _res.data;
       const mis_user = data.user;
       const mis_person: UserProfile = data.person;
 
@@ -22,6 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           email: mis_person.email,
         },
       });
+      console.log('existing_user', existing_user);
 
       if (existing_user) {
         res.status(200).json(existing_user);
@@ -39,6 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(201).json(p_data);
       }
     } catch (error: any) {
+      console.log('error', error);
       res.status(500).json({ error: error.message });
     }
   }

@@ -25,6 +25,7 @@ const LoginPage = () => {
       }
     };
     getOauthToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loginWithRCA = () => {
