@@ -9,7 +9,7 @@ const Countdown = dynamic(() => import('@/components/other/Countdown'));
 const MainLayout = dynamic(() => import('@/layouts/MainLayout'));
 
 const Home: NextPage = () => {
-  const { getMatches, matches, trends, friendlyMatches } = useApp();
+  const { matches, trends, friendlyMatches } = useApp();
 
   const finishedMatches = matches
     ?.filter((match) => match?.status?.status === 'FT' || match?.status?.status === 'FF')
@@ -70,20 +70,20 @@ const Home: NextPage = () => {
             <div className="flex flex-col border-2 gap-2 rounded-md p-2 border-gray">
               <h1 className="text-lg font-semibold">Friendlies</h1>
               <div className="grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2">
-                {friendlyMatches?.map((match, i) => <MatchCard key={match._id} {...match} />)}
+                {friendlyMatches?.map((match) => <MatchCard key={match._id} {...match} />)}
               </div>
             </div>
           )}
           <div className="flex flex-col border-2 rounded-md p-2 border-gray">
             <h1 className="text-xl font-semibold">Latest Results</h1>
             <div className="grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2">
-              {finishedMatches?.map((match, i) => <MatchCard key={match._id} {...match} />)}
+              {finishedMatches?.map((match) => <MatchCard key={match._id} {...match} />)}
             </div>
           </div>
           <div className="flex flex-col border-2 rounded-md p-2 border-gray">
             <h1 className="text-xl font-semibold">Upcoming Matches</h1>
             <div className="grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2">
-              {upComingMatches?.map((match, i) => <MatchCard key={match._id} {...match} />)}
+              {upComingMatches?.map((match) => <MatchCard key={match._id} {...match} />)}
             </div>
             <Link
               href={'/football/fixtures'}
@@ -95,7 +95,7 @@ const Home: NextPage = () => {
           <div className="flex flex-col border-2 rounded-md p-2 border-gray">
             <h1 className="text-xl font-semibold">Competitions</h1>
             <div className="flex w-full mt-4 flex-wrap gap-3">
-              {competitions.map((comp, i) => (
+              {competitions.map((comp) => (
                 <Link
                   href={comp.url ?? `/${comp.name}`}
                   key={comp.id}

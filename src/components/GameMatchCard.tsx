@@ -1,16 +1,16 @@
-'use client';
 import { useApp } from '@/contexts/AppProvider';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Moment from 'react-moment';
 import { Match } from '../utils/types/types1';
 import PredictionModal from './constants/PredictionModal';
+import React from 'react';
 
 interface Props extends Match {
   isGaming?: boolean;
 }
 
-const GameMatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category, isGaming }: Props) => {
+const GameMatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { userPredictions } = useApp();
   const [hasPredicted, setHasPredicted] = useState(false);
@@ -31,7 +31,7 @@ const GameMatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category,
       const hasPredicted = userPredictions.some((prediction) => prediction.matchId === _id);
       setHasPredicted(hasPredicted);
     }
-  }, [userPredictions]);
+  }, [_id, userPredictions]);
 
   return (
     <div

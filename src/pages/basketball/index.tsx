@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import BasketTable from '../../components/constants/BasketTable';
-import Table from '../../components/constants/Table';
-import MatchCard from '../../components/MatchCard';
 import { useApp } from '../../contexts/AppProvider';
-import MainLayout from '../../layouts/MainLayout';
+import dynamic from 'next/dynamic';
+const MatchCard = dynamic(() => import('@/components/MatchCard'));
+const BasketTable = dynamic(() => import('@/components/constants/BasketTable'));
+const MainLayout = dynamic(() => import('@/layouts/MainLayout'));
 
 const IndexBasket = () => {
   const { teams, matches } = useApp();
@@ -12,7 +12,7 @@ const IndexBasket = () => {
   );
   const upComingMatches = unfinishedMatches?.slice(0, 5);
   return (
-    <MainLayout title="Baskeball">
+    <MainLayout title="Basketball">
       <div className="flex flex-col w-full gap-y-3">
         {/* <div className='flex w-full flex-col mx-auto max-w-[800px]'>
 				<LiveGameCard path='/match/23' />
@@ -28,7 +28,7 @@ const IndexBasket = () => {
         <div className="flex flex-col border-2 rounded-md p-2 border-gray">
           <h1 className="text-xl font-semibold">Upcoming Matches</h1>
           <div className="grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2">
-            {upComingMatches?.map((match, i) => <MatchCard key={match._id} {...match} />)}
+            {upComingMatches?.map((match) => <MatchCard key={match._id} {...match} />)}
           </div>
           {upComingMatches?.length === 0 && <h1 className="">No Matches Available</h1>}
           <Link

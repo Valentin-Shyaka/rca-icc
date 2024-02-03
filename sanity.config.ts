@@ -1,8 +1,8 @@
+import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
+import { media } from 'sanity-plugin-media';
 import { structureTool } from 'sanity/structure';
 import { schemaTypes } from './src/cms/schemas';
-import { visionTool } from '@sanity/vision';
-import { media, mediaAssetSource } from 'sanity-plugin-media';
 
 export default defineConfig({
   basePath: '/studio',

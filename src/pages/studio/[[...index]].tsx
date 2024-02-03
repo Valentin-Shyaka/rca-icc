@@ -3,7 +3,6 @@ import { getDataSetFromYear, getYearFromDataSet } from '@/utils/funcs/func1';
 import { Select, Tooltip } from '@mantine/core';
 import { NextStudio } from 'next-sanity/studio';
 import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import Draggable from 'react-draggable';
 
@@ -11,7 +10,6 @@ export default function AdminPage() {
   const { config, setDataSet, dataSet, setConfig } = useSanity();
   const searchParams = useSearchParams();
   const [season, setSeason] = React.useState('2023');
-  const router = useRouter();
 
   useEffect(() => {
     const dts = getDataSetFromYear(season);

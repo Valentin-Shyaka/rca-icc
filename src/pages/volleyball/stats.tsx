@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
-import Stats from '../../components/constants/Stats';
+import { useSanity } from '@/contexts/SanityProvider';
+import { useEffect } from 'react';
 import { useApp } from '../../contexts/AppProvider';
 import MainLayout from '../../layouts/MainLayout';
 import { mixArray } from '../../utils/funcs';
 import { Player } from '../../utils/types/types1';
-import { useSanity } from '@/contexts/SanityProvider';
 
 const StatsIndex = () => {
   const { client } = useSanity();
@@ -20,6 +19,7 @@ const StatsIndex = () => {
     if (!players || (players.volleyball.length === 0 && players.football.length === 0)) {
       getPlayers!(client);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [client]);
 
   if (volleyPlayers.length === 0 && players?.football.length === 0)

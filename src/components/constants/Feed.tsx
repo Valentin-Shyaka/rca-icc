@@ -12,6 +12,7 @@ const Feed = () => {
   React.useEffect(() => {
     if (!client) return;
     getInsights!(client);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [client]);
   if (insights?.length === 0) return null;
   return (
