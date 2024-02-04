@@ -53,7 +53,7 @@ const index = () => {
           </Title>
 
           <Accordion variant="separated" className="mt-4">
-            <Accordion.Item className="" value="reset-password">
+            <Accordion.Item className="" value="scoring">
               <Accordion.Control>Score allocation</Accordion.Control>
               <Accordion.Panel>
                 <ScrollArea h={200}>
@@ -70,7 +70,7 @@ const index = () => {
               </Accordion.Panel>
             </Accordion.Item>
 
-            <Accordion.Item className="" value="another-account">
+            <Accordion.Item className="" value="rules">
               <Accordion.Control>Rules</Accordion.Control>
               <Accordion.Panel>
                 <List type="ordered" withPadding listStyleType="disc">
@@ -86,7 +86,8 @@ const index = () => {
                 </List>
               </Accordion.Panel>
             </Accordion.Item>
-            <Accordion.Item className="" value="another-account">
+
+            <Accordion.Item className="" value="awards">
               <Accordion.Control>Awards</Accordion.Control>
               <Accordion.Panel>
                 At the end of the 2024 ICC the winner of the ICC predictor will be awarded in the closing ceremony, and
