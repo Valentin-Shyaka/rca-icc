@@ -28,7 +28,7 @@ const SideBar = () => {
 			</div> */}
       <div className="flex flex-col gap-y-2">
         <span className="px-2 font-semibold">🔥 Trending</span>
-        <div className="flex flex-col rounded-md  border-divBack border-2">
+        <div className="flex flex-col rounded-md  border-divBack border-2 h-[80vh]">
           {trends?.map((trend, i) => (
             <Link
               href={`/trends/${trend._id}`}

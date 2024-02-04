@@ -1,5 +1,5 @@
+import { useUser } from '@/contexts/UserProvider';
 import GamingLayout from '@/layouts/GamingLayout';
-import { Table } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { User } from '@prisma/client';
 import axios from 'axios';
@@ -14,6 +14,7 @@ interface Standing {
 const FootTableIndex = () => {
   const [standings, setStandings] = React.useState<Standing[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const { user } = useUser();
 
   // api/fantasy/score/update-score
   const getStandings = async () => {
@@ -60,11 +61,11 @@ const FootTableIndex = () => {
                   <th align="left" className="p-2">
                     Rank
                   </th>
-                  <th align="left" className="p-2">
+                  {/* <th align="left" className="p-2">
                     First Name
-                  </th>
+                  </th> */}
                   <th align="left" className="p-2">
-                    Last Name
+                    Name
                   </th>
                   <th align="left" className="p-2">
                     Points
@@ -72,22 +73,28 @@ const FootTableIndex = () => {
                 </tr>
               </thead>
               <tbody>
-                {standings.map((standing, i) => (
-                  <tr key={standing.user.id}>
-                    <td align="left" className="p-2">
-                      {i + 1}
-                    </td>
-                    <td align="left" className="p-2">
+                {standings.map((standing, i) => {
+                  const isMe = standing.user.mis_id === user?.id;
+                  return (
+                    <tr
+                      key={standing.user.id}
+                      className={` ${isMe ? 'bg-blue text- hover:text-black hover:bg-gray-100 text-white' : ''} ${i % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}
+                    >
+                      <td align="left" className="p-2">
+                        {i + 1}.
+                      </td>
+                      {/* <td align="left" className="p-2">
                       {standing.user.firstName}
-                    </td>
-                    <td align="left" className="p-2">
-                      {standing.user.lastName}
-                    </td>
-                    <td align="left" className="p-2">
-                      {standing.points}
-                    </td>
-                  </tr>
-                ))}
+                    </td> */}
+                      <td align="left" className="p-2 capitalize">
+                        {`${standing.user.firstName?.[0]}. ${standing.user.lastName}`}
+                      </td>
+                      <td align="left" className="p-2">
+                        {standing.points}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           )}

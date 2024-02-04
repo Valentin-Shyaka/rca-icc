@@ -14,6 +14,14 @@ const nextConfig = {
       'e0.365dm.com',
       'images.unsplash.com',
     ],
+    // for next 14
+    remotePatterns: [
+      { hostname: 'cdn.sanity.io' },
+      { hostname: 'lh3.googleusercontent.com' },
+      { hostname: 'cdn.discordapp.com' },
+      { hostname: 'e0.365dm.com' },
+      { hostname: 'images.unsplash.com' },
+    ],
   },
 };
 
