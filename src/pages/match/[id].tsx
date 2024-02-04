@@ -12,6 +12,7 @@ import { fetchMatchByIdQuery } from '../../lib/queries';
 import { MatchGoals, SEO } from '../../utils/types/misc';
 import { Match } from '../../utils/types/types1';
 import { useSanity } from '@/contexts/SanityProvider';
+import ManOfTheMatch from '@/components/constants/prediction-dropdowns/ManOfTheMatch';
 
 const MatchPage = () => {
   const { client } = useSanity();
@@ -78,6 +79,15 @@ const MatchPage = () => {
     image: match?.banner,
   };
 
+  const mergedPlayers= match?.awayTeam.players.concat(match?.homeTeam.players)
+
+
+
+  const manOfTheMatch= mergedPlayers?.filter((player)=> player._id == match?.fantasy.manOfTheMatch._ref)
+  const highestScorer = mergedPlayers?.filter((player) => player._id == match?.fantasy.highestScoringPlayer._ref);
+
+ console.log(manOfTheMatch)
+   
   const isLive = match?.status?.status === 'LIVE';
 
   return (
@@ -169,6 +179,16 @@ const MatchPage = () => {
             >
               STATS
             </p>
+
+            <p
+              onClick={() => setActive('fantasy')}
+              className={`px-6 py-2 hover:bg-slate-300/30 cursor-pointer text-center ${
+                active === 'fantasy' && 'border-b-2  border-orange'
+              }`}
+            >
+              FANTASY
+            </p>
+
             {/* <p
 							onClick={() => setActive("trendings")}
 							className={`px-6 five:flex hidden py-2 hover:bg-slate-300/30 cursor-pointer text-center ${
@@ -190,8 +210,19 @@ const MatchPage = () => {
                 awayTeam={match?.awayTeam}
                 isBasketball={isBasketball}
               />
-            ) : (
+            ) : active === 'timeline' ? (
               <Timeline timeline={match?.events} isBasketball={isBasketball} />
+            ) : (
+              <div className="flex flex-col w-full py-3 text-center">
+                <h1 className="font-bold mt-4"> Man of The Match</h1>
+                {manOfTheMatch ? (
+                  <p className="">{manOfTheMatch[0].fullName}</p>
+                ) : (
+                  <p>Man of the match not yet appointed</p>
+                )}
+                <h1 className="font-bold  mt-4">Highest Scorer</h1>
+                <p>{highestScorer[0].fullName}</p>
+              </div>
             )
           ) : (
             <div className="flex flex-col items-center justify-center h-[300px]">
