@@ -37,7 +37,7 @@ const Home: NextPage = () => {
     <>
       <MainLayout title="ICC - Home" isGeneral>
         <main className="flex w-full flex-1 flex-col p-2 gap-y-3 overflow-x-hidden">
-          {!isFinished && todayMatch && (
+          {!isFinished && todayMatch && todayMatch.status.status === 'NS' && (
             <div className="flex flex-col border-2 rounded-md p-2 border-gray gap-y-3">
               <h1 className="text-xl font-semibold">Today&apos;s main match</h1>
               <Countdown

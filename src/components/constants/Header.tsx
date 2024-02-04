@@ -4,7 +4,7 @@ import { Alert, Select } from '@mantine/core';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { FaArrowLeft, FaHandPointLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaHandPointLeft, FaHome } from 'react-icons/fa';
 import { MdScoreboard } from 'react-icons/md';
 import Banner from '../other/Banner';
 
@@ -80,7 +80,7 @@ const Header = () => {
           `}
           href={isGaming ? '/' : '/gaming'}
         >
-          {isGaming ? <FaArrowLeft /> : <MdScoreboard />}
+          {isGaming ? <FaHome /> : <MdScoreboard />}
           {isGaming ? 'Home' : 'Fantasy'}
         </Link>
       </div>

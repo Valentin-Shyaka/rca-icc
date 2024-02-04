@@ -43,8 +43,10 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
   const { userPredictions, setUserPredictions } = useApp();
   const [hasPredicted, setHasPredicted] = useState(false);
   const [userPrediction, setUserPrediction] = useState<UserPrediction | null | undefined>(null);
+  const [gettingMatch, setGettingMatch] = useState(false);
 
   const getMatch = async () => {
+    setGettingMatch(true);
     try {
       const match = await client?.fetch<Match[] | null>(fetchMatchByIdQuery(matchId));
       if (!match) return;
@@ -54,6 +56,7 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
     } catch (error) {
       console.log(error);
     }
+    setGettingMatch(false);
   };
 
   console.log('match', match);
@@ -160,52 +163,60 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
           title: ' w-full text-center font-semibold text-xl',
         }}
       >
-        <div className="flex-1 flex flex-col gap-3 justify-center">
-          {/* error */}
-          <span className="text-red-500 text-center">{error}</span>
-          {match?.status.status !== 'NS' && userPrediction?.status !== 'MARKED' && (
-            <span className="text-red-500 text-center font-semibold text-lg">
-              Game is Closed. Prediction is not allowed.
-            </span>
-          )}
-          {userPrediction?.status === 'MARKED' && (
-            <span className=" text-center font-semibold text-lg">
-              You Scored {userPrediction?.points} Points in this match
-            </span>
-          )}
-          <div className="flex gap-2 justify-center items-center ">
-            <div className="flex gap-3 align-middle text-center flex-col">
-              <div className="flex items-center gap-x-2">
-                <Image src={match?.homeTeam.logo ?? '/images/teamImage.svg'} alt="team1" width={70} height={50} />
-                <p className="text-md text-slate-700 font-semibold text-lg">{match?.homeTeam?.name}</p>
-              </div>
-            </div>
-            <input
-              type="text"
-              name=""
-              value={prediction.homeScore}
-              id=""
-              className="border-2 border-blue w-10 h-10 rounded-lg outline-none text-center font-bold"
-              onChange={(e) => setPrediction((prevState) => ({ ...prevState, homeScore: Number(e.target.value) }))}
-              disabled={match?.status.status !== 'NS'}
-            />
-            <input
-              type="text"
-              name=""
-              value={prediction.awayScore}
-              id=""
-              className="border-2 border-blue w-10 h-10 rounded-lg outline-none text-center font-bold"
-              onChange={(e) => setPrediction((prevState) => ({ ...prevState, awayScore: Number(e.target.value) }))}
-              disabled={match?.status.status !== 'NS'}
-            />
-            <div className="flex gap-3 align-middle text-center flex-col">
-              <div className="flex items-center gap-x-2">
-                <p className="text-md text-slate-700 font-semibold text-lg">{match?.awayTeam?.name}</p>
-                <Image src={match?.awayTeam.logo ?? '/images/teamImage2.svg'} alt="team1" width={70} height={50} />
-              </div>
+        {gettingMatch ? (
+          <div className="flex-1 flex justify-center items-center">
+            <div className="flex gap-2 items-center">
+              {/* <Image src="/images/loading.gif" alt="loading" width={30} height={30} /> */}
+              <p className="text-lg font-semibold text-blue-500">Fetching Match Details...</p>
             </div>
           </div>
-          {/* <h3 className="text-center mt-2 font-bold text-warmGray-700 text-sm">Popular Predictions</h3>
+        ) : (
+          <div className="flex-1 flex flex-col gap-3 justify-center">
+            {/* error */}
+            <span className="text-red-500 text-center">{error}</span>
+            {match?.status.status !== 'NS' && userPrediction?.status !== 'MARKED' && (
+              <span className="text-red-500 text-center font-semibold text-lg">
+                Game is Closed. Prediction is not allowed.
+              </span>
+            )}
+            {userPrediction?.status === 'MARKED' && (
+              <span className=" text-center font-semibold text-lg">
+                You Scored {userPrediction?.points} Points in this match
+              </span>
+            )}
+            <div className="flex gap-2 justify-center items-center ">
+              <div className="flex gap-3 align-middle text-center flex-col">
+                <div className="flex items-center gap-x-2">
+                  <Image src={match?.homeTeam.logo ?? '/images/teamImage.svg'} alt="team1" width={70} height={50} />
+                  <p className="text-md text-slate-700 font-semibold text-lg">{match?.homeTeam?.name}</p>
+                </div>
+              </div>
+              <input
+                type="text"
+                name=""
+                value={prediction.homeScore}
+                id=""
+                className="border-2 border-blue w-10 h-10 rounded-lg outline-none text-center font-bold"
+                onChange={(e) => setPrediction((prevState) => ({ ...prevState, homeScore: Number(e.target.value) }))}
+                disabled={match?.status.status !== 'NS'}
+              />
+              <input
+                type="text"
+                name=""
+                value={prediction.awayScore}
+                id=""
+                className="border-2 border-blue w-10 h-10 rounded-lg outline-none text-center font-bold"
+                onChange={(e) => setPrediction((prevState) => ({ ...prevState, awayScore: Number(e.target.value) }))}
+                disabled={match?.status.status !== 'NS'}
+              />
+              <div className="flex gap-3 align-middle text-center flex-col">
+                <div className="flex items-center gap-x-2">
+                  <p className="text-md text-slate-700 font-semibold text-lg">{match?.awayTeam?.name}</p>
+                  <Image src={match?.awayTeam.logo ?? '/images/teamImage2.svg'} alt="team1" width={70} height={50} />
+                </div>
+              </div>
+            </div>
+            {/* <h3 className="text-center mt-2 font-bold text-warmGray-700 text-sm">Popular Predictions</h3>
           <div className="flex justify-center gap-2 mt-2">
             <div className="flex text-white font-bold justify-center align-middle text-sm rounded-xl bg-[#3076F8] w-10">
               <p>3</p>
@@ -213,60 +224,61 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
               <p>2</p>
             </div>
           </div> */}
-          <div className="w-full mt-2">
-            {match && (
-              <ManOfTheMatch
-                match={match}
-                onChange={(player) => {
-                  setPrediction((prevState) => ({ ...prevState, manOfTheMatch: player._id }));
-                }}
-                prevData={[...match.homeTeam.players, ...match.awayTeam.players].find(
-                  (t) => t._id === prediction.manOfTheMatch,
-                )}
-                disabled={match?.status.status !== 'NS'}
-              />
-            )}
+            <div className="w-full mt-2">
+              {match && (
+                <ManOfTheMatch
+                  match={match}
+                  onChange={(player) => {
+                    setPrediction((prevState) => ({ ...prevState, manOfTheMatch: player._id }));
+                  }}
+                  prevData={[...match.homeTeam.players, ...match.awayTeam.players].find(
+                    (t) => t._id === prediction.manOfTheMatch,
+                  )}
+                  disabled={match?.status.status !== 'NS'}
+                />
+              )}
+            </div>
+            <div className="w-full mt-2">
+              {match && isFootball && (
+                <FirstToScore
+                  match={match}
+                  onChange={(team) => {
+                    setPrediction((prevState) => ({ ...prevState, firstTeamToScore: team._id }));
+                  }}
+                  prevData={[match.homeTeam, match.awayTeam].find((t) => t._id === prediction.firstTeamToScore)}
+                  disabled={match?.status.status !== 'NS'}
+                />
+              )}
+            </div>
+            <div className="w-full mt-2">
+              {match && isBasketball && (
+                <HighScorer
+                  match={match}
+                  onChange={(player) => {
+                    setPrediction((prevState) => ({ ...prevState, highestScoringPlayer: player._id }));
+                  }}
+                  prevData={[...match.homeTeam.players, ...match.awayTeam.players].find(
+                    (t) => t._id === prediction.manOfTheMatch,
+                  )}
+                  disabled={match?.status.status !== 'NS'}
+                />
+              )}
+            </div>
+            <div className="flex items-center justify-center py-3 w-full">
+              <Button
+                onClick={hasPredicted ? updatePrediction : sendPrediction}
+                color="#2075f8"
+                className="w-full"
+                disabled={loading || match?.status.status !== 'NS'}
+                loading={loading}
+                variant="filled"
+                size="md"
+              >
+                {hasPredicted ? 'Update' : 'Submit'}
+              </Button>
+            </div>
           </div>
-          <div className="w-full mt-2">
-            {match && isFootball && (
-              <FirstToScore
-                match={match}
-                onChange={(team) => {
-                  setPrediction((prevState) => ({ ...prevState, firstTeamToScore: team._id }));
-                }}
-                prevData={[match.homeTeam, match.awayTeam].find((t) => t._id === prediction.firstTeamToScore)}
-                disabled={match?.status.status !== 'NS'}
-              />
-            )}
-          </div>
-          <div className="w-full mt-2">
-            {match && isBasketball && (
-              <HighScorer
-                match={match}
-                onChange={(player) => {
-                  setPrediction((prevState) => ({ ...prevState, highestScoringPlayer: player._id }));
-                }}
-                prevData={[...match.homeTeam.players, ...match.awayTeam.players].find(
-                  (t) => t._id === prediction.manOfTheMatch,
-                )}
-                disabled={match?.status.status !== 'NS'}
-              />
-            )}
-          </div>
-          <div className="flex items-center justify-center py-3 w-full">
-            <Button
-              onClick={hasPredicted ? updatePrediction : sendPrediction}
-              color="#2075f8"
-              className="w-full"
-              disabled={loading || match?.status.status !== 'NS'}
-              loading={loading}
-              variant="filled"
-              size="md"
-            >
-              {hasPredicted ? 'Update' : 'Submit'}
-            </Button>
-          </div>
-        </div>
+        )}
       </Modal>
     </>
   );
