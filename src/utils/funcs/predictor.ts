@@ -2,7 +2,7 @@ import { UserPrediction } from '@prisma/client';
 import { Match } from '../types/types1';
 import { RefType } from '../types/types2';
 
-export const calCulatePoints = (userPrediction: UserPrediction, match: Match) => {
+export const calculateUserPoints = (userPrediction: UserPrediction, match: Match) => {
   const { homeTeam, awayTeam, stats, fantasy, category } = match;
   const isBasketball = category === 'basketball';
   const isFootball = category === 'football';
@@ -17,22 +17,22 @@ export const calCulatePoints = (userPrediction: UserPrediction, match: Match) =>
   let correctAwayScore = 0;
   let correctScore = 0; // TODO: to be discussed later
 
-  // compare score and update
+  //* compare score and update
   const homeTeamScore = isBasketball ? stats.homeTeamStats.points : stats.homeTeamStats.goals;
   const awayTeamScore = isBasketball ? stats.awayTeamStats.points : stats.awayTeamStats.goals;
-  if (userPrediction.prediction.homeScore === homeTeamScore) {
-    userPoints += 6;
-    correctHomeScore = 6;
-  }
-  if (userPrediction.prediction.awayScore === awayTeamScore) {
-    userPoints += 6;
-    correctAwayScore = 6;
-  }
-  // if user predicted the correct winner or correct draw + 5 points
-  const winnerOrDraw =
-    homeTeamScore === awayTeamScore ? 'draw' : homeTeamScore > awayTeamScore ? homeTeam._id : awayTeam._id;
   const userHomeScore = userPrediction.prediction.homeScore;
   const userAwayScore = userPrediction.prediction.awayScore;
+
+  //* handle user score points. if user predicted the correct score + 6 points
+  const homeTeamPoints = calculateScorePoints(userHomeScore, homeTeamScore, category);
+  const awayTeamPoints = calculateScorePoints(userAwayScore, awayTeamScore, category);
+  userPoints += homeTeamPoints + awayTeamPoints;
+  correctHomeScore = homeTeamPoints;
+  correctAwayScore = awayTeamPoints;
+
+  //* if user predicted the correct winner or correct draw + 5 points
+  const winnerOrDraw =
+    homeTeamScore === awayTeamScore ? 'draw' : homeTeamScore > awayTeamScore ? homeTeam._id : awayTeam._id;
   const userWinnerOrDraw =
     userHomeScore === userAwayScore ? 'draw' : userHomeScore > userAwayScore ? homeTeam._id : awayTeam._id;
   if (winnerOrDraw === userWinnerOrDraw) {
@@ -40,23 +40,23 @@ export const calCulatePoints = (userPrediction: UserPrediction, match: Match) =>
     correctOutcome = 5;
   }
 
-  // if user predicted the correct score + 7 points
+  //* if user predicted the correct score + 7 points
   if (userHomeScore === homeTeamScore && userAwayScore === awayTeamScore) {
     userPoints += 7;
     correctScore = 7;
   }
 
-  // if user predicted the correct man of the match + 10 points
+  //* if user predicted the correct man of the match + 10 points
   if (userPrediction.prediction.manOfTheMatch === (fantasy.manOfTheMatch as RefType)._ref) {
     userPoints += 10;
     correctManOfTheMatch = 10;
   }
-  // if user predicted the correct first team to score + 5 points and is football
+  //* if user predicted the correct first team to score + 5 points and is football
   if (isFootball && userPrediction.prediction.firstTeamToScore === (fantasy.firstTeamToScore as RefType)._ref) {
     userPoints += 6;
     correctFirstTeamToScore = 6;
   }
-  // if user predicted the correct highest scoring player + 5 points an is basketball
+  //* if user predicted the correct highest scoring player + 5 points an is basketball
   if (
     isBasketball &&
     userPrediction.prediction.highestScoringPlayer === (fantasy.highestScoringPlayer as RefType)._ref
@@ -77,3 +77,18 @@ export const calCulatePoints = (userPrediction: UserPrediction, match: Match) =>
     },
   };
 };
+
+function calculateScorePoints(userScore: number, actualScore: number, category: string): number {
+  const isBasketball = category === 'basketball';
+  if (!userScore || Number.isNaN(userScore)) return 0;
+  let points = 0;
+
+  if (userScore === actualScore) {
+    points += 6;
+  } else if (Math.abs(userScore - actualScore) <= 4 && isBasketball) {
+    const scoreAway = 5 - Math.abs(userScore - actualScore); // 5 (6-1) because to give credit to one with exact answer i.e gets 1 bonus points
+    points += scoreAway;
+  }
+
+  return points;
+}

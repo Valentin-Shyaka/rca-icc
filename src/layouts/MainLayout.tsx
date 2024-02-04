@@ -24,7 +24,6 @@ const MainLayout = (props: Props) => {
   const host = window.location.host;
   const protocol = window.location.protocol;
   const baseUrl = `${protocol}//${host}`;
-  console.log(baseUrl, protocol);
   // const [isExploding, setIsExploding] = useState(true);
 
   return (

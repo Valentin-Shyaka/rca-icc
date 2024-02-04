@@ -1,10 +1,9 @@
 import prisma from '@/lib/prisma';
-import { calCulatePoints } from '@/utils/funcs/predictor';
+import { calculateUserPoints } from '@/utils/funcs/predictor';
 import { Match } from '@/utils/types/types1';
-import { RefType } from '@/utils/types/types2';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-// ! This is the method specified in sanity webhook. Be careful when changing it
+// ! This is the method specified in sanity webhook. Be careful when changing it and query below is returning the match object (one in sanity webhook)
 /* 
  {_id,title,description,date,"homeTeam": homeTeam->{
         _id,
@@ -37,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         fantasy,
         category,
       });
-      // If match is not finished, don't update the score
+      //* If match is not finished, don't update the score
       if (status.status !== 'FT') {
         res.status(200).json({ message: 'Match not finished' });
         return;
@@ -48,9 +47,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           matchId: _id,
         },
       });
-      //   map through the userPredictions and update the score (points) of each user
+      //* map through the userPredictions and update the score (points) of each user
       userPredictions.map(async (userPrediction) => {
-        const finalPoint = calCulatePoints(userPrediction, req.body as Match);
+        const finalPoint = calculateUserPoints(userPrediction, req.body as Match);
         await prisma.userPrediction.update({
           where: { id: userPrediction.id },
           data: {
