@@ -1,3 +1,4 @@
+import { Match } from '@/utils/types/types1';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { BiBell } from 'react-icons/bi';
@@ -7,9 +8,10 @@ interface Props {
   endTime: Date;
   startTime: Date;
   isFinished: boolean;
+  match: Match;
 }
 
-function CountdownTimer({ targetDate, startTime, endTime, isFinished }: Props) {
+function CountdownTimer({ targetDate, startTime, endTime, isFinished, match }: Props) {
   const calculateTimeLeft = () => {
     const difference = +new Date(targetDate) - +new Date();
 
@@ -46,11 +48,11 @@ function CountdownTimer({ targetDate, startTime, endTime, isFinished }: Props) {
   return (
     <div className="flex flex-col items-center w-full">
       <div className="flex w-full flex-col items-center justify-center gap-3">
-        <span className=" text-center">⚠️⚠️ BASKETBALL FINAL ⚠️⚠️</span>
+        <span className=" text-center capitalize">{match.category} Match</span>
         <div className="flex items-center gap-x-3">
-          <span className=" font-bold text-4xl">Y2 BC</span>
+          <span className=" font-bold text-4xl">{match.homeTeam.name}</span>
           <span className=" font-bold text-xl">vs</span>
-          <span className=" font-bold text-4xl">Y3 BC</span>
+          <span className=" font-bold text-4xl">{match.awayTeam.name}</span>
         </div>
       </div>
       {!Object.keys(timeLeft).length ? (

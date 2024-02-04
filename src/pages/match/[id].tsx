@@ -84,7 +84,7 @@ const MatchPage = () => {
     <MainLayout isGeneral title={seo.title} seo={seo}>
       <div className={`flex px-2 flex-col tablet:w-4/5 max-w-[1000px] w-full shadow-md mx-auto`}>
         <div className="flex px-3 items-center justify-between w-full">
-          <p className="text-violet-400">
+          <p className="text-violet-1000">
             <span className=" cursor-pointer capitalize">{match?.category}</span>
             <span className={`ml-2 text-orange`}>
               {isToday ? 'Today' : <Moment format="DD MMM">{match?.date}</Moment>}
@@ -95,8 +95,8 @@ const MatchPage = () => {
         <div className="flex px-4 py-4 max-w-[800px] w-full justify-between mx-auto mt-4">
           <div className="flex gap-3 align-middle text-center flex-col">
             <Link href={`/team/${match?.homeTeam._id}`} className="flex five:flex-row flex-col items-center gap-2">
-              <Image src={match?.homeTeam.logo ?? '/images/teamImage.svg'} alt="team1" width={40} height={40} />
-              <p className="text-md text-slate-700">{match?.homeTeam.name}</p>
+              <Image src={match?.homeTeam.logo ?? '/images/teamImage.svg'} alt="team1" width={100} height={100} />
+              <p className="text-md text-slate-700 text-xl font-semibold">{match?.homeTeam.name}</p>
             </Link>
             {hasStarted && !isBasketball && (
               <div className="flex flex-col gap-y-1">
@@ -120,7 +120,7 @@ const MatchPage = () => {
                 <span className="">FT</span>
               </>
             ) : (
-              <span className=" text-sm text-slate-500 ">VS</span>
+              <span className=" text-sm text-slate-500 my-auto ">VS</span>
             )}
           </div>
           <div className="flex gap-3 align-middle text-center flex-col">
@@ -128,8 +128,8 @@ const MatchPage = () => {
               href={`/team/${match?.awayTeam._id}`}
               className="flex five:flex-row flex-col-reverse items-center gap-2"
             >
-              <p className="text-md text-slate-700">{match?.awayTeam.name}</p>
-              <Image src={match?.awayTeam.logo ?? '/images/teamImage2.svg'} alt="team1" width={40} height={40} />
+              <p className="text-md text-slate-700 text-xl font-semibold">{match?.awayTeam.name}</p>
+              <Image src={match?.awayTeam.logo ?? '/images/teamImage2.svg'} alt="team1" width={100} height={100} />
             </Link>
             {hasStarted && !isBasketball && (
               <div className="flex flex-col gap-y-1">

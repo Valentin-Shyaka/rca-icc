@@ -27,7 +27,7 @@ const SideBar = () => {
 				</div>
 			</div> */}
       <div className="flex flex-col gap-y-2">
-        <span className="px-2 font-semibold">🔥 Trendings</span>
+        <span className="px-2 font-semibold">🔥 Trending</span>
         <div className="flex flex-col rounded-md  border-divBack border-2">
           {trends?.map((trend, i) => (
             <Link
@@ -38,9 +38,10 @@ const SideBar = () => {
               {trend.title}
             </Link>
           ))}
+          {trends?.length === 0 && <p className="text-center">No trending news</p>}
         </div>
       </div>
-      <div className="flex flex-col gap-y-2">
+      {/* <div className="flex flex-col gap-y-2">
         <span className="px-2 font-semibold">Football Matchdays</span>
         <div className="flex flex-col py-5 rounded-md  border-divBack border-2">
           {new Array(5).fill(0).map((v, i) => (
@@ -53,7 +54,7 @@ const SideBar = () => {
             </Link>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
