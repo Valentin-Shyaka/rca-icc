@@ -17,15 +17,15 @@ const index = () => {
     },
     {
       action: 'First Team to Score (Football)',
-      bonusPoint: 5,
+      bonusPoint: 6,
     },
     {
       action: 'Away score ',
-      bonusPoint: 5,
+      bonusPoint: 6,
     },
     {
       action: 'Home score',
-      bonusPoint: 5,
+      bonusPoint: 6,
     },
     {
       action: 'Highest scoring player (Basketball)',
@@ -34,6 +34,10 @@ const index = () => {
     {
       action: 'Match Winner Prediction',
       bonusPoint: 5,
+    },
+    {
+      action: 'correct outcome (home and away)',
+      bonusPoint: 7,
     },
   ];
 
