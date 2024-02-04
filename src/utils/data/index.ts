@@ -63,22 +63,22 @@ export const gamingNavs: CompNav[] = [
 export const gamingEvents = [
   {
     name: 'overview',
-    path: 'gaming',
+    path: '/gaming',
     icon: React.createElement(BiHome),
   },
   {
     name: 'football',
-    path: 'gaming/football',
+    path: '/gaming/football',
     icon: React.createElement(BiFootball),
   },
   {
     name: 'basketball',
-    path: 'gaming/basketball',
+    path: '/gaming/basketball',
     icon: React.createElement(BiBasketball),
   },
   {
     name: 'volleyball',
-    path: 'gaming/volleyball',
+    path: '/gaming/volleyball',
     icon: React.createElement(GiVolleyballBall),
   },
   // {

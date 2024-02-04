@@ -12,13 +12,13 @@ interface Props {
 const EventLinks = ({ routes }: Props) => {
   const [active, setActive] = useState('');
   const router = useRouter();
+  const { pathname } = router;
 
   useEffect(() => {
-    const { pathname } = router;
     const path = pathname.split('/')[1];
 
     setActive(path);
-  }, [router]);
+  }, [pathname]);
 
   const activeEventStyle =
     'w-full h-[40px] border-2 hover:bg-blue-200 border-[#2076F8] px-3 py-2 rounded rounded-full flex items-center gap-2 justify-center cursor-pointer text-white bg-[#2076F8]';
@@ -29,7 +29,8 @@ const EventLinks = ({ routes }: Props) => {
       {/* <div className='w-full flex justify-center gap-6 p-4'> */}
       {routes.map((item) => {
         const isHome = item.name === 'home' && active === '';
-        const isActive = item.name === active || isHome;
+        const isActive = item.name === active || isHome || pathname === item.path;
+        console.log('isActive', pathname, item.path);
         return (
           <Link className=" w-full m-2" href={`/${item.path}`} key={item.name}>
             <div className={` border-gray ${isActive ? activeEventStyle : eventStyle}`}>

@@ -19,13 +19,18 @@ export const getFile = (fileName: string | null | undefined) =>
  * @returns
  */
 export const createUserFromToken = async (token: string) => {
-  return fetch('/api/users/create-from-token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ token }),
-  });
+  try {
+    const res = await fetch('/api/users/create-from-token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token }),
+    });
+    console.log('res Create', res);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getResError = (error?: any, defaultMs: string = 'Something Went Wrong') => {

@@ -4,12 +4,14 @@ import Link from 'next/link';
 import { competitions } from '../utils/data/other';
 import { useApp } from '../contexts/AppProvider';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 const MatchCard = dynamic(() => import('@/components/MatchCard'));
 const Countdown = dynamic(() => import('@/components/other/Countdown'));
 const MainLayout = dynamic(() => import('@/layouts/MainLayout'));
 
 const Home: NextPage = () => {
   const { matches, trends, friendlyMatches } = useApp();
+  // const [isFinished, setIsFinished] = useState(true);
 
   const finishedMatches = matches
     ?.filter((match) => match?.status?.status === 'FT' || match?.status?.status === 'FF')
@@ -22,22 +24,29 @@ const Home: NextPage = () => {
   const todayMatch = unfinishedMatches?.filter((match) => new Date(match.date).getDate() === new Date().getDate())[0];
   const mainTrend = trends?.slice(0, 1)[0];
 
+  // useEffect
   // make a data of 25th March 2023 16:30 into readable javascript date
   const date = new Date(todayMatch?.date!);
   // make a date which is greater tha today's match by 3 hours
   const finishDate = new Date(date.getTime() + 1000 * 60 * 60 * 2);
   console.log('date', finishDate.toString());
   const isFinished = new Date().getTime() > finishDate.getTime();
-  console.log(isFinished);
+  console.log('isFinished', isFinished);
 
   return (
     <>
       <MainLayout title="ICC - Home" isGeneral>
         <main className="flex w-full flex-1 flex-col p-2 gap-y-3 overflow-x-hidden">
-          {!isFinished && todayMatch && (
+          {!isFinished && todayMatch && todayMatch.status.status === 'NS' && (
             <div className="flex flex-col border-2 rounded-md p-2 border-gray gap-y-3">
               <h1 className="text-xl font-semibold">Today&apos;s main match</h1>
-              <Countdown isFinished={isFinished} targetDate={date} endTime={finishDate} startTime={date} />
+              <Countdown
+                match={todayMatch}
+                isFinished={isFinished}
+                targetDate={date}
+                endTime={finishDate}
+                startTime={date}
+              />
             </div>
           )}
           {trends && trends?.length > 0 && (
@@ -74,12 +83,14 @@ const Home: NextPage = () => {
               </div>
             </div>
           )}
-          <div className="flex flex-col border-2 rounded-md p-2 border-gray">
-            <h1 className="text-xl font-semibold">Latest Results</h1>
-            <div className="grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2">
-              {finishedMatches?.map((match) => <MatchCard key={match._id} {...match} />)}
+          {finishedMatches && finishedMatches?.length > 0 && (
+            <div className="flex flex-col border-2 rounded-md p-2 border-gray">
+              <h1 className="text-xl font-semibold">Latest Results</h1>
+              <div className="grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2">
+                {finishedMatches?.map((match) => <MatchCard key={match._id} {...match} />)}
+              </div>
             </div>
-          </div>
+          )}
           <div className="flex flex-col border-2 rounded-md p-2 border-gray">
             <h1 className="text-xl font-semibold">Upcoming Matches</h1>
             <div className="grid w-full mt-4 desktop:grid-cols-3 five:grid-cols-2 gap-2">

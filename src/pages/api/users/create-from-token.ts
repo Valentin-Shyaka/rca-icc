@@ -44,4 +44,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.status(500).json({ error: error.message });
     }
   }
+
+  // if (req.method === 'GET') {
+  //   try {
+  //     const {token} = req.query;
+  //     const response = await fetch('http://194.163.167.131:6543/api/v1/auth/profile', {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     const _res = await response.json();
+  //     console.log('res', _res.data.message);
+  //     const data = _res.data;
+  //     const mis_user = data.user;
+  //     const mis_person: UserProfile = data.person;
+
+  // }
 }

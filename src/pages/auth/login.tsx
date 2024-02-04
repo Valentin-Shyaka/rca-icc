@@ -1,11 +1,10 @@
 import { createUserFromToken, decodeToken } from '@/utils/funcs/fetch';
-import { Button } from '@mantine/core';
+import { setCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
 import { LuLoader2 } from 'react-icons/lu';
-import { setCookie } from 'cookies-next';
 
 const LoginPage = () => {
   const [loading, setLoading] = React.useState(false);
@@ -21,6 +20,7 @@ const LoginPage = () => {
         setLoading(true);
         setCookie('token', token, { maxAge: 60 * 60 * 24 });
         await createUserFromToken(token);
+        console.log('user created if not exists');
         window.location.href = '/gaming';
       }
     };

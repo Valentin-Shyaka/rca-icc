@@ -1,5 +1,5 @@
+import { useUser } from '@/contexts/UserProvider';
 import GamingLayout from '@/layouts/GamingLayout';
-import { Table } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { User } from '@prisma/client';
 import axios from 'axios';
@@ -14,6 +14,7 @@ interface Standing {
 const FootTableIndex = () => {
   const [standings, setStandings] = React.useState<Standing[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const { user } = useUser();
 
   // api/fantasy/score/update-score
   const getStandings = async () => {
@@ -39,8 +40,8 @@ const FootTableIndex = () => {
   return (
     <GamingLayout title="Football - Table" isGeneral>
       <div className="p-3 gap-y-3">
-        <h3 className=" text-center">Fantasy Standings</h3>
-        <div className="float-left font-bold text-lg px-3">
+        <h3 className=" text-center text-xl font-semibold">Fantasy Standings</h3>
+        <div className="float-left mt-4 font-bold text-lg px-3">
           <h3>Standings</h3>
         </div>
         <div className="flex flex-col w-full items-center overflow-x-auto">
@@ -50,18 +51,21 @@ const FootTableIndex = () => {
               Loading Standings...
             </h1>
           )}
+          {!loading && standings.length === 0 && (
+            <h1 className="flex gap-2 flex-col items-center text-sm">No Standings So Far. Will be available after</h1>
+          )}
           {standings.length > 0 && (
-            <table>
+            <table className="mt-2">
               <thead>
                 <tr>
                   <th align="left" className="p-2">
                     Rank
                   </th>
-                  <th align="left" className="p-2">
+                  {/* <th align="left" className="p-2">
                     First Name
-                  </th>
+                  </th> */}
                   <th align="left" className="p-2">
-                    Last Name
+                    Name
                   </th>
                   <th align="left" className="p-2">
                     Points
@@ -69,22 +73,28 @@ const FootTableIndex = () => {
                 </tr>
               </thead>
               <tbody>
-                {standings.map((standing, i) => (
-                  <tr key={standing.user.id}>
-                    <td align="left" className="p-2">
-                      {i + 1}
-                    </td>
-                    <td align="left" className="p-2">
+                {standings.map((standing, i) => {
+                  const isMe = standing.user.mis_id === user?.id;
+                  return (
+                    <tr
+                      key={standing.user.id}
+                      className={` ${isMe ? 'bg-blue text- hover:text-black hover:bg-gray-100 text-white' : ''} ${i % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}
+                    >
+                      <td align="left" className="p-2">
+                        {i + 1}.
+                      </td>
+                      {/* <td align="left" className="p-2">
                       {standing.user.firstName}
-                    </td>
-                    <td align="left" className="p-2">
-                      {standing.user.lastName}
-                    </td>
-                    <td align="left" className="p-2">
-                      {standing.points}
-                    </td>
-                  </tr>
-                ))}
+                    </td> */}
+                      <td align="left" className="p-2 capitalize">
+                        {`${standing.user.firstName?.[0]}. ${standing.user.lastName}`}
+                      </td>
+                      <td align="left" className="p-2">
+                        {standing.points}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           )}

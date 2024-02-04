@@ -9,33 +9,43 @@ export const calCulatePoints = (userPrediction: UserPrediction, match: Match) =>
 
   // Points handlers
   let userPoints = 0;
-  let correctWinner = 0;
+  let correctOutcome = 0;
   let correctManOfTheMatch = 0;
   let correctFirstTeamToScore = 0;
   let correctHighestScoringPlayer = 0;
   let correctHomeScore = 0;
   let correctAwayScore = 0;
-  //   let correctScore = 0;  // TODO: to be discussed later
+  let correctScore = 0; // TODO: to be discussed later
 
   // compare score and update
   const homeTeamScore = isBasketball ? stats.homeTeamStats.points : stats.homeTeamStats.goals;
   const awayTeamScore = isBasketball ? stats.awayTeamStats.points : stats.awayTeamStats.goals;
   if (userPrediction.prediction.homeScore === homeTeamScore) {
-    userPoints += 5;
-    correctHomeScore = 5;
+    userPoints += 6;
+    correctHomeScore = 6;
   }
   if (userPrediction.prediction.awayScore === awayTeamScore) {
-    userPoints += 5;
-    correctAwayScore = 5;
+    userPoints += 6;
+    correctAwayScore = 6;
   }
-  // if user predicted the correct winner + 5 points
-  const winner = homeTeamScore > awayTeamScore ? homeTeam._id : awayTeam._id;
-  const userWinner =
-    userPrediction.prediction.homeScore > userPrediction.prediction.awayScore ? homeTeam._id : awayTeam._id;
-  if (winner === userWinner) {
+  // if user predicted the correct winner or correct draw + 5 points
+  const winnerOrDraw =
+    homeTeamScore === awayTeamScore ? 'draw' : homeTeamScore > awayTeamScore ? homeTeam._id : awayTeam._id;
+  const userHomeScore = userPrediction.prediction.homeScore;
+  const userAwayScore = userPrediction.prediction.awayScore;
+  const userWinnerOrDraw =
+    userHomeScore === userAwayScore ? 'draw' : userHomeScore > userAwayScore ? homeTeam._id : awayTeam._id;
+  if (winnerOrDraw === userWinnerOrDraw) {
     userPoints += 5;
-    correctWinner = 5;
+    correctOutcome = 5;
   }
+
+  // if user predicted the correct score + 7 points
+  if (userHomeScore === homeTeamScore && userAwayScore === awayTeamScore) {
+    userPoints += 7;
+    correctScore = 7;
+  }
+
   // if user predicted the correct man of the match + 10 points
   if (userPrediction.prediction.manOfTheMatch === (fantasy.manOfTheMatch as RefType)._ref) {
     userPoints += 10;
@@ -43,8 +53,8 @@ export const calCulatePoints = (userPrediction: UserPrediction, match: Match) =>
   }
   // if user predicted the correct first team to score + 5 points and is football
   if (isFootball && userPrediction.prediction.firstTeamToScore === (fantasy.firstTeamToScore as RefType)._ref) {
-    userPoints += 5;
-    correctFirstTeamToScore = 5;
+    userPoints += 6;
+    correctFirstTeamToScore = 6;
   }
   // if user predicted the correct highest scoring player + 5 points an is basketball
   if (
@@ -57,12 +67,13 @@ export const calCulatePoints = (userPrediction: UserPrediction, match: Match) =>
   return {
     userPoints,
     components: {
-      correctWinner,
+      correctOutcome,
       correctManOfTheMatch,
       correctFirstTeamToScore,
       correctHighestScoringPlayer,
       correctHomeScore,
       correctAwayScore,
+      correctScore,
     },
   };
 };

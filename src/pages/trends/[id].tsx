@@ -39,13 +39,15 @@ const TrendsIndex = () => {
     <MainLayout isGeneral title={seo.title} seo={seo}>
       <div className=" flex flex-col gap-y-3 five:p-3 p-1 w-full">
         <h1 className="text-lg font-semibold text-center">{trend?.title}</h1>
-        <Image
-          src={trend?.image ?? ''}
-          height={1080}
-          className=" w-full object-cover max-h-[70vh]"
-          width={1920}
-          alt="TrendImage"
-        />
+        <div className=" max-h-[70vh] w-full">
+          <Image
+            src={trend?.image ?? ''}
+            height={1080}
+            className=" h-full object-contain"
+            width={1920}
+            alt="TrendImage"
+          />
+        </div>
         {trend?.description.split('<nextp>').map((p, i) => (
           <p key={i} className=" mt-3">
             {p}
