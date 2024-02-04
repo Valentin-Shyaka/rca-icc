@@ -1,3 +1,3 @@
 # RCA-ICC
 
-site for all RCA Interclass Competitions. 
+site for all RCA Interclass Competitions.
