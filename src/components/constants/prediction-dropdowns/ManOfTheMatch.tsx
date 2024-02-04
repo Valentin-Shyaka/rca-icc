@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { BiSolidChevronUp } from 'react-icons/bi';
 import { FaPlus } from 'react-icons/fa';
-import { Match, Player, Team } from '../../../utils/types/types1';
+import { Match, Player } from '../../../utils/types/types1';
 
-import Image from 'next/image';
 import { Collapse, Tabs } from '@mantine/core';
+import Image from 'next/image';
 interface Props {
   match: Match;
   onChange: (player: Player) => void;
@@ -88,7 +88,7 @@ const ManOfTheMatch = ({ match, onChange, prevData, disabled }: Props) => {
   );
 };
 
-const SelectablePlayer = ({
+export const SelectablePlayer = ({
   player,
   isActive,
   onChange,
@@ -112,11 +112,14 @@ const SelectablePlayer = ({
         alt={player.displayName}
       />
       <p className="text-left font-bold ">{player.displayName}</p>
-      {player.position?.map((pos, key) => (
+      {/* {player.position?.map((pos, key) => (
         <p key={key} className="text-left capitalize font-bold text-slate-600 text-xs">
           {pos}
         </p>
-      ))}
+      ))} */}
+      <p key={'key'} className="text-center capitalize font-bold text-slate-600 text-xs">
+        {player.fullName}
+      </p>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { RefType, TimeType } from './types2';
 
 export type Player = {

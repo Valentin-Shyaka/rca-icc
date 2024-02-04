@@ -2,6 +2,12 @@ import { UserPrediction } from '@prisma/client';
 import { Match } from '../types/types1';
 import { RefType } from '../types/types2';
 
+/**
+ * Calculate user points
+ * @param {UserPrediction} userPrediction
+ * @param {Match} match
+ * @returns A summary of the user points and the components that contributed to the points
+ */
 export const calculateUserPoints = (userPrediction: UserPrediction, match: Match) => {
   const { homeTeam, awayTeam, stats, fantasy, category } = match;
   const isBasketball = category === 'basketball';
@@ -13,8 +19,8 @@ export const calculateUserPoints = (userPrediction: UserPrediction, match: Match
   let correctManOfTheMatch = 0;
   let correctFirstTeamToScore = 0;
   let correctHighestScoringPlayer = 0;
-  let correctHomeScore = 0;
-  let correctAwayScore = 0;
+  let correctHomeScore = { points: 0, scoreAway: 0 };
+  let correctAwayScore = { points: 0, scoreAway: 0 };
   let correctScore = 0; // TODO: to be discussed later
 
   //* compare score and update
@@ -26,7 +32,7 @@ export const calculateUserPoints = (userPrediction: UserPrediction, match: Match
   //* handle user score points. if user predicted the correct score + 6 points
   const homeTeamPoints = calculateScorePoints(userHomeScore, homeTeamScore, category);
   const awayTeamPoints = calculateScorePoints(userAwayScore, awayTeamScore, category);
-  userPoints += homeTeamPoints + awayTeamPoints;
+  userPoints += homeTeamPoints.points + awayTeamPoints.points;
   correctHomeScore = homeTeamPoints;
   correctAwayScore = awayTeamPoints;
 
@@ -78,17 +84,21 @@ export const calculateUserPoints = (userPrediction: UserPrediction, match: Match
   };
 };
 
-function calculateScorePoints(userScore: number, actualScore: number, category: string): number {
+function calculateScorePoints(
+  userScore: number,
+  actualScore: number,
+  category: string,
+): { points: number; scoreAway: number } {
   const isBasketball = category === 'basketball';
-  if (!userScore || Number.isNaN(userScore)) return 0;
+  if (!userScore || Number.isNaN(userScore)) return { points: 0, scoreAway: 0 };
   let points = 0;
-
+  const scoreAway = Math.abs(userScore - actualScore);
   if (userScore === actualScore) {
     points += 6;
   } else if (Math.abs(userScore - actualScore) <= 4 && isBasketball) {
-    const scoreAway = 5 - Math.abs(userScore - actualScore); // 5 (6-1) because to give credit to one with exact answer i.e gets 1 bonus points
-    points += scoreAway;
+    const pointsAway = 5 - Math.abs(userScore - actualScore); // 5 (6-1) because to give credit to one with exact answer i.e gets 1 bonus points
+    points += pointsAway;
   }
 
-  return points;
+  return { points, scoreAway };
 }

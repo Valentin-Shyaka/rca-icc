@@ -14,6 +14,7 @@ import { Match } from '../../utils/types/types1';
 import FirstToScore from './prediction-dropdowns/FirstToScore';
 import HighScorer from './prediction-dropdowns/HighScorer';
 import ManOfTheMatch from './prediction-dropdowns/ManOfTheMatch';
+import PredictionResults from './prediction-dropdowns/PredictionResults';
 
 interface Props {
   isOpen: boolean;
@@ -58,8 +59,6 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
     }
     setGettingMatch(false);
   };
-
-  console.log('match', match);
 
   const sendPrediction = async () => {
     setLoading(true);
@@ -119,8 +118,6 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
   // find in user_prediction
   const getPrevPrediction = () => {
     const userPrevPrediction = userPredictions?.find((pred) => pred.matchId === matchId);
-    console.log('userPredictions', userPredictions);
-    console.log('userPrevPrediction', userPrevPrediction);
     if (userPrevPrediction) setHasPredicted(true);
     setUserPrediction(userPrevPrediction!);
     setPrediction({
@@ -144,7 +141,7 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
 
   const isFootball = match?.category.toLowerCase() === 'football';
   const isBasketball = match?.category.toLowerCase() === 'basketball';
-  const isVolleyball = match?.category.toLowerCase() === 'volleyball';
+  // const isVolleyball = match?.category.toLowerCase() === 'volleyball';
 
   // TODO: Add Popular Predictions
   return (
@@ -170,6 +167,9 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
               <p className="text-lg font-semibold text-blue-500">Fetching Match Details...</p>
             </div>
           </div>
+        ) : // Show Prediction Results  if match is finished
+        match?.status.status === 'FT' ? (
+          <PredictionResults match={match} userPrediction={userPrediction} />
         ) : (
           <div className="flex-1 flex flex-col gap-3 justify-center">
             {/* error */}
