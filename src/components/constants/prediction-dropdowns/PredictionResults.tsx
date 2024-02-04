@@ -26,6 +26,8 @@ const PredictionResults = ({ match, userPrediction }: Props) => {
 
   const userHomeScorePoints = userScoreSummary?.components.correctHomeScore.points ?? 0;
   const userAwayScorePoints = userScoreSummary?.components.correctAwayScore.points ?? 0;
+  const userOutcome = userScoreSummary?.components.correctOutcome ?? 0;
+  const userCorrectScore = userScoreSummary?.components.correctScore ?? 0;
 
   // player fantasies
   const matchPlayers = match.homeTeam.players.concat(match.awayTeam.players);
@@ -51,7 +53,7 @@ const PredictionResults = ({ match, userPrediction }: Props) => {
       </span>
       <div className="flex w-full flex-col gap-y-2">
         <h1 className=" text-center font-semibold">
-          1. Score Results ({userAwayScorePoints + userHomeScorePoints}
+          1. Score Results ({userAwayScorePoints + userHomeScorePoints + userOutcome + userCorrectScore}
           &nbsp; Pts)
         </h1>
         <div className="flex gap-2 justify-center items-center ">
@@ -74,13 +76,15 @@ const PredictionResults = ({ match, userPrediction }: Props) => {
             </div>
           </div>
         </div>
-        <span className=" text-center font-semibold">
-          You Said {userPrediction?.prediction.homeScore} - {userPrediction?.prediction.awayScore}
-          &nbsp;{' '}
+        <div className="flex flex-col items-center">
+          <span className=" text-center font-semibold">
+            You Said {userPrediction?.prediction.homeScore} - {userPrediction?.prediction.awayScore}
+            &nbsp;{' '}
+          </span>
           {exactScore ? (
-            <span className=" text-green-700 font-semibold">
+            <span className=" text-green-700 text-center font-semibold">
               You've got it exactly right 🤩 ({userAwayScorePoints + userHomeScorePoints}
-              Points)
+              &nbsp; Points) <br /> + {userCorrectScore} Bonus Points for correct score 🥳
             </span>
           ) : (
             <div className="flex flex-col font-medium">
@@ -119,7 +123,13 @@ const PredictionResults = ({ match, userPrediction }: Props) => {
               )}
             </div>
           )}
-        </span>
+          {/* Correct Outcome */}
+          {userOutcome > 0 && (
+            <span className=" text-center font-semibold text-green-700">
+              You got the outcome right ({userOutcome} Points)
+            </span>
+          )}
+        </div>
       </div>
       <div className="flex w-full flex-col gap-y-2">
         <h1 className=" text-center font-semibold">

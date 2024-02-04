@@ -21,7 +21,7 @@ export const calculateUserPoints = (userPrediction: UserPrediction, match: Match
   let correctHighestScoringPlayer = 0;
   let correctHomeScore = { points: 0, scoreAway: 0 };
   let correctAwayScore = { points: 0, scoreAway: 0 };
-  let correctScore = 0; // TODO: to be discussed later
+  let correctScore = 0;
 
   //* compare score and update
   const homeTeamScore = isBasketball ? stats.homeTeamStats.points : stats.homeTeamStats.goals;
@@ -46,10 +46,10 @@ export const calculateUserPoints = (userPrediction: UserPrediction, match: Match
     correctOutcome = 5;
   }
 
-  //* if user predicted the correct score + 7 points
+  //* if user predicted the correct score + 3 points
   if (userHomeScore === homeTeamScore && userAwayScore === awayTeamScore) {
-    userPoints += 7;
-    correctScore = 7;
+    userPoints += 3;
+    correctScore = 3;
   }
 
   //* if user predicted the correct man of the match + 10 points
