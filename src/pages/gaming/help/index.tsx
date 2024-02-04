@@ -40,11 +40,35 @@ const index = () => {
       bonusPoint: 7,
     },
   ];
+  const pointsData = [
+    {
+      pointsAway: '1 point away',
+      scoreDifference: 4,
+    },
+    {
+      pointsAway: '2 point away',
+      scoreDifference: 3,
+    },
+    {
+      pointsAway: '3 point away',
+      scoreDifference: 2,
+    },
+    {
+      pointsAway: '4 point away',
+      scoreDifference: 1,
+    },
+  ];
 
   const rows = data.map((row) => (
     <Table.Tr key={row.action}>
       <Table.Td>{row.action}</Table.Td>
       <Table.Td>{row.bonusPoint}</Table.Td>
+    </Table.Tr>
+  ));
+  const listRows = pointsData.map((row) => (
+    <Table.Tr key={row.pointsAway}>
+      <Table.Td>{row.pointsAway}</Table.Td>
+      <Table.Td>{row.scoreDifference}</Table.Td>
     </Table.Tr>
   ));
   return (
@@ -87,6 +111,20 @@ const index = () => {
                   </List.Item>
                   <List.Item>You are allowed to update your prediction once the match has not started yet</List.Item>
                   <List.Item>No predictions will be made once the match has started</List.Item>
+                  <List.Item>
+                    Concerning Basketball score points allocation the points will be allocated as follows:
+                    <ScrollArea h={200}>
+                      <Table miw={600}>
+                        <Table.Thead className="">
+                          <Table.Tr>
+                            <Table.Th>Points away from score</Table.Th>
+                            <Table.Th>Points allocated</Table.Th>
+                          </Table.Tr>
+                        </Table.Thead>
+                        <Table.Tbody>{listRows}</Table.Tbody>
+                      </Table>
+                    </ScrollArea>
+                  </List.Item>
                 </List>
               </Accordion.Panel>
             </Accordion.Item>
