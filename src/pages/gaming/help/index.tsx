@@ -40,27 +40,24 @@ const index = () => {
       bonusPoint: 7,
     },
   ];
-  const pointsData=[
+  const pointsData = [
     {
-      pointsAway: "1 point away",
-      scoreDifference:4
-    },{
-      pointsAway: "2 point away",
-      scoreDifference:3
+      pointsAway: '1 point away',
+      scoreDifference: 4,
     },
     {
-      pointsAway: "3 point away",
-      scoreDifference:2
+      pointsAway: '2 point away',
+      scoreDifference: 3,
     },
     {
-      pointsAway: "4 point away",
-      scoreDifference:1
-    }
-  ]
-
-  
-  
-  
+      pointsAway: '3 point away',
+      scoreDifference: 2,
+    },
+    {
+      pointsAway: '4 point away',
+      scoreDifference: 1,
+    },
+  ];
 
   const rows = data.map((row) => (
     <Table.Tr key={row.action}>
@@ -127,7 +124,6 @@ const index = () => {
                         <Table.Tbody>{listRows}</Table.Tbody>
                       </Table>
                     </ScrollArea>
-                    
                   </List.Item>
                 </List>
               </Accordion.Panel>
