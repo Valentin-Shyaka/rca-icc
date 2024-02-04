@@ -13,15 +13,27 @@ const index = () => {
   const data = [
     {
       action: 'Man of The Match',
-      bonusPoint: 9,
-    },
-    {
-      action: 'First Team to Score',
-      bonusPoint: 3,
-    },
-    {
-      action: 'Match Score Prediction',
       bonusPoint: 10,
+    },
+    {
+      action: 'First Team to Score (Football)',
+      bonusPoint: 5,
+    },
+    {
+      action: 'Away score ',
+      bonusPoint: 5,
+    },
+    {
+      action: 'Home score',
+      bonusPoint: 5,
+    },
+    {
+      action: 'Highest scoring player (Basketball)',
+      bonusPoint: 10,
+    },
+    {
+      action: 'Match Winner Prediction',
+      bonusPoint: 5,
     },
   ];
 
