@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { FaListOl, FaUser } from 'react-icons/fa';
 import { MdScoreboard, MdTableChart } from 'react-icons/md';
+import { FaInfoCircle } from 'react-icons/fa';
 
 interface SideBarRoute {
   name: string;
@@ -28,5 +29,10 @@ export const gameSidebarRoutes: SideBarRoute[] = [
     name: 'Account',
     path: '/gaming/account',
     icon: React.createElement(FaUser, { size: 18 }),
+  },
+  {
+    name: 'Help',
+    path: '/gaming/help',
+    icon: React.createElement(FaInfoCircle, { size: 18 }),
   },
 ];
