@@ -81,20 +81,15 @@ const MatchPage = () => {
   };
 
   const mergedPlayers = match?.awayTeam.players.concat(match?.homeTeam.players);
-  
-
-  
 
   const manOfTheMatch = mergedPlayers?.filter(
     (player) => player._id == (match?.fantasy?.manOfTheMatch as RefType)?._ref,
   );
   const highestScorer = mergedPlayers?.filter(
     (player) => player._id == (match?.fantasy?.highestScoringPlayer as RefType)?._ref,
-
   );
-  const firstteamToScore= match?.awayTeam._id== (match?.fantasy.firstTeamToScore as RefType)?._ref ?(match?.awayTeam):(match?.homeTeam)
-
-
+  const firstteamToScore =
+    match?.awayTeam._id == (match?.fantasy.firstTeamToScore as RefType)?._ref ? match?.awayTeam : match?.homeTeam;
 
   // const isLive = match?.status?.status === 'LIVE';
 
