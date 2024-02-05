@@ -26,7 +26,7 @@ const ManOfTheMatch = ({ match, onChange, prevData, disabled }: Props) => {
     <div className=" max-sm:w-full h-fit p-2 border-b border-slate-300 cursor-pointer  ">
       <div onClick={() => setDropActive(!dropActive)} className="flex justify-between items-center">
         <p className="font-semibold text-sm text-warmGray-700">
-          Player Of the Match
+          2. Player Of the Match
           <span className=" font-bold ml-5 text-blue">
             ({selectedPlayer?.displayName ?? selectedPlayer?.fullName ?? 'Click To Choose'})
           </span>

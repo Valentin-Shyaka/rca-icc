@@ -12,6 +12,7 @@ export const calculateUserPoints = (userPrediction: UserPrediction, match: Match
   const { homeTeam, awayTeam, stats, fantasy, category } = match;
   const isBasketball = category === 'basketball';
   const isFootball = category === 'football';
+  // const isVolleyb
 
   // Points handlers
   let userPoints = 0;

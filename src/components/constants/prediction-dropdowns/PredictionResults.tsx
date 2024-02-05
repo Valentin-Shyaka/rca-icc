@@ -12,16 +12,16 @@ interface Props {
 }
 
 const PredictionResults = ({ match, userPrediction }: Props) => {
-  const isBasketball = match.category === 'basketball';
-  const isFootball = match.category === 'football';
-  const awayScore = isBasketball ? match.stats?.awayTeamStats?.points : match.stats?.awayTeamStats?.goals;
-  const homeScore = isBasketball ? match.stats?.homeTeamStats?.points : match.stats?.homeTeamStats?.goals;
+  const isBasketball = match?.category === 'basketball';
+  const isFootball = match?.category === 'football';
+  const awayScore = isBasketball ? match?.stats?.awayTeamStats?.points : match?.stats?.awayTeamStats?.goals;
+  const homeScore = isBasketball ? match?.stats?.homeTeamStats?.points : match?.stats?.homeTeamStats?.goals;
 
   const userScoreSummary = userPrediction ? calculateUserPoints(userPrediction, match) : null;
   const exactHomeScore =
-    userPrediction?.prediction.homeScore === match.stats.homeTeamStats[isBasketball ? 'points' : 'goals'];
+    userPrediction?.prediction.homeScore === match?.stats.homeTeamStats[isBasketball ? 'points' : 'goals'];
   const exactAwayScore =
-    userPrediction?.prediction.awayScore === match.stats.awayTeamStats[isBasketball ? 'points' : 'goals'];
+    userPrediction?.prediction.awayScore === match?.stats.awayTeamStats[isBasketball ? 'points' : 'goals'];
   const exactScore = exactHomeScore && exactAwayScore;
 
   const userHomeScorePoints = userScoreSummary?.components.correctHomeScore.points ?? 0;
@@ -30,19 +30,19 @@ const PredictionResults = ({ match, userPrediction }: Props) => {
   const userCorrectScore = userScoreSummary?.components.correctScore ?? 0;
 
   // player fantasies
-  const matchPlayers = match.homeTeam.players.concat(match.awayTeam.players);
-  const manOfTheMatch = matchPlayers.find((player) => player._id === (match.fantasy.manOfTheMatch as RefType)?._ref);
+  const matchPlayers = match?.homeTeam.players.concat(match?.awayTeam.players);
+  const manOfTheMatch = matchPlayers.find((player) => player._id === (match?.fantasy.manOfTheMatch as RefType)?._ref);
   const userManOfTheMatch = matchPlayers.find((player) => player._id === userPrediction?.prediction.manOfTheMatch);
   const highestScorer = matchPlayers.find(
-    (player) => player._id === (match.fantasy.highestScoringPlayer as RefType)?._ref,
+    (player) => player._id === (match?.fantasy.highestScoringPlayer as RefType)?._ref,
   );
   const userHighestScorer = matchPlayers.find(
     (player) => player._id === userPrediction?.prediction.highestScoringPlayer,
   );
 
   // team fantasies
-  const matchTeams = [match.homeTeam, match.awayTeam];
-  const firstTeamToScore = matchTeams.find((team) => team._id === (match.fantasy.firstTeamToScore as RefType)?._ref);
+  const matchTeams = [match?.homeTeam, match?.awayTeam];
+  const firstTeamToScore = matchTeams.find((team) => team._id === (match?.fantasy.firstTeamToScore as RefType)?._ref);
   const userFirstTeamToScore = matchTeams.find((team) => team._id === userPrediction?.prediction.firstTeamToScore);
 
   return (

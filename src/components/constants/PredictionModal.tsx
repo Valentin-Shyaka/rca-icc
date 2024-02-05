@@ -141,7 +141,7 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
 
   const isFootball = match?.category.toLowerCase() === 'football';
   const isBasketball = match?.category.toLowerCase() === 'basketball';
-  // const isVolleyball = match?.category.toLowerCase() === 'volleyball';
+  const isVolleyball = match?.category.toLowerCase() === 'volleyball';
 
   // TODO: Add Popular Predictions
   return (
@@ -183,6 +183,10 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
               <span className=" text-center font-semibold text-lg">
                 You Scored {userPrediction?.points} Points in this match
               </span>
+            )}
+            <h1 className=" text-center font-semibold">1. Predict Score (Goals, Points or Sets in volleyball)</h1>
+            {isVolleyball && (
+              <span className=" text-sm font-medium text-center">Hint: Score in volleyball can't exceed 3</span>
             )}
             <div className="flex gap-2 justify-center items-center ">
               <div className="flex gap-3 align-middle text-center flex-col">

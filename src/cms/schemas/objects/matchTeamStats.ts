@@ -14,6 +14,11 @@ export default {
       name: 'basketballTeamStats',
       options: { collapsible: true },
     },
+    {
+      title: 'Volleyball Team Stats',
+      name: 'volleyballTeamStats',
+      options: { collapsible: true },
+    },
   ],
 
   fields: [
@@ -22,8 +27,8 @@ export default {
       name: 'goals',
       title: 'Goals',
       type: 'number',
-      description: 'number of goals scored by the team',
-      group: 'footballTeamStats',
+      description: 'number of goals scored by the team (Football, Sets in Volleyball)',
+      group: ['footballTeamStats', 'volleyballTeamStats'],
     },
     {
       name: 'possession',
