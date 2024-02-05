@@ -113,11 +113,14 @@ const SelectablePlayer = ({
         alt={player.displayName}
       />
       <p className="text-left font-bold ">{player.displayName}</p>
-      {player.position?.map((pos, key) => (
+      <p key={'key'} className="text-center  capitalize font-bold text-slate-600 text-xs">
+        {player.fullName}
+      </p>
+      {/* {player.position?.map((pos, key) => (
         <p key={key} className="text-left capitalize font-bold text-slate-600 text-xs">
           {pos}
         </p>
-      ))}
+      ))} */}
     </div>
   );
 };

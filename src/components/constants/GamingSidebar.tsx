@@ -1,6 +1,5 @@
 import { gameSidebarRoutes } from '@/utils/data/sidebar';
-import { decodeToken } from '@/utils/funcs/fetch';
-import { deleteCookie, getCookie } from 'cookies-next';
+import { deleteCookie } from 'cookies-next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { BiLogOut } from 'react-icons/bi';
@@ -12,8 +11,6 @@ const GamingSidebar = () => {
     deleteCookie('token');
     window.location.reload();
   };
-
-  console.log('decoded token', decodeToken(getCookie('token')!));
 
   return (
     <div className=" tab:flex hidden flex-col h-[90vh] max-w-[300px] w-1/4 gap-y-4 overflow-y-auto min-w-[200px]">

@@ -186,8 +186,6 @@ export default function AppProvider({ children }: Props) {
   };
 
   useEffect(() => {
-    console.log('app provider', dataSet);
-    console.log('client', client);
     if (!client) return;
     // flush data
     flush();

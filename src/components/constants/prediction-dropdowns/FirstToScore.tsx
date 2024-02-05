@@ -73,7 +73,7 @@ const FirstToScore = ({ match, onChange, prevData, disabled }: Props) => {
   );
 };
 
-const SelectableTeam = ({
+export const SelectableTeam = ({
   team,
   logo,
   isActive,

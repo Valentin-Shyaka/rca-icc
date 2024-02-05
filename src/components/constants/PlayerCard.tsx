@@ -2,9 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import { Player } from '../../utils/types/types1';
 
-const PlayerCard = ({ displayName, profile, position }: Player) => {
+const PlayerCard = ({ displayName, profile, fullName }: Player) => {
   return (
-    <div className="w-[120px] h-[180px] flex flex-col items-center cursor-pointer border-2 border-gray">
+    <div className="w-[120px] flex flex-col items-center cursor-pointer border-2 border-gray">
       <Image
         src={profile || '/images/player.png'}
         width={120}
@@ -13,11 +13,11 @@ const PlayerCard = ({ displayName, profile, position }: Player) => {
         alt={displayName}
       />
       <p className="text-left font-bold ">{displayName}</p>
-      {position?.map((pos, key) => (
-        <p key={key} className="text-left capitalize font-bold text-slate-600 text-xs">
-          {pos}
-        </p>
-      ))}
+      {/* {position?.map((pos, key) => ( */}
+      <p key={'key'} className="text-left capitalize font-bold text-slate-600 text-xs">
+        {fullName}
+      </p>
+      {/* ))} */}
     </div>
   );
 };
