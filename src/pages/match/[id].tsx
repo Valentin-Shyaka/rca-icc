@@ -1,3 +1,5 @@
+import { useSanity } from '@/contexts/SanityProvider';
+import { RefType } from '@/utils/types/types2';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -11,8 +13,6 @@ import MainLayout from '../../layouts/MainLayout';
 import { fetchMatchByIdQuery } from '../../lib/queries';
 import { MatchGoals, SEO } from '../../utils/types/misc';
 import { Match } from '../../utils/types/types1';
-import { useSanity } from '@/contexts/SanityProvider';
-import ManOfTheMatch from '@/components/constants/prediction-dropdowns/ManOfTheMatch';
 
 const MatchPage = () => {
   const { client } = useSanity();
@@ -51,6 +51,7 @@ const MatchPage = () => {
     if (id) {
       getMatch();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, client]);
 
   useLayoutEffect(() => {
@@ -81,12 +82,16 @@ const MatchPage = () => {
 
   const mergedPlayers = match?.awayTeam.players.concat(match?.homeTeam.players);
 
-  const manOfTheMatch = mergedPlayers?.filter((player) => player._id == match?.fantasy?.manOfTheMatch?._ref);
-  const highestScorer = mergedPlayers?.filter((player) => player._id == match?.fantasy?.highestScoringPlayer?._ref);
+  const manOfTheMatch = mergedPlayers?.filter(
+    (player) => player._id == (match?.fantasy?.manOfTheMatch as RefType)?._ref,
+  );
+  const highestScorer = mergedPlayers?.filter(
+    (player) => player._id == (match?.fantasy?.highestScoringPlayer as RefType)?._ref,
+  );
 
   console.log(manOfTheMatch);
 
-  const isLive = match?.status?.status === 'LIVE';
+  // const isLive = match?.status?.status === 'LIVE';
 
   return (
     <MainLayout isGeneral title={seo.title} seo={seo}>
@@ -219,7 +224,7 @@ const MatchPage = () => {
                   <p>Man of the match not yet appointed</p>
                 )}
                 <h1 className="font-bold  mt-4">Highest Scorer</h1>
-                <p>{highestScorer[0].fullName}</p>
+                <p>{highestScorer?.[0].fullName}</p>
               </div>
             )
           ) : (
