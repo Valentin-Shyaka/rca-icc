@@ -81,8 +81,8 @@ const MatchPage = () => {
 
   const mergedPlayers = match?.awayTeam.players.concat(match?.homeTeam.players);
 
-  const manOfTheMatch = mergedPlayers?.filter((player) => player._id == match?.fantasy.manOfTheMatch._ref);
-  const highestScorer = mergedPlayers?.filter((player) => player._id == match?.fantasy.highestScoringPlayer._ref);
+  const manOfTheMatch = mergedPlayers?.filter((player) => player._id == match?.fantasy.manOfTheMatch?._ref);
+  const highestScorer = mergedPlayers?.filter((player) => player._id == match?.fantasy.highestScoringPlayer?._ref);
 
   console.log(manOfTheMatch);
 
