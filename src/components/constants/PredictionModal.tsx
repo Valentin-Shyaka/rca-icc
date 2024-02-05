@@ -245,7 +245,7 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
               )}
             </div>
             <div className="w-full mt-2">
-              {match && isFootball && (
+              {match && !isBasketball && (
                 <FirstToScore
                   match={match}
                   onChange={(team) => {

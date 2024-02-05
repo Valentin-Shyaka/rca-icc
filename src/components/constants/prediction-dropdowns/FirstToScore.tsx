@@ -27,7 +27,7 @@ const FirstToScore = ({ match, onChange, prevData, disabled }: Props) => {
     <div className=" max-sm:w-full h-fit p-2 border-b border-slate-300 cursor-pointer  ">
       <div onClick={() => setDropActive(!dropActive)} className="flex justify-between items-center">
         <p className="font-semibold text-sm text-warmGray-700">
-          3. First Team To Score
+          3. First Team To Score (Goal/Set)
           <span className=" font-bold ml-5 text-blue">({selectedTeam?.name ?? 'Click To Choose'})</span>
         </p>
         {dropActive ? (

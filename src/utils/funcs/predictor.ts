@@ -58,8 +58,8 @@ export const calculateUserPoints = (userPrediction: UserPrediction, match: Match
     userPoints += 10;
     correctManOfTheMatch = 10;
   }
-  //* if user predicted the correct first team to score + 5 points and is football
-  if (isFootball && userPrediction.prediction.firstTeamToScore === (fantasy.firstTeamToScore as RefType)._ref) {
+  //* if user predicted the correct first team to score + 6 points and is football/volleyball
+  if (!isBasketball && userPrediction.prediction.firstTeamToScore === (fantasy.firstTeamToScore as RefType)._ref) {
     userPoints += 6;
     correctFirstTeamToScore = 6;
   }
