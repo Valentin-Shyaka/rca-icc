@@ -9,10 +9,14 @@ import { Container, Title, Accordion } from '@mantine/core';
 const placeholder =
   'It can’t help but hear a pin drop from over half a mile away, so it lives deep in the mountains where there aren’t many people or Pokémon.It was born from sludge on the ocean floor. In a sterile environment, the germs within its body can’t multiply, and it dies.It has no eyeballs, so it can’t see. It checks its surroundings via the ultrasonic waves it emits from its mouth.';
 
-const index = () => {
+const FantasyHelpPage = () => {
   const data = [
     {
       action: 'Man of The Match',
+      bonusPoint: 10,
+    },
+    {
+      action: 'Highest scoring player (Basketball)',
       bonusPoint: 10,
     },
     {
@@ -28,19 +32,19 @@ const index = () => {
       bonusPoint: 6,
     },
     {
-      action: 'Highest scoring player (Basketball)',
-      bonusPoint: 10,
-    },
-    {
-      action: 'Match Winner Prediction',
+      action: 'Match Outcome Prediction (Winner, Draw)',
       bonusPoint: 5,
     },
     {
-      action: 'correct outcome (home and away)',
-      bonusPoint: 7,
+      action: 'Bonus Point for correct home and away score (High Precision 🙌)',
+      bonusPoint: 3,
     },
   ];
   const pointsData = [
+    {
+      pointsAway: 'Exact score',
+      scoreDifference: 6,
+    },
     {
       pointsAway: '1 point away',
       scoreDifference: 4,
@@ -144,4 +148,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default FantasyHelpPage;

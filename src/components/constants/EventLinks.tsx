@@ -30,7 +30,6 @@ const EventLinks = ({ routes }: Props) => {
       {routes.map((item) => {
         const isHome = item.name === 'home' && active === '';
         const isActive = item.name === active || isHome || pathname === item.path;
-        console.log('isActive', pathname, item.path);
         return (
           <Link className=" w-full m-2" href={`/${item.path}`} key={item.name}>
             <div className={` border-gray ${isActive ? activeEventStyle : eventStyle}`}>

@@ -1,18 +1,17 @@
+import LoadingView from '@/components/other/LoadingView';
+import { useApp } from '@/contexts/AppProvider';
+import { useSanity } from '@/contexts/SanityProvider';
 import { useUser } from '@/contexts/UserProvider';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import EventLinks from '../components/constants/EventLinks';
 import Feed from '../components/constants/Feed';
 import GamingSidebar from '../components/constants/GamingSidebar';
 import Header from '../components/constants/Header';
-import { gamingEvents, gamingNavs } from '../utils/data';
+import { gamingEvents } from '../utils/data';
 import { CompNav } from '../utils/types';
 import { SEO } from '../utils/types/misc';
-import { useRouter } from 'next/router';
-import LoadingView from '@/components/other/LoadingView';
-import CompNavBar from '@/components/constants/CompNavBar';
-import { useApp } from '@/contexts/AppProvider';
-import { useSanity } from '@/contexts/SanityProvider';
 
 type Props = {
   children: React.ReactNode;

@@ -38,9 +38,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
         },
       });
       const res = await response.json();
-      console.log('res', res);
       const data = res.data;
-      console.log(data);
       setUser(data.user);
       setProfile(data.person);
     } catch (error) {

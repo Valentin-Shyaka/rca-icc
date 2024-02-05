@@ -26,13 +26,13 @@ export const gameSidebarRoutes: SideBarRoute[] = [
     icon: React.createElement(FaListOl, { size: 18 }),
   },
   {
-    name: 'Account',
-    path: '/gaming/account',
-    icon: React.createElement(FaUser, { size: 18 }),
-  },
-  {
     name: 'Help',
     path: '/gaming/help',
     icon: React.createElement(FaInfoCircle, { size: 18 }),
+  },
+  {
+    name: 'Account',
+    path: '/gaming/account',
+    icon: React.createElement(FaUser, { size: 18 }),
   },
 ];
