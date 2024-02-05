@@ -88,8 +88,8 @@ const MatchPage = () => {
   const highestScorer = mergedPlayers?.filter(
     (player) => player._id == (match?.fantasy?.highestScoringPlayer as RefType)?._ref,
   );
-
-  console.log(manOfTheMatch);
+  const firstteamToScore =
+    match?.awayTeam._id == (match?.fantasy.firstTeamToScore as RefType)?._ref ? match?.awayTeam : match?.homeTeam;
 
   // const isLive = match?.status?.status === 'LIVE';
 
@@ -225,6 +225,9 @@ const MatchPage = () => {
                 )}
                 <h1 className="font-bold  mt-4">Highest Scorer</h1>
                 <p>{highestScorer?.[0].fullName}</p>
+
+                <h1 className="font-bold  mt-4">First team to score</h1>
+                <p>{firstteamToScore?.name}</p>
               </div>
             )
           ) : (
