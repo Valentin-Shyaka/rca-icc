@@ -54,17 +54,17 @@ const FirstToScore = ({ match, onChange, prevData, disabled }: Props) => {
       <Collapse in={dropActive} className="mt-2">
         <div className="flex flex-wrap justify-between mt-2 text-sm text-slate-500 text-left p-2 ">
           <SelectableTeam
-            team={match.awayTeam}
+            team={match.homeTeam}
             logo={match.homeTeam.logo ?? '/images/teamImage.svg'}
-            isActive={selectedTeam?._id === match.awayTeam._id}
+            isActive={selectedTeam?._id === match.homeTeam._id}
             onChange={onChangeTeam}
           />
 
           <span className=" text-2xl font-semibold my-auto">OR</span>
           <SelectableTeam
             logo={match.awayTeam.logo ?? '/images/teamImage2.svg'}
-            team={match.homeTeam}
-            isActive={selectedTeam?._id === match.homeTeam._id}
+            team={match.awayTeam}
+            isActive={selectedTeam?._id === match.awayTeam._id}
             onChange={onChangeTeam}
           />
         </div>

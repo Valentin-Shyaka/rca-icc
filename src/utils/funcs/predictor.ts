@@ -91,11 +91,12 @@ function calculateScorePoints(
   category: string,
 ): { points: number; scoreAway: number } {
   const isBasketball = category === 'basketball';
+  const isVolleyball = category === 'volleyball';
   if (!userScore || Number.isNaN(userScore)) return { points: 0, scoreAway: 0 };
   let points = 0;
   const scoreAway = Math.abs(userScore - actualScore);
   if (userScore === actualScore) {
-    points += 6;
+    points += isVolleyball ? 4 : 6; // Because volleyball sets are easier to predict
   } else if (Math.abs(userScore - actualScore) <= 4 && isBasketball) {
     const pointsAway = 5 - Math.abs(userScore - actualScore); // 5 (6-1) because to give credit to one with exact answer i.e gets 1 bonus points
     points += pointsAway;

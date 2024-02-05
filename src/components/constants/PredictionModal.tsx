@@ -186,7 +186,9 @@ const PredictionModal = ({ isOpen, closeModal, matchId }: Props) => {
             )}
             <h1 className=" text-center font-semibold">1. Predict Score (Goals, Points or Sets in volleyball)</h1>
             {isVolleyball && (
-              <span className=" text-sm font-medium text-center">Hint: Score in volleyball can't exceed 3</span>
+              <span className=" text-sm font-medium text-center">
+                Hint: Team Score in volleyball usually can't exceed 2.( or 3 for big matches)
+              </span>
             )}
             <div className="flex gap-2 justify-center items-center ">
               <div className="flex gap-3 align-middle text-center flex-col">

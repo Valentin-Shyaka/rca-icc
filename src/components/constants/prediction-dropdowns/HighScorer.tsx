@@ -60,7 +60,7 @@ const HighScorer = ({ match, onChange, prevData, disabled }: Props) => {
             <Tabs.Tab value="awayTeam">{match.awayTeam.name}</Tabs.Tab>
           </Tabs.List>
           <Tabs.Panel value="homeTeam">
-            <div className="flex flex-wrap justify-between mt-2 text-sm text-slate-500 text-left p-2 ">
+            <div className="flex flex-wrap justify-between gap-2 mt-2 text-sm text-slate-500 text-left p-2 ">
               {match.homeTeam?.players.map((player, i) => (
                 <SelectablePlayer
                   key={player._id ?? i}
@@ -72,7 +72,7 @@ const HighScorer = ({ match, onChange, prevData, disabled }: Props) => {
             </div>
           </Tabs.Panel>
           <Tabs.Panel value="awayTeam">
-            <div className="flex flex-wrap justify-between mt-2 text-sm text-slate-500 text-left p-2 ">
+            <div className="flex flex-wrap justify-between gap-2 mt-2 text-sm text-slate-500 text-left p-2 ">
               {match.awayTeam?.players.map((player, i) => (
                 <SelectablePlayer
                   key={player._id ?? i}

@@ -1,10 +1,9 @@
 import GamingLayout from '@/layouts/GamingLayout';
-import React from 'react';
 import { List } from '@mantine/core';
 
-import { Table, ScrollArea } from '@mantine/core';
+import { ScrollArea, Table } from '@mantine/core';
 
-import { Container, Title, Accordion } from '@mantine/core';
+import { Accordion, Container, Title } from '@mantine/core';
 
 const placeholder =
   'It can’t help but hear a pin drop from over half a mile away, so it lives deep in the mountains where there aren’t many people or Pokémon.It was born from sludge on the ocean floor. In a sterile environment, the germs within its body can’t multiply, and it dies.It has no eyeballs, so it can’t see. It checks its surroundings via the ultrasonic waves it emits from its mouth.';
@@ -25,11 +24,11 @@ const FantasyHelpPage = () => {
     },
     {
       action: 'Away score ',
-      bonusPoint: 6,
+      bonusPoint: '6 ( 4 in volleyball)',
     },
     {
       action: 'Home score',
-      bonusPoint: 6,
+      bonusPoint: '6  ( 4 in volleyball)',
     },
     {
       action: 'Match Outcome Prediction (Winner, Draw)',
@@ -98,6 +97,11 @@ const FantasyHelpPage = () => {
                     </Table.Thead>
                     <Table.Tbody>{rows}</Table.Tbody>
                   </Table>
+                  <h1 className=" text-sm mt-5">
+                    <strong className="mr-2">Note:</strong>
+                    home/Away Score (sets) in volleyball is 4 points because the score is not as high as football or
+                    basketball. So it is easy to predict sets in volleyball
+                  </h1>
                 </ScrollArea>
               </Accordion.Panel>
             </Accordion.Item>
