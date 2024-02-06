@@ -2,7 +2,6 @@ import { getUserFromReq } from '@/lib/api';
 import prisma from '@/lib/prisma';
 import { fetchMatchStatusQuery } from '@/lib/query2';
 import { seasonClient } from '@/lib/sanity';
-import { decodeToken } from '@/utils/funcs/fetch';
 import { Match } from '@/utils/types/types1';
 import { NextApiRequest, NextApiResponse } from 'next';
 

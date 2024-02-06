@@ -1,6 +1,6 @@
-import prisma from '~/lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { UserProfile } from '@/utils/types/user.type';
+import prisma from '@/lib/prisma';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {

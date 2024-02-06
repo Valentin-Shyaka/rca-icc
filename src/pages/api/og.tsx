@@ -1,5 +1,4 @@
 import { ImageResponse } from '@vercel/og';
-import Image from 'next/image';
 import { NextRequest } from 'next/server';
 
 export const config = {
@@ -8,7 +7,7 @@ export const config = {
 
 export default async function (req: NextRequest) {
   const { searchParams } = req.nextUrl;
-  const name = searchParams.get('name');
+  // const name = searchParams.get('name');
   const image = searchParams.get('image');
   return new ImageResponse(
     (
