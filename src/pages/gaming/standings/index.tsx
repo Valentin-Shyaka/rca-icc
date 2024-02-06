@@ -4,6 +4,9 @@ import { Standing } from '@/utils/types/fantasy.type';
 import { notifications } from '@mantine/notifications';
 import axios from 'axios';
 import React from 'react';
+import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
+import { FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa';
+import { TiChevronRight } from 'react-icons/ti';
 import { LuLoader2 } from 'react-icons/lu';
 
 const FootTableIndex = () => {
@@ -32,6 +35,28 @@ const FootTableIndex = () => {
     getStandings();
   }, []);
 
+  const FormIndicator = ({ lastRank, currentRank }: { lastRank: number; currentRank: number }) => {
+    console.log(lastRank, currentRank);
+    if (lastRank === currentRank) {
+      return <span className="text-xs w-4 aspect-square rounded-full bg-gray"></span>;
+    }
+    if (lastRank < currentRank) {
+      return (
+        <span className="text-xs w-4 aspect-square grid place-items-center rounded-full bg-green-500">
+          <TiChevronRight className=" -rotate-90" />
+        </span>
+      );
+    }
+    if (lastRank < currentRank) {
+      return (
+        <span className="text-xs w-4 aspect-square grid place-items-center rounded-full text-white bg-red-500">
+          <TiChevronRight className=" rotate-90" />
+        </span>
+      );
+    }
+    return null;
+  };
+
   return (
     <GamingLayout title="Football - Table" isGeneral>
       <div className="p-3 gap-y-3">
@@ -56,9 +81,6 @@ const FootTableIndex = () => {
                   <th align="left" className="p-2">
                     Rank
                   </th>
-                  {/* <th align="left" className="p-2">
-                    First Name
-                  </th> */}
                   <th align="left" className="p-2">
                     Name
                   </th>
@@ -79,7 +101,10 @@ const FootTableIndex = () => {
                       className={` ${isMe ? 'bg-blue text- hover:text-black hover:bg-gray-100 text-white' : ''} ${i % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}
                     >
                       <td align="left" className="p-2">
-                        {i + 1}.
+                        <div className="flex items-center gap-2">
+                          {i + 1}.{' '}
+                          <FormIndicator lastRank={standing.lastPosition} currentRank={standing.currentPosition} />
+                        </div>
                       </td>
                       {/* <td align="left" className="p-2">
                       {standing.user.firstName}
