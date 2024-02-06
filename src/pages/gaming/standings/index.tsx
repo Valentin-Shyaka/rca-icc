@@ -47,7 +47,7 @@ const FootTableIndex = () => {
         </span>
       );
     }
-    if (lastRank < currentRank) {
+    if (lastRank > currentRank) {
       return (
         <span className="text-xs w-4 aspect-square grid place-items-center rounded-full text-white bg-red-500">
           <TiChevronRight className=" rotate-90" />
