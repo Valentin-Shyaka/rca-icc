@@ -1,15 +1,10 @@
 import { useUser } from '@/contexts/UserProvider';
 import GamingLayout from '@/layouts/GamingLayout';
+import { Standing } from '@/utils/types/fantasy.type';
 import { notifications } from '@mantine/notifications';
-import { User } from '@prisma/client';
 import axios from 'axios';
 import React from 'react';
 import { LuLoader2 } from 'react-icons/lu';
-
-interface Standing {
-  user: User;
-  points: number;
-}
 
 const FootTableIndex = () => {
   const [standings, setStandings] = React.useState<Standing[]>([]);
@@ -68,16 +63,19 @@ const FootTableIndex = () => {
                     Name
                   </th>
                   <th align="left" className="p-2">
+                    MP (Marked)
+                  </th>
+                  <th align="left" className="p-2">
                     Points
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {standings.map((standing, i) => {
-                  const isMe = standing.user.mis_id === user?.id;
+                  const isMe = standing.mis_id === user?.id;
                   return (
                     <tr
-                      key={standing.user.id}
+                      key={standing.user_id}
                       className={` ${isMe ? 'bg-blue text- hover:text-black hover:bg-gray-100 text-white' : ''} ${i % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}
                     >
                       <td align="left" className="p-2">
@@ -87,10 +85,13 @@ const FootTableIndex = () => {
                       {standing.user.firstName}
                     </td> */}
                       <td align="left" className="p-2 capitalize">
-                        {`${standing.user.firstName?.[0]}. ${standing.user.lastName}`}
+                        {`${standing.firstName?.[0]}. ${standing.lastName}`}
+                      </td>
+                      <td align="left" className="p-2 capitalize">
+                        {standing.matchesPredicted}
                       </td>
                       <td align="left" className="p-2">
-                        {standing.points}
+                        {standing.score}
                       </td>
                     </tr>
                   );

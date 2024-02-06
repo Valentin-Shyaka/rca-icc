@@ -27,7 +27,6 @@ const GamingLayout = (props: Props) => {
   const { getUserPredictions, getMatches } = useApp();
   const { client } = useSanity();
   const { title, seo } = props;
-  const seoTitle = title ?? 'RCA-ICC';
   const host = window.location.host;
   const protocol = window.location.protocol;
   const baseUrl = `${protocol}//${host}`;
@@ -53,33 +52,31 @@ const GamingLayout = (props: Props) => {
   return (
     <>
       <Head>
-        <title>{seoTitle}</title>
+        <title>{title ?? 'RCA-ICC'}</title>
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
-        <>
-          <meta
-            name="description"
-            content={seo?.description?.slice(0, 200) ?? 'RCA-ICC- Home of all RCA interclass Competitions'}
-          />
-          <meta property="og:title" content={seo?.title ?? 'RCA-ICC- Home of all RCA interclass Competitions'} />
-          <meta name="type" property="og:type" content="article" />
-          <meta
-            name="image"
-            property="og:image"
-            content={
-              seo?.image
-                ? `${baseUrl}/api/og?image=${seo?.image}`
-                : `${baseUrl}/api/og?image=https://cdn.sanity.io/images/lxeru4rg/2024/0cdfceb82a3cb1b03a044c50126f2c0f2a82cab3-1024x1024.png?fit=max&w=500&h=500`
-            }
-          />
-          <meta
-            name="description"
-            property="og:description"
-            content={
-              seo?.description ??
-              'RCA ICC Fantasy Gaming Platform, where you can predict and win big on your favorite teams and players.'
-            }
-          />
-        </>
+        <meta
+          name="description"
+          content={seo?.description?.slice(0, 200) ?? 'RCA-ICC- Home of all RCA interclass Competitions'}
+        />
+        <meta property="og:title" content={seo?.title ?? 'RCA-ICC- Home of all RCA interclass Competitions'} />
+        <meta name="type" property="og:type" content="article" />
+        <meta
+          name="image"
+          property="og:image"
+          content={
+            seo?.image
+              ? `${baseUrl}/api/og?image=${seo?.image}`
+              : `${baseUrl}/api/og?image=https://cdn.sanity.io/images/lxeru4rg/2024/0cdfceb82a3cb1b03a044c50126f2c0f2a82cab3-1024x1024.png?fit=max&w=500&h=500`
+          }
+        />
+        <meta
+          name="description"
+          property="og:description"
+          content={
+            seo?.description ??
+            'RCA ICC Fantasy Gaming Platform, where you can predict and win big on your favorite teams and players.'
+          }
+        />
       </Head>
       <main className="w-full z-50 flex flex-col md:px-[2%] px-1 overflow-hidden h-screen">
         <div className="w-full flex flex-col border-b-2 border-gray">

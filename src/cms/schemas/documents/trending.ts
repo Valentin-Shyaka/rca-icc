@@ -29,7 +29,7 @@ export default defineType({
       title: 'Title',
       type: 'string',
       description: 'the title of the trending',
-      validation: (Rule) => Rule.required().min(3).max(100).warning('please provide a title for the trending'),
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'description',
@@ -52,7 +52,7 @@ export default defineType({
           type: 'file',
         },
       ],
-      validation: (Rule) => Rule.required().warning('please provide a content'),
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'date',

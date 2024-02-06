@@ -29,14 +29,14 @@ export default defineType({
       title: 'Title',
       type: 'string',
       description: 'the title of the insight',
-      validation: (Rule) => Rule.required().min(3).max(100).warning('please provide a title for the insight'),
+      validation: (Rule) => Rule.required().min(3).max(100),
     },
     {
       name: 'description',
       title: 'description',
       type: 'text',
       description: 'the description of the insight',
-      validation: (Rule) => Rule.required().min(3).max(300).warning('please provide a title for the insight'),
+      validation: (Rule) => Rule.required().min(3).max(300),
     },
   ],
 });

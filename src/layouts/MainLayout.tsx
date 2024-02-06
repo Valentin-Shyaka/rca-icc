@@ -20,7 +20,6 @@ type Props = {
 
 const MainLayout = (props: Props) => {
   const { title, seo } = props;
-  const seo_title = title ?? 'RCA-ICCC';
   const host = window.location.host;
   const protocol = window.location.protocol;
   const baseUrl = `${protocol}//${host}`;
@@ -29,7 +28,7 @@ const MainLayout = (props: Props) => {
   return (
     <>
       <Head>
-        <title>{seo_title}</title>
+        <title>{title ?? 'RCA-ICC'}</title>
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
         <>
           <meta
