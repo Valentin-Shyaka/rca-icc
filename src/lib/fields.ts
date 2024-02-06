@@ -15,4 +15,5 @@ export const allPlayerFields = `{
     yellowCards,
     number,
     position,
+    gender,
     }`;

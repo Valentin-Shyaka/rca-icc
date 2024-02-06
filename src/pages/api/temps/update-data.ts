@@ -12,14 +12,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   console.log('season', season);
   const client = seasonClient((season as string) ?? '2024');
   try {
-    const teams = await client.fetch('*[_type == "team"]');
-    // ! This was used
-    for (const match of teams) {
-      await client
-        .patch(match._id) // Document ID to patch
-        .set({ gender: 'male' }) // Set new gender
-        .commit(); // Perform the update
-    }
+    // const teams = await client.fetch('*[_type == "team"]');
+    // // ! This was used
+    // ! Don't uncomment unless you want to update the data again or you know well what you are doing
+    // for (const match of teams) {
+    //   await client
+    //     .patch(match._id) // Document ID to patch
+    //     .set({ gender: 'male' }) // Set new gender
+    //     .commit(); // Perform the update
+    // }
 
     const updated = await client.fetch('*[_type == "team"]');
     res.status(200).json({ updated });

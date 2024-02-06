@@ -3,7 +3,7 @@ import { PRankeAble } from './func1';
 
 export const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
-export const mixArray = (arr: any[]) => {
+export const mixArray = <T = any>(arr: T[]) => {
   let currentIndex = arr.length,
     temporaryValue,
     randomIndex;

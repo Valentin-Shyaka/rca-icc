@@ -1,11 +1,21 @@
 import { groq } from 'next-sanity';
 import { allPlayerFields } from './fields';
 
+const teamPlayerFields = `{
+    _id,
+    displayName,
+    fullName,
+    position,
+    "profile": profile.asset->url,
+    gender,
+}`;
+
 export const playersQuery = groq`*[_type == "player"]{
     _id,
     displayName,
     fullName,
     "profile": profile.asset->url,
+    gender,
 }`;
 
 export const teamsFootQuery = groq`*[_type == "team" && category == "football"]{
@@ -34,19 +44,15 @@ export const teamsStatsQuery = groq`*[_type == "team"]{
     "logo": logo.asset->url,
     stats,
     category,
+    gender,
 }`;
 
 export const playersFootQuery = groq`*[_type == "team" && category == "football"]{
     _id,
     name,
     category,
-    players[]->{
-        _id,
-        displayName,
-        fullName,
-        position,
-        "profile": profile.asset->url,
-    },
+    players[]-> ${teamPlayerFields} ,
+    gender,
 }`;
 
 export const playersByTeamQuery = (id: string) => groq`*[_type== "team" && "_id"==${id}]{
@@ -55,7 +61,8 @@ export const playersByTeamQuery = (id: string) => groq`*[_type== "team" && "_id"
         displayname,
         fullName,
         position,
-        "profile": profile.asset->url
+        "profile": profile.asset->url,
+        gender,
     }
 } `;
 
@@ -63,26 +70,16 @@ export const playersBaccoQuery = groq`*[_type == "team" && category == "basketba
     _id,
     name,
     category,
-    players[]->{
-        _id,
-        displayName,
-        fullName,
-        position,
-        "profile": profile.asset->url,
-    },
+    gender,
+    players[]->${teamPlayerFields},
 }`;
 
 export const playersVolleyQuery = groq`*[_type == "team" && category == "volleyball"]{
     _id,
     name,
+    gender,
     category,
-    players[]->{
-        _id,
-        displayName,
-        fullName,
-        position,
-        "profile": profile.asset->url,
-    },
+    players[]->${teamPlayerFields},
 }`;
 
 export const fetchPlayersAllQuery = groq`*[_type == "player"]${allPlayerFields}`;

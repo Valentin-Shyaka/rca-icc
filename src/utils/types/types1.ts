@@ -18,6 +18,8 @@ export type Player = {
   yellowCards: number;
   number: number;
   position: string[];
+  gender?: Gender;
+  team?: string;
 };
 
 export enum category {
@@ -41,6 +43,7 @@ export type Team = {
   isOfficial: boolean;
   players: Player[];
   category: category;
+  gender: Gender;
   stats: {
     goalsConceded: number;
     goalsScored: number;

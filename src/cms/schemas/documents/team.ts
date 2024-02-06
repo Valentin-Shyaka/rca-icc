@@ -50,7 +50,6 @@ export default defineType({
         ],
       },
       validation: (rule) => rule.required().warning('Please select team gender'),
-      initialValue: 'male',
     },
     // category
     {

@@ -5,6 +5,7 @@ export const AllPlayersStatsQuery = groq`*[_type == "team"]{
     _id,
     name,
     category,
+    gender,
     players[]->${allPlayerFields},
 }`;
 

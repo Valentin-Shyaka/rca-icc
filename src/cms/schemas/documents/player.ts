@@ -45,6 +45,7 @@ export default defineType({
       type: 'string',
       description: 'name of a player(like a username)',
       group: 'playerInfo',
+      validation: (Rule) => Rule.required().min(3).max(100).warning('please provide a display name for this player'),
     },
     {
       name: 'fullName',
@@ -52,6 +53,20 @@ export default defineType({
       type: 'string',
       validation: (Rule) => Rule.required().min(3).max(300).warning('please provide a full name for this player'),
       description: 'all names of a player (this is not required)',
+      group: 'playerInfo',
+    },
+    // gender
+    {
+      name: 'gender',
+      title: 'Gender',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Male', value: 'male' },
+          { title: 'Female', value: 'female' },
+        ],
+      },
+      validation: (rule) => rule.required().warning('Please select player gender'),
       group: 'playerInfo',
     },
     {

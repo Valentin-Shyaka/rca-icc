@@ -1,15 +1,13 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { SeasonData } from '@/utils/types';
+import { UserPrediction } from '@prisma/client';
+import axios from 'axios';
+import { SanityClient } from 'next-sanity';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { fetchMatchesQuery, teamsStatsQuery } from '../lib/queries';
 import { AllPlayersStatsQuery, getInsightsQuery, getTrendsQuery } from '../lib/query1';
 import { Match, Team } from '../utils/types/types1';
 import { Insight, PlayerByTeam, TeamGroups, Trend } from '../utils/types/types2';
 import { useSanity } from './SanityProvider';
-import { SanityClient } from 'next-sanity';
-import { SeasonData } from '@/utils/types';
-import axios from 'axios';
-import { notifications } from '@mantine/notifications';
-import { UserPrediction } from '@prisma/client';
-import React from 'react';
 
 export type AppContextType = {
   players?: PlayerByTeam;
@@ -98,20 +96,23 @@ export default function AppProvider({ children }: Props) {
 
   const getPlayers = async (client: SanityClient) => {
     try {
-      const teamPlayers = await client?.fetch(AllPlayersStatsQuery);
-      const footballTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'football');
-      const basketballTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'basketball');
-      // const pingpongTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'pingpong');
-      // const debateTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'debate');
-      const volleyballTeamPlayers = teamPlayers.filter((player: Team) => player.category === 'volleyball');
+      const teamPlayers = await client?.fetch<Team[]>(AllPlayersStatsQuery);
+      const footballTeamPlayers = teamPlayers.filter((teamPlayer: Team) => teamPlayer.category === 'football');
+      const basketballTeamPlayers = teamPlayers.filter((teamPlayer: Team) => teamPlayer.category === 'basketball');
+      const volleyballTeamPlayers = teamPlayers.filter((teamPlayer: Team) => teamPlayer.category === 'volleyball');
+      // const pingpongTeamPlayers = teamPlayers.filter((teamPlayer: Team) => teamPlayer.category === 'pingpong');
+      // const debateTeamPlayers = teamPlayers.filter((teamPlayer: Team) => teamPlayer.category === 'debate');
+
+      // TODO: return players with their team
       const footballPlayers = footballTeamPlayers.map((team: Team) => team.players).flat();
       const basketballPlayers = basketballTeamPlayers.map((team: Team) => team.players).flat();
+      const volleyballPlayers = volleyballTeamPlayers.map((team: Team) => team.players).flat();
 
       setPlayers({
         ...players,
         football: footballPlayers,
         basketball: basketballPlayers,
-        volleyball: volleyballTeamPlayers,
+        volleyball: volleyballPlayers,
       });
     } catch (error) {
       // console.log(error);

@@ -1,12 +1,15 @@
 import Link from 'next/link';
 import { useApp } from '../../contexts/AppProvider';
 import dynamic from 'next/dynamic';
+import useGender from '@/hooks/useGender';
+import GenderSwitcher from '@/components/shared/GenderSwitcher';
 const MatchCard = dynamic(() => import('@/components/MatchCard'));
 const BasketTable = dynamic(() => import('@/components/constants/BasketTable'));
 const MainLayout = dynamic(() => import('@/layouts/MainLayout'));
 
 const IndexBasket = () => {
   const { teams, matches } = useApp();
+  const [genderTeams, setGenderTeams] = useGender(teams?.basketball!);
   const unfinishedMatches = matches?.filter(
     (match) => match.status?.status !== 'FT' && match.category === 'basketball',
   );
@@ -18,11 +21,12 @@ const IndexBasket = () => {
 				<LiveGameCard path='/match/23' />
 			</div> */}
         <div className="flex flex-col border-2 rounded-md p-2 border-gray">
-          <div className="p-3 gap-y-3">
+          <div className="p-3 gap-y-3 flex flex-col">
+            <GenderSwitcher onChange={setGenderTeams} className=" max-w-md mx-auto w-full" />
             <div className="float-left font-bold text-lg px-3">
               <h3>Basketball Standings</h3>
             </div>
-            <BasketTable teams={teams?.basketball!} />
+            <BasketTable teams={genderTeams} />
           </div>
         </div>
         <div className="flex flex-col border-2 rounded-md p-2 border-gray">

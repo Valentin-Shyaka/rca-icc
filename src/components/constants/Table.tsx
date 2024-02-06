@@ -7,7 +7,7 @@ type Props = {
 
 const Table = ({ teams }: Props) => {
   if (!teams) return <div>loading...</div>;
-  if (teams.length === 0) return <div>no teams</div>;
+  if (teams.length === 0) return <div className=" px-5">No teams</div>;
 
   const standings = teams.sort((a, b) => {
     if (a?.stats?.points === b?.stats?.points) {
