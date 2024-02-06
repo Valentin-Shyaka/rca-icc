@@ -6,6 +6,7 @@ import MainLayout from '../../layouts/MainLayout';
 import { fetchTeamByIdQuery } from '../../lib/query1';
 import { Team } from '../../utils/types/types1';
 import { useSanity } from '@/contexts/SanityProvider';
+import { SEO } from '@/utils/types/misc';
 
 const TeamIndex = () => {
   const { client } = useSanity();
@@ -22,15 +23,22 @@ const TeamIndex = () => {
     }
   };
 
-  const isFootball = team?.category === 'football';
+  // const isFootball = team?.category === 'football';
+
+  const seo: SEO = {
+    title: team?.name,
+    description: `Get to know more about ${team?.name}`,
+    image: team?.logo,
+  };
 
   React.useEffect(() => {
     if (id) {
       getTeam();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
   return (
-    <MainLayout isGeneral title={'Team' + ` - ${team?.name}`}>
+    <MainLayout isGeneral title={'Team' + ` - ${team?.name}`} seo={seo}>
       <h1 className=" text-center font-semibold text-lg">Team Details</h1>
       <div className=" w-full px-2 gap-y-3">
         <div className=" flex  border-2 border-gray rounded-md p-2 w-full gap-y-2 flex-col justify-center items-center ">

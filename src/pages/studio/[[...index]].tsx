@@ -19,12 +19,14 @@ export default function AdminPage() {
     setConfig?.(makeConfig(dts));
     // router.push(router.pathname, `?season=${season}`, { shallow: true });
     // // // window.location.reload();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [season]);
 
   useEffect(() => {
     if (!dataSet) return;
     const season = searchParams.get('season') ?? getYearFromDataSet(dataSet);
     setSeason(season);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   useEffect(() => {
