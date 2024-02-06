@@ -15,7 +15,7 @@ const FootTableIndex = () => {
   const getStandings = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('/api/fantasy/score/standings');
+      const response = await axios.get('/api/fantasy/score/overall');
       setStandings(response.data.data);
     } catch (error) {
       console.log(error);
@@ -72,10 +72,10 @@ const FootTableIndex = () => {
               </thead>
               <tbody>
                 {standings.map((standing, i) => {
-                  const isMe = standing.mis_id === user?.id;
+                  const isMe = standing.user.mis_id === user?.id;
                   return (
                     <tr
-                      key={standing.user_id}
+                      key={standing.id}
                       className={` ${isMe ? 'bg-blue text- hover:text-black hover:bg-gray-100 text-white' : ''} ${i % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}
                     >
                       <td align="left" className="p-2">
@@ -85,7 +85,7 @@ const FootTableIndex = () => {
                       {standing.user.firstName}
                     </td> */}
                       <td align="left" className="p-2 capitalize">
-                        {`${standing.firstName?.[0]}. ${standing.lastName}`}
+                        {`${standing.user.firstName?.[0]}. ${standing.user.lastName}`}
                       </td>
                       <td align="left" className="p-2 capitalize">
                         {standing.matchesPredicted}

@@ -1,5 +1,4 @@
 import prisma from '@/lib/prisma';
-import { Standing } from '@/utils/types/fantasy.type';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -37,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           return acc + prediction.points;
         }, 0);
         // ! Don't remove type for consistency btn backend and frontend
-        const standing: Standing = {
+        const standing = {
           user_id: user.id,
           name: user.name,
           mis_id: user.mis_id,
