@@ -1,5 +1,5 @@
 import { schemaTypes } from '@/cms/schemas';
-import LoadingView from '@/components/other/LoadingView';
+import LoadingView from '@/components/shared/LoadingView';
 import { getDataSetFromYear, getYearFromDataSet } from '@/utils/funcs/func1';
 import { visionTool } from '@sanity/vision';
 import { SanityClient, createClient } from 'next-sanity';

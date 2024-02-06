@@ -6,7 +6,7 @@ import { useApp } from '../contexts/AppProvider';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 const MatchCard = dynamic(() => import('@/components/MatchCard'));
-const Countdown = dynamic(() => import('@/components/other/Countdown'));
+const Countdown = dynamic(() => import('@/components/shared/Countdown'));
 const MainLayout = dynamic(() => import('@/layouts/MainLayout'));
 
 const Home: NextPage = () => {

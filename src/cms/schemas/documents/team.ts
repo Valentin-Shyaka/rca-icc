@@ -7,7 +7,7 @@ export default defineType({
   preview: {
     select: {
       title: 'name',
-      subtitlle: 'category',
+      subtitle: 'gender',
       media: 'logo',
     },
   },
@@ -16,8 +16,8 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
-      description: 'The team name . ex : Y2 FC (VC, BC, ...)',
-      validation: (Rule) => Rule.required().min(3).max(300).warning('please provide a name for this team'),
+      description: 'The team name W for women clubs . ex : Y2 FC (W)',
+      validation: (Rule) => Rule.required().min(3).max(100).warning('please provide a name for this team'),
     }),
     {
       name: 'logo',
@@ -38,11 +38,19 @@ export default defineType({
       of: [{ type: 'reference', to: { type: 'player' } }],
       validation: (rule) => rule.required(),
     },
+    // gender
     {
-      name: 'coach',
-      title: 'Coach',
-      type: 'reference',
-      to: { type: 'coach' },
+      name: 'gender',
+      title: 'Gender',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Male', value: 'male' },
+          { title: 'Female', value: 'female' },
+        ],
+      },
+      validation: (rule) => rule.required().warning('Please select team gender'),
+      initialValue: 'male',
     },
     // category
     {
@@ -60,6 +68,12 @@ export default defineType({
         ],
       },
       validation: (rule) => rule.required(),
+    },
+    {
+      name: 'coach',
+      title: 'Coach',
+      type: 'reference',
+      to: { type: 'coach' },
     },
     {
       name: 'stats',

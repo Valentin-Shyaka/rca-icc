@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { FaArrowLeft, FaHandPointLeft, FaHome } from 'react-icons/fa';
 import { MdScoreboard } from 'react-icons/md';
-import Banner from '../other/Banner';
+import Banner from '../shared/Banner';
 
 const Header = () => {
   const { setDataSet, refresh, dataSet } = useSanity();

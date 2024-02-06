@@ -14,6 +14,7 @@ export const fetchMatchDayTitleQuery = (title: string) => groq`*[_type == "match
     category,
     description,
     date,
+    gender,
     "matches": matches[]->{
         _id,
         title,

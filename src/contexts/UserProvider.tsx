@@ -1,4 +1,4 @@
-import LoadingView from '@/components/other/LoadingView';
+import LoadingView from '@/components/shared/LoadingView';
 import { IUser, UserProfile } from '@/utils/types/user.type';
 import { deleteCookie, getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';

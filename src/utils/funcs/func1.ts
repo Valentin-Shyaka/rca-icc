@@ -1,3 +1,4 @@
+import { Gender } from '../types/misc';
 import { Player } from '../types/types1';
 
 export type PRankeAble = Player & { rank: string };
@@ -50,4 +51,8 @@ export const getDataSetFromYear = (year: string) => {
  */
 export const getYearFromDataSet = (dataSet: string) => {
   return dataSet === 'production' ? '2023' : dataSet;
+};
+
+export const genderColor = (gender: Gender) => {
+  return gender === 'male' ? 'blue' : 'pink';
 };

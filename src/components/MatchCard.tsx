@@ -2,8 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Moment from 'react-moment';
 import { Match } from '../utils/types/types1';
+import { Badge } from '@mantine/core';
+import { genderColor } from '@/utils/funcs/func1';
 
-const MatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category }: Match) => {
+const MatchCard = (match: Match) => {
+  const { awayTeam, homeTeam, stats, status, date, _id, category, gender } = match;
   const isFinished = status?.status === 'FT';
   const isBasketball = category === 'basketball';
   const isLive = status?.status === 'HT' || status?.status === '1H' || status?.status === '2H';
@@ -14,12 +17,15 @@ const MatchCard = ({ awayTeam, homeTeam, stats, status, date, _id, category }: M
 
   const isDueDate = new Date(date).getTime() + 1000 * 60 * 90 < new Date().getTime();
   const isToday = new Date(date).getDate() === new Date().getDate();
-
+  // console.log('match', match);
   return (
     <Link
       href={`/match/${_id}`}
       className="relative flex border-2 border-gray max-w-[300px] min-w-[200px] w-full h-[120px] rounded-md hover:bg-slate-100 duration-300 cursor-pointer"
     >
+      <Badge color={genderColor(gender)} className="absolute top-1 right-1">
+        {gender}
+      </Badge>
       <div className="lg:p-6 p-3 flex justify-center w-full gap-y-2 flex-col">
         <div className="flex gap-2 text-center">
           <Image src={homeTeam?.logo ?? '/images/teamImage.svg'} width={20} height={10} alt={''} />

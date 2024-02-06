@@ -119,10 +119,10 @@ export const fetchMatchesQuery = groq`*[_type == "match"] | order(date asc){
         "logo": logo.asset->url,
     },
     stats,
-    events,
     type,
     status,
     category,
+    gender,
 }`;
 
 export const playerFields = `{
@@ -137,6 +137,7 @@ export const playerFields = `{
 export const fetchMatchByIdQuery = (id: string) => groq`*[_type == "match" && _id == "${id}"]{
     _id,
     date,
+    gender,
     "homeTeam": homeTeam->{
         _id,
         name,

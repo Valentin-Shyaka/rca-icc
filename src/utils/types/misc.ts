@@ -17,3 +17,5 @@ export type MatchGoals = {
   home: matchTeamGoal[];
   away: matchTeamGoal[];
 };
+
+export type Gender = 'male' | 'female';

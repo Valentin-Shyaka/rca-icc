@@ -1,4 +1,4 @@
-import LoadingView from '@/components/other/LoadingView';
+import LoadingView from '@/components/shared/LoadingView';
 import { useApp } from '@/contexts/AppProvider';
 import { useSanity } from '@/contexts/SanityProvider';
 import { useUser } from '@/contexts/UserProvider';

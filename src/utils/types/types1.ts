@@ -1,3 +1,4 @@
+import { Gender } from './misc';
 import { RefType, TimeType } from './types2';
 
 export type Player = {
@@ -86,6 +87,7 @@ export type Match = {
   };
   events: TimeType[];
   category: category;
+  gender: Gender;
   stats: {
     awayTeamStats: TeamStats;
     homeTeamStats: TeamStats;

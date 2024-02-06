@@ -17,6 +17,7 @@ export const fetchMatchFantasyQuery = (id: string) => groq`*[_type == "match" &&
     },
     status,
     stats,
+    gender,
     fantasy,
     category,
 }`;

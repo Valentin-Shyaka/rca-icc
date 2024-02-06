@@ -86,6 +86,21 @@ export default defineType({
       validation: (rule) => rule.required(),
       group: 'match',
     },
+    // gender
+    {
+      name: 'gender',
+      title: 'Gender',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Male', value: 'male' },
+          { title: 'Female', value: 'female' },
+        ],
+      },
+      validation: (rule) => rule.required().warning('Please select team gender'),
+      initialValue: 'male',
+      group: 'match',
+    },
     // category
     {
       name: 'category',
