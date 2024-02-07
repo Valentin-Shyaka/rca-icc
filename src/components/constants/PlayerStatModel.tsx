@@ -22,7 +22,7 @@
 //         setPlayerToShow(playerToShow
 //             )
 //     }
-    
+
 //   return (
 //     <Modal
 //       centered
@@ -31,7 +31,7 @@
 //       onClose={()=>closeModal}
 //       title={
 //         <span className=" font-semibold w-full justify-center text-xl text-center">
-//           {player?.fullName} 
+//           {player?.fullName}
 //         </span>
 //       }
 //     ></Modal>
