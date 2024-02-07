@@ -142,7 +142,6 @@ export default function AppProvider({ children }: Props) {
     try {
       const res = await axios.get(`/api/fantasy/my-predictions`);
       const data = await res.data?.data;
-      console.log('userPredictions prov', data);
       setUserPredictions(data);
     } catch (error: any) {
       console.log(error);

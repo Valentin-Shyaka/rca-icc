@@ -6,7 +6,8 @@ import { SanityClient, createClient } from 'next-sanity';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import React, { JSXElementConstructor, ReactElement, useContext, useEffect } from 'react';
-import { defineConfig, set } from 'sanity';
+import { defineConfig } from 'sanity';
+import { media } from 'sanity-plugin-media';
 import { structureTool } from 'sanity/structure';
 
 interface SanityContextProps {
@@ -43,7 +44,7 @@ export const makeConfig = (dataSet?: string) => {
     useCdn: typeof document !== 'undefined' && process.env.NODE_ENV === 'production',
     apiVersion: '2022-11-16',
     dataset: dataSet ?? 'production',
-    plugins: [structureTool(), visionTool()],
+    plugins: [structureTool(), visionTool(), media()],
     schema: {
       types: schemaTypes as any,
     },
@@ -86,6 +87,7 @@ const SanityProvider = ({ children }: Props) => {
       setClient(client);
       setLoading(false);
     }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   useEffect(() => {
@@ -96,6 +98,7 @@ const SanityProvider = ({ children }: Props) => {
     setConfig(makeConfig(dataSet));
     const client = createClient(makeConfig(dataSet));
     setClient(client);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // if (!client || !config || loading || !dataSet) return <LoadingView />;

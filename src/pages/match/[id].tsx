@@ -76,7 +76,7 @@ const MatchPage = () => {
 
   const seo: SEO = {
     title: `${match?.homeTeam?.name} vs ${match?.awayTeam?.name}`,
-    description: `${match?.homeTeam?.name} vs ${match?.awayTeam?.name}`,
+    description: `${match?.description}`,
     image: match?.banner,
   };
 

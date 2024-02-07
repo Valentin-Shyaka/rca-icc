@@ -23,12 +23,12 @@ export default async function (req: NextRequest) {
         }}
       >
         {image ? (
-          <img tw="object-cover min-w-full" src={image} alt="og:Image" />
+          <img tw="object-contain " src={image} alt="og:Image" />
         ) : (
           <img
-            tw="object-cover min-w-full"
+            tw="object-contain"
             src={
-              'https://cdn.sanity.io/images/lxeru4rg/production/7db3e46e0e970a3bc31d281fea74473bf3d56edc-846x755.png'
+              'https://cdn.sanity.io/images/lxeru4rg/2024/57ee018c077683e5bb64b47ff5fa9a0e1d48c4d5-1024x1024.png?fit=max&w=1200&h=1200'
             }
             alt="og:Image"
           />
@@ -36,8 +36,8 @@ export default async function (req: NextRequest) {
       </div>
     ),
     {
-      width: 1200,
-      height: 630,
+      width: 1030,
+      height: 1030,
     },
   );
 }

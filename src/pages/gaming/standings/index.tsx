@@ -1,15 +1,13 @@
 import { useUser } from '@/contexts/UserProvider';
 import GamingLayout from '@/layouts/GamingLayout';
+import { Standing } from '@/utils/types/fantasy.type';
 import { notifications } from '@mantine/notifications';
-import { User } from '@prisma/client';
 import axios from 'axios';
 import React from 'react';
+import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
+import { FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa';
+import { TiChevronRight } from 'react-icons/ti';
 import { LuLoader2 } from 'react-icons/lu';
-
-interface Standing {
-  user: User;
-  points: number;
-}
 
 const FootTableIndex = () => {
   const [standings, setStandings] = React.useState<Standing[]>([]);
@@ -20,7 +18,7 @@ const FootTableIndex = () => {
   const getStandings = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('/api/fantasy/score/standings');
+      const response = await axios.get('/api/fantasy/score/overall');
       setStandings(response.data.data);
     } catch (error) {
       console.log(error);
@@ -36,6 +34,28 @@ const FootTableIndex = () => {
   React.useEffect(() => {
     getStandings();
   }, []);
+
+  const FormIndicator = ({ lastRank, currentRank }: { lastRank: number; currentRank: number }) => {
+    console.log(lastRank, currentRank);
+    if (lastRank === currentRank) {
+      return <span className="text-xs w-4 aspect-square rounded-full bg-gray"></span>;
+    }
+    if (lastRank < currentRank) {
+      return (
+        <span className="text-xs w-4 aspect-square grid place-items-center rounded-full bg-green-500">
+          <TiChevronRight className=" -rotate-90" />
+        </span>
+      );
+    }
+    if (lastRank > currentRank) {
+      return (
+        <span className="text-xs w-4 aspect-square grid place-items-center rounded-full text-white bg-red-500">
+          <TiChevronRight className=" rotate-90" />
+        </span>
+      );
+    }
+    return null;
+  };
 
   return (
     <GamingLayout title="Football - Table" isGeneral>
@@ -61,11 +81,11 @@ const FootTableIndex = () => {
                   <th align="left" className="p-2">
                     Rank
                   </th>
-                  {/* <th align="left" className="p-2">
-                    First Name
-                  </th> */}
                   <th align="left" className="p-2">
                     Name
+                  </th>
+                  <th align="left" className="p-2">
+                    MP (Marked)
                   </th>
                   <th align="left" className="p-2">
                     Points
@@ -77,11 +97,14 @@ const FootTableIndex = () => {
                   const isMe = standing.user.mis_id === user?.id;
                   return (
                     <tr
-                      key={standing.user.id}
+                      key={standing.id}
                       className={` ${isMe ? 'bg-blue text- hover:text-black hover:bg-gray-100 text-white' : ''} ${i % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'}`}
                     >
                       <td align="left" className="p-2">
-                        {i + 1}.
+                        <div className="flex items-center gap-2">
+                          {i + 1}.{' '}
+                          <FormIndicator lastRank={standing.lastPosition} currentRank={standing.currentPosition} />
+                        </div>
                       </td>
                       {/* <td align="left" className="p-2">
                       {standing.user.firstName}
@@ -89,8 +112,11 @@ const FootTableIndex = () => {
                       <td align="left" className="p-2 capitalize">
                         {`${standing.user.firstName?.[0]}. ${standing.user.lastName}`}
                       </td>
+                      <td align="left" className="p-2 capitalize">
+                        {standing.matchesPredicted}
+                      </td>
                       <td align="left" className="p-2">
-                        {standing.points}
+                        {standing.score}
                       </td>
                     </tr>
                   );

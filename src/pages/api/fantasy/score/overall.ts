@@ -22,8 +22,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         where: {
           seasonId: seasonId,
         },
+        include: {
+          user: true,
+        },
       });
-      res.status(200).json({ data: score });
+      const sortedScore = score.sort((a, b) => b.score - a.score);
+      res.status(200).json({ data: sortedScore });
     } catch (error: any) {
       console.log('error', error);
       res.status(500).json({ error: error.message });

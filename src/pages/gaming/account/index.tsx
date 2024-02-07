@@ -10,9 +10,9 @@ const AccountIndex = () => {
   return (
     <GamingLayout title="My Account" isGeneral>
       <div className="w-full h-full flex p-4 flex-col items-center">
-        <div className=" border-mainblue border-2 rounded-full mt-11">
+        <div className=" border-blue border-2 rounded-lg overflow-hidden mt-11">
           <img
-            className=" rounded-full w-40 object-cover"
+            className=" w-40 object-cover"
             src={
               (getFile(profile?.profilePicture) as string) ??
               `https://ui-avatars.com/api/?name=${profile?.firstName}+${profile?.lastName}&bold=true`

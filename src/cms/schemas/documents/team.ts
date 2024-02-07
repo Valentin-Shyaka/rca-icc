@@ -17,7 +17,7 @@ export default defineType({
       title: 'Name',
       type: 'string',
       description: 'The team name W for women clubs . ex : Y2 FC (W)',
-      validation: (Rule) => Rule.required().min(3).max(100).warning('please provide a name for this team'),
+      validation: (Rule) => Rule.required(),
     }),
     {
       name: 'logo',
@@ -49,7 +49,7 @@ export default defineType({
           { title: 'Female', value: 'female' },
         ],
       },
-      validation: (rule) => rule.required().warning('Please select team gender'),
+      validation: (rule) => rule.required(),
     },
     // category
     {

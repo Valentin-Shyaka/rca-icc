@@ -18,26 +18,36 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
       console.log('season', season);
       if (!season) return res.status(404).json({ error: 'Season not found' });
-      const userPredictions = await prisma.userPrediction.findMany({
+      const usersWithPredictions = await prisma.user.findMany({
         where: {
-          seasonId: seasonId,
+          UserPrediction: {
+            some: {
+              seasonId: seasonId,
+            },
+          },
         },
         include: {
-          user: true,
+          UserPrediction: true,
         },
       });
-      // generate standings first find gamers and for each gamer calculate the total points then sort by points and push to standings
-      const gamers = userPredictions.filter((userPrediction) => userPrediction.user.isGamer);
-      const standings = gamers.map((gamer) => {
-        const totalPoints = userPredictions
-          .filter((userPrediction) => userPrediction.userId === gamer.userId)
-          .reduce((acc, curr) => acc + curr.points, 0);
-        return {
-          user: gamer.user,
-          points: totalPoints,
+      // calculate user score of the sum of predictions
+      const standings = usersWithPredictions.map((user) => {
+        const score = user.UserPrediction.reduce((acc, prediction) => {
+          return acc + prediction.points;
+        }, 0);
+        // ! Don't remove type for consistency btn backend and frontend
+        const standing = {
+          user_id: user.id,
+          name: user.name,
+          mis_id: user.mis_id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          matchesPredicted: user.UserPrediction.filter((pre) => pre.status === 'MARKED').length,
+          score,
         };
+        return standing;
       });
-      const sortedStandings = standings.sort((a, b) => b.points - a.points);
+      const sortedStandings = standings.sort((a, b) => b.score - a.score);
       res.status(200).json({ data: sortedStandings });
     } catch (error: any) {
       console.log('error', error);

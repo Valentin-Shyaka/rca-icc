@@ -38,7 +38,7 @@ export default defineType({
       title: 'Title',
       type: 'string',
       description: 'title of the match',
-      validation: (Rule) => Rule.required().min(3).max(300).warning('please provide a title for the match'),
+      validation: (Rule) => Rule.required(),
       initialValue: ({ homeTeam, awayTeam }) => {
         if (homeTeam && awayTeam) {
           return `${homeTeam.name} vs ${awayTeam.name}`;
@@ -96,7 +96,7 @@ export default defineType({
           { title: 'Female', value: 'female' },
         ],
       },
-      validation: (rule) => rule.required().warning('Please select team gender'),
+      validation: (rule) => rule.required(),
       group: 'match',
     },
     // category

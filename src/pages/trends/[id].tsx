@@ -27,6 +27,7 @@ const TrendsIndex = () => {
   useEffect(() => {
     if (!client) return;
     if (id) getTrend(client);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, client]);
 
   const seo: SEO = {

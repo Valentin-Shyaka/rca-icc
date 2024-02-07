@@ -1,3 +1,5 @@
+import { User, UserOverallScore } from '@prisma/client';
+
 export interface UserPrediction {
   prediction: Prediction;
   id: string;
@@ -15,4 +17,8 @@ export interface Prediction {
   homeScore: number;
   awayScore: number;
   highestScoringPlayer: string;
+}
+
+export interface Standing extends UserOverallScore {
+  user: User;
 }
